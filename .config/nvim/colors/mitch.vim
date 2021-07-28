@@ -35,7 +35,7 @@ highlight Special       	guibg=black     guifg=#bb00bb	gui=bold    ctermbg=0	cte
 highlight Error		    	guibg=#ff0000   guifg=white		gui=none    ctermbg=9   ctermfg=white       cterm=none
 highlight Todo		    	guibg=#c0c000	guifg=#000080	gui=none    ctermbg=3	ctermfg=4           cterm=none
 highlight Directory	    	guibg=black	    guifg=#00c000	gui=bold	ctermbg=0	ctermfg=10          cterm=bold
-highlight Normal	    	guibg=#000000	guifg=#cccc66	gui=none	ctermbg=0   ctermfg=darkyellow  cterm=none
+highlight Normal	    	guibg=#000000	guifg=#cccc66	gui=none	ctermbg=0   ctermfg=11          cterm=none
 highlight Search	    	guibg=#c0c000	guifg=black     gui=none    ctermbg=3   ctermfg=black       cterm=none
 highlight operator 	    	guibg=black 	guifg=pink      gui=none    ctermbg=0   ctermfg=13          cterm=none
 highlight statement	    	guibg=black     guifg=red	    gui=bold	ctermbg=0	ctermfg=1           cterm=bold

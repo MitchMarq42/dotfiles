@@ -138,6 +138,7 @@ dots() {
     /usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME $@
 }
 
+
 # add personal bin folder and emacs functions to path, for custom scripts
 export PATH=~/.local/bin:$PATH:~/.emacs.d/bin
 

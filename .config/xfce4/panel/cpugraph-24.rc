@@ -1,0 +1,15 @@
+UpdateInterval=0
+TimeScale=0
+Size=128
+Mode=0
+Frame=0
+Border=0
+Bars=0
+TrackedCore=0
+InTerminal=1
+StartupNotification=0
+ColorMode=2
+Foreground2=rgb(28,113,216)
+Command=gotop
+PerCore=0
+

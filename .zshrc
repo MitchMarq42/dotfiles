@@ -136,7 +136,8 @@ lf () {
 
 # Do git bare repo stuff
 dots() {
-    /usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME $@ -a
+    [[ $1 == "commit" ]] && @="$@ -a"
+    /usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME $@
     ## I had a great explanation for all these things, but
     ## git does not take multi-line arguments.
 }

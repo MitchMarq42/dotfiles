@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# mrandr, or Mitch's RandR, uses xrandr for things since sysfs is apparently not how this works...
+
+state=$(
+	xrandr |
+	grep ' connected' |
+	awk '{print $5}' |
+	sed 's/(//'
+)
+oldstate=$state
+echo "going $1 from $state"
+# Clockwise function.
+[[ $1 == right ]] && echo "going clockwise" && (
+	[[ $state == normal ]] && state=right ||
+	[[ $state == left ]] && state=normal ||
+	[[ $state == inverted ]] && state=left ||
+	[[ $state == right ]] && state=inverted
+) &&
+
+# Counter-clockwise function.
+#[[ $1 == left ]] && echo "going counterclockwise" && (
+#	[[ $state == right ]] && state=normal ||
+#	[[ $state == inverted ]] && state=right ||
+#	[[ $state == left ]] && state=inverted ||
+#	[[ $state == normal ]] && state=left
+#) &&
+xrandr -o $state &&
+echo "rotated $@, from $oldstate to $state" ||
+echo "didn't successfully rotate $1 from $oldstate, talk to your manager"

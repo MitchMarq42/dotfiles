@@ -136,8 +136,9 @@ lf () {
 
 # Do git bare repo stuff
 dots() {
-    [[ $1 == "commit" ]] && @="$@ -a"
+    #[[ $1 == "commit" ]] && export args="$@ -a" || export args=$@
     /usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME $@
+    #unset $args
     ## I had a great explanation for all these things, but
     ## git does not take multi-line arguments.
 }

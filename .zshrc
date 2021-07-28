@@ -136,7 +136,9 @@ lf () {
 
 # Do git bare repo stuff
 dots() {
-    /usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME $@
+    /usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME $@ -a
+    ## I had a great explanation for all these things, but
+    ## git does not take multi-line arguments.
 }
 
 # add personal bin folder and emacs functions to path, for custom scripts

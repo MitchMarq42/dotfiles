@@ -97,6 +97,7 @@ export GHCUP_USE_XDG_DIRS="anything"                        # clean up HOME
 
 # aliases that make things easier for me by invoking rust programs you don't have
 alias ls='exa'
+alias tree='exa -T'
 alias grep='rg'
 alias lolcat='dotacat'
 alias pacman="paru"
@@ -137,7 +138,6 @@ lf () {
 dots() {
     /usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME $@
 }
-
 
 # add personal bin folder and emacs functions to path, for custom scripts
 export PATH=~/.local/bin:$PATH:~/.emacs.d/bin

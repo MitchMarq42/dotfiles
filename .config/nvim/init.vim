@@ -113,39 +113,6 @@ highlight link Scrollbar Comment
 
 source ~/.config/nvim/minline.vim
 
-" open NetRW on the left
-let g:netrw_preview=1
-let g:netrw_winsize = 20
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_sort_sequence = '[\/]$,*'
-let g:netrw_browse_split = 4
-
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Lexplore
-    endif
-endfunction
-
-autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
-
-augroup ProjectDrawer
-    autocmd!
-    autocmd VimEnter * :call ToggleNetrw()
-augroup END
-
-let g:NetrwIsOpen=0
-
 " Man page stuff that doesn't work
 if &ft ==? "help"
 	nmap <silent> <buffer> <nowait> q :q!

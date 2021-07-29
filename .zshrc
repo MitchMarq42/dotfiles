@@ -87,7 +87,8 @@ bindkey '^v' edit-command-line
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # source aliases file
-source ~/.config/zsh/aliases
+source ~/.config/zsh/aliases.zsh
+source ~/.config/zsh/functions.zsh
 #random exports for various quality-of-life things
 export LANG="en_US.UTF-8"                                   # these two lines are
 export LC_COLLATE="C"                                       # for silencing perl scripts
@@ -96,42 +97,6 @@ export BAT_THEME="base16"                                   # Don't really use b
 export EDITOR="nvim"
 export LESSHISTFILE="-"                                     # stop ~/.lesshst from happening
 export GHCUP_USE_XDG_DIRS="anything"                        # clean up HOME
-
-# Have neomutt sync to gmail by becoming a mockery of itself
-neomutt() {
-	/usr/bin/neomutt $@ &&
-	mbsync -a
-}
-# Tmux clean function to kill detached sessions
-tmux-clean() {
-	for session in $(
-		tmux ls |
-		grep -v attached |
-		awk '{print $1}' |
-		sed 's/://'
-		)
-	do
-		tmux kill-session -t $session
-	done
-}
-# Advanced pacman -Ql without nonsense.
-pacQl() {
-	/usr/bin/pacman -Ql $@ |
-	grep -v '/$' |
-	awk '{print $2}'
-}
-lf () {
-	~/.local/bin/lfrun $@
-}
-
-# Do git bare repo stuff
-dots() {
-    #[[ $1 == "commit" ]] && export args="$@ -a" || export args=$@
-    /usr/bin/git --git-dir=$HOME/git/dotfiles --work-tree=$HOME $@
-    #unset $args
-    ## I had a great explanation for all these things, but
-    ## git does not take multi-line arguments.
-}
 
 # add personal bin folder and emacs functions to path, for custom scripts
 export PATH=~/.local/bin:$PATH:~/.emacs.d/bin

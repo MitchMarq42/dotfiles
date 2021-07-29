@@ -27,14 +27,7 @@ zplug check --verbose || (
 )
 # Do a bunch of things for tmux usage if we're in a tmux but not if we're not
 [ -n "${TMUX}" ] && (
-	#remove stupid status line in tmux, and do many other things. This
-	#saves us the effort of creating a ~/.tmux.conf file, which pollutes $HOME.
-	tmux set -g status off; tmux set -g mouse on
-	tmux bind -Tcopy-mode WheelUpPane send -N1 -X scroll-up
-	tmux bind -Tcopy-mode WheelDownPane send -N1 -X scroll-down
-	tmux set-option -g renumber-windows on
 	# Clear tmux history as well as terminal screen with "clear"
-	#
 	clear() {
 		/usr/bin/clear &&
 		tmux clear-history &&
@@ -131,5 +124,3 @@ source ~/.local/bin/fixpath
 
 # Finally load those zplugs
 zplug load
-
-#export PS1='\[\033[34m\]/home/mitch\n\[\033[32m\]> ' ##Doesn't work but would be nice if it did

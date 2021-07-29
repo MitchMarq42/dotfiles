@@ -22,10 +22,11 @@ call plug#begin()
 Plug 'glacambre/firenvim' " for modal editing in browser
 Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Cool color highlighting stuff
-"Plug 'vim-airline/vim-airline' " not good statusline
+"Plug 'sslivkoff/vim-scroll-barnacle'
+Plug 'atahabaki/archman-vim'
 call plug#end()
 
-source ~/.config/nvim/colors/mitch.vim
+colorscheme mitch
 
 " Hexokinase things
 let g:Hexokinase_highlighters = ['backgroundfull']
@@ -51,10 +52,12 @@ let g:scrollbar_max_size = 40
 
 filetype plugin on
 filetype indent on
+let mapleader="\\"
 set linebreak
+set encoding=utf-8
 set mouse=a
 set number
-"set relativenumber
+set relativenumber
 set lazyredraw
 set scrolloff=3
 set splitbelow splitright
@@ -65,28 +68,32 @@ set viminfo='10,\"100,:20,%,n~/.viminfo
 nnoremap <esc> :noh<return>
 " Make manpages verticalize themselves instantly
 autocmd FileType help,man wincmd L
-" Fix control+W keys to be easier to use
+" Fix control+W keys to be easier to use (splits)
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
-"these two lines make scrolling through single-line "paragraphs" so much
-"easier
+" these two lines make scrolling through single-line "paragraphs" so much
+" easier
 nmap j gj
 nmap k gk
-"make visual replace the default
+" make 0 and $ easier
+nnoremap gl $
+nnoremap gh 0
+" make visual replace the default
 nmap R gR
 " save and quit all tabs and buffers on ZZ; avoids 'only floating windows
 " left' error (but not readonly errors)
 nnoremap ZZ :wqa<return>
-
 " start with statusbar enabled
 set laststatus=2
-
 " fix tab indentation being weird
 set tabstop=4
 set shiftwidth=4
 set expandtab
+" learn to control autocommenting
+map <leader>c :set formatoptions-=cro<CR>
+map <leader>C :set formatoptions=cro<CR>
 
 " Hide bottom status line while in terminal
 augroup hidebar
@@ -95,7 +102,7 @@ augroup hidebar
 	"autocmd TermClose silent! set laststatus=2
 augroup end
 
-" something I don't understand but it helps with folds or sth ig
+" go to previous location
 autocmd BufReadPost * silent! normal! g`"zv
 " Save things with doas when you really want to
 cnoremap w!! execute 'silent! write !doas tee % >/dev/null' <bar> edit!
@@ -105,16 +112,44 @@ autocmd BufWritePre *.[ch] %s/\%$/\r/e " from files upon exit
 highlight link Scrollbar Comment
 
 source ~/.config/nvim/minline.vim
-redrawtabline
+
+" open NetRW on the left
+let g:netrw_preview=1
+let g:netrw_winsize = 20
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_sort_sequence = '[\/]$,*'
+let g:netrw_browse_split = 4
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
+
+autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+
+augroup ProjectDrawer
+    autocmd!
+    autocmd VimEnter * :call ToggleNetrw()
+augroup END
+
+let g:NetrwIsOpen=0
 
 " Man page stuff that doesn't work
 if &ft ==? "help"
-	nmap <silent> <buffer> <nowait> q ZZ
+	nmap <silent> <buffer> <nowait> q :q!
 	" The above usually doesn't work, nor does it accomplish the right
 	" thing. Instead, modify the file
 	" /usr/share/nvim/runtime/ftplugin/man.vim.
 endif
-
-""" These things are slow but kinda look cool so whatever
-"set cursorline
-"set cursorcolumn

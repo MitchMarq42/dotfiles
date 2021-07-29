@@ -86,6 +86,8 @@ bindkey '^v' edit-command-line
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# source aliases file
+source ~/.config/zsh/aliases
 #random exports for various quality-of-life things
 export LANG="en_US.UTF-8"                                   # these two lines are
 export LC_COLLATE="C"                                       # for silencing perl scripts
@@ -94,18 +96,6 @@ export BAT_THEME="base16"                                   # Don't really use b
 export EDITOR="nvim"
 export LESSHISTFILE="-"                                     # stop ~/.lesshst from happening
 export GHCUP_USE_XDG_DIRS="anything"                        # clean up HOME
-
-# aliases that make things easier for me by invoking rust programs you don't have
-alias ls='exa'
-alias tree='exa -T'
-alias grep='rg'
-alias lolcat='dotacat'
-alias pacman="paru"
-alias spider="spider -s 2 -c"
-alias mounr="doas mount"
-alias umounr="doas umount -r"
-alias rickroll="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
-alias 'pacman -Ql'='pacQl'
 
 # Have neomutt sync to gmail by becoming a mockery of itself
 neomutt() {

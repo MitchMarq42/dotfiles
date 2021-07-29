@@ -41,6 +41,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
 	, ((modMask, xK_o), withFocused (keysMoveWindow (10, 0)) )
 	, ((modMask, xK_b), sendMessage ToggleStruts)
     , ((modMask, xK_Return), spawn myTerminal)
+    , ((modMask, xK_w), spawn "brave")
+    , ((modMask, xK_Escape), spawn "xkill")
 	]
 
 main = xmonad xfceConfig

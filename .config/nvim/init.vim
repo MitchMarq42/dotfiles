@@ -6,11 +6,6 @@ let g:loaded_perl_provider = 0
 " Ease of use thing since suspend/hibernate messes with xserver mods
 silent! !xset r rate 300 50
 
-" Preliminary color things
-hi clear
-syntax reset
-set termguicolors
-
 " Maybe install vim-plug and then do plug things
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -22,11 +17,17 @@ call plug#begin()
 Plug 'glacambre/firenvim' " for modal editing in browser
 Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Cool color highlighting stuff
-"Plug 'sslivkoff/vim-scroll-barnacle'
-Plug 'atahabaki/archman-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'atelierbram/vim-colors_atelier-schemes'
+Plug 'tomasiser/vim-code-dark'
 call plug#end()
 
-colorscheme mitch
+set termguicolors
+colorscheme codedark
+highlight Normal guibg=none
+highlight LineNr guibg=none guifg=blue gui=none
+highlight CursorLineNr guibg=none guifg=lightblue gui=bold
 
 " Hexokinase things
 let g:Hexokinase_highlighters = ['backgroundfull']
@@ -92,8 +93,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 " learn to control autocommenting
-map <leader>c :set formatoptions-=cro<CR>
-map <leader>C :set formatoptions=cro<CR>
+set formatoptions-=cro
 
 " Hide bottom status line while in terminal
 augroup hidebar
@@ -111,7 +111,16 @@ autocmd BufWritePre * %s/\n\+\%$//e    " unwanted forms of white space
 autocmd BufWritePre *.[ch] %s/\%$/\r/e " from files upon exit
 highlight link Scrollbar Comment
 
-source ~/.config/nvim/minline.vim
+"let g:airline_left_sep=''
+let g:airline_inactve_collapse=1
+let g:airline_powerline_fonts=1
+let g:airline_theme="codedark"
+" base16_tube
+" base16_colors
+" base16_isotope
+" tomorrow
+" base16_summerfruit
+" jet
 
 " Man page stuff that doesn't work
 if &ft ==? "help"

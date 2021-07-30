@@ -7,17 +7,15 @@
 "cyan     =  6  =  14
 "white    =  7  =  15
 
-" A color scheme made to emulate the SV colors, but without requiring
-" termguicolors to be enabled. Instead, manually set your terminal's
-" first 8 colors to the correct ones that look right. This ensures that
-" they look right.
+" A color scheme made to emulate the SV colors (https://github.com/alexkh/vimcolors),
+" but without requiring termguicolors to be enabled. Instead, manually
+" set your terminal's first 8 colors to the correct ones that look
+" right. This ensures that they look right.
 
 " EDIT: ack screw it im using termguicolors they work
 " EDIT2: Gonna fill this in completely some time with all the possible values
 " for colors and stuff. Probs not for a while though.
 
-" Color scheme. Stolen from "sv" colors but modified. And ridiculously
-" appended.
 " hi	  thing		    	guibg	    	guifg	       	gui		    ctermbg		ctermfg		        cterm
 set background=dark
 "highlight Background        guibg=black                                 ctermbg=0
@@ -62,40 +60,14 @@ highlight WhiteWhite    	guibg=white 	guifg=white
 highlight RedRed 	    	guibg=red    	guifg=red
 highlight BlackBlack   		guibg=black 	guifg=black
 highlight GrayGray 	    	guibg=#303030 	guifg=#303030
-highlight link ArrowGreenGreen GreenGreen
-highlight ArrowGreenPurple 	guibg=purple 	guifg=green     gui=none    ctermbg=13  ctermfg=2           cterm=none
-highlight ArrowGreenOrange 	guibg=orange 	guifg=green     gui=none    ctermbg=9   ctermfg=2           cterm=none
-highlight ArrowGreenWhite 	guibg=white 	guifg=green     gui=none    ctermbg=7   ctermfg=2           cterm=none
-highlight ArrowGreenRed 	guibg=red   	guifg=green     gui=none    ctermbg=1   ctermfg=2           cterm=none
-highlight ArrowGreenBlue 	guibg=blue  	guifg=green     gui=none    ctermbg=4   ctermfg=2           cterm=none
-highlight ArrowGreenGray 	guibg=#303030 	guifg=green     gui=none    ctermbg=8   ctermfg=2           cterm=none
-highlight ArrowGreenBlack 	guibg=black 	guifg=green     gui=none    ctermbg=0   ctermfg=2           cterm=none
-highlight link ArrowPurplePurple PurplePurple
-highlight ArrowPurpleGreen 	guibg=green 	guifg=purple
-highlight ArrowPurpleRed 	guibg=red   	guifg=purple
-highlight ArrowPurpleBlue 	guibg=blue  	guifg=purple
-highlight ArrowPurpleBlack 	guibg=black 	guifg=purple
-highlight link ArrowOrangeOrange OrangeOrange
-highlight ArrowOrangeRed 	guibg=red   	guifg=orange
-highlight ArrowOrangeBlue 	guibg=blue  	guifg=orange
-highlight ArrowOrangePurple guibg=purple 	guifg=orange
-highlight ArrowOrangeBlack 	guibg=black 	guifg=orange
-highlight link ArrowWhiteWhite WhiteWhite
-highlight ArrowWhiteRed 	guibg=red    	guifg=white
-highlight ArrowWhiteBlue 	guibg=blue 	    guifg=white
-highlight ArrowWhitePurple 	guibg=purple 	guifg=white
-highlight ArrowWhiteBlack 	guibg=black 	guifg=white
-highlight link ArrowRedRed RedRed
-highlight ArrowRedBlue 		guibg=blue 	    guifg=red
-highlight ArrowRedBlack 	guibg=black 	guifg=red
-highlight ArrowBlueGreen 	guibg=green 	guifg=blue
-highlight ArrowBlueBlack 	guibg=black 	guifg=blue
-highlight ArrowBlueGray 	guibg=#303030 	guifg=blue
-highlight ArrowGrayBlue 	guibg=blue 	    guifg=#303030
-highlight ArrowBlackPurple 	guibg=purple 	guifg=black
-highlight ArrowBlackGreen 	guibg=green 	guifg=black
-highlight ArrowBlackOrange 	guibg=orange 	guifg=black
-highlight ArrowBlackRed 	guibg=red 	    guifg=black
-highlight ArrowBlackWhite 	guibg=white 	guifg=black
-highlight ArrowBlackBlue 	guibg=blue 	    guifg=black
-highlight ArrowBlackGray 	guibg=#303030 	guifg=black
+
+highlight BluBG             guibg=blue      guifg=fg
+highlight RedBG             guibg=red       guifg=fg
+highlight GrayBG            guibg=#303030   guifg=fg
+highlight OrangeBG          guibg=orange    guifg=fg
+highlight GreenBG           guibg=green     guifg=fg
+highlight PurpleBG          guibg=purple    guifg=fg
+
+highlight WhiteFG           guibg=bg        guifg=white     gui=bold
+highlight BlackFG           guibg=bg        guifg=black     gui=bold
+highlight NoBoldBG          guibg=bg        guifg=fg        gui=none

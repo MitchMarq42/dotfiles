@@ -1,5 +1,3 @@
-"""" Set a custom Status Line because the default one is bland """"
-
 """"" Set tabline to kinda match statusline cause I'm addicted to this now
 function MyTabLine()
 	let s = '%#ArrowGreenBlack#'
@@ -53,19 +51,24 @@ endfunction
 set showtabline=1
 set tabline=%!MyTabLine()
 
-"set statusline=
-"set statusline+=%#MsgSeparator# " bold, white on blue
-"set statusline+=%f\           	" file name
-"set statusline+=%#DiffDelete#   " bold, black on red
-"set statusline+=%r  		    " for read-only
-"set statusline+=%m  	       	" modified [+] flag
-"set statusline+=%#TabLineFill#  " gray on gray
-"set statusline+=%=	        	" right align
-"set statusline+=%#DiffText#     " bold, black on orange
-"set statusline+=%y   	    	" file type
-"set statusline+=%#MsgSeparator# " bold, white on blue
-"set statusline+=[%l:%-c]     	" line + column
-"set statusline+=%#DiffChange#   " bold black on green
-"set statusline+=[%p%%]  	   	" percentage
-"set statusline+=%#DiffAdd#  	" bold, black on purple
-"set statusline+=[%n]	    	" buffer number
+"""" Set a custom Status Line because the default one is bland """"
+set statusline=
+set statusline+=%#BluBG#        " blue background
+set statusline+=%#WhiteFG#      " white foreground
+set statusline+=%f\           	" file name
+set statusline+=%#RedBG#        " red background
+set statusline+=%#BlackFG#       " black foreground
+set statusline+=%r  		    " for read-only
+set statusline+=%m  	       	" modified [+] flag
+set statusline+=%#GrayBG#       " gray background
+set statusline+=%=	        	" right align
+set statusline+=%#OrangeBG#     " orange background
+set statusline+=%y   	    	" file type
+set statusline+=%#BlueBG#       " blue background
+set statusline+=%#WhiteFG#      " white foreground
+set statusline+=[%l:%-c]     	" line + column
+set statusline+=%#GreenBG#      " green background
+set statusline+=%#BlackFG#      " black foreground
+set statusline+=[%p%%]  	   	" percentage
+set statusline+=%#PurpleBG#     " purple background
+set statusline+=[%n]	    	" buffer number

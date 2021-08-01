@@ -4,13 +4,17 @@
 # Run it with doas, or have the user own the brightness file.
 
 brightness=$(cat /sys/class/backlight/*_bl0/brightness)
+maxbrightness=$(cat /sys/class/backlight/*_bl0/max_brightness)
 oldbrightness=$brightness
 echo "Was $brightness"
-[[ $@ == + ]] && ((brightness=($brightness+7) ))
-[[ $@ == - ]] && ((brightness=($brightness-8) ))
+[[ $@ == + ]] && ((brightness=($brightness+1) ))
+[[ $@ == - ]] && ((brightness=($brightness-1) ))
 [[ $@ == -s ]] && (echo $brightness 2>/dev/null > /etc/brightness && echo "Saved /etc/brightness as $brightness" || echo "Failed. Check your privilege.")
 [[ $@ == -r || $@ == restore || $@ == --restore ]] && brightness=$(cat /etc/brightness)
 
 echo $brightness > /sys/class/backlight/*_bl0/brightness 2>/dev/null &&
 echo "Now $brightness" ||
 echo "Still $oldbrightness, maybe don't expect the impossible next time?"
+
+perc=$(( brightness / maxbrightness ))
+notify-send "Now $brightness" -t 1 -u low -i xfpm-brightness-lcd -h int:value:$perc -h string:x-canonical-private-synchronous:brightness

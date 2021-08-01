@@ -1,5 +1,5 @@
 favorites=brave-hpfldicfbfomlpcikngkocigghgafkph-Default.desktop,brave-browser.desktop,Alacritty.desktop,Terraria.desktop
-recent=rpi-imager.desktop,cups.desktop,run.desktop,xterm.desktop,neovide.desktop,brave-hpfldicfbfomlpcikngkocigghgafkph-Default.desktop,conky.desktop,blueberry.desktop,onlyoffice-desktopeditors.desktop,discord.desktop
+recent=gparted.desktop,google-chrome.desktop,rpi-imager.desktop,cups.desktop,run.desktop,xterm.desktop,neovide.desktop,brave-hpfldicfbfomlpcikngkocigghgafkph-Default.desktop,conky.desktop,blueberry.desktop
 button-icon=distributor-logo-manjaro
 button-single-row=false
 show-button-title=false
@@ -21,7 +21,7 @@ position-commands-alternate=false
 position-categories-alternate=true
 stay-on-focus-out=false
 confirm-session-command=true
-menu-width=1258
+menu-width=628
 menu-height=732
 menu-opacity=80
 command-settings=xfce4-settings-manager

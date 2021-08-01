@@ -17,17 +17,7 @@ call plug#begin()
 Plug 'glacambre/firenvim' " for modal editing in browser
 Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Cool color highlighting stuff
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'atelierbram/vim-colors_atelier-schemes'
-Plug 'tomasiser/vim-code-dark'
 call plug#end()
-
-set termguicolors
-colorscheme codedark
-highlight Normal guibg=none
-highlight LineNr guibg=none guifg=blue gui=none
-highlight CursorLineNr guibg=none guifg=lightblue gui=bold
 
 " Hexokinase things
 let g:Hexokinase_highlighters = ['backgroundfull']
@@ -45,12 +35,13 @@ let g:scrollbar_shape = {
   \ 'tail': '█',
   \ }
 let g:scrollbar_highlight = {
-  \ 'head': 'Comment',
-  \ 'body': 'Comment',
-  \ 'tail': 'Comment',
+  \ 'head': 'VertSplit',
+  \ 'body': 'VertSplit',
+  \ 'tail': 'VertSplit',
   \ }
 let g:scrollbar_max_size = 40
 
+" generally good/useful things
 filetype plugin on
 filetype indent on
 let mapleader="\\"
@@ -65,7 +56,7 @@ set splitbelow splitright
 set cmdwinheight=1
 set wildmode=longest,list,full
 set viminfo='10,\"100,:20,%,n~/.viminfo
-" Clear highlighting from search results on second esc and redraw status bar
+" Clear highlighting from search results on second esc
 nnoremap <esc> :noh<return>
 " Make manpages verticalize themselves instantly
 autocmd FileType help,man wincmd L
@@ -85,14 +76,14 @@ nnoremap gh 0
 nmap R gR
 " save and quit all tabs and buffers on ZZ; avoids 'only floating windows
 " left' error (but not readonly errors)
-nnoremap ZZ :wqa<return>
+"nnoremap ZZ :wqa<return>
 " start with statusbar enabled
 set laststatus=2
 " fix tab indentation being weird
 set tabstop=4
 set shiftwidth=4
 set expandtab
-" learn to control autocommenting
+" control autocommenting
 set formatoptions-=cro
 
 " Hide bottom status line while in terminal
@@ -102,6 +93,13 @@ augroup hidebar
 	"autocmd TermClose silent! set laststatus=2
 augroup end
 
+" re-source any .vim files when you save them
+augroup vimrc
+   autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+ augroup END
+
+colorscheme mitch-old
+
 " go to previous location
 autocmd BufReadPost * silent! normal! g`"zv
 " Save things with doas when you really want to
@@ -109,18 +107,6 @@ cnoremap w!! execute 'silent! write !doas tee % >/dev/null' <bar> edit!
 autocmd BufWritePre * %s/\s\+$//e      " These three lines remove various
 autocmd BufWritePre * %s/\n\+\%$//e    " unwanted forms of white space
 autocmd BufWritePre *.[ch] %s/\%$/\r/e " from files upon exit
-highlight link Scrollbar Comment
-
-"let g:airline_left_sep=''
-let g:airline_inactve_collapse=1
-let g:airline_powerline_fonts=1
-let g:airline_theme="codedark"
-" base16_tube
-" base16_colors
-" base16_isotope
-" tomorrow
-" base16_summerfruit
-" jet
 
 " Man page stuff that doesn't work
 if &ft ==? "help"

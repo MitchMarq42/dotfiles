@@ -51,24 +51,22 @@ endfunction
 set showtabline=1
 set tabline=%!MyTabLine()
 
+highlight link StatusMain StatusLine
+highlight link StatusMod DiffDelete
 """" Set a custom Status Line because the default one is bland """"
 set statusline=
-set statusline+=%#BluBG#        " blue background
-set statusline+=%#WhiteFG#      " white foreground
+set statusline+=%#StatusMain#   " Same as "StatusLine" color
 set statusline+=%f\           	" file name
-set statusline+=%#RedBG#        " red background
-set statusline+=%#BlackFG#       " black foreground
+set statusline+=%#StatusMod#    " Same as "DiffDelete" color
 set statusline+=%r  		    " for read-only
 set statusline+=%m  	       	" modified [+] flag
-set statusline+=%#GrayBG#       " gray background
+set statusline+=%#TabLineFill#  " gray background, gray background
 set statusline+=%=	        	" right align
-set statusline+=%#OrangeBG#     " orange background
+set statusline+=%#TabLineSel#   " orange with black foreground
 set statusline+=%y   	    	" file type
-set statusline+=%#BlueBG#       " blue background
-set statusline+=%#WhiteFG#      " white foreground
+set statusline+=%#StatusMain#   " Same as "StatusLine" color
 set statusline+=[%l:%-c]     	" line + column
-set statusline+=%#GreenBG#      " green background
-set statusline+=%#BlackFG#      " black foreground
+set statusline+=%#DiffChange#   " Black on green?
 set statusline+=[%p%%]  	   	" percentage
-set statusline+=%#PurpleBG#     " purple background
+set statusline+=%#DiffAdd#      " Black on violet?
 set statusline+=[%n]	    	" buffer number

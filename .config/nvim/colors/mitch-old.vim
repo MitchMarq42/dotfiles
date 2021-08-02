@@ -80,4 +80,5 @@ let g:scrollbar_highlight = {
   \ 'tail': 'Comment',
   \ }
 
-set statusline=%#StatusLine#%t%r%m%=%y\ [%l:%v]
+"set statusline=%#StatusLine#%t%r%m%=%y\ [%l:%v]
+source ~/.config/nvim/minline.vim

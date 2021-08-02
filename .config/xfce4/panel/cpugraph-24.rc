@@ -10,6 +10,6 @@ InTerminal=1
 StartupNotification=0
 ColorMode=2
 Foreground2=rgb(28,113,216)
-Command=gotop
+Command=btm
 PerCore=0
 

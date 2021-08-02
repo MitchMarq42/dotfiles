@@ -73,3 +73,11 @@ highlight PurpleBG          guibg=purple    guifg=fg
 highlight WhiteFG           guibg=bg        guifg=white     gui=bold
 highlight BlackFG           guibg=bg        guifg=black     gui=bold
 highlight NoBoldBG          guibg=bg        guifg=fg        gui=none
+
+let g:scrollbar_highlight = {
+  \ 'head': 'Comment',
+  \ 'body': 'Comment',
+  \ 'tail': 'Comment',
+  \ }
+
+set statusline=%#StatusLine#%t%r%m%=%y\ [%l:%v]

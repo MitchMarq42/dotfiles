@@ -1,0 +1,17 @@
+#!/bin/bash
+
+source ~/.xprofile
+export PATH=/home/mitch/.local/bin:$PATH
+
+xfce4-panel --disable-wm-check &
+xfce4-power-manager &
+xcompmgr &
+sxhkd &
+xfsettingsd --disable-wm-check &
+xsetroot -cursor_name left_ptr &
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
+nitrogen --restore &
+#conky &
+alacritty &
+#exec /home/mitch/.local/share/xmonad/xmonad-x86_64-linux
+xmonad || sudo brightctl -s

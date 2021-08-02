@@ -7,8 +7,8 @@ brightness=$(cat /sys/class/backlight/*_bl0/brightness)
 maxbrightness=$(cat /sys/class/backlight/*_bl0/max_brightness)
 oldbrightness=$brightness
 echo "Was $brightness"
-[[ $@ == + ]] && ((brightness=($brightness+1) ))
-[[ $@ == - ]] && ((brightness=($brightness-1) ))
+[[ $@ == + ]] && ((brightness=($brightness+2) ))
+[[ $@ == - ]] && ((brightness=($brightness-2) ))
 [[ $@ == -s ]] && (echo $brightness 2>/dev/null > /etc/brightness && echo "Saved /etc/brightness as $brightness" || echo "Failed. Check your privilege.")
 [[ $@ == -r || $@ == restore || $@ == --restore ]] && brightness=$(cat /etc/brightness)
 
@@ -17,4 +17,4 @@ echo "Now $brightness" ||
 echo "Still $oldbrightness, maybe don't expect the impossible next time?"
 
 perc=$(( brightness / maxbrightness ))
-notify-send "Now $brightness" -t 1 -u low -i xfpm-brightness-lcd -h int:value:$perc -h string:x-canonical-private-synchronous:brightness
+#notify-send "Now $brightness" -t 1 -u low -i xfpm-brightness-lcd -h int:value:$perc -h string:x-canonical-private-synchronous:brightness

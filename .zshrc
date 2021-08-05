@@ -79,7 +79,7 @@ bindkey '^v' edit-command-line
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# source aliases file
+# source aliases and functions files
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/functions.zsh
 #random exports for various quality-of-life things

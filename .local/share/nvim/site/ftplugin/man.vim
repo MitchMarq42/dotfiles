@@ -27,11 +27,16 @@ setlocal foldcolumn=0 colorcolumn=0 nolist nofoldenable
 
 setlocal tagfunc=man#goto_tag
 
+setlocal statusline=%F
+
+setlocal scrolloff=0
+
 if !exists('g:no_plugin_maps') && !exists('g:no_man_maps')
-  nnoremap <silent> <buffer> j             Lgj
-  nnoremap <silent> <buffer> k             Hgk
+  nnoremap <silent> <buffer> j             gjL
+  nnoremap <silent> <buffer> k             gkH
   nnoremap <silent> <buffer> gO            :call man#show_toc()<CR>
   nnoremap <silent> <buffer> <2-LeftMouse> :Man<CR>
+  wincmd L
   if s:pager
     nnoremap <silent> <buffer> <nowait> q :lclose<CR>:q<CR>
   else

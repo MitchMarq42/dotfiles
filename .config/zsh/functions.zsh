@@ -26,3 +26,8 @@ dots() {
     ## I had a great explanation for all these things, but
     ## git does not take multi-line arguments.
 }
+
+# Sudo is a bitch so bitch about it
+sudo() {
+    which doas >/dev/null && doas $@ ||
+}

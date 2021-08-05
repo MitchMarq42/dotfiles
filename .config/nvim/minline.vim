@@ -53,20 +53,20 @@ set tabline=%!MyTabLine()
 
 highlight link StatusMain StatusLine
 highlight link StatusMod DiffDelete
+
 """" Set a custom Status Line because the default one is bland """"
 set statusline=
-set statusline+=%#StatusMain#   " Same as "StatusLine" color
-set statusline+=%f\           	" file name
-set statusline+=%#StatusMod#    " Same as "DiffDelete" color
-set statusline+=%r  		    " for read-only
-set statusline+=%m  	       	" modified [+] flag
-set statusline+=%#TabLineFill#  " gray background, gray background
-set statusline+=%=	        	" right align
-set statusline+=%#TabLineSel#   " orange with black foreground
-set statusline+=%y   	    	" file type
-set statusline+=%#StatusMain#   " Same as "StatusLine" color
-set statusline+=[%l:%-c]     	" line + column
-set statusline+=%#DiffChange#   " Black on green?
-set statusline+=[%p%%]  	   	" percentage
-set statusline+=%#DiffAdd#      " Black on violet?
-set statusline+=[%n]	    	" buffer number
+
+set statusline+=%#DiffAdd#%{(mode()=='n')?'\ [NORMAL]':''}
+
+set statusline+=%#DiffChange#%{(mode()=='i')?'\ [INSERT]':''}
+
+set statusline+=%#DiffDelete#%{(mode()=='r')?'\ [RPLACE]':''}
+set statusline+=%#DiffDelete#%{(mode()=='Rv')?'\ [VRPLCE]':''}
+
+set statusline+=%#Cursor#%{(mode()=='v')?'\ [VISUAL]':''}
+set statusline+=%#Cursor#%{(mode()=='V')?'\ [VIS\ LN]':''}
+
+set statusline+=%#CmdMode#%{(mode()=='c')?'\ [\:CMD\?\:]':''}
+
+set statusline+=%#StatusMain#%f\ %#StatusMod#%r%m%#CursorColumn#%=%=%=%t%=%#TabLineSel#%y%#StatusMain#[%l:%-c]%#DiffChange#[%p%%]%#DiffAdd#[%n]

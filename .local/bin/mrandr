@@ -8,12 +8,23 @@ direction=$@
 
 touchpad=$(
     xinput list |
-    grep TouchPad |
+    grep -i touchpad |
     sed 's/^.*id=//' |
     awk '{print $1}'
 )
-prop=$(
+tpprop=$(
     xinput list-props $touchpad |
+    grep Matrix |
+    sed 's/^.*(//;s/).*$//'
+)
+touchscreen=$(
+    xinput list |
+    grep -i touchscreen |
+    sed 's/^.*id=//' |
+    awk '{print $1}'
+)
+tsprop=$(
+    xinput list-props $touchscreen |
     grep Matrix |
     sed 's/^.*(//;s/).*$//'
 )
@@ -30,5 +41,7 @@ prop=$(
 [[ $direction == inverted ]] &&
     export matrix="-1 0 1 0 -1 1 0 0 1"
 
-xinput set-prop $touchpad $prop $matrix
+xinput set-prop $touchpad $tpprop $matrix
+xinput set-prop $touchscreen $tsprop $matrix
 xrandr -o $direction
+which nitrogen >/dev/null && nitrogen --restore

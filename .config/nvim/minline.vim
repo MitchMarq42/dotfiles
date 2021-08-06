@@ -69,4 +69,4 @@ set statusline+=%#Cursor#%{(mode()=='V')?'\ [VIS\ LN]':''}
 
 set statusline+=%#CmdMode#%{(mode()=='c')?'\ [\:CMD\?\:]':''}
 
-set statusline+=%#StatusMain#%f\ %#StatusMod#%r%m%#CursorColumn#%=%=%=%t%=%#TabLineSel#%y%#StatusMain#[%l:%-c]%#DiffChange#[%p%%]%#DiffAdd#[%n]
+set statusline+=%#StatusMain#%f\ %#StatusMod#%r%m%#GrayGray#%=%=%=%t%=%#TabLineSel#%y%#StatusMain#[%l:%-c]%#DiffChange#[%p%%]%#DiffAdd#[%n]

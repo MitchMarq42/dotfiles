@@ -1,30 +1,34 @@
 #!/bin/bash
 
-# mrandr, or Mitch's RandR, uses xrandr for things since sysfs is apparently not how this works...
+# Excellent info at https://wiki.ubuntu.com/X/InputCoordinateTransformation
 
-state=$(
-	xrandr |
-	grep ' connected' |
-	awk '{print $5}' |
-	sed 's/(//'
+[[ $@ == "" ]] && echo "no operation specified" && exit 0
+
+direction=$@
+
+touchpad=$(
+    xinput list |
+    grep TouchPad |
+    sed 's/^.*id=//' |
+    awk '{print $1}'
 )
-oldstate=$state
-echo "going $1 from $state"
-# Clockwise function.
-[[ $1 == right ]] && echo "going clockwise" && (
-	[[ $state == normal ]] && state=right ||
-	[[ $state == left ]] && state=normal ||
-	[[ $state == inverted ]] && state=left ||
-	[[ $state == right ]] && state=inverted
-) &&
+prop=$(
+    xinput list-props $touchpad |
+    grep Matrix |
+    sed 's/^.*(//;s/).*$//'
+)
 
-# Counter-clockwise function.
-#[[ $1 == left ]] && echo "going counterclockwise" && (
-#	[[ $state == right ]] && state=normal ||
-#	[[ $state == inverted ]] && state=right ||
-#	[[ $state == left ]] && state=inverted ||
-#	[[ $state == normal ]] && state=left
-#) &&
-xrandr -o $state &&
-echo "rotated $@, from $oldstate to $state" ||
-echo "didn't successfully rotate $1 from $oldstate, talk to your manager"
+[[ $direction == normal ]] &&
+    export matrix="1 0 0 0 1 0 0 0 1"
+
+[[ $direction == left ]] &&
+    export matrix="0 -1 1 1 0 0 0 0 1"
+
+[[ $direction == right ]] &&
+    export matrix="0 1 0 -1 0 1 0 0 1"
+
+[[ $direction == inverted ]] &&
+    export matrix="-1 0 1 0 -1 1 0 0 1"
+
+xinput set-prop $touchpad $prop $matrix
+xrandr -o $direction

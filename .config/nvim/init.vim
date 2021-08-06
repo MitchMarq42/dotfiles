@@ -95,7 +95,7 @@ augroup end
 
 " re-source any .vim files when you save them
 augroup vimrc
-   autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+   autocmd! BufWritePost *.vim source % | echom "Reloaded "
  augroup END
 
 colorscheme mitch-old
@@ -115,3 +115,5 @@ if &ft ==? "help"
 	" thing. Instead, modify the file
 	" /usr/share/nvim/runtime/ftplugin/man.vim.
 endif
+
+set guifont=MesloLGS\ NF:h12.5

@@ -27,7 +27,8 @@ setlocal foldcolumn=0 colorcolumn=0 nolist nofoldenable
 
 setlocal tagfunc=man#goto_tag
 
-setlocal statusline=%F
+setlocal statusline=%#MsgSeparator#%F
+setlocal laststatus=2
 
 setlocal scrolloff=0
 

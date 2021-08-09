@@ -1,4 +1,4 @@
--- Okay, now onto my actual config...
+-- xmonad configuration file, for compiling into xmonad
 import XMonad
 import XMonad.Config.Xfce
 import qualified XMonad.StackSet as W
@@ -53,5 +53,5 @@ main = xmonad xfceConfig
        , keys       = myKeys <+> keys xfceConfig
        --, layoutHook = myLayout
        , handleEventHook = mySwallowHook <+> ewmhDesktopsEventHook <+> fullscreenEventHook <+> handleEventHook def
-       , startupHook = ewmhDesktopsStartup
+       , startupHook = ewmhDesktopsStartup <+> spawn myTerminal
        }

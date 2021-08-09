@@ -14,7 +14,8 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 	autocmd VimEnter * PlugInstall
 endif
 call plug#begin()
-Plug 'glacambre/firenvim' " for modal editing in browser
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " for modal editing in browser
+
 Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Cool color highlighting stuff
 call plug#end()
@@ -86,13 +87,6 @@ set expandtab
 " control autocommenting
 set formatoptions-=cro
 
-" Hide bottom status line while in terminal
-augroup hidebar
-	autocmd!
-	autocmd TermOpen,TermEnter silent! set laststatus=0
-	"autocmd TermClose silent! set laststatus=2
-augroup end
-
 " re-source any .vim files when you save them
 augroup vimrc
    autocmd! BufWritePost *.vim source % | echom "Reloaded "
@@ -111,9 +105,11 @@ autocmd BufWritePre *.[ch] %s/\%$/\r/e " from files upon exit
 " Man page stuff that doesn't work
 if &ft ==? "help"
 	nmap <silent> <buffer> <nowait> q :q!
-	" The above usually doesn't work, nor does it accomplish the right
-	" thing. Instead, modify the file
-	" /usr/share/nvim/runtime/ftplugin/man.vim.
 endif
 
-set guifont=MesloLGS\ NF:h12.5
+if exists('g:started_by_firenvim')
+    set guifont=MesloLGS\ NF:h12.5
+    set laststatus=0
+else
+    set guifont=MesloLGS\ NF:h15.5
+endif

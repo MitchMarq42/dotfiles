@@ -80,5 +80,13 @@ let g:scrollbar_highlight = {
   \ 'tail': 'Comment',
   \ }
 
+function! ArrowColor(fg,bg)
+    let highlightstr = 'highlight Arrow' . a:fg . a:bg . ' '
+    let highlightstr .= 'guifg=' . a:fg . ' '
+    let highlightstr .= 'guibg=' . a:bg
+
+    execute highlightstr
+endfunction
+
 "set statusline=%#StatusLine#%t%r%m%=%y\ [%l:%v]
 source ~/.config/nvim/minline.vim

@@ -8,8 +8,8 @@ maxbrightness=$(cat /sys/class/backlight/*_bl0/max_brightness)
 saved="~/.local/share/brightness"
 oldbrightness=$brightness
 echo "Was $brightness"
-[[ $@ == + ]] && ((brightness=($brightness+2) ))
-[[ $@ == - ]] && ((brightness=($brightness-2) ))
+[[ $@ == + ]] && ((brightness=($brightness+5) ))
+[[ $@ == - ]] && ((brightness=($brightness-6) ))
 [[ $@ == -s ]] && (echo $brightness 2>/dev/null > $saved && echo "Saved $saved as $brightness" || echo "Failed. Check your privilege.")
 [[ $@ == -r || $@ == restore || $@ == --restore ]] && brightness=$(cat $saved)
 

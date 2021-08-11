@@ -10,6 +10,14 @@ tmux-clean() {
 		tmux kill-session -t $session
 	done
 }
+[ -n "${TMUX}" ] && (
+	# Clear tmux history as well as terminal screen with "clear"
+	clear() {
+		/usr/bin/clear &&
+		tmux clear-history &&
+		/usr/bin/clear
+	}
+)
 # Advanced pacman -Ql without nonsense.
 pacQl() {
 	/usr/bin/pacman -Ql $@ |

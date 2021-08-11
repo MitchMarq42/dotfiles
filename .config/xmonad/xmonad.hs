@@ -20,7 +20,7 @@ myManageHook = composeAll
 	    , className =? "Emacs"      			--> viewShift "office"
         , className =? "Oblogout"	        	--> doFloat
 	    , className =? "st256color"		        --> doIgnore
-        --, className =? "mpv"			        --> doSwallow
+        , className =? "mpv"			        --> doIgnore
 	    --, className =? "xfce4-panel"  		--> doIgnore
 	    , manageDocks
         ]

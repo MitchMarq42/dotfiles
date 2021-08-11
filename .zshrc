@@ -7,7 +7,7 @@
 # note the previous value of $TERM, for self-awareness in tmuxes.
 [ -z "${TMUX}" ] && export OLDTERM="${TERM}"
 # Start a new tmux session to put the current shell in, if not already in a tmux or alacritty. Remember old TERM.
-[ -z "${TMUX}" ] && [[ "${TERM}" != alacritty ]] && [[ "${TERM}" != linux ]] && [[ "${TERM}" != xterm-kitty ]] && OLDTERM="${TERM}" exec tmux
+[ -z "${TMUX}" ] && [[ "${TERM}" != alacritty ]] && [[ "${TERM}" != linux ]] && [[ "${TERM}" != xterm-256color ]] && OLDTERM="${TERM}" exec tmux
 
 # Maybe install zplug, and definitely make it update stuff
 [ -n {XDG_CONFIG_HOME:$HOME/.config}/zsh/zplug ] && (
@@ -24,15 +24,6 @@ zplug check --verbose || (
     if read -q; then
         echo; zplug install
     fi
-)
-# Do a bunch of things for tmux usage if we're in a tmux but not if we're not
-[ -n "${TMUX}" ] && (
-	# Clear tmux history as well as terminal screen with "clear"
-	clear() {
-		/usr/bin/clear &&
-		tmux clear-history &&
-		/usr/bin/clear
-	}
 )
 
 # Choose a fetch based on the width of the terminal and run it, since we are firmly in an interactive shell now.

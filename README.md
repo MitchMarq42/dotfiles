@@ -32,3 +32,7 @@ Instead, bind it to a hotkey. I currently have it bound to ctrl+alt+arrowkey via
         /home/mitch/.local/bin/mrandr right
     control + alt + Right
         /home/mitch/.local/bin/mrandr left
+
+For an alternate way of doing the capslock remap see:
+
+https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7

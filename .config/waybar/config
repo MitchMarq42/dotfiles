@@ -1,0 +1,28 @@
+{
+    "layer": "top",
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["pulseaudio", "battery", "clock"],
+    "sway/window": {
+        "max-length": 50
+    },
+    "battery": {
+        "format": "{icon}{capacity}%  ",
+        "format-icons": ["🔋"]
+    },
+    "clock": {
+        "format": "{:%I:%M %p}",
+        "format-alt": "{:%a %b %d %H:%M:%S}"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%  ",
+        "format-bluetooth": "{icon} {volume}%  ",
+        "format-muted": "{icon} Mute  ",
+        "format-icons": {
+            "default": [""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol"
+    }
+
+}

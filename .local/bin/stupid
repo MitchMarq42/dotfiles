@@ -6,5 +6,5 @@
 for program in $@
 do
 	echo "Searching for $program"
-	ps -e | grep $program || echo "found nothing. Sorry. But ain't that stupid?" || awk '{print $4 " at PID" $1 " going for " $3 " on /dev/"$2}' 
+	ps -e | grep $program | awk '{print $4 " at PID " $1 " going for " $3 " on /dev/"$2}'
 done

@@ -18,15 +18,16 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wofi --show dmenu -t alacritty -M fuzzy -i -G | xargs swaymsg exec --
+set $menu dmenu_path | wofi --show dmenu -t alacritty -i -G | xargs swaymsg exec --
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output eDP-1 bg ~/.local/share/backgrounds/mojave_midnight.jpg fill
-output eDP-1 scale 1.0
+output * bg ~/.local/share/backgrounds/mojave_midnight.jpg fill
+
 # Lower refresh rate to avoid stupid crashes. What are we, heathens?
-output eDP-1 mode 1920x1080@47.982Hz
+#output eDP-1 mode 1920x1080@47.982Hz
+
 #
 # Example configuration:
 #
@@ -238,19 +239,6 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     swaybar_command waybar
-#    position top
-#    font "MesloLGS NF":h8.5
-#    workspace_buttons yes
-#
-#    # When the status_command prints a new line to stdout, swaybar updates.
-#    # The default just shows the current date and time.
-#    status_command while echo $(date +'%l:%M %p') "  🔋"$(cat /sys/class/power_supply/BAT0/capacity)"%"; do sleep 1; done
-#
-#    colors {
-#        statusline #ffffff
-#        background #323232
-#        inactive_workspace #32323200 #32323200 #5c5c5c
-#    }
 }
 
 #
@@ -270,9 +258,9 @@ default_floating_border pixel 1
 client.focused #ff0000 #ff0000 #ff0000 #ff6f6f
 client.unfocused #8f8f8f #8f8f8f #8f8f8f
 
+include /etc/sway/config.d/*
+
 # stupid systemd integration or sth idk
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
 exec $term
-
-#include /etc/sway/config.d/*

@@ -1,5 +1,5 @@
 # start X on tty7
-[[ $(tty) = /dev/tty7 ]] && exec sway #sx ~/.config/x11/xinitrc
+[[ $(tty) = /dev/tty7 ]] && exec sway -d #sx ~/.config/x11/xinitrc
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return

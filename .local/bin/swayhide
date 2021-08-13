@@ -1,0 +1,15 @@
+#!/bin/bash
+
+killall -SIGUSR1 waybar
+
+isgaps=$(cat $XDG_RUNTIME_DIR/swayisgaps)
+
+[[ $isgaps == yes ]] && (
+    swaymsg gaps inner all set 0
+    echo no > $XDG_RUNTIME_DIR/swayisgaps
+)
+
+[[ $isgaps == no ]] && (
+    swaymsg gaps inner all set 20
+    echo yes > $XDG_RUNTIME_DIR/swayisgaps
+)

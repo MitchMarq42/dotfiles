@@ -23,8 +23,10 @@ set $menu dmenu_path | wofi --show dmenu -t alacritty -M fuzzy -i -G | xargs swa
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/.local/share/backgrounds/mojave_midnight.jpg fill
-output * scale 1.0
+output eDP-1 bg ~/.local/share/backgrounds/mojave_midnight.jpg fill
+output eDP-1 scale 1.0
+# Lower refresh rate to avoid stupid crashes. What are we, heathens?
+output eDP-1 mode 1920x1080@47.982Hz
 #
 # Example configuration:
 #
@@ -34,7 +36,7 @@ output * scale 1.0
 
 ### Idle configuration
 #
-# Example configuration:
+# Slightly broken configuration:
 #
 # exec swayidle -w \
 #          timeout 300 '~/.local/bin/waylock' \
@@ -59,7 +61,6 @@ output * scale 1.0
    }
 
    input "type:keyboard" {
-       #xkb_file ~/.config/xkb/symbols/supescaps
        xkb_options "custom:super_esc"
        xkb_numlock enable
        repeat_delay 300
@@ -68,11 +69,11 @@ output * scale 1.0
     input * {
     }
 
-   seat seat0 xcursor_theme "WinSur-white-cursors" 24
-   exec_always {
-        gsettings set org.gnome.desktop.interface cursor-theme "WinSur-white-cursors"
-        gsettings set org.gnome.desktop.interface cursor-size 24
-        }
+#   seat seat0 xcursor_theme "WinSur-white-cursors" 24
+#   exec_always {
+#        gsettings set org.gnome.desktop.interface cursor-theme "WinSur-white-cursors"
+#        gsettings set org.gnome.desktop.interface cursor-size 24
+#        }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -97,10 +98,6 @@ exec pulseaudio
 
     # Start your launcher
     bindsym $mod+d exec $menu
-
-    # fake fullscreen (custom)-- Hides bar and disables gaps
-    exec echo yes > $XDG_RUNTIME_DIR/swayisgaps
-    bindsym $mod+b exec ~/.local/bin/swayhide
 
     # Brightness keys (custom)
     bindsym XF86MonBrightnessUp exec /home/mitch/.local/bin/brightctl +
@@ -261,6 +258,10 @@ bar {
 #
 gaps inner 20
 
+# fake fullscreen (custom)-- Hides bar and disables gaps
+exec_always echo yes > $XDG_RUNTIME_DIR/swayisgaps
+bindsym $mod+b exec ~/.local/bin/swayhide
+
 #
 # Remove title bars:
 #
@@ -269,6 +270,9 @@ default_floating_border pixel 1
 client.focused #ff0000 #ff0000 #ff0000 #ff6f6f
 client.unfocused #8f8f8f #8f8f8f #8f8f8f
 
+# stupid systemd integration or sth idk
+exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+
 exec $term
 
-include /etc/sway/config.d/*
+#include /etc/sway/config.d/*

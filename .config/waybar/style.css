@@ -28,7 +28,8 @@ window#waybar.chromium {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    color: #ff0000;
+    color: #1020aa;
+    background-color: #dfdfdf;
 }
 
 #workspaces button.focused {

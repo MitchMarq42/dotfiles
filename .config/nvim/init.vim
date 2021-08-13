@@ -62,10 +62,10 @@ nnoremap <esc> :noh<return>
 " Make manpages verticalize themselves instantly
 autocmd FileType help,man wincmd L
 " Fix control+W keys to be easier to use (splits)
-nmap <C-h> <C-w>h
-nmap <C-l> <C-w>l
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
+"nmap <C-h> <C-w>h
+"nmap <C-l> <C-w>l
+"nmap <C-j> <C-w>j
+"nmap <C-k> <C-w>k
 " these two lines make scrolling through single-line "paragraphs" so much
 " easier
 nmap j gj

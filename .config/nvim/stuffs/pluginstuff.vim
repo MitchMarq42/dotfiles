@@ -7,8 +7,9 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 endif
 call plug#begin()
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " for modal editing in browser
-Plug 'ervandew/supertab'
+Plug 'ervandew/supertab' " dumb tab complete that doesn't really work but should
 Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
+Plug 'mattn/emmet-vim' " Magic HTML IDE thingy
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Cool color highlighting stuff
 call plug#end()
 

@@ -32,7 +32,7 @@ if &ft ==? "markdown"
 endif
 
 if exists('g:started_by_firenvim')
-    set guifont=MesloLGS\ NF:h10.5
+    set guifont=MesloLGS\ NF:h10
     set laststatus=0
 else
     set guifont=MesloLGS\ NF:h15.5

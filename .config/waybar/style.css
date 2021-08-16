@@ -50,7 +50,6 @@ window#waybar.chromium {
 #cpu,
 #memory,
 #disk,
-#temperature,
 #backlight,
 #network,
 #pulseaudio,
@@ -104,8 +103,7 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
+    color: #c00f0f;
 }
 
 #memory {
@@ -147,11 +145,11 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    color: #f0932b;
 }
 
 #temperature.critical {
-    background-color: #eb4d4b;
+    color: #eb4d4b;
 }
 
 #tray {

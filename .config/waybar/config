@@ -2,7 +2,7 @@
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "battery", "clock"],
+    "modules-right": ["pulseaudio", "battery", "temperature", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
         "persistent_workspaces": {
@@ -18,25 +18,38 @@
         }
     },
     "sway/window": {
-        "max-length": 50
     },
     "pulseaudio": {
         "format": "{icon} {volume}%  ",
         "format-bluetooth": "{icon} {volume}%  ",
-        "format-muted": "{icon} Mute  ",
+        "format-muted": " Mute  ",
         "format-icons": {
-            "default": [""]
+            "default": ["奔", "墳", ""]
         },
         "scroll-step": 1,
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "min-length": 8,
+        "max-length": 8
     },
     "battery": {
-        "format": "{icon}{capacity}%  ",
-        "format-icons": ["🔋"]
+        "format": "{icon} {capacity}%  ",
+        "format-icons": ["", "", "", "", "", "", "", "", "", ""],
+        "min-length": 8,
+        "max-length": 8
     },
+    "temperature": {
+        "interval": 1,
+        "thermal-zone": 3,
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "format": "{temperatureF}宅",
+        "min-length": 4,
+        "max-length": 4
+        },
     "clock": {
-        "format": "{:%I:%M %p}",
-        "format-alt": "({:%a %b %d %H:%M})"
+        "format": "   {:%I:%M %p}",
+        "format-alt": "   ({:%a %b %d %H:%M})"
     }
 
 }
+
+// vim: set filetype=json :

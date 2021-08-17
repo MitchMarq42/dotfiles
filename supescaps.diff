@@ -1,0 +1,27 @@
+--- /dev/null
++++ /usr/share/X11/xkb/symbols/custom_opts
+@@ -0,0 +1,6 @@
++// Make Caps an additional Escape
++hidden partial modifier_keys
++xkb_symbols "super_esc" {
++    key <CAPS> { [ Escape ] };
++    modifier_map Mod4 { <CAPS> };
++};
+--- /usr/share/X11/xkb/rules/evdev	2021-06-09 14:06:17.000000000 -0800
++++ /usr/share/X11/xkb/rules/evdev	2021-08-16 21:13:09.531258907 -0800
+@@ -1196,6 +1196,8 @@
+   lv5:lwin_switch_lock_cancel     =       +level5(lwin_switch_lock_cancel)
+   lv5:rwin_switch_lock_cancel     =       +level5(rwin_switch_lock_cancel)
+   parens:swap_brackets   =   +parens(swap_brackets)
++    custom:super_esc = +custom_opts(super_esc)
++
+
+
+ ! option	=	compat
+--- /usr/share/X11/xkb/rules/evdev.lst	2021-06-09 14:06:17.000000000 -0800
++++ /usr/share/X11/xkb/rules/evdev.lst	2021-08-16 21:14:21.664196414 -0800
+@@ -982,3 +982,4 @@
+   solaris:sun_compat   Sun key compatibility
+   terminate            Key sequence to kill the X server
+   terminate:ctrl_alt_bksp Ctrl+Alt+Backspace
++    custom:super_esc  Make Caps Lock an additional ESC and Mod4

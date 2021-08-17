@@ -268,6 +268,6 @@ client.unfocused #8f8f8f #8f8f8f #8f8f8f
 include /etc/sway/config.d/*
 
 # stupid systemd integration or sth idk
-exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+#exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
 exec $term

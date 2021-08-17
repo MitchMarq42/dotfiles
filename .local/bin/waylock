@@ -1,0 +1,5 @@
+#!/bin/bash
+
+grim /tmp/scrot.png && magick /tmp/scrot.png -paint 3 -swirl 75 -stroke "#a0a000" -strokewidth 125 -draw "line 0,0 1920,1080" -stroke black -strokewidth 1 -gravity Northwest -font Impact -pointsize 125 -draw "rotate +29.4 text 0,-72 'S C R E E N      L O C K E D      S C R E E N      L O C K E D'" -stroke "#b0b000" -strokewidth 125 -draw "line 1920,0 0,1080" -stroke black -strokewidth 1 -gravity Southwest -draw "rotate -29.4 text 0,-137 'S C R E E N      L O C K E D      S C R E E N      L O C K E D'" /tmp/scrot.png
+
+swaylock -i /tmp/scrot.png -e -F

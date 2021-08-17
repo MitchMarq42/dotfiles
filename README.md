@@ -1,4 +1,4 @@
-### This is a setup that I use. You might find it bloated, or ugly, or even sacreligious. Nevertheless, it's what I use, so get over it.
+#### This is a setup that I use. You might find it bloated, or ugly, or even sacreligious. Nevertheless, it's what I use, so get over it.
 
 ---
 
@@ -11,6 +11,8 @@ Also note: ~/.config/neofetch/config.conf has a couple of neat things going on w
 - Prints out the current tmux pane if the current session is in one (otherwise says "N/A")
 
 - When paired with my `.zshrc`, prints out the previous value of the TERM variable (before tmux sets it to `screen`)
+
+- Prints out your currently-booted init system. The Artix inits work as expected, systemd insults you, and anything else spews nonsense.
 
 ---
 
@@ -33,6 +35,8 @@ Instead, bind it to a hotkey. I currently have it bound to ctrl+alt+arrowkey via
     control + alt + Right
         /home/mitch/.local/bin/mrandr left
 
-For an alternate way of doing the capslock remap see:
+---
 
-https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7
+For getting capslock -\> esc and held-capslock -\> super to work in sway, see https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will also suffice for any X11 window manager, or any other Wayland compositor that uses XKB instead of doing its own thing.
+
+The file supescaps.diff currently contains the instructions in this gist but automated; run `doas patch < supescaps.diff` and it will magically work. You will have to re-do this every upgrade or reinstall of XKB/XCB/xorg/linux. Maybe make it a pacman hook?

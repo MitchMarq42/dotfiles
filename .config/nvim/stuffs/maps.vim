@@ -1,5 +1,5 @@
 " Clear highlighting from search results on second esc
-nnoremap <esc> :noh<return>
+nnoremap <esc> :noh<CR>:<CR>
 
 " Fix control+W keys to be easier to use (splits)
 "nmap <C-h> <C-w>h
@@ -11,8 +11,8 @@ nnoremap <esc> :noh<return>
 nmap j gj
 nmap k gk
 " make 0 and $ easier
-nnoremap gl $
-nnoremap gh 0
+"nnoremap gl $
+"nnoremap gh 0
 " make visual replace the default
 nmap R gR
 " save and quit all tabs and buffers on ZZ; avoids 'only floating windows
@@ -20,8 +20,17 @@ nmap R gR
 "nnoremap ZZ :wqa<return>
 
 " Make parentheses fun again
-inoremap < <><ESC>ha
-inoremap ( ()<ESC>ha
-inoremap [ []<ESC>ha
-inoremap { {}<ESC>ha
-inoremap ` ``<ESC>ha
+inoremap < <><ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {}<ESC>i
+inoremap ` ``<ESC>i
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+
+" Double space for file switching (magic)
+nnoremap <leader><leader> <c-^>
+
+" visual stuff?
+vmap < <gv
+vmap > >gv

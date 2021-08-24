@@ -7,7 +7,7 @@ source ~/.config/nvim/stuffs/maps.vim
 " generally good/useful things
 filetype plugin on
 filetype indent on
-let mapleader="\\"
+let mapleader="space"
 
 " Make manpages verticalize themselves instantly
 autocmd FileType help,man wincmd L

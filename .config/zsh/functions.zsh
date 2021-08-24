@@ -36,6 +36,6 @@ dots() {
 }
 
 # Sudo is a bitch so bitch about it
-sudo() {
-    which doas >/dev/null && doas $@ ||
-}
+#sudo() {
+#    which doas >/dev/null && doas $@ ||
+#}

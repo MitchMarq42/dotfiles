@@ -223,16 +223,16 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym $left resize shrink width 15px
+    bindsym $down resize grow height 15px
+    bindsym $up resize shrink height 15px
+    bindsym $right resize grow width 15px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym Left resize shrink width 15px
+    bindsym Down resize grow height 15px
+    bindsym Up resize shrink height 15px
+    bindsym Right resize grow width 15px
 
     # Return to default mode
     bindsym Return mode "default"
@@ -245,7 +245,7 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    swaybar_command waybar
+    swaybar_command "waybar"
 }
 
 #

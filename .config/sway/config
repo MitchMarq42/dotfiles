@@ -241,6 +241,10 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #
+# Magical experimental Windows stealth mode?
+#
+bindsym $mod+shift+w mode exec ~/.local/bin/swaywinstealth
+#
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.

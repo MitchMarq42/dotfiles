@@ -1,12 +1,13 @@
 # aliases that make things easier for me by invoking rust programs you don't have
-alias ls='exa'
-alias tree='exa -T'
-alias grep='rg'
-alias lolcat='dotacat'
-alias pacman="paru"
+which doas >/dev/null && alias sudo='doas'
+which exa >/dev/null && alias ls='exa'
+which exa >/dev/null && alias tree='exa -T'
+which rg >/dev/null && alias grep='rg'
+which dotacat >/dev/null && alias lolcat='dotacat'
+which paru >/dev/null && alias pacman="paru" || alias pacman="sudo pacman"
 alias spider="spider -s 2 -c"
 alias mounr="doas mount"
 alias umounr="doas umount -r"
-alias rickroll="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
+alias dc="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
 #alias mpv="mpv --really-quiet"
-#[[ $TERM == alacritty ]] && alias nvim="neovide"
+# $TERM == alacritty  && alias nvim="neovide"

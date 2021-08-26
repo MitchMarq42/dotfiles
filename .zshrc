@@ -18,6 +18,7 @@ source ~/.config/zsh/zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "zdharma/fast-syntax-highlighting", defer:2
+zplug 'zsh-users/zsh-history-substring-search', depth:1
 # Install plugins if there are plugins that have not been installed
 zplug check --verbose || (
     printf "Install? [y/N]: "
@@ -66,6 +67,10 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v "^?" backward-delete-char
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^v' edit-command-line
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

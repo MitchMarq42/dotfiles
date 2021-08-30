@@ -11,8 +11,10 @@ set linebreak
 set encoding=utf-8
 set mouse=a
 set number relativenumber
-set nobackup nowritebackup
 set noswapfile
+set nobackup nowritebackup
+set undodir=~/.cache/nvim/undo
+set undofile
 set lazyredraw
 set scrolloff=3
 set splitbelow splitright

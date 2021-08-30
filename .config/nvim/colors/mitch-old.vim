@@ -53,8 +53,8 @@ highlight TabLineSel    	guibg=orange 	guifg=black	    gui=bold    ctermbg=9   c
 highlight LineNr            guibg=none      guifg=yellow    gui=none    ctermbg=0   ctermfg=3           cterm=none
 highlight CursorLineNr      guibg=black     guifg=yellow    gui=bold
 highlight StatusLine        guibg=blue      guifg=white     gui=bold    ctermbg=4   ctermfg=11          cterm=bold
+highlight NonText guifg=purple guibg=black
 highlight Pmenu             guibg=#303030   guifg=#a0a0f0
-highlight TabLineFill   	guibg=#303030 	guifg=#303030
 highlight TabLine 	    	guibg=green 	guifg=black
 highlight GreenGreen    	guibg=green 	guifg=green
 highlight PurplePurple  	guibg=purple 	guifg=purple
@@ -63,17 +63,7 @@ highlight WhiteWhite    	guibg=white 	guifg=white
 highlight RedRed 	    	guibg=red    	guifg=red
 highlight BlackBlack   		guibg=black 	guifg=black
 highlight GrayGray 	    	guibg=#303030 	guifg=#303030
-
-highlight BluBG             guibg=blue      guifg=fg
-highlight RedBG             guibg=red       guifg=fg
-highlight GrayBG            guibg=#303030   guifg=fg
-highlight OrangeBG          guibg=orange    guifg=fg
-highlight GreenBG           guibg=green     guifg=fg
-highlight PurpleBG          guibg=purple    guifg=fg
-
-highlight WhiteFG           guibg=bg        guifg=white     gui=bold
-highlight BlackFG           guibg=bg        guifg=black     gui=bold
-highlight NoBoldBG          guibg=bg        guifg=fg        gui=none
+highlight TabLineFill       guibg=#303030   guifg=#303030
 
 let g:scrollbar_highlight = {
   \ 'head': 'Comment',

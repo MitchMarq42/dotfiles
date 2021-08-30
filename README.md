@@ -1,8 +1,6 @@
-#### This is a setup that I use. You might find it bloated, or ugly, or even sacreligious. Nevertheless, it's what I use, so get over it.
+##### This is a setup that I use. You might find it bloated, or ugly, or even sacreligious. Nevertheless, it's what I use, so get over it.
 
 ---
-
-Good luck installing xmonad with my config! I suuure do hope that it compiles successfully and doesn't fail at importing anything...
 
 Also note: ~/.config/neofetch/config.conf has a couple of neat things going on with it:
 
@@ -39,4 +37,4 @@ Instead, bind it to a hotkey. I currently have it bound to ctrl+alt+arrowkey via
 
 For getting capslock -\> esc and held-capslock -\> super to work in sway, see https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will also suffice for any X11 window manager, or any other Wayland compositor that uses XKB instead of doing its own thing.
 
-The file supescaps.diff currently contains the instructions in this gist but automated; run `doas patch < supescaps.diff` and it will magically work. You will have to re-do this every upgrade or reinstall of XKB/XCB/xorg/linux. Maybe make it a pacman hook?
+The file .local/share/supescaps.diff currently contains the instructions in this gist but automated; run `doas patch < .local/share/supescaps.diff` and it will magically work. You will have to re-do this every upgrade or reinstall of XKB/XCB/xorg/linux. Maybe make it a pacman hook?

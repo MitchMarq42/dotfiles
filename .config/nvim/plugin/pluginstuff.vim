@@ -8,16 +8,13 @@ endif
 call plug#begin()
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " for modal editing in browser
 Plug 'tpope/vim-surround'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
 Plug 'vim-airline/vim-airline' " Semi shitty but pretty epic statusline
-Plug 'vin-airline/vim-airline-themes' " themes for above
+""Plug 'vin-airline/vim-airline-themes' " themes for above
 Plug 'mattn/emmet-vim' " Magic HTML IDE thingy
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Cool color highlighting stuff
 call plug#end()
 
-" Supertab things
-"let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
 " Hexokinase things
 let g:Hexokinase_highlighters = ['backgroundfull']
 " scrollbar things
@@ -40,18 +37,10 @@ let g:scrollbar_highlight = {
   \ }
 let g:scrollbar_max_size = 40
 
-"CoC things (currently disabled because it's slow etc)
-"command! -nargs=0 Prettier :CocCommand prettier.formatFile
-"let g:coc_global_extensions = [
-"            \'coc-snippets',
-"            \'coc-pairs',
-"            \'coc-prettier',
-"            \'coc-tsserver',
-"            \'coc-html',
-"            \'coc-css',
-"            \'coc-json',
-"            \]
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              "\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"" firenvim things
+if exists('g:started_by_firenvim')
+    set guifont=MesloLGS\ NF:h10
+    set laststatus=0
+else
+    set guifont=MesloLGS\ NF:h15.5
+endif

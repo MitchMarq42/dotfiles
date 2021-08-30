@@ -2,19 +2,37 @@
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "battery", "temperature", "clock"],
+    "modules-right": ["pulseaudio", "battery", "cpu", "clock"],
     "sway/workspaces": {
+        "format": "{icon}",
         "disable-scroll": true,
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": []
+//        "persistent_workspaces": {
+//            "1": [],
+//            "2": [],
+//            "3": [],
+//            "4": [],
+//            "5": [],
+//            "6": [],
+//            "7": [],
+//            "8": [],
+//            "9": []
+//        },
+//        "format-icons": {
+//            "1": "  ",
+//            "2": "  ",
+//            "3": " ﭮ ",
+//            "4": " 4 "
+//        }
+        "format-icons": {
+            "1": "  ",
+            "2": "  ",
+            "3": " ﭮ ",
+            "4": " 4 ",
+            "5": " 5 ",
+            "6": " 6 ",
+            "7": " 7 ",
+            "8": " 8 ",
+            "9": " 9 "
         }
     },
     "sway/window": {
@@ -37,14 +55,12 @@
         "min-length": 8,
         "max-length": 8
     },
-    "temperature": {
-        "interval": 1,
-        "thermal-zone": 3,
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
-        "format": "{temperatureF}宅",
-        "min-length": 4,
-        "max-length": 4
-        },
+    "cpu": {
+    "format": "  {usage}%",
+    "interval": 1,
+    "max-length": 7,
+    "min-length": 6
+    },
     "clock": {
         "format": "   {:%I:%M %p}",
         "format-alt": "   ({:%a %b %d %H:%M})"

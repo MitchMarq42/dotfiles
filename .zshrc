@@ -1,8 +1,8 @@
-# start X on tty7
-[[ $(tty) = /dev/tty7 ]] && exec sway -d #sx ~/.config/x11/xinitrc
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+# start X on tty7
+[[ $(tty) = /dev/tty7 ]] && exec sway
 
 # note the previous value of $TERM, for self-awareness in tmuxes.
 [ -z "${TMUX}" ] && export OLDTERM="${TERM}"

@@ -17,9 +17,10 @@
 " for colors and stuff. Probs not for a while though.
 
 " hi	  thing		    	guibg	    	guifg	       	gui		    ctermbg		ctermfg		        cterm
-set background=dark
+hi clear
+"set background=dark
 set termguicolors
-"highlight Background        guibg=black                                 ctermbg=0
+highlight Normal	    	guibg=#000000	guifg=#bbbb77	gui=none	ctermbg=0   ctermfg=11          cterm=none
 highlight Comment  	    	guibg=none    	guifg=green		gui=none	ctermbg=0   ctermfg=2           cterm=none
 highlight NonText 	    	guibg=none      guifg=brown     gui=bold    ctermbg=0   ctermfg=13          cterm=bold
 highlight Constant          guibg=none  	guifg=#0077ff	gui=none 	ctermbg=0   ctermfg=12	        cterm=none
@@ -34,7 +35,6 @@ highlight Special       	guibg=none      guifg=#bb00bb	gui=bold    ctermbg=0	cte
 highlight Error		    	guibg=#ff0000   guifg=white		gui=none    ctermbg=9   ctermfg=white       cterm=none
 highlight Todo		    	guibg=#c0c000	guifg=#000080	gui=none    ctermbg=3	ctermfg=4           cterm=none
 highlight Directory	    	guibg=none	    guifg=#00c000	gui=bold	ctermbg=0	ctermfg=10          cterm=bold
-highlight Normal	    	guibg=#000000	guifg=#cccc66	gui=none	ctermbg=0   ctermfg=11          cterm=none
 highlight Search	    	guibg=#c0c000	guifg=black     gui=none    ctermbg=3   ctermfg=black       cterm=none
 highlight operator 	    	guibg=none   	guifg=pink      gui=none    ctermbg=0   ctermfg=13          cterm=none
 highlight statement	    	guibg=none      guifg=red	    gui=bold	ctermbg=0	ctermfg=1           cterm=bold
@@ -53,7 +53,7 @@ highlight TabLineSel    	guibg=orange 	guifg=black	    gui=bold    ctermbg=9   c
 highlight LineNr            guibg=none      guifg=yellow    gui=none    ctermbg=0   ctermfg=3           cterm=none
 highlight CursorLineNr      guibg=black     guifg=yellow    gui=bold
 highlight StatusLine        guibg=blue      guifg=white     gui=bold    ctermbg=4   ctermfg=11          cterm=bold
-highlight NonText guifg=purple guibg=black
+highlight NonText           guibg=black     guifg=red
 highlight Pmenu             guibg=#303030   guifg=#a0a0f0
 highlight TabLine 	    	guibg=green 	guifg=black
 highlight GreenGreen    	guibg=green 	guifg=green
@@ -72,4 +72,4 @@ let g:scrollbar_highlight = {
   \ }
 
 ""source ~/.config/nvim/stuffs/minline.vim
-let g:airline_theme='mitch'
+let g:airline_theme='lucius'

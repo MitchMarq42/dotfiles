@@ -2,27 +2,11 @@
     "layer": "top",
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "battery", "cpu", "clock"],
+    "modules-right": ["tray", "pulseaudio", "battery", "cpu", "clock"],
+
     "sway/workspaces": {
         "format": "{icon}",
         "disable-scroll": true,
-//        "persistent_workspaces": {
-//            "1": [],
-//            "2": [],
-//            "3": [],
-//            "4": [],
-//            "5": [],
-//            "6": [],
-//            "7": [],
-//            "8": [],
-//            "9": []
-//        },
-//        "format-icons": {
-//            "1": "  ",
-//            "2": "  ",
-//            "3": " ﭮ ",
-//            "4": " 4 "
-//        }
         "format-icons": {
             "1": "  ",
             "2": "  ",
@@ -35,11 +19,27 @@
             "9": " 9 "
         }
     },
-    "sway/window": {
+    "custom": {
+        "exec": "cat ~/.cache/vivarium.state",
+        "exec-if": "~/.local/bin/stupid vivarium"
     },
+
+    "sway/window": {
+        "format": "{}",
+        "rewrite": {
+            "(.*) - (.*) - Brave": "$1",
+            "(.*): (.*) - Brave": "$1"
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
     "pulseaudio": {
         "format": "{icon} {volume}%  ",
-        "format-bluetooth": "{icon} {volume}%  ",
+        "format-bluetooth": "  {icon} {volume}%  ",
         "format-muted": " Mute  ",
         "format-icons": {
             "default": ["奔", "墳", ""]
@@ -47,20 +47,23 @@
         "scroll-step": 1,
         "on-click": "pavucontrol",
         "min-length": 8,
-        "max-length": 8
+        "max-length": 9
     },
+
     "battery": {
         "format": "{icon} {capacity}%  ",
         "format-icons": ["", "", "", "", "", "", "", "", "", ""],
         "min-length": 8,
         "max-length": 8
     },
+
     "cpu": {
-    "format": "  {usage}%",
-    "interval": 1,
-    "max-length": 7,
-    "min-length": 6
+        "format": "  {usage}%",
+        "interval": 1,
+        "max-length": 7,
+        "min-length": 6
     },
+
     "clock": {
         "format": "   {:%I:%M %p}",
         "format-alt": "   ({:%a %b %d %H:%M})"

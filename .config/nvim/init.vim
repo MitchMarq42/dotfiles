@@ -11,8 +11,8 @@ autocmd FileType help,man wincmd L
 
 " re-source any .vim files when you save them
 augroup vimrc
-   autocmd! BufWritePost *.vim source %
- augroup END
+    autocmd! BufWritePost *.vim source %
+augroup END
 
 colorscheme mitch-old
 

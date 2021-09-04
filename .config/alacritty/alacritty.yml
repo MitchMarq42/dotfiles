@@ -95,7 +95,6 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Source Code Pro
     family: MesloLGS NF
     #family: JetBrains Mono Nerd Font
 
@@ -172,7 +171,7 @@ colors:
   normal:
     black:   '#000000'
     red:     '#ff0000'
-    green:   '#008000'
+    green:   '#00aa00'
     yellow:  '#ffee11'
     blue:    '#0000ff'
     magenta: '#ff00ff'

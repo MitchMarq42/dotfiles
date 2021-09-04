@@ -84,6 +84,9 @@ exec pulseaudio
 # Boilerplate for gestures
 exec_always libinput-gestures -c ~/.config/libinput-gestures.conf
 
+# boilerplate for notifications (mako will start itself up automatically)
+exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+
 # Restore old brightness
 exec ~/.local/bin/brightctl -r
 

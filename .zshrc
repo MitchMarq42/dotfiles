@@ -35,7 +35,7 @@ $FETCH
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Switch escape and caps if tty and no passwd required:
@@ -94,18 +94,18 @@ export PATH=~/.local/bin:$PATH:~/.emacs.d/bin
 ######   Luke Smith's custom vi-mode cursor switcher   ######
 #############################################################
 function zle-keymap-select {
-	if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]];
-	then echo -ne '\e[1 q'
-	elif [[ ${KEYMAP} == main ]] ||
-	[[ ${KEYMAP} == viins ]] ||
+    if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]];
+    then echo -ne '\e[1 q'
+    elif [[ ${KEYMAP} == main ]] ||
+    [[ ${KEYMAP} == viins ]] ||
         [[ ${KEYMAP} = '' ]] ||
         [[ $1 = 'beam' ]];
-	then echo -ne '\e[5 q'
-	fi
+    then echo -ne '\e[5 q'
+    fi
 }
 zle-line-init() {
-	zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-	echo -ne "\e[5 q"
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
 }
 zle -N zle-keymap-select
 zle -N zle-line-init

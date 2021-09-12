@@ -19,9 +19,9 @@
 " hi	  thing		    	guibg	    	guifg	       	gui		    ctermbg		ctermfg		        cterm
 hi clear
 "set background=dark
-set termguicolors
-highlight Normal	    	guibg=#000000	guifg=#bbbb77	gui=none	ctermbg=0   ctermfg=11          cterm=none
-highlight Comment  	    	guibg=none    	guifg=green		gui=none	ctermbg=0   ctermfg=2           cterm=none
+"set termguicolors
+highlight Normal	    	guibg=#000000	guifg=white 	gui=none	ctermbg=0   ctermfg=11          cterm=none
+highlight Comment  	    	guibg=none    	guifg=#00aa00   gui=none	ctermbg=0   ctermfg=2           cterm=none
 highlight NonText 	    	guibg=none      guifg=brown     gui=bold    ctermbg=0   ctermfg=13          cterm=bold
 highlight Constant          guibg=none  	guifg=#0077ff	gui=none 	ctermbg=0   ctermfg=12	        cterm=none
 highlight cString 	    	guibg=none      guifg=white 	gui=bold 	ctermbg=0   ctermfg=7       	cterm=bold
@@ -35,7 +35,7 @@ highlight Special       	guibg=none      guifg=#bb00bb	gui=bold    ctermbg=0	cte
 highlight Error		    	guibg=#ff0000   guifg=white		gui=none    ctermbg=9   ctermfg=white       cterm=none
 highlight Todo		    	guibg=#c0c000	guifg=#000080	gui=none    ctermbg=3	ctermfg=4           cterm=none
 highlight Directory	    	guibg=none	    guifg=#00c000	gui=bold	ctermbg=0	ctermfg=10          cterm=bold
-highlight Search	    	guibg=#c0c000	guifg=black     gui=none    ctermbg=3   ctermfg=black       cterm=none
+highlight Search	    	guibg=purple 	guifg=yellow    gui=none    ctermbg=3   ctermfg=black       cterm=none
 highlight operator 	    	guibg=none   	guifg=pink      gui=none    ctermbg=0   ctermfg=13          cterm=none
 highlight statement	    	guibg=none      guifg=red	    gui=bold	ctermbg=0	ctermfg=1           cterm=bold
 highlight DiffAdd 	    	guibg=purple 	guifg=black	    gui=bold    ctermbg=5   ctermfg=0           cterm=bold
@@ -73,3 +73,5 @@ let g:scrollbar_highlight = {
 
 ""source ~/.config/nvim/stuffs/minline.vim
 let g:airline_theme='lucius'
+
+set termguicolors

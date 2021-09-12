@@ -1,8 +1,10 @@
+# vim: set ft=sh :
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 # start X on tty7
-[[ $(tty) = /dev/tty7 ]] && exec sway
+[[ $(tty) = /dev/tty7 ]] && XDG_RUNTIME_DIR="/run/user/1000" exec sway
 
 # note the previous value of $TERM, for self-awareness in tmuxes.
 [ -z "${TMUX}" ] && export OLDTERM="${TERM}"

@@ -1,3 +1,5 @@
+# vim: set ft=sh :
+
 # Custom config for sway
 #
 # I copied this to ~/.config/sway/config and edited it to my liking.
@@ -84,8 +86,9 @@ exec pulseaudio
 # Boilerplate for gestures
 exec_always libinput-gestures -c ~/.config/libinput-gestures.conf
 
-# boilerplate for notifications (mako will start itself up automatically)
+# boilerplate for notifications (mako will NOT start itself up automatically)
 exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+exec mako
 
 # Restore old brightness
 exec ~/.local/bin/brightctl -r
@@ -243,10 +246,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Magical experimental Windows stealth mode?
-#
-bindsym $mod+shift+w mode exec ~/.local/bin/swaywinstealth
 #
 # Status Bar:
 #

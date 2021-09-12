@@ -10,7 +10,7 @@ Also note: ~/.config/neofetch/config.conf has a couple of neat things going on w
 
 - When paired with my `.zshrc`, prints out the previous value of the TERM variable (before tmux sets it to `screen`)
 
-- Prints out your currently-booted init system. The Artix inits work as expected, systemd insults you, and anything else spews nonsense.
+- Prints out your currently-booted init system. The Artix inits work as expected, systemd insults you, and anything else (\*android init\*) spews nonsense.
 
 ---
 

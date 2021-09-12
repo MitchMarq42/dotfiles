@@ -1,0 +1,17 @@
+# vim: set ft=dosini :
+
+on-button-left=dismiss
+on-button-right=invoke-default-action
+
+font=MesloLGS NF 10.5
+background-color=#303030cc
+text-color=#dfdfdfff
+width=350
+height=150
+padding=10
+border-size=1
+border-color=#ff0000ff
+border-radius=5
+text-alignment=center
+max-visible=2
+anchor=bottom-right

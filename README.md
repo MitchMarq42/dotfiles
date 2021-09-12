@@ -33,6 +33,13 @@ Instead, bind it to a hotkey. I currently have it bound to ctrl+alt+arrowkey via
     control + alt + Right
         /home/mitch/.local/bin/mrandr left
 
+Or for sway (might also work in vivarium, dwl, etc):
+
+    bindsym $mod+Left exec "~/.local/bin/mrandr right"
+    bindsym $mod+Down exec "~/.local/bin/mrandr normal"
+    bindsym $mod+Up exec "~/.local/bin/mrandr inverted"
+    bindsym $mod+Right exec "~/.local/bin/mrandr left"
+
 ---
 
 For getting capslock -\> esc and held-capslock -\> super to work in sway, see https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will also suffice for any X11 window manager, or any other Wayland compositor that uses XKB instead of doing its own thing.

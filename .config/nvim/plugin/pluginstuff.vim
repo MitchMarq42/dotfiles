@@ -12,7 +12,7 @@ Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
 Plug 'vim-airline/vim-airline' " sorta epic statusline
 Plug 'vim-airline/vim-airline-themes' " themes for above
 Plug 'mattn/emmet-vim' " Magic HTML IDE thingy
-Plug 'norcalli/nvim-colorizer.lua' " Cool color highlighting stuff
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Actually cool color highlighting stuff
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 call plug#end()
 
@@ -21,8 +21,10 @@ set noshowmode
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-" Colorizer things
-lua require'colorizer'.setup()
+" Hexokinase things
+let g:Hexokinase_highlighters = ['foregroundfull']
+"HexokinaseTurnOn
+" #ff0000 (test to see if the plugin actually works)
 
 " scrollbar things
 augroup ScrollbarInit

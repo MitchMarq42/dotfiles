@@ -19,7 +19,7 @@ set lazyredraw
 set scrolloff=3
 set splitbelow splitright
 set cmdwinheight=1
-set wildmode=longest,list,full
+"set wildmode=longest,list,full
 set ignorecase smartcase
 set incsearch hlsearch
 set viminfo='10,\"100,:20,%,n~/.cache/nvim/viminfo
@@ -28,8 +28,6 @@ set termguicolors
 " start with statusbar enabled
 set laststatus=2
 " fix tab indentation being weird
-set tabstop=4
-set shiftwidth=4
-set expandtab
+set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
 " control autocommenting
 set formatoptions-=cro

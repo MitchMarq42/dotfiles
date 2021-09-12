@@ -1,14 +1,14 @@
 "colorscheme mitch-old
 
-"source ~/.config/nvim/plugin/slets.vim
-"source ~/.config/nvim/plugin/pluginstuff.vim
-"source ~/.config/nvim/plugin/maps.vim
-
-" #ff0000 -- test to see whether colors work
+ "#ff0000 -- test to see whether colors work
 
 " generally good/useful things
 filetype plugin on
 filetype indent on
+
+"source ~/.config/nvim/plugin/slets.vim
+"source ~/.config/nvim/plugin/maps.vim
+source ~/.config/nvim/plugin/pluginstuff.vim
 
 " Make manpages verticalize themselves instantly
 autocmd FileType help,man wincmd L

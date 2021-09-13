@@ -83,7 +83,7 @@ source ~/.config/zsh/functions.zsh
 #random exports for various quality-of-life things
 export LANG="en_US.UTF-8"                                   # these two lines are
 export LC_COLLATE="C"                                       # for silencing perl scripts
-export MANPAGER="nvim -c 'set ft=man' -"                    # Nvim does manpages...
+export MANPAGER="nvim +Man!"                                # Nvim does manpages...
 export BAT_THEME="base16"                                   # Don't really use bat
 export EDITOR="nvim"
 export LESSHISTFILE="-"                                     # stop ~/.lesshst from happening

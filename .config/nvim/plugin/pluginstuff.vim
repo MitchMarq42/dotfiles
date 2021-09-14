@@ -13,7 +13,10 @@ Plug 'vim-airline/vim-airline' " sorta epic statusline
 Plug 'vim-airline/vim-airline-themes' " themes for above
 Plug 'mattn/emmet-vim' " Magic HTML IDE thingy
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Actually cool color highlighting stuff
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " they recommend updating the parsers on update
+Plug 'ervandew/supertab' " super tab complete? (not super, just tab)
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " main one
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'} " 9000+ Snippets
 call plug#end()
 
 " airline things (more in colors file)
@@ -54,7 +57,10 @@ else
     set guifont=MesloLGS\ NF:h15.5
 endif
 
-" LSP things
+" coq
+"COQnow [--shut-up]
+
+" LSP, COQ things
 lua << EOF
 require'nvim-treesitter.configs'.setup {
 ensure_installed = {"html", "css", "json", "bash", "rust", "haskell", "regex", "lua"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages

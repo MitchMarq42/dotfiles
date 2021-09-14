@@ -13,13 +13,13 @@ set mouse=a
 set number relativenumber
 set noswapfile
 set nobackup nowritebackup
-set undodir=~/.cache/nvim/undo
 set undofile
+set undodir=~/.cache/nvim/undo
 set lazyredraw
 set scrolloff=3
 set splitbelow splitright
 set cmdwinheight=1
-"set wildmode=longest,list,full
+set wildmode=longest,full
 set ignorecase smartcase
 set incsearch hlsearch
 set viminfo='10,\"100,:20,%,n~/.cache/nvim/viminfo

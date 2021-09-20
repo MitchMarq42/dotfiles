@@ -54,22 +54,24 @@ output * bg ~/.local/share/backgrounds/mojave_midnight.jpg fill
 #
 # Modified configuration:
 #
-   input "type:touchpad" {
+    input "type:touchpad" {
        dwt disabled
        tap enabled
        natural_scroll enabled
        middle_emulation enabled
        repeat_delay 200
        repeat_rate 60
-   }
+    }
 
-   input "type:keyboard" {
+    input "type:keyboard" {
        xkb_options "custom:super_esc"
        xkb_numlock enable
        repeat_delay 300
        repeat_rate 50
-       }
+    }
+
     input * {
+        scroll_button button9 274
     }
 
    seat seat0 xcursor_theme Mocu-White-Right
@@ -138,8 +140,7 @@ exec ~/.local/bin/brightctl -r
     bindsym $mod+q reload
 
     # Exit sway (logs you out of your Wayland session)
-    for_window [app_id="fzf-launcher"] focus, floating enabled, border pixel 1
-    bindsym $mod+Shift+e exec alacritty --class fzf-launcher -e ~/.local/bin/swaxit
+    bindsym $mod+Shift+e exec wlogout
 
 #
 # Moving around:

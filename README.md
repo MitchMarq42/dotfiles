@@ -22,7 +22,7 @@ There is a comment at the beginning of the executable linking to an extremely he
 
 To make it run automatically on gyroscope/accelerometer events, learn C or something.
 
-Instead, bind it to a hotkey. I currently have it bound to ctrl+alt+arrowkey via sxhkd (https://wiki.archlinux.org/title/sxhkd):
+Instead, bind it to a hotkey. On Xorg I have it bound to ctrl+alt+arrowkey via sxhkd (https://wiki.archlinux.org/title/sxhkd):
 
     control + alt + Up
         /home/mitch/.local/bin/mrandr inverted
@@ -33,7 +33,7 @@ Instead, bind it to a hotkey. I currently have it bound to ctrl+alt+arrowkey via
     control + alt + Right
         /home/mitch/.local/bin/mrandr left
 
-Or for sway (might also work in vivarium, dwl, etc):
+Or for sway (concept may be the same in vivarium, dwl, etc):
 
     bindsym $mod+Left exec "~/.local/bin/mrandr right"
     bindsym $mod+Down exec "~/.local/bin/mrandr normal"
@@ -44,4 +44,4 @@ Or for sway (might also work in vivarium, dwl, etc):
 
 For getting capslock -\> esc and held-capslock -\> super to work in sway, see https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will also suffice for any X11 window manager, or any other Wayland compositor that uses XKB instead of doing its own thing.
 
-The file .local/share/supescaps.diff currently contains the instructions in this gist but automated; run `doas patch < .local/share/supescaps.diff` and it will magically work. You will have to re-do this every upgrade or reinstall of XKB/XCB/xorg/linux. Maybe make it a pacman hook?
+The file .local/share/supescaps.diff currently contains the instructions in this gist but automated; run `doas patch < .local/share/supescaps.diff` and it might magically work. You will have to re-do this every upgrade or reinstall of XKB/XCB/xorg/linux. Maybe make it a pacman hook?

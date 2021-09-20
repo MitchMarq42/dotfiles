@@ -17,6 +17,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " they recommend up
 Plug 'ervandew/supertab' " super tab complete? (not super, just tab)
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " main one
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'} " 9000+ Snippets
+Plug 'rhysd/nyaovim-markdown-preview'
 call plug#end()
 
 " airline things (more in colors file)

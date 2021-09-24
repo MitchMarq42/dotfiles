@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-left": ["custom/vivarium", "sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
     "modules-right": ["tray", "pulseaudio", "battery", "cpu", "clock"],
 
@@ -19,7 +19,7 @@
             "9": " 9 "
         }
     },
-    "custom": {
+    "custom/vivarium": {
         "exec": "cat ~/.cache/vivarium.state",
         "exec-if": "~/.local/bin/stupid vivarium"
     },

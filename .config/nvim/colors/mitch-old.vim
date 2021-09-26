@@ -20,7 +20,7 @@
 hi clear
 "set background=dark
 "set termguicolors
-highlight Normal	    	guibg=#000000	guifg=white 	gui=none	ctermbg=0   ctermfg=11          cterm=none
+highlight Normal	    	guibg=#000000	guifg=#eeee99	gui=none	ctermbg=0   ctermfg=11          cterm=none
 highlight Comment  	    	guibg=none    	guifg=#00aa00   gui=none	ctermbg=0   ctermfg=2           cterm=none
 highlight NonText 	    	guibg=none      guifg=brown     gui=bold    ctermbg=0   ctermfg=13          cterm=bold
 highlight Constant          guibg=none  	guifg=#0077ff	gui=none 	ctermbg=0   ctermfg=12	        cterm=none

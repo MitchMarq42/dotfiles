@@ -28,7 +28,7 @@ set $menu dmenu_path | wofi --show drun -t alacritty -i -G | xargs swaymsg exec 
 output * bg ~/.local/share/backgrounds/mojave_midnight.jpg fill
 
 # Lower refresh rate to avoid stupid crashes. What are we, heathens?
-#output eDP-1 mode 1920x1080@47.982Hz
+output eDP-1 mode 1920x1080@47.982Hz
 
 #
 # Example configuration:
@@ -74,10 +74,11 @@ output * bg ~/.local/share/backgrounds/mojave_midnight.jpg fill
         scroll_button button9 274
     }
 
-   seat seat0 xcursor_theme Mocu-White-Right
-   exec_always {
+    seat seat0 xcursor_theme Mocu-White-Right
+
+    exec_always {
         gsettings set org.gnome.desktop.interface cursor-theme "Mocu-White-Right"
-        }
+    }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.

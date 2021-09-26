@@ -44,7 +44,7 @@ fi
 doas -n loadkeys ~/.local/share/ttymaps.kmap 2>/dev/null
 
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE=~/.local/share/zsh/histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt extendedglob nomatch
@@ -75,22 +75,11 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 # source aliases and functions files
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/functions.zsh
-#random exports for various quality-of-life things
-export LANG="en_US.UTF-8"                                   # these two lines are
-export LC_COLLATE="C"                                       # for silencing perl scripts
-export MANPAGER="nvim +Man!"                                # Nvim does manpages...
-export BAT_THEME="base16"                                   # Don't really use bat
-export EDITOR="nvim"
-export LESSHISTFILE="-"                                     # stop ~/.lesshst from happening
-export GHCUP_USE_XDG_DIRS="anything"                        # clean up HOME
-
-# add personal bin folder and emacs functions to path, for custom scripts
-export PATH=~/.local/bin:$PATH:~/.emacs.d/bin
 
 #############################################################
 ######   Luke Smith's custom vi-mode cursor switcher   ######
@@ -116,9 +105,6 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 #############################################################
 ###### End Luke Smith's custom vi-mode cursor switcher ######
 #############################################################
-
-# Fix duplicate entries in PATH variable caused by sourcing this file multiple times
-source ~/.local/bin/fixpath
 
 # Finally load those zplugs
 zplug load

@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
 ## Fix $PATH variable by removing duplicate entries and ordering them by length
-export PATH=$(
-	echo $PATH |
+## Now in POSIX-ish shell!
+PATH=$(
+	echo "$PATH" |
 	sed 's/:/\n/g' |
 	sort -u |
 	awk '{ print length(), $0 | "sort -n" }' |
@@ -10,5 +11,4 @@ export PATH=$(
 	awk '$1=$1' ORS=':' |
     sed 's/:$//g'
 )
-
-#echo $PATH
+export PATH

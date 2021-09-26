@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 grim /tmp/scrot.png &&
     magick /tmp/scrot.png \

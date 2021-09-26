@@ -1,60 +1,60 @@
-#!/bin/bash
+#!/bin/sh
 
 # Excellent info at https://wiki.ubuntu.com/X/InputCoordinateTransformation
 
-direction=$@
+direction=$*
 
 case $direction in
-    normal)     wldirection=0
-                matrix="1 0 0 0 1 0 0 0 1";;
-    right)      wldirection=90
-                matrix="0 1 0 -1 0 1 0 0 1";;
-    inverted)   wldirection=180
-                matrix="-1 0 1 0 -1 1 0 0 1";;
-    left)       wldirection=270
-                matrix="0 -1 1 1 0 0 0 0 1";;
-    "")         echo "no operation specified" && exit 0;;
-    *)          echo "don't waste my time" && exit 1
+    normal | 0)      wldirection=0
+                     matrix="1 0 0 0 1 0 0 0 1";;
+    right | 90)      wldirection=90
+                     matrix="0 1 0 -1 0 1 0 0 1";;
+    inverted | 180)  wldirection=180
+                     matrix="-1 0 1 0 -1 1 0 0 1";;
+    left | 270)      wldirection=270
+                     matrix="0 -1 1 1 0 0 0 0 1";;
+    "")              echo "no operation specified" && exit 0;;
+    *)               echo "don't waste my time" && exit 1
 esac
 
-[[ $(xinput list 2>/dev/null | grep -i wayland 2>/dev/null) ]] &&
+[ "$(xinput list 2>/dev/null | grep -i wayland)" ] &&
     export server=wayland ||
     export server=xorg
 
 touchpad=$(
-    xinput list 2>/dev/null |
+xinput list 2>/dev/null |
     grep -i touchpad |
     sed 's/^.*id=//' |
     awk '{print $1}'
 )
 tpprop=$(
-    xinput list-props $touchpad 2>/dev/null |
+xinput list-props "$touchpad" 2>/dev/null |
     grep Matrix |
     sed 's/^.*(//;s/).*$//'
 )
 touchscreen=$(
-    xinput list 2>/dev/null |
+xinput list 2>/dev/null |
     grep -i touchscreen |
     sed 's/^.*id=//' |
     awk '{print $1}'
 )
 tsprop=$(
-    xinput list-props $touchscreen 2>/dev/null |
+xinput list-props "$touchscreen" 2>/dev/null |
     grep Matrix |
     sed 's/^.*(//;s/).*$//'
 )
 
-echo "direction=$direction"
-echo "wldirection=$wldirection"
-echo "matrix= $matrix"
-echo "server=$server"
+echo direction="$direction"
+echo wldirection="$wldirection"
+echo matrix= "$matrix"
+echo server="$server"
 
-case $server in
+case "$server" in
     xorg)
-            xinput set-prop $touchpad $tpprop $matrix 2>/dev/null
-            xinput set-prop $touchscreen $tsprop $matrix 2>/dev/null
-            xrandr -o $direction
-            which nitrogen >/dev/null && nitrogen --restore;;
+        xinput set-prop "$touchpad" "$tpprop" "$matrix" 2>/dev/null
+        xinput set-prop "$touchscreen" "$tsprop" "$matrix" 2>/dev/null
+        xrandr -o       "$direction"
+        which nitrogen >/dev/null && nitrogen --restore;;
     wayland)
-            swaymsg output "*" transform $wldirection
+        swaymsg output "*" transform "$wldirection"
 esac

@@ -1,21 +1,25 @@
-#!/bin/bash
+#!/bin/sh
 
 # Brightctl, a simple switch that uses sysfs to manage the display brightness. See also: Brightnessctl.
 # Run it with doas, or have the user own the brightness file.
 
-brightness=$(cat /sys/class/backlight/*_bl0/brightness)
-maxbrightness=$(cat /sys/class/backlight/*_bl0/max_brightness)
-saved="~/.local/share/brightness"
-oldbrightness=$brightness
-echo "Was $brightness"
-[[ $@ == + ]] && ((brightness=($brightness+5) ))
-[[ $@ == - ]] && ((brightness=($brightness-6) ))
-[[ $@ == -s ]] && (echo $brightness > ~/.local/share/brightness && echo "Saved $saved as $brightness" || echo "Failed. Check your privilege.")
-[[ $@ == -r || $@ == restore || $@ == --restore ]] && brightness=$(cat $saved)
+arg="$*"
+echo "$arg"
+bl="$(ls /sys/class/backlight | awk '{print $1}')"
+brightness=$(cat /sys/class/backlight/"$bl"/brightness)
+saved="$HOME/.local/share/brightness"
+oldbrightness="$brightness"
+echo "Was $oldbrightness"
+case "$arg" in
+    +)       _=$((brightness=(brightness+5) )) ;;
+    -)       _=$((brightness=(brightness-6) )) ;;
+    -s)      (echo "$brightness" > "$HOME"/.local/share/brightness &&
+                 echo Saved "$saved" as "$brightness" ||
+                 echo "Failed. Check your privilege.")
+                     ;;
+    -r | restore | --restore ) brightness=$(cat "$saved")
+esac
 
-echo $brightness > /sys/class/backlight/*_bl0/brightness 2>/dev/null &&
-echo "Now $brightness" ||
-echo "Still $oldbrightness, maybe don't expect the impossible next time?"
-
-perc=$(( brightness / maxbrightness ))
-#notify-send "Now $brightness" -t 1 -u low -i xfpm-brightness-lcd -h int:value:$perc -h string:x-canonical-private-synchronous:brightness
+echo "$brightness" > /sys/class/backlight/"$bl"/brightness 2>/dev/null &&
+echo Now "$brightness" ||
+    echo Still "$oldbrightness"\, maybe don\'t expect the impossible next time?

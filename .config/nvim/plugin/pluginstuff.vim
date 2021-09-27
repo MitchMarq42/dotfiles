@@ -41,15 +41,15 @@ augroup ScrollbarInit
 augroup end
 let g:scrollbar_right_offset = 0
 let g:scrollbar_shape = {
-  \ 'head': '⣿',
-  \ 'body': '⣿',
-  \ 'tail': '⣿',
+  \ 'head': '❚',
+  \ 'body': '█',
+  \ 'tail': '❚',
   \ }
-let g:scrollbar_highlight = {
-  \ 'head': 'LineNr',
-  \ 'body': 'LineNr',
-  \ 'tail': 'LineNr',
-  \ }
+"let g:scrollbar_highlight = {
+"  \ 'head': 'LineNr',
+"  \ 'body': 'LineNr',
+"  \ 'tail': 'LineNr',
+"  \ }
 let g:scrollbar_max_size = 40
 
 "" firenvim things

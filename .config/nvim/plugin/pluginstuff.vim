@@ -9,10 +9,10 @@ call plug#begin()
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " for modal editing in browser
 Plug 'tpope/vim-surround'
 Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
-"Plug 'vim-airline/vim-airline' " sorta epic statusline
-"Plug 'vim-airline/vim-airline-themes' " themes for above
+Plug 'vim-airline/vim-airline' " sorta epic statusline
+Plug 'vim-airline/vim-airline-themes' " themes for above
 Plug 'kyazdani42/nvim-web-devicons' " Icons that work in lua
-Plug 'famiu/feline.nvim' " cringe Lua statusline
+"Plug 'famiu/feline.nvim' " cringe Lua statusline
 Plug 'mattn/emmet-vim' " Magic HTML IDE thingy
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Actually cool color highlighting stuff
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " they recommend updating the parsers on update
@@ -20,6 +20,7 @@ Plug 'ervandew/supertab' " super tab complete? (not super, just tab)
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " main one
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'} " 9000+ Snippets
 Plug 'pprovost/vim-ps1'
+Plug 'lewis6991/gitsigns.nvim' " Lua git thingies
 call plug#end()
 
 " airline things (more in colors file)

@@ -79,5 +79,5 @@ ensure_installed = {"html", "css", "json", "bash", "rust", "haskell", "regex", "
     additional_vim_regex_highlighting = false,
   },
 }
-require('feline').setup()
+--require('feline').setup()
 EOF

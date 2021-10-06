@@ -1,4 +1,6 @@
 -- xmonad configuration file, for compiling into xmonad
+
+-- Imports
 import XMonad
 import XMonad.Config.Xfce
 import qualified XMonad.StackSet as W
@@ -13,6 +15,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.WindowSwallowing
 import Control.Monad (liftM2)
 
+-- Window rules
 myManageHook = composeAll
     [ className =? "Brave-browser"          --> doShift "web"
     , className =? "DesktopEditors"         --> viewShift "office"
@@ -26,6 +29,7 @@ myManageHook = composeAll
     ]
     where viewShift = doF . liftM2 (.) W.greedyView W.shift
 
+-- Workspaces
 myWorkspaces = ["term","web","office","settings","5","6","7","8","9"]
 
 myTerminal = "alacritty"
@@ -34,6 +38,7 @@ myTerminal = "alacritty"
 
 mySwallowHook = swallowEventHook ( className =? "Alacritty" ) ( return True )
 
+-- keybindings (see ~/.config/sxhkd/sxhkdrc for more)
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
     [ ((modMask, xK_u), withFocused (keysMoveWindow (0, 10)) )
     , ((modMask, xK_i), withFocused (keysMoveWindow (0, -10)) )
@@ -45,6 +50,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
     , ((modMask, xK_Escape), spawn "xkill")
     ]
 
+-- main defs: start with XFCE defaults and throw in all the above.
 main = xmonad xfceConfig
     { modMask    = mod4Mask
     , terminal   = myTerminal

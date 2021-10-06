@@ -7,20 +7,22 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 endif
 call plug#begin()
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " for modal editing in browser
-Plug 'tpope/vim-surround'
-Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
-Plug 'vim-airline/vim-airline' " sorta epic statusline
-Plug 'vim-airline/vim-airline-themes' " themes for above
-Plug 'kyazdani42/nvim-web-devicons' " Icons that work in lua
-"Plug 'famiu/feline.nvim' " cringe Lua statusline
 Plug 'mattn/emmet-vim' " Magic HTML IDE thingy
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Actually cool color highlighting stuff
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " they recommend updating the parsers on update
-Plug 'ervandew/supertab' " super tab complete? (not super, just tab)
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " main one
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'} " 9000+ Snippets
-Plug 'pprovost/vim-ps1'
+Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar
+"Plug 'vim-airline/vim-airline' " sorta epic statusline
+"Plug 'vim-airline/vim-airline-themes' " themes for above
+"Plug 'famiu/feline.nvim' " cringe Lua statusline
+Plug 'kyazdani42/nvim-web-devicons' " Icons that work in lua
 Plug 'lewis6991/gitsigns.nvim' " Lua git thingies
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " they recommend updating the parsers on update
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+Plug 'glepnir/lspsaga.nvim'
+"Plug 'ervandew/supertab' " super tab complete? (not super, just tab)
+"Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " main one
+"Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'} " 9000+ Snippets
+Plug 'pprovost/vim-ps1'
 call plug#end()
 
 " airline things (more in colors file)
@@ -79,5 +81,8 @@ ensure_installed = {"html", "css", "json", "bash", "rust", "haskell", "regex", "
     additional_vim_regex_highlighting = false,
   },
 }
+local nvim_lsp = require('lspconfig')
+require'lspconfig'.pylsp.setup{}
+
 --require('feline').setup()
 EOF

@@ -14,4 +14,5 @@ nitrogen --restore &
 #conky &
 alacritty &
 #exec /home/mitch/.local/share/xmonad/xmonad-x86_64-linux
-xmonad || sudo brightctl -s
+#xmonad || sudo brightctl -s
+qtile start

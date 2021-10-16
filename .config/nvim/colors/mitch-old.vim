@@ -52,7 +52,7 @@ highlight CmdMode 	    	guibg=white 	guifg=black	    gui=bold    ctermbg=7   cte
 highlight TabLineSel    	guibg=orange 	guifg=black	    gui=bold    ctermbg=9   ctermfg=0           cterm=bold
 highlight LineNr            guibg=none      guifg=yellow    gui=none    ctermbg=0   ctermfg=3           cterm=none
 highlight CursorLineNr      guibg=black     guifg=yellow    gui=bold
-highlight StatusLine        guibg=blue      guifg=white     gui=bold    ctermbg=4   ctermfg=11          cterm=bold
+"highlight StatusLine        guibg=blue      guifg=white     gui=bold    ctermbg=4   ctermfg=11          cterm=bold
 highlight NonText           guibg=black     guifg=red
 highlight Pmenu             guibg=#303030   guifg=#a0a0f0
 highlight TabLine 	    	guibg=green 	guifg=black

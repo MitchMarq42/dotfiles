@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=brave-wayland
+StartupNotify=true
+StartupWMClass=brave-browser
+Exec=brave --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+Terminal=false
+Icon=brave-desktop
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=x-scheme-handler/unknown;x-scheme-handler/about;x-scheme-handler/https;x-scheme-handler/http;text/html;

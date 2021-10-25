@@ -1,5 +1,5 @@
 call plug#begin()
-" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } } " for modal editing in browser
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " for modal editing in browser
 Plug 'mattn/emmet-vim' " Magic HTML IDE thingy
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' } " Actually cool color highlighting stuff
 Plug 'Xuyuanp/scrollbar.nvim' " actually good scrollbar

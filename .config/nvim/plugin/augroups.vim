@@ -1,3 +1,9 @@
+" go to previous location
+augroup init
+    autocmd!
+    autocmd BufReadPost * silent! normal! g`"zv
+augroup END
+
 " convert markdown to html
 augroup markdown
     autocmd!
@@ -9,9 +15,6 @@ augroup bufwritepost
     autocmd!
     autocmd BufWritePost *.vim source %
 augroup END
-
-" go to previous location
-autocmd BufReadPost * silent! normal! g`"zv
 
 " scrollbar things (more in pluginstuff file)
 augroup ScrollbarInit

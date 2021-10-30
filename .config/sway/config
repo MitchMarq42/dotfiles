@@ -4,11 +4,11 @@
 #
 # I copied this to ~/.config/sway/config and edited it to my liking.
 #
-# Read `man 5 sway` for a complete reference.
+# I have also attempted to read `man 5 sway`, but have not yet obtained the zen of complete reference.
 
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
+# Logo key. Use Mod4 for logo cause it's the best.
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
@@ -130,11 +130,8 @@ exec ~/.local/bin/brightctl -r
     # Lock screen (custom)
     bindsym $mod+x exec ~/.local/bin/waylock
 
-    # Drag floating windows by holding down $mod and left mouse button.
+    # Drag windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
     floating_modifier $mod normal
 
     # Reload the configuration file
@@ -157,11 +154,6 @@ exec ~/.local/bin/brightctl -r
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
@@ -277,6 +269,6 @@ client.unfocused #8f8f8f #8f8f8f #8f8f8f
 include /etc/sway/config.d/*
 
 # stupid systemd integration or sth idk
-#exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+exec "systemctl --user import-environment; systemctl --user start sway-session.target"
 
 exec $term

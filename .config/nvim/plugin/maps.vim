@@ -1,6 +1,6 @@
 let mapleader = " "
-" Clear highlighting from search results on second esc
-nnoremap <esc> :noh<CR>:<CR>
+" Clear search highlighting and errors on second esc. Also goes to 1st char.
+nnoremap <esc> <Cmd>noh<CR><Bar><Cmd>echon<CR>
 
 " Save things with doas when you really want to
 cnoremap w!! execute 'silent! write !doas tee % >/dev/null' <bar> edit!
@@ -23,10 +23,10 @@ nmap R gR
 " left' error (but not readonly errors) (disabled because reasons)
 "nnoremap ZZ :wqa<return>
 "
-" Don't press shift again!
-nnoremap ; :
+" Don't press shift again! (disabled because I kept pressing shift anyway)
+" nnoremap ; :
 
-" Make parentheses fun again
+" Make parentheses fun again (USE A PLUGIN FOR THIS!!!)
 inoremap < <><ESC>i
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i

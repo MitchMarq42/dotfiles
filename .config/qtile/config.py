@@ -134,7 +134,7 @@ screens = [
                     widget.Clock(format='%I:%M %p'),
                     # widget.QuickExit(),
                     ],
-                24,
+                29,
                 background="#303030",
                 opacity=0.8,
                 ),

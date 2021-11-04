@@ -270,5 +270,7 @@ include /etc/sway/config.d/*
 
 # stupid systemd integration or sth idk
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+exec /usr/lib/sway-systemd/session.sh --with-cleanup
+exec /usr/lib/sway-systemd/assign-cgroups.py
 
 exec $term

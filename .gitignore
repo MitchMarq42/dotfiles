@@ -7,6 +7,8 @@
 
 # Ignore all extra files in .local/share (they get nasty)
 .local/share/*
+.local/git/*
+.local/src/*
 
 # Ignore .local/state (used by wireplumber which is Fedora audio session)
 .local/state

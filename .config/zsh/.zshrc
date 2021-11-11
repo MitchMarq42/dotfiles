@@ -20,7 +20,7 @@
 source ~/.config/zsh/zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "romkatv/powerlevel10k", as:theme, depth:1
-zplug "zdharma/fast-syntax-highlighting", defer:2
+zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
 zplug 'zsh-users/zsh-history-substring-search', depth:1
 # Install plugins if there are plugins that have not been installed
 zplug check --verbose || (
@@ -81,6 +81,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 # source aliases and functions files
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/functions.zsh
+
+# Make gpg work
+export GPT_TTY=$(tty)
 
 #############################################################
 ######   Luke Smith's custom vi-mode cursor switcher   ######

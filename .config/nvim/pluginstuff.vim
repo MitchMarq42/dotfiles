@@ -17,6 +17,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'jamessan/vim-gnupg'
 call plug#end()
 
 " CoC things
@@ -48,3 +49,8 @@ else
     set guifont=MesloLGS\ NF:h15.5
 endif
 
+" gpg things
+let g:GPGUseAgent=1
+let g:GPGPreferSymmetric=1
+let g:GPGPreferArmor=1
+let g:GPGUsePipes=1

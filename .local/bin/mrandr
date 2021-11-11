@@ -17,9 +17,7 @@ case $direction in
     *)               echo "don't waste my time" && exit 1
 esac
 
-[ "$(xinput list 2>/dev/null | grep -i wayland)" ] &&
-    export server=wayland ||
-    export server=xorg
+export server=wayland
 
 touchpad=$(
 xinput list 2>/dev/null |

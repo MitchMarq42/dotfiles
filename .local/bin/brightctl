@@ -5,11 +5,23 @@
 
 arg="$*"
 echo "$arg"
-bl="$(ls /sys/class/backlight | awk '{print $1}')"
+
+bl="$(
+    ls /sys/class/backlight |
+    awk '{print $1}'
+)"
+
 brightness=$(cat /sys/class/backlight/"$bl"/brightness)
+
 saved="$HOME/.local/share/brightness"
 oldbrightness="$brightness"
+
+upstep=$(
+    cat /sys/class/backlight/"$bl"/max_brightness
+)
+
 echo "Was $oldbrightness"
+
 case "$arg" in
     +)       _=$((brightness=(brightness+5) )) ;;
     -)       _=$((brightness=(brightness-6) )) ;;

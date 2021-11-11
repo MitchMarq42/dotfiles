@@ -33,6 +33,6 @@ case "$arg" in
     -r | restore | --restore ) brightness=$(cat "$saved")
 esac
 
-echo "$brightness" > /sys/class/backlight/"$bl"/brightness >&/dev/null &&
+echo "$brightness" > /sys/class/backlight/"$bl"/brightness 2>/dev/null &&
 echo Now "$brightness" ||
     echo "Still $oldbrightness, maybe don't expect the impossible next time?"

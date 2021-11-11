@@ -8,8 +8,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # fix xdg runtime dir making sway need a relaunch
-#export XDG_RUNTIME_DIR=/run/user/1000
-#doas -n mkdir -p $XDG_RUNTIME_DIR
+export XDG_RUNTIME_DIR=/run/user/1000
+doas -n mkdir -p $XDG_RUNTIME_DIR
 
 # random exports for various quality-of-life things
 export LANG="en_US.UTF-8"                                   # these two lines are

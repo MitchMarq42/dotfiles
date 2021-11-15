@@ -24,6 +24,7 @@ window#waybar.chromium {
 }
 
 #workspaces button {
+    color: #dfdfdf;
     padding: 0 0px;
 }
 

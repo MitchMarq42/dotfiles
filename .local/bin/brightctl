@@ -18,19 +18,24 @@ oldbrightness="$brightness"
 
 upstep=$(
     cat /sys/class/backlight/"$bl"/max_brightness |
-    awk '{ print int($1/12  +0.5 ) } '
+    awk '{ print int($1/17  +0.5 ) } '
+)
+downstep=$(
+    cat /sys/class/backlight/"$bl"/max_brightness |
+    awk '{ print int($1/19  +0.5 ) } '
 )
 
 echo "Was $oldbrightness"
 
 case "$arg" in
     +)       _=$((brightness=(brightness+upstep) )) ;;
-    -)       _=$((brightness=(brightness-upstep) )) ;;
-    -s)      (echo "$brightness" > "$HOME"/.local/share/brightness &&
-                 echo Saved "$saved" as "$brightness" ||
-                 echo "Failed. Check your privilege.")
-                     ;;
-    -r | restore | --restore ) brightness=$(cat "$saved")
+    -)       _=$((brightness=(brightness-downstep) )) ;;
+    -s | save | --save )
+             (echo "$brightness" > "$HOME"/.local/share/brightness 2>/dev/null &&
+              echo Saved "$saved" as "$brightness" ||
+              echo "Failed. Check your privilege.") ;;
+    -r | restore | --restore )
+        brightness=$(cat "$saved")
 esac
 
 echo "$brightness" > /sys/class/backlight/"$bl"/brightness 2>/dev/null &&

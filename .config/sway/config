@@ -4,11 +4,12 @@
 #
 # I copied this to ~/.config/sway/config and edited it to my liking.
 #
-# I have also attempted to read `man 5 sway`, but have not yet obtained the zen of complete reference.
+# I have also attempted to read `man 5 sway`,
+# but have not yet obtained the zen of complete reference.
 
 ### Variables
 #
-# Logo key. Use Mod4 for logo cause it's the best.
+# Logo key. Use Mod4 for logo cause it's the best, or Mod1 for Alt if you're lazy.
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
@@ -64,7 +65,10 @@ output eDP-1 mode 1920x1080@47.982Hz
     }
 
     input "type:keyboard" {
-       xkb_options "custom:super_esc"
+       xkb_options {
+           "altwin:prtsc_rwin",
+           "custom:super_esc"
+       }
        xkb_numlock enable
        repeat_delay 300
        repeat_rate 50

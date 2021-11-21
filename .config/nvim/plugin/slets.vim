@@ -12,28 +12,22 @@ set encoding=utf-8
 set mouse=a
 set number relativenumber
 set signcolumn=number
-set noswapfile
+set noswapfile undofile undodir=~/.cache/nvim/undo
 set nobackup nowritebackup
-set undofile
-set undodir=~/.cache/nvim/undo
 set lazyredraw
 set scrolloff=3
 set splitbelow splitright
-set cmdwinheight=1
 set shortmess+=c
 set wildmode=longest,full
-set ignorecase smartcase
-set incsearch hlsearch
+set ignorecase smartcase incsearch hlsearch
 set viminfo='10,\"100,:20,%,n~/.cache/nvim/viminfo
-set termguicolors
 set hidden
+"set cursorline cursorcolumn SLOW AF
 
-" start with statusbar enabled
-set laststatus=2
-set noshowmode
+set noshowmode laststatus=2 cmdwinheight=1
 " fix tab indentation being weird
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
-" control autocommenting
+" control autocommenting (broken)
 set formatoptions-=cro
 
 " airline things (more in colors file)

@@ -18,7 +18,7 @@ call plug#end()
 nnoremap : <cmd>lua require('fine-cmdline').open()<CR>
 
 " Hexokinase things
-let g:Hexokinase_highlighters = ['foregroundfull']
+let g:Hexokinase_highlighters = ['backgroundfull']
 " #ff0000 (test to see if the plugin actually works)
 
 "" firenvim/gui things

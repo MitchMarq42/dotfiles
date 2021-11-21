@@ -5,7 +5,7 @@ nnoremap <esc> <Cmd>noh<CR><Bar><Cmd>echon<CR>
 " Save things with doas when you really want to
 cnoremap w!! execute 'silent! write !doas tee % >/dev/null' <bar> edit!
 
-" Fix control+W keys to be easier to use (splits)
+" Fix control+W keys to be easier to use (splits) (BAD DO NOT USE)
 "nmap <C-h> <C-w>h
 "nmap <C-l> <C-w>l
 "nmap <C-j> <C-w>j
@@ -14,17 +14,11 @@ cnoremap w!! execute 'silent! write !doas tee % >/dev/null' <bar> edit!
 " easier
 nmap j gj
 nmap k gk
-" make 0 and $ easier
-"nnoremap gl $
-"nnoremap gh 0
 " make visual replace the default
 nmap R gR
 " save and quit all tabs and buffers on ZZ; avoids 'only floating windows
 " left' error (but not readonly errors) (disabled because reasons)
 "nnoremap ZZ :wqa<return>
-"
-" Don't press shift again! (disabled because I kept pressing shift anyway)
-" nnoremap ; :
 
 " Make parentheses fun again (USE A PLUGIN FOR THIS!!!)
 inoremap < <><ESC>i
@@ -41,3 +35,7 @@ nnoremap <leader><leader> <c-^>
 " visual stuff?
 vmap < <gv
 vmap > >gv
+
+" Janky sideways window movements
+nnoremap < <C-w><
+nnoremap > <C-w>>

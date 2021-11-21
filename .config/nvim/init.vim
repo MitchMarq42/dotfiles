@@ -29,3 +29,6 @@ nnoremap N Nzz
 
 colorscheme mitch
 let g:airline_theme='ravenpower'
+
+" EXPERINENTAL FEATURE. WILL NOT WORK IN YOUR VIM.
+silent set cmdheight=0

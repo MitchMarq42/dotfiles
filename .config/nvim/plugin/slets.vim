@@ -39,3 +39,13 @@ set formatoptions-=cro
 " airline things (more in colors file)
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+" Plugin settings. Moved because reasons.
+let g:coc_global_extensions = ['coc-json', 'coc-css', 'coc-sh', 'coc-vimlsp', 'coc-pyright', 'coc-powershell']
+let g:scrollbar_right_offset = 0
+let g:scrollbar_max_size = 40
+let g:scrollbar_shape = {
+  \ 'head': '❚',
+  \ 'body': '█',
+  \ 'tail': '❚',
+  \ }

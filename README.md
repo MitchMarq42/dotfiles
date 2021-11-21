@@ -96,8 +96,10 @@ Or for sway/i3:
 
 ---
 
-For getting capslock -\> esc and held-capslock -\> super to work in sway, see https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will also suffice for any X11 window manager, or any other Wayland compositor that uses XKB instead of doing its own thing.
+~~For getting capslock -\> esc and held-capslock -\> super to work in sway, see https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will also suffice for any X11 window manager, or any other Wayland compositor that uses XKB instead of doing its own thing.
 
 The file .local/share/supescaps.diff currently contains the instructions in this gist but automated; run `doas patch < .local/share/supescaps.diff` and it might magically work. You will have to re-do this every upgrade or reinstall of XKB/XCB/xorg/linux. Maybe make it a pacman hook?
 
-^^^ the above doesn't work because I'm an idiot and can't write patch files. Should probably work it into that shell script that will also auto-detect the package manager and install everything automatically.
+^^^ the above doesn't work because I'm an idiot and can't write patch files. Should probably work it into that shell script that will also auto-detect the package manager and install everything automatically.~~
+
+As of 2020, xkb accepts user-specific keyboard patches. Modifying system files is no longer needed.

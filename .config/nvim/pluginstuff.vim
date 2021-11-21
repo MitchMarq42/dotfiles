@@ -30,4 +30,4 @@ else
 endif
 
 lua <<EOF
-require("desktop-notify").override_vim_notify()
+EOF

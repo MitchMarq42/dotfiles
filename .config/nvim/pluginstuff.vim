@@ -9,8 +9,8 @@ Plug 'nvim-lua/completion-nvim'                                                 
 Plug 'pprovost/vim-ps1'                                                             " PowerShell highlighting etc
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                         " Better highlighting?
 Plug 'hrsh7th/cmp-nvim-lsp'                                                         " These three probably
-Plug 'hrsh7th/cmp-buffer'                                                           " do something, but I'm
-Plug 'hrsh7th/nvim-cmp'                                                             " not sure what
+Plug 'hrsh7th/cmp-buffer'                                                           "    do something, but I'm
+Plug 'hrsh7th/nvim-cmp'                                                             "    not sure what
 Plug 'MunifTanjim/nui.nvim'                                                         " For floating command line etc.
 Plug 'VonHeikemen/fine-cmdline.nvim'                                                " Disable if you don't have cmdheight=0 patch.
 call plug#end()

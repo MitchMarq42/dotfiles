@@ -5,17 +5,19 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }                       
 Plug 'Xuyuanp/scrollbar.nvim'                                                       " actually good scrollbar
 Plug 'vim-airline/vim-airline'                                                      " sorta epic statusline
 Plug 'vim-airline/vim-airline-themes'                                               " themes for above
-Plug 'nvim-lua/completion-nvim'                                                     " probably does something
 Plug 'pprovost/vim-ps1'                                                             " PowerShell highlighting etc
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                         " Better highlighting?
-Plug 'hrsh7th/cmp-nvim-lsp'                                                         " These three probably
-Plug 'hrsh7th/cmp-buffer'                                                           "    do something, but I'm
-Plug 'hrsh7th/nvim-cmp'                                                             "    not sure what
-Plug 'MunifTanjim/nui.nvim'                                                         " For floating command line etc.
-Plug 'VonHeikemen/fine-cmdline.nvim'                                                " Disable if you don't have cmdheight=0 patch.
+Plug 'hrsh7th/cmp-nvim-lsp'                                                         "    These four
+Plug 'hrsh7th/cmp-buffer'                                                           "    probably do
+Plug 'hrsh7th/nvim-cmp'                                                             "    something, but I'm
+Plug 'nvim-lua/completion-nvim'                                                     "    not sure what
+Plug 'MunifTanjim/nui.nvim'                                                         " Dependency of following:
+Plug 'VonHeikemen/fine-cmdline.nvim'                                                " Floating Ex command line (:)
+Plug 'VonHeikemen/searchbox.nvim'                                                   " Floating Search box (/)
 call plug#end()
 
 nnoremap : <cmd>lua require('fine-cmdline').open()<CR>
+nnoremap / <cmd>lua require('searchbox').incsearch()<CR>
 
 " Hexokinase things
 let g:Hexokinase_highlighters = ['backgroundfull']

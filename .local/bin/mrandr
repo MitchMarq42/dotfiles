@@ -6,14 +6,19 @@ direction=$*
 
 case $direction in
     normal | 0)      wldirection=0
-                     matrix="1 0 0 0 1 0 0 0 1";;
+                     matrix="1 0 0 0 1 0 0 0 1"
+                     ;;
     right | 90)      wldirection=90
-                     matrix="0 1 0 -1 0 1 0 0 1";;
+                     matrix="0 1 0 -1 0 1 0 0 1"
+                     ;;
     inverted | 180)  wldirection=180
-                     matrix="-1 0 1 0 -1 1 0 0 1";;
+                     matrix="-1 0 1 0 -1 1 0 0 1"
+                     ;;
     left | 270)      wldirection=270
-                     matrix="0 -1 1 1 0 0 0 0 1";;
-    "")              echo "no operation specified" && exit 0;;
+                     matrix="0 -1 1 1 0 0 0 0 1"
+                     ;;
+    "")              echo "no operation specified" && exit 0
+                     ;;
     *)               echo "don't waste my time" && exit 1
 esac
 
@@ -44,9 +49,15 @@ xinput list-props "$touchscreen" 2>/dev/null |
     sed 's/^.*(//;s/).*$//'
 )
 
+smatrix=$(
+    echo $matrix |
+    awk '{print $1 " " $2 " " $3 " " $4 " " $5 " " $6 }'
+)
+
 echo direction="$direction"
 echo wldirection="$wldirection"
 echo matrix= "$matrix"
+echo smatrix= "$smatrix"
 echo server="$server"
 
 case "$server" in
@@ -57,4 +68,5 @@ case "$server" in
         which nitrogen >/dev/null && nitrogen --restore;;
     wayland)
         swaymsg output "*" transform "$wldirection"
+        swaymsg input "*" calibration_matrix "$smatrix"
 esac

@@ -74,7 +74,7 @@ output eDP-1 mode 1920x1080@47.982Hz
         scroll_button button9 274
     }
 
-    seat seat0 xcursor_theme Mocu-White-Right
+    seat seat0 xcursor_theme Adwaita
 
     exec_always {
         gsettings set org.gnome.desktop.interface cursor-theme "Mocu-White-Right"

@@ -4,7 +4,7 @@ which exa >/dev/null && alias ls='exa'
 which exa >/dev/null && alias tree='exa -T'
 which rg >/dev/null && alias grep='rg -uuu'
 #which dotacat >/dev/null && alias lolcat='dotacat'
-#which paru >/dev/null && alias pacman="paru" || alias pacman="sudo pacman"
+[ -f /usr/bin/paru ] && alias pacman="paru" || alias pacman="sudo pacman"
 alias cd..="cd .."
 alias spider="spider -s 2 -c"
 alias mounr="doas mount"

@@ -1,0 +1,4 @@
+! option           =    symbols
+  custom:super_esc =    +custom_opts(super_esc)
+
+! include %S/evdev

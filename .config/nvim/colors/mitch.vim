@@ -21,6 +21,7 @@ hi clear
 "set background=dark
 set termguicolors
 highlight Normal	    	guibg=#000000	guifg=#eeee99	gui=none
+highlight Visual            guibg=#3f0090
 highlight Comment  	    	guibg=none    	guifg=#00aa00   gui=none
 highlight NonText 	    	guibg=none      guifg=brown     gui=bold
 highlight Constant          guibg=none  	guifg=#0077ff	gui=none
@@ -43,8 +44,8 @@ highlight DiffChange    	guibg=green 	guifg=black	    gui=bold
 highlight DiffDelete    	guibg=red    	guifg=black	    gui=bold
 highlight DiffText 	    	guibg=orange 	guifg=black	    gui=bold
 highlight MsgSeparator  	guibg=blue  	guifg=white	    gui=bold
-highlight CursorLine    	guibg=#303030
-highlight CursorColumn  	guibg=#303030
+highlight CursorLine    	guibg=#101010
+highlight CursorColumn  	guibg=#101010
 highlight VertSplit     	guibg=none   	guifg=purple	gui=bold
 highlight RevComment    	guibg=green 	guifg=black 	gui=none
 highlight RevStatLn     	guibg=red   	guifg=black	    gui=bold

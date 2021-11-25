@@ -7,8 +7,11 @@ augroup END
 " convert markdown to html
 augroup markdown
     autocmd!
+    " autocmd BufReadPost index.md call Indexify()
     autocmd BufWritePost *.md silent !markdown % > %:r.html
 augroup END
+
+" this is a test ofc <index pls>
 
 " re-source any .vim files when you save them
 augroup bufwritepost
@@ -23,4 +26,19 @@ augroup ScrollbarInit
     autocmd WinEnter,FocusGained	       * silent! lua require('scrollbar').show()
     autocmd WinLeave,BufLeave,BufWinLeave,FocusLost		* silent! lua require('scrollbar').clear()
 augroup end
+
+" Packer, for plugins.
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost pluginstuff.lua source <afile> | PackerCompile
+augroup end
+
+" Indexify (for html)
+"function Indexify() abort
+    "normal gg
+    "/\<index pls\>
+    "for file in expand("!ls")
+        "echon "[" . file . "]" . "(" . file . ")"
+    "endfor
+"endfunction
 

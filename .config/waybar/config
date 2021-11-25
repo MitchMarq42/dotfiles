@@ -1,5 +1,6 @@
 {
     "layer": "top",
+    "exclusive": true,
     "modules-left": ["custom/vivarium", "sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
     "modules-right": ["tray", "pulseaudio", "battery", "cpu", "clock"],

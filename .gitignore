@@ -1,3 +1,6 @@
+# Ignore .html, which my vim config generates involuntarily
+*.html
+
 # Ignore all extra files in .local/bin (they get added by python)
 .local/bin/*
 .local/lib/*

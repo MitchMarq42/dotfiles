@@ -23,4 +23,4 @@ colorscheme mitch
 let g:airline_theme='ravenpower'
 
 " EXPERINENTAL FEATURE. WILL NOT WORK IN YOUR VIM.
-silent set cmdheight=0
+silent! set cmdheight=0

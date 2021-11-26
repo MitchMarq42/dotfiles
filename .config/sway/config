@@ -90,6 +90,9 @@ output eDP-1 mode 1920x1080@47.982Hz
 #boilerplate for having audio
 exec wireplumber
 
+# Boilerplate for networking. Because I've given up.
+exec nm-applet
+
 # Boilerplate for gestures
 exec_always libinput-gestures -c ~/.config/libinput-gestures.conf
 

@@ -197,7 +197,6 @@ exec ~/.local/bin/brightctl -r
     bindsym $mod+v splitt
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen

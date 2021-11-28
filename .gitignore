@@ -15,3 +15,6 @@
 
 # Ignore .local/state (used by wireplumber which is Fedora audio session)
 .local/state
+
+# Ignore everything
+*

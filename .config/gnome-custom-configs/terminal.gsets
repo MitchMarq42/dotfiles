@@ -1,0 +1,24 @@
+[legacy]
+menu-accelerator-enabled=false
+
+[legacy/keybindings]
+detach-tab='<Primary>braceright'
+find='<Primary>question'
+
+[legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+audible-bell=false
+background-color='rgb(0,0,0)'
+background-transparency-percent=40
+cell-height-scale=0.69999999999999996
+cursor-blink-mode='on'
+default-size-columns=160
+default-size-rows=48
+font='MesloLGS NF 11.5'
+foreground-color='rgb(221,221,221)'
+palette=['rgb(0,0,0)', 'rgb(255,0,0)', 'rgb(0,170,0)', 'rgb(255,238,17)', 'rgb(0,0,255)', 'rgb(255,0,255)', 'rgb(0,255,255)', 'rgb(255,255,255)', 'rgb(48,48,48)', 'rgb(255,160,0)', 'rgb(0,192,0)', 'rgb(204,204,102)', 'rgb(0,119,255)', 'rgb(159,0,170)', 'rgb(0,192,192)', 'rgb(175,175,175)']
+scrollbar-policy='never'
+use-system-font=false
+use-theme-colors=false
+use-theme-transparency=false
+use-transparent-background=true
+visible-name='mitch'

@@ -1,5 +1,5 @@
 " go to previous location
-augroup init
+augroup resume
     autocmd!
     autocmd BufReadPost * silent! normal! g`"zv
 augroup END
@@ -7,14 +7,11 @@ augroup END
 " convert markdown to html
 augroup markdown
     autocmd!
-    " autocmd BufReadPost index.md call Indexify()
     autocmd BufWritePost *.md silent !markdown % > %:r.html
 augroup END
 
-" this is a test ofc <index pls>
-
 " re-source any .vim files when you save them
-augroup bufwritepost
+augroup vimrc
     autocmd!
     autocmd BufWritePost *.vim source %
 augroup END
@@ -25,7 +22,7 @@ augroup ScrollbarInit
     autocmd CursorMoved,VimResized,QuitPre * silent! lua require('scrollbar').show()
     autocmd WinEnter,FocusGained	       * silent! lua require('scrollbar').show()
     autocmd WinLeave,BufLeave,BufWinLeave,FocusLost		* silent! lua require('scrollbar').clear()
-augroup end
+augroup END
 
 " Packer, for plugins.
 augroup packer_user_config
@@ -33,12 +30,10 @@ augroup packer_user_config
   autocmd BufWritePost pluginstuff.lua source <afile> | PackerCompile
 augroup end
 
-" Indexify (for html)
-"function Indexify() abort
-    "normal gg
-    "/\<index pls\>
-    "for file in expand("!ls")
-        "echon "[" . file . "]" . "(" . file . ")"
-    "endfor
-"endfunction
-
+" *.gsets files. I made this up because dconf is oof.
+augroup dconf
+    autocmd!
+    autocmd BufReadPre *.gsets silent !dconf dump /org/gnome/%:t:r/ > %
+    autocmd BufReadPost *.gsets set ft=dosini
+    autocmd BufWritePost *.gsets silent !cat % | dconf load /org/gnome/%:t:r/
+augroup END

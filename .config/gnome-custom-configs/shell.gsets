@@ -1,0 +1,43 @@
+[/]
+disabled-extensions=['ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'window-list@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['pop-shell@system76.com', 'logomenu@aryan_k', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com']
+favorite-apps=['org.gnome.Terminal.desktop', 'brave_brave.desktop', 'nvim_nvim.desktop', 'gnome-control-center.desktop']
+welcome-dialog-last-shown-version='40.5'
+
+[extensions/Logo-menu]
+menu-button-icon-image=24
+menu-button-icon-size=19
+
+[extensions/auto-move-windows]
+application-list=['brave_brave.desktop:2']
+
+[extensions/dash-to-dock]
+dash-max-icon-size=48
+dock-fixed=false
+dock-position='LEFT'
+preferred-monitor=0
+
+[extensions/ding]
+start-corner='bottom-right'
+
+[extensions/pop-shell]
+active-hint=true
+gap-inner=uint32 3
+gap-outer=uint32 3
+hint-color-rgba='rgb(255,0,0)'
+show-skip-taskbar=false
+show-title=false
+smart-gaps=true
+snap-to-grid=true
+tile-by-default=true
+
+[extensions/user-theme]
+name=''
+
+[extensions/workspace-indicator]
+symbolic=false
+
+[keybindings]
+open-application-menu=@as []
+toggle-message-tray=['<Super>v']
+toggle-overview=@as []

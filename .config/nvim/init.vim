@@ -1,16 +1,5 @@
-" generally good/useful things
-filetype plugin indent on
-
-"source ~/.config/nvim/plugin/slets.vim " done automatically
-"source ~/.config/nvim/plugin/maps.vim  " by vim runtime
 lua require('pluginstuff')
 
-" Make manpages verticalize themselves instantly
-autocmd FileType help,man wincmd L
-
-" Bring search results to center of page
-nnoremap n nzz
-nnoremap N Nzz
 "set nohlsearch
 
 " These three lines remove various unwanted forms of white space from files upon exit

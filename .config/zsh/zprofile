@@ -1,5 +1,7 @@
 # vim: set ft=sh :
 
+# Fix weird chain-shell issues
+export SHELL=$(which zsh)
 # make all configs be in right place
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -51,7 +53,7 @@ export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/config"
 export ELECTRUMDIR="${XDG_DATA_HOME:-$HOME/.local/share}/electrum"
 
 # add personal bin folder and emacs functions to path, for custom scripts
-export PATH=~/.local/bin:$PATH:~/.emacs.d/bin:~/.local/share/cargo/bin
+export PATH=~/.local/bin:$PATH:~/.emacs.d/bin:~/.local/share/cargo/bin:~/.local/share/brew/bin:~/.local/share/brew/sbin
 
 # Fix duplicate entries in PATH variable caused by sourcing this file multiple times
 source ~/.local/bin/fixpath

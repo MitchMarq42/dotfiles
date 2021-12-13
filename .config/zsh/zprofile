@@ -1,9 +1,9 @@
 # vim: set ft=sh :
 
 # Fix weird chain-shell issues
-[ -z "${ZSH}" ] && export ZSH=$(find -O3 ~/.local -type l -user $USER -executable -name zsh 2>/dev/null | grep "bin" )
-export SHELL="$ZSH"
-export shell_name=zsh
+# [ -z "${ZSH}" ] && export ZSH=$(find -O3 ~/.local -type l -user $USER -executable -name zsh 2>/dev/null | grep "bin" )
+# export SHELL="$ZSH"
+# export shell_name=zsh
 # make all configs be in right place
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"

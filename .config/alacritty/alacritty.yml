@@ -8,6 +8,7 @@ env:
   TERM: alacritty
 
 window:
+  opacity: 0.5
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. The number of columns
@@ -179,8 +180,6 @@ colors:
     magenta: '#9f00aa'
     cyan:    '#00c0c0'
     white:   '#afafaf'
-
-background_opacity: 0.5
 
 selection:
   # This string contains all characters that are used as separators for

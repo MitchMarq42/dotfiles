@@ -1,5 +1,5 @@
 # aliases that make things easier for me by invoking rust programs you don't have
-which doas >/dev/null && alias sudo='doas'
+#which doas >/dev/null && alias sudo='doas'
 which exa >/dev/null && alias ls='exa'
 which exa >/dev/null && alias tree='exa -T'
 which rg >/dev/null && alias grep='rg -uuu'

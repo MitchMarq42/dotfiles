@@ -17,7 +17,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term alacritty -e zsh
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -88,10 +88,12 @@ output eDP-1 mode 1920x1080@47.982Hz
 # Read `man 5 sway-input` for more information about this section.
 
 #boilerplate for having audio
+exec pipewire
 exec wireplumber
 
 # Boilerplate for networking. Because I've given up.
-exec nm-applet
+exec export XDG_CURRENT_DESKTOP=Unity
+exec lxqt-connman-applet
 
 # Boilerplate for gestures
 exec_always libinput-gestures -c ~/.config/libinput-gestures.conf
@@ -275,8 +277,8 @@ client.unfocused #8f8f8f #8f8f8f #8f8f8f
 include /etc/sway/config.d/*
 
 # stupid systemd integration or sth idk
-exec "systemctl --user import-environment; systemctl --user start sway-session.target"
-exec /usr/lib/sway-systemd/session.sh --with-cleanup
-exec /usr/lib/sway-systemd/assign-cgroups.py
+#exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+#exec /usr/lib/sway-systemd/session.sh --with-cleanup
+#exec /usr/lib/sway-systemd/assign-cgroups.py
 
 exec $term

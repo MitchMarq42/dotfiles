@@ -42,7 +42,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Switch escape and caps if tty and no passwd required:
-doas -n loadkeys ~/.local/share/ttymaps.kmap 2>/dev/null
+# doas -n loadkeys ~/.local/share/ttymaps.kmap 2>/dev/null
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.local/share/zsh/histfile

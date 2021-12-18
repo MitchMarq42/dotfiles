@@ -30,6 +30,10 @@ inoremap ` ``<ESC>i
 ""inoremap ' ''<ESC>i
 ""inoremap " ""<ESC>i
 
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 " Double space for file switching (magic)
 nnoremap <leader><leader> <c-^>
 

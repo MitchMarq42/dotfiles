@@ -28,15 +28,20 @@ return require('packer').startup(function(use)
   use 'vim-airline/vim-airline'         -- sorta epic statusline
   use 'vim-airline/vim-airline-themes'  -- themes for above
   use 'pprovost/vim-ps1'                -- PowerShell highlighting etc
-  use 'hrsh7th/cmp-nvim-lsp'               -- These four
-  use 'hrsh7th/cmp-buffer'                 -- probably do
-  use 'hrsh7th/nvim-cmp'                   -- something, but I'm
-  use 'nvim-lua/completion-nvim'           -- not sure what
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
   use { 'VonHeikemen/fine-cmdline.nvim', requires = { {'MunifTanjim/nui.nvim'} } }
   use { 'VonHeikemen/searchbox.nvim', requires = { {'MunifTanjim/nui.nvim'} } }
   use { 'rrethy/vim-hexokinase', run = 'make hexokinase' }
+  -- LSP stuff. May change or be destroyed.
+  use 'neovim/nvim-lspconfig'
+  use 'tami5/lspsaga.nvim'
+  use 'hrsh7th/cmp-nvim-lsp'            -- These three probably
+  use 'hrsh7th/cmp-buffer'              -- do something, but
+  use 'hrsh7th/nvim-cmp'                -- I'm not sure what.
+  use 'onsails/lspkind-nvim'
+  use 'nvim-lua/popup.nvim'
+  use 'nvim-lua/plenary.nvim'
 
 require('fine-cmdline').setup({
   cmdline = {
@@ -63,8 +68,7 @@ require'nvim-treesitter.configs'.setup {
        "lua",
        "python",
        "regex",
-       "vim",
-       "markdown"
+       "vim"
    },
    sync_install = true,
    highlight = {

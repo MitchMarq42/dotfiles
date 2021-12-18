@@ -22,6 +22,8 @@ set wildmode=longest,full
 set ignorecase smartcase incsearch hlsearch
 set viminfo='10,\"100,:20,%,n~/.cache/nvim/viminfo
 set hidden
+set completeopt=menuone,noinsert,noselect
+
 "set cursorline cursorcolumn SLOW AF
 
 set noshowmode laststatus=2 cmdwinheight=1

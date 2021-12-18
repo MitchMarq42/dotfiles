@@ -68,12 +68,6 @@ You may find some fragments of `coc.nvim`, `cmp`, or LSP configuration scattered
 
 ---
 
-| This is | a table  |
-| ------- | -------- |
-| which I | am using |
-| to prove | they |
-| can | exist |
-
 # Notes on mrandr:
 
 Use it as you would `xrandr -o`. E.G., `mrandr right` rotates the screen clockwise by 90 degrees. Et cetera.

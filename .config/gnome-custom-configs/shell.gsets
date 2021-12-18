@@ -41,3 +41,6 @@ symbolic=false
 open-application-menu=@as []
 toggle-message-tray=['<Super>v']
 toggle-overview=@as []
+
+[world-clocks]
+locations=@av []

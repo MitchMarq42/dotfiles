@@ -397,7 +397,7 @@ c.colors.tabs.bar.bg = '#303030'
 
 ## Background color of unselected even tabs.
 ## Type: QtColor
-c.colors.tabs.even.bg = '#303040'
+c.colors.tabs.even.bg = '#2c2c2c'
 
 ## Foreground color of unselected even tabs.
 ## Type: QtColor
@@ -426,7 +426,7 @@ c.colors.tabs.indicator.stop = '#303030'
 
 ## Background color of unselected odd tabs.
 ## Type: QtColor
-c.colors.tabs.odd.bg = '#403030'
+c.colors.tabs.odd.bg = '#2c2c2c'
 
 ## Foreground color of unselected odd tabs.
 ## Type: QtColor
@@ -466,7 +466,7 @@ c.colors.tabs.odd.fg = '#f0f0f0'
 
 ## Background color of selected even tabs.
 ## Type: QtColor
-c.colors.tabs.selected.even.bg = '#304030'
+c.colors.tabs.selected.even.bg = '#4c4c4c'
 
 ## Foreground color of selected even tabs.
 ## Type: QtColor
@@ -474,7 +474,7 @@ c.colors.tabs.selected.even.fg = '#f0f0f0'
 
 ## Background color of selected odd tabs.
 ## Type: QtColor
-c.colors.tabs.selected.odd.bg = '#304030'
+c.colors.tabs.selected.odd.bg = '#4c4c4c'
 
 ## Foreground color of selected odd tabs.
 ## Type: QtColor
@@ -1799,7 +1799,7 @@ c.scrolling.smooth = True
 ## Scaling factor for favicons in the tab bar. The tab size is unchanged,
 ## so big favicons also require extra `tabs.padding`.
 ## Type: Float
-c.tabs.favicons.scale = 2.0
+c.tabs.favicons.scale = 1.0
 
 ## When to show favicons in the tab bar. When switching this from never
 ## to always/pinned, note that favicons might not be loaded yet, thus
@@ -1915,7 +1915,7 @@ c.tabs.position = 'top'
 ##   - prev: Select the tab which came before the closed one (left in horizontal, above in vertical).
 ##   - next: Select the tab which came after the closed one (right in horizontal, below in vertical).
 ##   - last-used: Select the previously selected tab.
-# c.tabs.select_on_remove = 'next'
+c.tabs.select_on_remove = 'last-used'
 
 ## When to show the tab bar.
 ## Type: String
@@ -1924,7 +1924,7 @@ c.tabs.position = 'top'
 ##   - never: Always hide the tab bar.
 ##   - multiple: Hide the tab bar if only one tab is open.
 ##   - switching: Show the tab bar when switching tabs.
-# c.tabs.show = 'always'
+c.tabs.show = 'always'
 
 ## Duration (in milliseconds) to show the tab bar before hiding it when
 ## tabs.show is set to 'switching'.
@@ -1941,7 +1941,7 @@ c.tabs.position = 'top'
 ##   - left
 ##   - right
 ##   - center
-# c.tabs.title.alignment = 'left'
+c.tabs.title.alignment = 'center'
 
 ## Format to use for the tab title. The following placeholders are
 ## defined:  * `{perc}`: Percentage as a string like `[10%]`. *
@@ -1956,7 +1956,7 @@ c.tabs.position = 'top'
 ## web page. * `{protocol}`: Protocol (http/https/...) of the current web
 ## page. * `{audio}`: Indicator for audio/mute status.
 ## Type: FormatString
-# c.tabs.title.format = '{audio}{index}: {current_title}'
+c.tabs.title.format = '{audio} {host}'
 
 ## Format to use for the tab title for pinned tabs. The same placeholders
 ## like for `tabs.title.format` are defined.

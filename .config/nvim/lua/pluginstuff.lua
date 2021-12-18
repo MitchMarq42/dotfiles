@@ -63,7 +63,8 @@ require'nvim-treesitter.configs'.setup {
        "lua",
        "python",
        "regex",
-       "vim"
+       "vim",
+       "markdown"
    },
    sync_install = true,
    highlight = {

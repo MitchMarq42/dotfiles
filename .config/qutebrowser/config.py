@@ -2031,7 +2031,7 @@ c.url.default_page = 'https://search.brave.com/'
 ## the search engine name to the search term, e.g. `:open google
 ## qutebrowser`.
 ## Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://search.brave.com/?q={}'}
+c.url.searchengines = {'DEFAULT': 'https://search.brave.com/search?q={}'}
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
@@ -2254,6 +2254,7 @@ config.bind('k', 'scroll up')
 # config.bind('wp', 'open -w -- {clipboard}')
 # config.bind('xO', 'set-cmd-text :open -b -r {url:pretty}')
 # config.bind('xo', 'set-cmd-text -s :open -b')
+config.bind('x', 'tab-close')
 # config.bind('yD', 'yank domain -s')
 # config.bind('yM', 'yank inline [{title}]({url}) -s')
 # config.bind('yP', 'yank pretty-url -s')

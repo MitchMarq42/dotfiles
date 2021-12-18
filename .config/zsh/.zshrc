@@ -22,6 +22,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
 zplug 'zsh-users/zsh-history-substring-search', depth:1
+zplug 'zsh-users/zsh-autosuggestions'
 # Install plugins if there are plugins that have not been installed
 zplug check --verbose || (
     printf "Install? [y/N]: "
@@ -81,6 +82,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 # source aliases and functions files
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/functions.zsh
+source ~/.config/zsh/insulter.zsh
 
 # Make gpg work
 export GPT_TTY=$(tty)

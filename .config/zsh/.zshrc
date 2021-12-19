@@ -21,7 +21,7 @@ source ~/.config/zsh/zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
-zplug 'zsh-users/zsh-history-substring-search', depth:1
+# zplug 'zsh-users/zsh-history-substring-search', depth:1
 zplug 'zsh-users/zsh-autosuggestions'
 # Install plugins if there are plugins that have not been installed
 zplug check --verbose || (
@@ -54,7 +54,7 @@ setopt HIST_IGNORE_ALL_DUPS
 unsetopt autocd beep
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '~/.zshrc'
+zstyle :compinstall filename "$ZDOTDIR/.zshrc"
 autoload -Uz compinit
 # Basic auto/tab complete
 zstyle ':completion:*' menu select
@@ -63,7 +63,7 @@ _comp_options+=(globdots)		# Include hidden files.
 compinit
 # End of lines added by compinstall
 
-# Use vim keys in tab complete menu:
+# Use vim keys in tab complete menu etc:
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
@@ -71,10 +71,14 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v "^?" backward-delete-char
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^v' edit-command-line
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+bindkey -M vicmd 'k' up-line-or-beginning-search
+bindkey -M vicmd 'j' down-line-or-beginning-search
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh

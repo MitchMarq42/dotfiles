@@ -2,8 +2,9 @@
 folder-children=['Utilities', 'YaST']
 
 [app-folders/folders/Utilities]
-apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
+apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
 categories=['X-GNOME-Utilities']
+excluded-apps=['org.gnome.tweaks.desktop']
 name='X-GNOME-Utilities.directory'
 translate=true
 
@@ -28,12 +29,20 @@ sources=[('xkb', 'us')]
 xkb-options=['custom:super_esc']
 
 [interface]
-font-antialiasing='grayscale'
+clock-format='12h'
+clock-show-weekday=false
+document-font-name='Ubuntu 12'
+font-antialiasing='rgba'
 font-hinting='slight'
+font-name='Ubuntu 12'
 gtk-im-module='ibus'
-gtk-theme='Mojave-dark'
-monospace-font-name='MesloLGS NF 10'
+gtk-theme='Mojave-dark-alt'
+monospace-font-name='MesloLGS NF 11'
 show-battery-percentage=true
+text-scaling-factor=1.0
+
+[media-handling]
+autorun-never=true
 
 [notifications]
 application-children=['gvim', 'org-freedesktop-problems-applet', 'gnome-power-panel', 'gnome-network-panel']
@@ -45,9 +54,6 @@ application-id='gnome-network-panel.desktop'
 
 [notifications/application/gnome-power-panel]
 application-id='gnome-power-panel.desktop'
-
-[notifications/application/gvim]
-application-id='gvim.desktop'
 
 [notifications/application/org-freedesktop-problems-applet]
 application-id='org.freedesktop.problems.applet.desktop'
@@ -88,9 +94,12 @@ switch-to-workspace-1=['<Super>1']
 switch-to-workspace-2=['<Super>2']
 switch-to-workspace-3=['<Super>3']
 switch-to-workspace-4=['<Super>4']
+switch-to-workspace-5=['<Super>5']
+switch-to-workspace-6=['<Super>6']
 
 [wm/preferences]
 action-middle-click-titlebar='none'
 button-layout='close,minimize,maximize:appmenu'
 focus-mode='sloppy'
 resize-with-right-button=true
+titlebar-font='Ubuntu Bold 12'

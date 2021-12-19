@@ -683,13 +683,13 @@ c.confirm_quit = ['downloads']
 
 ## Enable the ad/host blocker
 ## Type: Bool
-# c.content.blocking.enabled = True
+c.content.blocking.enabled = True
 
 ## Block subdomains of blocked hosts. Note: If only a single subdomain is
 ## blocked but should be allowed, consider using
 ## `content.blocking.whitelist` instead.
 ## Type: Bool
-# c.content.blocking.hosts.block_subdomains = True
+c.content.blocking.hosts.block_subdomains = True
 
 ## List of URLs to host blocklists for the host blocker.  Only used when
 ## the simple host-blocker is used (see `content.blocking.method`).  The
@@ -714,7 +714,7 @@ c.confirm_quit = ['downloads']
 ##   - adblock: Use Brave's ABP-style adblocker
 ##   - hosts: Use hosts blocking
 ##   - both: Use both hosts blocking and Brave's ABP-style adblocker
-# c.content.blocking.method = 'auto'
+c.content.blocking.method = 'both'
 
 ## A list of patterns that should always be loaded, despite being blocked
 ## by the ad-/host-blocker. Local domains are always exempt from
@@ -1244,14 +1244,14 @@ c.confirm_quit = ['downloads']
 ## font setting, it's replaced with the fonts listed here. If set to an
 ## empty value, a system-specific monospace default is used.
 ## Type: List of Font, or Font
-c.fonts.default_family = ['MesloLGS NF']
+c.fonts.default_family = ['Ubuntu Sans Bold']
 
 ## Default font size to use. Whenever "default_size" is used in a font
 ## setting, it's replaced with the size listed here. Valid values are
 ## either a float value with a "pt" suffix, or an integer value with a
 ## "px" suffix.
 ## Type: String
-c.fonts.default_size = '10.5pt'
+c.fonts.default_size = '11pt'
 
 ## Font used for the downloadbar.
 ## Type: Font
@@ -1809,7 +1809,7 @@ c.tabs.favicons.scale = 1.0
 ##   - always: Always show favicons.
 ##   - never: Always hide favicons.
 ##   - pinned: Show favicons only on pinned tabs.
-# c.tabs.favicons.show = 'always'
+c.tabs.favicons.show = 'never'
 
 ## Maximum stack size to remember for tab switches (-1 for no maximum).
 ## Type: Int
@@ -1943,20 +1943,23 @@ c.tabs.show = 'always'
 ##   - center
 c.tabs.title.alignment = 'center'
 
-## Format to use for the tab title. The following placeholders are
-## defined:  * `{perc}`: Percentage as a string like `[10%]`. *
-## `{perc_raw}`: Raw percentage, e.g. `10`. * `{current_title}`: Title of
-## the current web page. * `{title_sep}`: The string `" - "` if a title
-## is set, empty otherwise. * `{index}`: Index of this tab. *
-## `{aligned_index}`: Index of this tab padded with spaces to have the
-## same   width. * `{id}`: Internal tab ID of this tab. * `{scroll_pos}`:
-## Page scroll position. * `{host}`: Host of the current web page. *
-## `{backend}`: Either `webkit` or `webengine` * `{private}`: Indicates
-## when private mode is enabled. * `{current_url}`: URL of the current
-## web page. * `{protocol}`: Protocol (http/https/...) of the current web
-## page. * `{audio}`: Indicator for audio/mute status.
+## Format to use for the tab title. The following placeholders are defined:
+## * `{perc}`: Percentage as a string like `[10%]`.
+## * `{perc_raw}`: Raw percentage, e.g. `10`.
+## * `{current_title}`: Title of the current web page.
+## * `{title_sep}`: The string `" - "` if a title is set, empty otherwise.
+## * `{index}`: Index of this tab.
+## * `{aligned_index}`: Index of this tab padded with spaces to have the same width.
+## * `{id}`: Internal tab ID of this tab.
+## * `{scroll_pos}`: Page scroll position.
+## * `{host}`: Host of the current web page.
+## * `{backend}`: Either `webkit` or `webengine`
+## * `{private}`: Indicates when private mode is enabled.
+## * `{current_url}`: URL of the current web page.
+## * `{protocol}`: Protocol (http/https/...) of the current web page.
+## * `{audio}`: Indicator for audio/mute status.
 ## Type: FormatString
-c.tabs.title.format = '{audio} {host}'
+c.tabs.title.format = '{audio} {current_title}'
 
 ## Format to use for the tab title for pinned tabs. The same placeholders
 ## like for `tabs.title.format` are defined.

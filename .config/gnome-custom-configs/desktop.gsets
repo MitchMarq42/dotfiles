@@ -30,6 +30,7 @@ xkb-options=['custom:super_esc']
 
 [interface]
 clock-format='12h'
+clock-show-date=false
 clock-show-weekday=false
 document-font-name='Ubuntu 12'
 font-antialiasing='rgba'
@@ -55,6 +56,9 @@ application-id='gnome-network-panel.desktop'
 [notifications/application/gnome-power-panel]
 application-id='gnome-power-panel.desktop'
 
+[notifications/application/gvim]
+application-id='gvim.desktop'
+
 [notifications/application/org-freedesktop-problems-applet]
 application-id='org.freedesktop.problems.applet.desktop'
 
@@ -62,6 +66,7 @@ application-id='org.freedesktop.problems.applet.desktop'
 numlock-state=false
 
 [peripherals/touchpad]
+click-method='fingers'
 tap-to-click=true
 two-finger-scrolling-enabled=true
 

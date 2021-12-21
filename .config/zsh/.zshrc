@@ -32,8 +32,8 @@ zplug check --verbose || (
 )
 
 # Choose a fetch based on the width of the terminal and run it, since we are firmly in an interactive shell now.
-(( $COLUMNS <= 84 )) && FETCH=pfetch || FETCH='neofetch'
-$FETCH --ascii_colors 4 --colors 7 4 4 4 4 7
+(( $COLUMNS <= 84 )) && FETCH='pfetch' || FETCH='neofetch'
+$FETCH #--ascii_colors 4 --colors 7 4 4 4 4 7
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]

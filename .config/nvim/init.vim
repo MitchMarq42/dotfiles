@@ -8,6 +8,9 @@ lua require('pluginstuff')
 "autocmd BufWritePre * %s/\n\+\%$//e     " trailing tabs
 "autocmd BufWritePre *.[ch] %s/\%$/\r/e  " Trailing newlines
 
+" Fix folding
+set foldmethod=syntax
+
 colorscheme mitch
 let g:airline_theme='ravenpower'
 

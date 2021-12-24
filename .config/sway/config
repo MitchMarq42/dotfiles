@@ -89,7 +89,8 @@ output eDP-1 mode 1920x1080@47.982Hz
 
 #boilerplate for having audio
 exec pipewire
-exec wireplumber
+exec pipewire-pulse
+exec pipewire-media-session
 
 # Boilerplate for networking. Because I've given up.
 exec export XDG_CURRENT_DESKTOP=Unity

@@ -10,11 +10,13 @@ alias spider="spider -s 2 -c"
 alias mounr="doas mount"
 alias umounr="doas umount -r"
 alias dc="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
+alias ping="ping -c 4"
+alias ip="ip -c"
 #alias mpv="mpv --really-quiet"
 # $TERM == alacritty  && alias nvim="neovide"
 export WM=$(neofetch wm | awk '{print $2}')
 [[ ${WM} == sway ]] &&
     #alias emacs='swallow emacs' &&
     #alias neovide='swallow neovide' &&
-    alias mpv='swallow mpv' &&
+    #alias mpv='swallow mpv' &&
     alias brave='swallow brave'

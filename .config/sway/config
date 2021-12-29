@@ -88,9 +88,7 @@ output eDP-1 mode 1920x1080@47.982Hz
 # Read `man 5 sway-input` for more information about this section.
 
 #boilerplate for having audio
-exec pipewire
-exec pipewire-pulse
-exec pipewire-media-session
+exec pipewire & pipewire-pulse & pipewire-media-session
 
 # Boilerplate for networking. Because I've given up.
 exec export XDG_CURRENT_DESKTOP=Unity

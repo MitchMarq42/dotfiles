@@ -27,16 +27,14 @@ lf () {
     ~/.local/bin/lfrun $@
 }
 
-# Do git bare repo stuff
-dots() {
-    /usr/bin/git --git-dir=$HOME/.local/git/dotfiles --work-tree=$HOME $@
-    ## I had a great explanation for all these things, but
-    ## git does not take multi-line arguments.
-}
+# Do git bare repo stuff (moved to separate file)
+# dots() {
+#     $HOME/.local/bin/dots $@
+# }
 
 # Sudo is a bitch so bitch about it
 #sudo() {
 #    which doas >/dev/null && doas $@ ||
 #}
 
-# vim: set ft=sh
+# vim: set ft=sh :

@@ -1,0 +1,22 @@
+#!/bin/sh
+# vim: set ft=sh :
+git_cmd(){
+    git --git-dir=$HOME/.local/git/dotfiles --work-tree=$HOME $@
+}
+submodule_opts="--init --rebase --remote --merge"
+pull(){
+    git_cmd $@ && git_cmd submodule $submodule_opts update
+}
+push(){
+    git_cmd $@ --recurse-submodules=on-demand
+}
+diff(){
+    git_cmd $@ --recurse-submodules
+}
+
+case $1 in
+    pull) pull $@ ;;
+    push) push $@ ;;
+    diff) diff $@ ;;
+    *) git_cmd $@ ;;
+esac

@@ -5,7 +5,7 @@ git_cmd(){
 }
 submodule_opts="--init --rebase --remote --merge"
 pull(){
-    git_cmd $@ && git_cmd submodule $submodule_opts update
+    git_cmd $@ && git_cmd submodule update $submodule_opts
 }
 push(){
     git_cmd --recurse-submodules=on-demand $@

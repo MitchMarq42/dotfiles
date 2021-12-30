@@ -8,7 +8,7 @@ pull(){
     git_cmd $@ && git_cmd submodule update $submodule_opts
 }
 push(){
-    git_cmd --recurse-submodules=on-demand $@
+    git_cmd $@ --recurse-submodules=on-demand
 }
 diff(){
     git_cmd $@ #--recurse-submodules

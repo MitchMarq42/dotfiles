@@ -29,8 +29,8 @@ set $menu dmenu_path | wofi --show drun -t alacritty -i -G | xargs swaymsg exec 
 output * bg ~/.local/share/backgrounds/mojave_midnight.jpg fill
 
 # Lower refresh rate to avoid stupid crashes. What are we, heathens?
-output eDP-1 mode 1920x1080@47.982Hz position 0,300
-output DP-3 resolution 1920x1080 position 1920,0
+output eDP-1 mode 1920x1080@47.982Hz position 0,500
+output DP-3 resolution 1920x1080 position 1920,0 scale 0.9
 
 #
 # Example configuration:

@@ -2,7 +2,7 @@
 hidden partial modifier_keys
 xkb_symbols "super_esc" {
     key <CAPS> { [ Escape ] };
-    modifier_map Mod4 { <CAPS> };
+    // modifier_map Mod4 { <CAPS> };
 };
 
 // vim: set ft=xkb :

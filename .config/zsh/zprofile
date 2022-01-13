@@ -27,6 +27,8 @@ export GHCUP_USE_XDG_DIRS="anything"                        # clean up HOME
 export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"          # smooth scrolling in FF
 export WINIT_HIDPI_FACTOR=1.0       # fix alacritty giant fonts on X
+export WINIT_X11_SCALE_FACTOR=1.0   # fix alacritty giant fonts on X
+export NEOVIDE_MULTIGRID="yeah"     # smooth scrolling etc in neovide
 export XKB_DEFAULT_LAYOUT="us"
 export XKB_DEFAULT_OPTS="custom:super_esc"
 

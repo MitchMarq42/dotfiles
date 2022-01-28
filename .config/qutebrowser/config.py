@@ -570,7 +570,7 @@ c.colors.webpage.darkmode.threshold.text = 150
 ##   - auto: Use the system-wide color scheme setting.
 ##   - light: Force a light theme.
 ##   - dark: Force a dark theme.
-# c.colors.webpage.preferred_color_scheme = 'auto'
+c.colors.webpage.preferred_color_scheme = 'dark'
 
 ## Number of commands to save in the command history. 0: no history / -1:
 ## unlimited
@@ -2038,7 +2038,7 @@ c.url.searchengines = {'DEFAULT': 'https://search.brave.com/search?q={}'}
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
-# c.url.start_pages = ['https://start.duckduckgo.com']
+c.url.start_pages = ['https://search.brave.com']
 
 ## URL parameters to strip with `:yank url`.
 ## Type: List of String
@@ -2047,7 +2047,7 @@ c.url.searchengines = {'DEFAULT': 'https://search.brave.com/search?q={}'}
 ## Hide the window decoration.  This setting requires a restart on
 ## Wayland.
 ## Type: Bool
-# c.window.hide_decoration = False
+c.window.hide_decoration = True
 
 ## Format to use for the window title. The same placeholders like for
 ## `tabs.title.format` are defined.

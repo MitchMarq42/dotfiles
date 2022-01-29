@@ -10,7 +10,12 @@
 # note the previous value of $TERM, for self-awareness in tmuxes.
 [ -z "${TMUX}" ] && export OLDTERM="${TERM}"
 # Start a new tmux session to put the current shell in, if not already in a tmux or alacritty. Remember old TERM.
-[ -z "${TMUX}" ] && [[ "${TERM}" != alacritty ]] && [[ "${TERM}" != linux ]] && [[ "${TERM}" != xterm-256color ]] && OLDTERM="${TERM}" exec tmux
+[ -z "${TMUX}" ] &&
+    [[ "${TERM}" != alacritty ]] &&
+    [[ "${TERM}" != linux ]] &&
+    [[ "${TERM}" != xterm-256color ]] &&
+    [[ "${TERM}" != eterm-color ]] &&
+        OLDTERM="${TERM}" exec tmux
 
 # Maybe install zplug, and definitely make it update stuff
 [ -n {XDG_CONFIG_HOME:$HOME/.config}/zsh/zplug ] && (

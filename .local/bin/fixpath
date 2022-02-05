@@ -2,6 +2,7 @@
 
 ## Fix $PATH variable by removing duplicate entries and ordering them by length
 ## Now in POSIX-ish shell!
+
 PATH=$(
 	echo "$PATH" |
 	sed 's/:/\n/g' |

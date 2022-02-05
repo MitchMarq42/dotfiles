@@ -60,4 +60,4 @@ export ELECTRUMDIR="${XDG_DATA_HOME:-$HOME/.local/share}/electrum"
 export PATH=~/.local/bin:$PATH:~/.emacs.d/bin:~/.local/share/cargo/bin:~/.local/share/brew/bin:~/.local/share/brew/sbin
 
 # Fix duplicate entries in PATH variable caused by sourcing this file multiple times
-source ~/.local/bin/fixpath
+# source ~/.local/bin/fixpath

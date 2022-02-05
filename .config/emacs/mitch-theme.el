@@ -43,7 +43,13 @@
   (font-lock-constant-face (:foreground mitch-light-cyan))
   (font-lock-string-face (:foreground mitch-light-blue))
   (font-lock-builtin-face (:foreground mitch-light-cyan :weight 'bold))
-  (rainbow-delimiters-base-face (:foreground mitch-light-magenta :weight 'bold))
+  (rainbow-delimiters-depth-1-face (:foreground mitch-light-magenta))
+  (rainbow-delimiters-depth-2-face (:foreground mitch-magenta :weight 'normal))
+  (rainbow-delimiters-depth-3-face (:foreground mitch-light-magenta))
+  (rainbow-delimiters-depth-4-face (:foreground mitch-magenta :weight 'normal))
+  (rainbow-delimiters-depth-5-face (:foreground mitch-light-magenta))
+  (window-divider (:foreground mitch-light-magenta :weight 'bold))
+  (yascroll:thumb-fringe (:foreground mitch-green :background mitch-green))
   )
 
  ;; Forms after the face specifications are evaluated.
@@ -63,6 +69,7 @@
 (tooltip-mode -1)
 (menu-bar-mode -1)
 (set-fringe-mode 10)
+(setq window-divider-default-places t)
 (setq ring-bell-function 'ignore)
 ;; set font
 (defvar mitchcustom/default-font-size 130)

@@ -14,7 +14,7 @@
     [[ "${TERM}" != alacritty ]] &&
     [[ "${TERM}" != linux ]] &&
     [[ "${TERM}" != xterm-256color ]] &&
-    [[ "${TERM}" != eterm-color ]] &&
+    [[ "${TERM}" != eterm* ]] &&
         OLDTERM="${TERM}" exec tmux
 
 # Maybe install zplug, and definitely make it update stuff
@@ -64,7 +64,7 @@ autoload -Uz compinit
 # Basic auto/tab complete
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-_comp_options+=(globdots)		# Include hidden files.
+_comp_options+=(globdots) # Include hidden files.
 compinit
 # End of lines added by compinstall
 
@@ -99,7 +99,7 @@ export GPT_TTY=$(tty)
 #############################################################
 ######   Luke Smith's custom vi-mode cursor switcher   ######
 #############################################################
-function zle-keymap-select {
+zle-keymap-select() {
     if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]];
     then echo -ne '\e[1 q'
     elif [[ ${KEYMAP} == main ]] ||

@@ -8,24 +8,19 @@
 ;; https://mitchmarq42.xyz
 
 ;; Cucky auto settings
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes '(default))
  '(package-selected-packages
-   '(eterm-256color rainbow-mode autothemer doom-themes highlight-parentheses linum-relative nlinum-relative doom-modeline org-evil evil-commentary evil which-key rainbow-delimiters use-package smart-mode-line-powerline-theme ivy command-log-mode)))
+   '(yascroll org-mode eterm-256color rainbow-mode autothemer doom-themes highlight-parentheses linum-relative nlinum-relative doom-modeline org-evil evil-commentary evil which-key rainbow-delimiters use-package smart-mode-line-powerline-theme ivy command-log-mode))
+ '(yascroll:delay-to-hide nil))
 
 ;; Disable landing screen, gui elements, bell
 (setq inhibit-startup-message t)
-;; (scroll-bar-mode -1)
+;; (setq scroll-bar-adjust-thumb-portion nil)
+(scroll-bar-mode -1)
 (tool-bar-mode -1)
 
 ;; Variable setting
@@ -123,6 +118,9 @@
   :config
   (require 'org-evil))
 
+;; org mode
+;; (use-package org-mode)
+
 ;; terminal cursor shape fixer
 (use-package evil-terminal-cursor-changer
   :config
@@ -184,3 +182,10 @@
 (use-package eterm-256color
   :ensure t)
 (add-hook 'term-mode-hook #'eterm-256color-mode)
+
+;; text scrollbar
+(use-package yascroll
+  :ensure t
+  :init
+  (global-yascroll-bar-mode 1)
+  )

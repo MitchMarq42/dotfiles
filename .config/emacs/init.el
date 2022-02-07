@@ -7,21 +7,25 @@
 
 ;; https://mitchmarq42.xyz
 
-;; Cucky auto settings
+;; Disable landing screen, gui elements, bell
+(setq inhibit-startup-message t)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+
+;; Cucky auto settings (make sure to try defining elsewhere)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(yascroll org-mode eterm-256color rainbow-mode autothemer doom-themes highlight-parentheses linum-relative nlinum-relative doom-modeline org-evil evil-commentary evil which-key rainbow-delimiters use-package smart-mode-line-powerline-theme ivy command-log-mode))
- '(yascroll:delay-to-hide nil))
-
-;; Disable landing screen, gui elements, bell
-(setq inhibit-startup-message t)
-;; (setq scroll-bar-adjust-thumb-portion nil)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
+   '(org-bullets undo-fu magit undo-tree yascroll which-key use-package smart-mode-line-powerline-theme rainbow-mode rainbow-delimiters org-evil linum-relative ivy highlight-parentheses evil-terminal-cursor-changer evil-commentary eterm-256color doom-themes doom-modeline command-log-mode autothemer)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 ;; Variable setting
 
@@ -75,6 +79,10 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; theme
+(use-package autothemer
+  :ensure t)
+
 (use-package ivy
   :bind (("C-s" . swiper)
          :map ivy-minibuffer-map
@@ -104,12 +112,15 @@
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump nil)
+  (setq evil-undo-system 'undo-fu)
   :config
   (evil-mode 1)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
+  (evil-set-initial-state 'dashboard-mode 'normal)
+  )
+(use-package undo-fu)
 ;; comment with gcc
 (use-package evil-commentary
   :config
@@ -117,9 +128,6 @@
 (use-package org-evil
   :config
   (require 'org-evil))
-
-;; org mode
-;; (use-package org-mode)
 
 ;; terminal cursor shape fixer
 (use-package evil-terminal-cursor-changer
@@ -161,17 +169,6 @@
 ;; highlight parentheses
 (use-package rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-;; (use-package highlight-parentheses)
-;; (define-globalized-minor-mode global-highlight-parentheses-mode
-;;   highlight-parentheses-mode
-;;   (lambda ()
-;;     (highlight-parentheses-mode t)))
-;; (global-highlight-parentheses-mode t)
-
-;; theme
-(use-package autothemer
-  :ensure t)
-(load-theme 'mitch t)
 
 ;; hex colors
 (use-package rainbow-mode
@@ -188,4 +185,28 @@
   :ensure t
   :init
   (global-yascroll-bar-mode 1)
+  (setq yascroll:delay-to-hide nil)
   )
+
+;; magit-- git client
+(use-package magit
+  :ensure t)
+
+;; org stuff
+(defun mitch/org-mode-setup()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (auto-fill-mode 0)
+  (visual-line-mode 1)
+  (setq evil-auto-indent nil))
+(use-package org
+  :hook (org-mode . mitch/org-mode-setup)
+  :config
+  (setq org-ellipses " (expand)"
+        org-hide-emphasis-markers t))
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  )
+
+(load-theme 'mitch t)

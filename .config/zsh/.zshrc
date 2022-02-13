@@ -1,11 +1,12 @@
 # vim: set ft=sh :
+# Don't edit this file. Modify and re-tangle the README.org instead.
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 # start X or sway on tty7
 [[ $(tty) = /dev/tty7 ]] && exec sway
-[[ $(tty) = /dev/tty5 ]] && startx
+[[ $(tty) = /dev/tty5 ]] && startx $XINITRC
 
 # note the previous value of $TERM, for self-awareness in tmuxes.
 [ -z "${TMUX}" ] && export OLDTERM="${TERM}"
@@ -15,14 +16,14 @@
     [[ "${TERM}" != linux ]] &&
     [[ "${TERM}" != xterm-256color ]] &&
     [[ "${TERM}" != eterm* ]] &&
-        OLDTERM="${TERM}" exec tmux
+    OLDTERM="${TERM}" exec tmux
 
 # Maybe install zplug, and definitely make it update stuff
 [ -n {XDG_CONFIG_HOME:$HOME/.config}/zsh/zplug ] && (
-    export ZPLUG_HOME=~/.config/zsh/zplug
+    export ZPLUG_HOME=zplug
     git clone https://github.com/zplug/zplug $ZPLUG_HOME 2>/dev/null
 )
-source ~/.config/zsh/zplug/init.zsh
+source zplug/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
@@ -40,7 +41,7 @@ zplug check --verbose || (
 (( $COLUMNS <= 84 )) && FETCH='pfetch' || FETCH='neofetch'
 $FETCH #--ascii_colors 4 --colors 7 4 4 4 4 7
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -59,7 +60,7 @@ setopt HIST_IGNORE_ALL_DUPS
 unsetopt autocd beep
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename "$ZDOTDIR/.zshrc"
+zstyle :compinstall filename "$ZDOTDIR/~/.config/zsh/.zshrc"
 autoload -Uz compinit
 # Basic auto/tab complete
 zstyle ':completion:*' menu select
@@ -86,12 +87,12 @@ bindkey -M vicmd 'k' up-line-or-beginning-search
 bindkey -M vicmd 'j' down-line-or-beginning-search
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+[[ ! -f $ZDOTDIR/.p10k.zsh ]] || source $ZDOTDIR/.p10k.zsh
 
 # source aliases and functions files
-source ~/.config/zsh/aliases.zsh
-source ~/.config/zsh/functions.zsh
-source ~/.config/zsh/insulter.zsh
+source $ZDOTDIR/aliases.zsh
+source $ZDOTDIR/functions.zsh
+source $ZDOTDIR/insulter.zsh
 
 # Make gpg work
 export GPT_TTY=$(tty)
@@ -103,9 +104,9 @@ zle-keymap-select() {
     if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]];
     then echo -ne '\e[1 q'
     elif [[ ${KEYMAP} == main ]] ||
-    [[ ${KEYMAP} == viins ]] ||
-        [[ ${KEYMAP} = '' ]] ||
-        [[ $1 = 'beam' ]];
+             [[ ${KEYMAP} == viins ]] ||
+             [[ ${KEYMAP} = '' ]] ||
+             [[ $1 = 'beam' ]];
     then echo -ne '\e[5 q'
     fi
 }

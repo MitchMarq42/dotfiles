@@ -95,6 +95,7 @@ event-sounds=true
 
 [wm/keybindings]
 close=['<Shift><Super>c']
+minimize=@as []
 move-to-workspace-last=@as []
 panel-run-dialog=@as []
 switch-to-workspace-1=['<Super>1']
@@ -103,6 +104,7 @@ switch-to-workspace-3=['<Super>3']
 switch-to-workspace-4=['<Super>4']
 switch-to-workspace-5=['<Super>5']
 switch-to-workspace-6=['<Super>6']
+toggle-fullscreen=['<Super>f']
 
 [wm/preferences]
 action-middle-click-titlebar='none'

@@ -1,0 +1,20 @@
+[plugins/color]
+night-light-last-coordinates=(61.187299280057594, -149.95070000000001)
+
+[plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']
+
+[plugins/media-keys/custom-keybindings/custom0]
+binding='<Super>Return'
+command='gnome-terminal'
+name='terminal'
+
+[plugins/media-keys/custom-keybindings/custom1]
+binding='<Super>w'
+command='qutebrowser'
+name='browser'
+
+[plugins/media-keys/custom-keybindings/custom2]
+binding='<Super>e'
+command='emacsclient -nc -a /usr/bin/emacs'
+name='emacs'

@@ -3,13 +3,9 @@
 
 * The beginning
 
-Hello and welcome. This is the Org-file which contains (or will contain) all
-of my personal system configurations. There's a lot to go through, but hopefully
-writing this will give me a good excuse to make an end of it all.
+Hello and welcome. This is the Org-file which contains (or will contain) all of my personal zsh configurations. There's a lot to go through, but hopefully writing this will give me a good excuse to make an end of it all.
 
-The most important part of this config is the shell. I'm presently not ready for
-fully committing to using emacs' built-in shell =eshell=, so that means relying on
-=zsh=.
+I'm presently not ready for fully committing to using emacs' built-in shell =eshell=, so that means relying on =zsh=.
 
 * ZSH config
 ** The ~/.config/zsh/.zshrc file (in ~/.config/zsh/.zshrc which is the $ZDOTDIR)
@@ -144,8 +140,7 @@ so they don't accidentally re-apply themselves.
 
 #+end_src
 
-Since the emacs terminal is bad, let's rely on zsh itself for vi emulation (it actually does
-a pretty decent job and even has a visual mode like vim):
+Since the emacs terminal is bad, let's rely on zsh itself for vi emulation (it actually does a pretty decent job and even has a visual mode like vim):
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -197,11 +192,7 @@ Not sure why this is here. Possibly a failed re-implementation of vim's encrypti
 
 #+end_src
 
-The following is copied more-or-less from Luke Smith's~/.config/zsh/.zshrc. I have, however, done a
-bit of syntax policing and line-shuffling. What this actually does is enable nvim-style
-terminal cursor-shape changes on changing zsh's built-in vi modes. insert is a bar, normal
-and visual are blocks, replace is an underscore. This is a killer feature. Once you use it you
-will not be able to live without it.
+The following is copied more-or-less from Luke Smith's~/.config/zsh/.zshrc. I have, however, done a bit of syntax policing and line-shuffling. What this actually does is enable nvim-style terminal cursor-shape changes on changing zsh's built-in vi modes. insert is a bar, normal and visual are blocks, replace is an underscore. This is a killer feature. Once you use it you will not be able to live without it.
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -311,9 +302,7 @@ Get myself to use emacs more (broken)
 
 #+end_src
 
-Do window-manager based things, particularly in =sway= environment. All of this
-stuff is kind of iffy since it relies on i3-swallow which I don't actually have
-installed. This is pretty unnecessary and emacs will obsolesce it.
+Do window-manager based things, particularly in =sway= environment. All of this stuff is kind of iffy since it relies on i3-swallow which I don't actually have installed. This is pretty unnecessary and emacs will obsolesce it.
 
 #+begin_src shell :tangle~/.config/zsh/aliases.zsh
 

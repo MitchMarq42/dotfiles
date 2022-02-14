@@ -24,6 +24,7 @@ secondary-color='#000000000000'
 show-weekdate=true
 
 [input-sources]
+current=uint32 0
 per-window=false
 sources=[('xkb', 'us')]
 xkb-options=['custom:super_esc']
@@ -37,10 +38,11 @@ font-antialiasing='rgba'
 font-hinting='slight'
 font-name='Ubuntu 12'
 gtk-im-module='ibus'
-gtk-theme='Mojave-dark-alt'
+gtk-theme='Adwaita-dark'
 monospace-font-name='MesloLGS NF 11'
 show-battery-percentage=true
 text-scaling-factor=1.0
+toolkit-accessibility=false
 
 [media-handling]
 autorun-never=true

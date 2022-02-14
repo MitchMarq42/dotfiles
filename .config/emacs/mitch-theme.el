@@ -1,5 +1,18 @@
 (require 'autothemer)
 
+;; set font
+(defvar mitchcustom/default-font-size 130)
+(defvar mitchcustom/only-good-font "MesloLGS NF")
+(set-face-attribute 'default nil
+		    :font mitchcustom/only-good-font
+		    :height mitchcustom/default-font-size)
+(set-face-attribute 'fixed-pitch nil
+		    :font mitchcustom/only-good-font
+		    :height mitchcustom/default-font-size)
+(set-face-attribute 'variable-pitch nil
+		    :font "Ubuntu"
+		    :height mitchcustom/default-font-size)
+
 (autothemer-deftheme
  mitch "Based on my nvim theme. Because everything else looks the same."
 
@@ -53,53 +66,28 @@
   (window-divider (:foreground mitch-light-magenta :weight 'bold))
   (window-divider-first-pixel (:foreground mitch-light-magenta :weight 'bold))
   (window-divider-last-pixel (:foreground mitch-light-magenta :weight 'bold))
-  (yascroll:thumb-fringe (:foreground mitch-green :background mitch-green))
-  (show-paren-match (:background mitch-light-cyan))
+  (yascroll (:foreground mitch-green :background mitch-green))
+  (show-paren-match (:background mitch-light-blue))
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (org-block nil   (:inherit 'fixed-pitch))
-  (org-table nil   (:inherit 'fixed-pitch))
-  (org-formula nil (:inherit 'fixed-pitch))
-  (org-code nil    (:inherit '(shadow fixed-pitch)))
-  (org-table nil   (:inherit '(shadow fixed-pitch)))
-  (org-verbatim nil (:inherit '(shadow fixed-pitch)))
-  (org-special-keyword nil (:inherit '(font-lock-comment-face fixed-pitch)))
-  (org-meta-line nil (:inherit '(font-lock-comment-face fixed-pitch)))
-  (org-checkbox nil  (:inherit 'fixed-pitch))
-  )
-
- ;; Forms after the face specifications are evaluated.
- ;; (palette vars can be used.)
- (custom-theme-set-variables
-  'mitch
-  `(ansi-color-names-vector
-    [,mitch-red
-     ,mitch-green
-     ,mitch-blue
-     ,mitch-light-magenta
-     ,mitch-yellow
-     ,mitch-light-red
-     ,mitch-cyan]))
- )
+  (org-block (:background mitch-dark-gray))
+  (org-block-begin-line (:foreground mitch-light-black))
+  (org-block-end-line (:foreground mitch-light-black))
+  (org-table   (:inherit 'fixed-pitch))
+  (org-formula (:inherit 'fixed-pitch))
+  (org-code    (:inherit '(shadow fixed-pitch)))
+  (org-table   (:inherit '(shadow fixed-pitch)))
+  (org-verbatim (:inherit '(shadow fixed-pitch)))
+  (org-special-keyword (:inherit '(font-lock-comment-face fixed-pitch)))
+  (org-meta-line (:inherit '(font-lock-comment-face fixed-pitch)))
+  (org-checkbox  (:inherit 'fixed-pitch))
+  ))
 
 (tooltip-mode -1)
 (menu-bar-mode -1)
-(set-fringe-mode 10)
+(set-fringe-style '(0 . nil))
 (setq window-divider-default-places t)
 (setq right-divider-width 5)
 (setq ring-bell-function 'ignore)
-;; set font
-(defvar mitchcustom/default-font-size 130)
-(defvar mitchcustom/only-good-font "MesloLGS NF")
-(set-face-attribute 'default nil
-		    :font mitchcustom/only-good-font
-		    :height mitchcustom/default-font-size)
-(set-face-attribute 'fixed-pitch nil
-		    :font mitchcustom/only-good-font
-		    :height mitchcustom/default-font-size)
-(set-face-attribute 'variable-pitch nil
-		    :font "Ubuntu"
-		    :height mitchcustom/default-font-size)
-
 ;; Set faces for heading levels
 ;; (dolist (face '((org-level-1 . 1.2)
 ;; 		(org-level-2 . 1.1)
@@ -110,6 +98,5 @@
 ;; 		(org-level-7 . 1.1)
 ;; 		(org-level-8 . 1.1)))
 ;;   (set-face-attribute (car face) nil :font "Ubuntu" :weight 'regular :height (cdr face)))
-
 
 (provide-theme 'mitch)

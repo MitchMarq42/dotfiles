@@ -7,8 +7,11 @@
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;; line wrap
+(global-visual-line-mode t)
 
-;; straight.el minified bootstrap (the better package manager?) (split lines if you want)
+;; straight.el minified bootstrap
+;; (the better package manager?) (split lines if you want)
 (defvar bootstrap-version) (let ((bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)) (bootstrap-version 5)) (unless (file-exists-p bootstrap-file) (with-current-buffer (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el" 'silent 'inhibit-cookies) (goto-char (point-max)) (eval-print-last-sexp))) (load bootstrap-file nil 'nomessage)) (straight-use-package 'use-package) (setq straight-use-package-by-default t)
 
 ;; load evil
@@ -44,20 +47,21 @@
 ;; Completion framework...
 (use-package ivy
   :straight t
+  :defer 0.5
   :diminish
   :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)
+	 ("C-l" . ivy-alt-done)
+	 ("C-j" . ivy-next-line)
+	 ("C-k" . ivy-previous-line)
+	 :map ivy-switch-buffer-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-l" . ivy-done)
+	 ("C-d" . ivy-switch-buffer-kill)
+	 :map ivy-reverse-i-search-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-reverse-i-search-kill))
   :init
   (ivy-mode 1))
 
@@ -68,27 +72,14 @@
 (load-theme 'mitch t)
 
 ;; Relative numbers
-(global-display-line-numbers-mode t)
-(setq global-display-line-numbers-type 'relative)
-
-;; EXWM stuff. For using emacs as the window manager.
-(use-package exwm
+(use-package linum-relative
   :straight t
-  ;; :config
-  ;; (require 'exwm)
-  ;; (require 'exwm-config)
-  ;; (exwm-config-default)
-  :init
-  ;; (exwm-enable)
-  (setq exwm-input-global-keys
-	`(([?\s-q] . exwm-reset)
-	  ([?\s-C] . exwm-workspace-delete)
-	  ,@(mapcar (lambda (i)
-		      `(,(kbd (format "s-%d" i)) .
-			(lambda ()
-			  (interactive)
-			  (exwm-workspace-switch-create ,i))))
-		    (number-sequence 0 9))))
+  :defer 0.1
+  :config
+  (setq linum-relative-backend 'display-line-numbers-mode)
+  ;; (setq linum-relative-backend 'linum-mode)
+  (setq linum-relative-current-symbol "%3s ")
+  (linum-relative-global-mode t)
   )
 
 ;; Better modeline?
@@ -107,3 +98,25 @@
 (setq show-paren-delay 0
       show-paren-style 'parenthesis)
 (show-paren-mode 1)
+
+;; Org mode and messy things
+(use-package org
+  :straight t
+  :mode (("\\.org$" . org-mode))
+  :config
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  ;; (visual-line-mode 1)
+  (setq org-ellipsis " ▾"))
+(use-package writeroom-mode
+  :straight t
+  :after org
+  :hook (org-mode . writeroom-mode)
+  )
+(use-package evil-terminal-cursor-changer
+  :straight t
+  :if (null (display-graphic-p))
+  :config
+  (evil-terminal-cursor-changer-activate)
+  )
+

@@ -83,6 +83,11 @@
   )
 
 ;; Better modeline?
+(use-package all-the-icons
+  :straight t
+  :if (display-graphic-p)
+  :config (all-the-icons-install-fonts t)
+  )
 (use-package doom-modeline
   :straight t
   :init
@@ -120,3 +125,7 @@
   (evil-terminal-cursor-changer-activate)
   )
 
+(defun eshell/exit ()
+  "Redefined by mitch. Same-ish behavior as Evil's ZZ."
+  (save-buffers-kill-emacs))
+(setq initial-major-mode 'eshell)

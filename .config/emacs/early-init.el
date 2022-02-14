@@ -16,9 +16,5 @@
 					  (abbreviate-file-name (buffer-file-name))
 					"%b"))))
 
-(defun eshell/exit ()
-  "Redefined by mitch. Same-ish behavior as Evil's ZZ."
-  (save-buffers-kill-emacs))
-(setq initial-major-mode 'eshell)
 (setq-default scroll-up-aggressively 0.01
 	      scroll-down-aggressively 0.01)

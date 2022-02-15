@@ -64,6 +64,9 @@
 	 ("C-d" . ivy-reverse-i-search-kill))
   :init
   (ivy-mode 1))
+(use-package counsel
+  :straight t
+  :after ivy)
 
 ;; Custom Theme.
 ;; Not to be confused with a color theme, or a color scheme, or a custom scheme.
@@ -85,9 +88,7 @@
 ;; Better modeline?
 (use-package all-the-icons
   :straight t
-  :if (display-graphic-p)
-  :config (all-the-icons-install-fonts t)
-  )
+  :if (display-graphic-p))
 (use-package doom-modeline
   :straight t
   :init
@@ -125,7 +126,43 @@
   (evil-terminal-cursor-changer-activate)
   )
 
-(defun eshell/exit ()
-  "Redefined by mitch. Same-ish behavior as Evil's ZZ."
-  (save-buffers-kill-emacs))
-(setq initial-major-mode 'eshell)
+;; cheaty key popups
+(use-package which-key
+  :straight t
+  :init
+  (which-key-mode t))
+
+;; weird lisp extension
+(use-package slime
+  :straight t
+  :config
+  (slime-setup))
+
+;; diable stupid file open box thingy
+(setq use-file-dialog nil)
+(setq use-dialog-box nil)
+
+;; run launcher. Copied from
+;; https://www.reddit.com/r/unixporn/comments/s7p7pr/so_which_run_launcher_do_you_use_rofi_or_dmenu/
+(defun emacs-run-launcher ()
+"Create and select a frame called emacs-run-launcher which consists only of a minibuffer and has specific dimensions. Run counsel-linux-app on that frame, which is an emacs command that prompts you to select an app and open it in a dmenu like behaviour. Delete the frame after that command has exited"
+(interactive)
+(with-selected-frame (make-frame '((name . "emacs-run-launcher")
+(minibuffer . only)
+(width . 120)
+(height . 11)))
+(unwind-protect
+(counsel-linux-app)
+(delete-frame))))
+
+;; Same, but will edit a new buffer
+(defun emacs-edit-launcher ()
+"Create and select a frame called emacs-edit-launcher which consists only of a minibuffer and has specific dimensions. Run find-file-other-frame on that frame, which is an emacs command that prompts you to select a file and open it in a dmenu like behaviour. Delete the frame after that command has exited"
+(interactive)
+(with-selected-frame (make-frame '((name . "emacs-edit-launcher")
+(minibuffer . only)
+(width . 120)
+(height . 11)))
+(unwind-protect
+(find-file-other-frame)
+(delete-frame))))

@@ -1,13 +1,15 @@
 * User-level configuration files
 
+** TODO Fix the whole document to properly reflect the truth. It's wrong right now.
+
 Hi. Welcome to my dotfiles repository.
 
 Everything in here is developed on pretty much a single fixed arch/artix system, but is designed to be declarative and deployable.
 So far this only extends to UNIX-like platforms, but I will eventually figure out Windows file path resolution.
 
-There's a lot of stuff in [.config/nvim](.config/nvim) as that's where I spend a lot of my time, so be sure and check that out.
+There's a lot of stuff in [[.config/nvim][.config/nvim]] as that's where I spend a lot of my time, so be sure and check that out.
 
-For shell configs, look in [.config/zsh](.config/zsh). For scripts, [.local/bin](.local/bin).
+For shell configs, look in [[.config/zsh][.config/zsh]]. For scripts, [[.local/bin][.local/bin]].
 
 There's a whole bunch of other stuff too, which I'll eventually go and document.
 
@@ -30,7 +32,7 @@ Also the reason I got so invested in alacritty in the first place was because th
 
 *** The shell
 
-I run ZSH. It's decently fast, POSIX compliant, and has _zillions_ of options and menues and plugins.
+I run ZSH. It's decently fast, POSIX compliant, and has /zillions/ of options and menues and plugins.
 
 I have copied Luke Smith's config layout of a .zprofile linked to its xdg-compliant location and setting =$ZDOTDIR= to =~/.config/zsh= because having a clean =$HOME= is nice.
 the =.zshrc= sources =functions.zsh= and =aliases.zsh=, and will on first run attempt to install =zplug= for a few fun extensions.
@@ -78,28 +80,32 @@ To make it run automatically on gyroscope/accelerometer events, learn how ACPI w
 
 Instead, bind it to a hotkey. On Xorg/xmonad I have it bound to ctrl+alt+arrowkey via sxhkd (https://wiki.archlinux.org/title/sxhkd):
 
+#+begin_src sxhkd
 control + alt + Up
-/home/mitch/.local/bin/mrandr inverted
+    /home/mitch/.local/bin/mrandr inverted
 control + alt + Down
-/home/mitch/.local/bin/mrandr normal
+    /home/mitch/.local/bin/mrandr normal
 control + alt + Left
-/home/mitch/.local/bin/mrandr right
+    /home/mitch/.local/bin/mrandr right
 control + alt + Right
-/home/mitch/.local/bin/mrandr left
+    /home/mitch/.local/bin/mrandr left
+#+end_src
 
 Or for sway/i3:
 
+#+begin_src i3config
 bindsym $mod+Left exec "~/.local/bin/mrandr right"
 bindsym $mod+Down exec "~/.local/bin/mrandr normal"
 bindsym $mod+Up exec "~/.local/bin/mrandr inverted"
 bindsym $mod+Right exec "~/.local/bin/mrandr left"
+#+end_src
 
 ---
 
-~~For getting capslock -\> esc and held-capslock -\> super to work in sway, see https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will also suffice for any X11 window manager, or any other Wayland compositor that uses XKB instead of doing its own thing.~~
++For getting capslock -\> esc and held-capslock -\> super to work in sway, see https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will also suffice for any X11 window manager, or any other Wayland compositor that uses XKB instead of doing its own thing.+
 
-~~The file .local/share/supescaps.diff currently contains the instructions in this gist but automated; run =doas patch < .local/share/supescaps.diff= and it might magically work. You will have to re-do this every upgrade or reinstall of XKB/XCB/xorg/linux. Maybe make it a pacman hook?~~
++The file .local/share/supescaps.diff currently contains the instructions in this gist but automated; run =doas patch < .local/share/supescaps.diff= and it might magically work. You will have to re-do this every upgrade or reinstall of XKB/XCB/xorg/linux. Maybe make it a pacman hook?+
 
-~~^^^ the above doesn't work because I'm an idiot and can't write patch files. Should probably work it into that shell script that will also auto-detect the package manager and install everything automatically.~~
++^^^ the above doesn't work because I'm an idiot and can't write patch files. Should probably work it into that shell script that will also auto-detect the package manager and install everything automatically.+
 
 As of 2020, xkb accepts user-specific keyboard patches. Modifying system files is no longer needed, and was always bad practice. Please don't do it either.

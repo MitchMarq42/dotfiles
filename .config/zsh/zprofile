@@ -10,7 +10,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 # make zsh configs be in the right place
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export ZPLUG_HOME="$ZDOTDIR/.zplug"
+export ZPLUG_HOME="$ZDOTDIR/zplug"
 
 # fix xdg runtime dir making sway need a relaunch
 # export XDG_RUNTIME_DIR=/run/user/1000

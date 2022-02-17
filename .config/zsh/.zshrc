@@ -19,11 +19,12 @@
     OLDTERM="${TERM}" exec tmux
 
 # Maybe install zplug, and definitely make it update stuff
-[ -n {XDG_CONFIG_HOME:$HOME/.config}/zsh/zplug ] && (
-    export ZPLUG_HOME=zplug
-    git clone https://github.com/zplug/zplug $ZPLUG_HOME 2>/dev/null
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZPLUG_HOME="$ZDOTDIR/zplug"
+[ -n $ZDOTDIR/zplug ] && (
+    git clone https://github.com/zplug/zplug $ZPLUG_HOME #2>/dev/null
 )
-source zplug/init.zsh
+source $ZPLUG_HOME/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
@@ -105,9 +106,9 @@ zle-keymap-select() {
     if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]];
     then echo -ne '\e[1 q'
     elif [[ ${KEYMAP} == main ]] ||
-             [[ ${KEYMAP} == viins ]] ||
-             [[ ${KEYMAP} = '' ]] ||
-             [[ $1 = 'beam' ]];
+	     [[ ${KEYMAP} == viins ]] ||
+	     [[ ${KEYMAP} = '' ]] ||
+	     [[ $1 = 'beam' ]];
     then echo -ne '\e[5 q'
     fi
 }

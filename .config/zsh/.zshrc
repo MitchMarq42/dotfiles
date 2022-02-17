@@ -29,11 +29,12 @@ zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
 # zplug 'zsh-users/zsh-history-substring-search', depth:1
 zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-completions'
 # Install plugins if there are plugins that have not been installed
 zplug check --verbose || (
     printf "Install? [y/N]: "
     if read -q; then
-        echo; zplug install
+	echo; zplug install
     fi
 )
 

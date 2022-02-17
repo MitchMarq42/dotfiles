@@ -3,15 +3,21 @@
 
 ;; remove auto-generated bits
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(if (not (file-exists-p custom-file))
+    (make-empty-file custom-file t))
 (load custom-file)
+
+;; Control backups/swapfiles
+(defvar --backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p --backup-directory))
+    (make-directory --backup-directory t))
+(setq backup-directory-alist `(("." . ,--backup-directory)))
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-;; line wrap
-(global-visual-line-mode t)
 
 ;; straight.el minified bootstrap
-;; (the better package manager?) (split lines if you want)
+;; (the better package manager?) (split lines if you want) (or not)
 (defvar bootstrap-version) (let ((bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)) (bootstrap-version 5)) (unless (file-exists-p bootstrap-file) (with-current-buffer (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el" 'silent 'inhibit-cookies) (goto-char (point-max)) (eval-print-last-sexp))) (load bootstrap-file nil 'nomessage)) (straight-use-package 'use-package) (setq straight-use-package-by-default t)
 
 ;; load evil
@@ -31,7 +37,8 @@
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
   (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
+  (evil-set-initial-state 'dashboard-mode 'normal)
+  (global-visual-line-mode t))
 (use-package evil-collection
   :straight t
   :after evil
@@ -62,8 +69,7 @@
 	 :map ivy-reverse-i-search-map
 	 ("C-k" . ivy-previous-line)
 	 ("C-d" . ivy-reverse-i-search-kill))
-  :init
-  (ivy-mode 1))
+  :init (ivy-mode 1))
 (use-package counsel
   :straight t
   :after ivy)
@@ -82,8 +88,7 @@
   (setq linum-relative-backend 'display-line-numbers-mode)
   ;; (setq linum-relative-backend 'linum-mode)
   (setq linum-relative-current-symbol "%3s ")
-  (linum-relative-global-mode t)
-  )
+  (linum-relative-global-mode t))
 
 ;; Better modeline?
 (use-package all-the-icons
@@ -93,6 +98,14 @@
   :straight t
   :init
   (doom-modeline-mode 1))
+(use-package mode-line-frame
+  :straight t
+  :init
+  (setq mode-line-frame-format mode-line-format)
+  (setq mode-line-format nil)
+  :config
+  (mode-line-frame-create)
+  )
 
 ;; scroll step stuff
 (setq scroll-margin 1
@@ -145,24 +158,29 @@
 ;; run launcher. Copied from
 ;; https://www.reddit.com/r/unixporn/comments/s7p7pr/so_which_run_launcher_do_you_use_rofi_or_dmenu/
 (defun emacs-run-launcher ()
-"Create and select a frame called emacs-run-launcher which consists only of a minibuffer and has specific dimensions. Run counsel-linux-app on that frame, which is an emacs command that prompts you to select an app and open it in a dmenu like behaviour. Delete the frame after that command has exited"
-(interactive)
-(with-selected-frame (make-frame '((name . "emacs-run-launcher")
-(minibuffer . only)
-(width . 120)
-(height . 11)))
-(unwind-protect
-(counsel-linux-app)
-(delete-frame))))
+  "Create and select a frame called emacs-run-launcher which consists only of a minibuffer and has specific dimensions. Run counsel-linux-app on that frame, which is an emacs command that prompts you to select an app and open it in a dmenu like behaviour. Delete the frame after that command has exited"
+  (interactive)
+  (with-selected-frame
+      (make-frame '((name . "emacs-run-launcher")
+		    (minibuffer . only)
+		    (width . 120)
+		    (height . 11)))
+    (unwind-protect
+	(counsel-linux-app)
+      (delete-frame))))
 
-;; Same, but will edit a new buffer
+;; Same, but will edit a new buffer. BROKEN.
 (defun emacs-edit-launcher ()
-"Create and select a frame called emacs-edit-launcher which consists only of a minibuffer and has specific dimensions. Run find-file-other-frame on that frame, which is an emacs command that prompts you to select a file and open it in a dmenu like behaviour. Delete the frame after that command has exited"
-(interactive)
-(with-selected-frame (make-frame '((name . "emacs-edit-launcher")
-(minibuffer . only)
-(width . 120)
-(height . 11)))
-(unwind-protect
-(find-file-other-frame)
-(delete-frame))))
+  "Create and select a frame called emacs-edit-launcher which consists only of a minibuffer and has specific dimensions. Run find-file-other-frame on that frame, which is an emacs command that prompts you to select a file and open it in a dmenu like behaviour. Delete the frame after that command has exited"
+  (interactive)
+  (with-selected-frame
+      (make-frame '((name . "emacs-edit-launcher")
+		    (minibuffer . only)
+		    (width . 120)
+		    (height . 11)))
+    (unwind-protect
+	;; (counsel-find-file-extern emacs)
+	(counsel-locate-action-extern)
+      (delete-frame)
+      )
+    ))

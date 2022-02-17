@@ -33,6 +33,7 @@
   (mitch-magenta "#ff00ff")
   (mitch-cyan    "#00ffff")
   (mitch-white   "#ffffff")
+  (mitch-pink    "#ffaaaa")
   (mitch-light-black   "#303030")
   (mitch-light-red     "#ffa000")
   (mitch-light-green   "#00c000")
@@ -47,11 +48,13 @@
 
  ;; specifications for Emacs faces.
  (
-  (default                (:background mitch-black :foreground mitch-light-yellow))
-  (highlight              (:background mitch-visual-bg))
+  (default (:background mitch-black :foreground mitch-light-yellow))
+  (highlight (:background mitch-visual-bg))
   (font-lock-comment-face (:foreground mitch-green))
-  (mode-line     (:background mitch-light-black :foreground mitch-white :weight 'bold))
-  (line-number            (:foreground mitch-yellow :weight 'normal))
+  (mode-line (:background mitch-light-black :foreground mitch-white :weight 'bold))
+  ;; (mode-line-inactive (:background mitch-light-black :foreground mitch-white :weight 'bold))
+  ;; (doom-modeline-buffer-modified (:background mitch-light-black :foreground mitch-pink :weight 'bold))
+  (line-number (:foreground mitch-yellow :weight 'normal))
   (line-number-current-line (:foreground mitch-yellow :weight 'bold))
   (font-lock-function-name-face (:foreground mitch-red :weight 'bold))
   (font-lock-keyword-face (:foreground mitch-red :weight 'bold))

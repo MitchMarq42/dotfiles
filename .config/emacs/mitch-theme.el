@@ -21,23 +21,24 @@
   (
    ((class color) (min-colors #xFFFFFF)) ;; truecolor
    ((class color) (min-colors #xFF    )) ;; 256color
-   ((class color) (min-colors 16color )) ;; 16color
+   ((class color) (min-colors 16 )) ;; 16color
+   ((class color) (min-colors 8 )) ;; 8color
    )
 
   ;; Specify the color palette for each of the classes above.
-  (mitch-black   "#000000")
-  (mitch-red     "#ff0000")
-  (mitch-green   "#00aa00")
-  (mitch-yellow  "#ffee11")
-  (mitch-blue    "#0000ff")
+  (mitch-black   "#000000" "black" )
+  (mitch-red     "#ff0000" "red" )
+  (mitch-green   "#00aa00" "green" )
+  (mitch-yellow  "#ffee11" "yellow" "yellow" )
+  (mitch-blue    "#0000ff" "blue" )
   (mitch-magenta "#ff00ff")
   (mitch-cyan    "#00ffff")
   (mitch-white   "#ffffff")
   (mitch-pink    "#ffaaaa")
-  (mitch-light-black   "#303030")
+  (mitch-light-black   "#303030" "gray" )
   (mitch-light-red     "#ffa000")
   (mitch-light-green   "#00c000")
-  (mitch-light-yellow  "#eeee99")
+  (mitch-light-yellow  "#eeee99" "tan" "lightyellow")
   (mitch-light-blue    "#0077ff")
   (mitch-light-magenta "#9f00aa")
   (mitch-light-cyan    "#00c0c0")

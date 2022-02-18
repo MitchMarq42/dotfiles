@@ -21,7 +21,7 @@
 # Maybe install zplug, and definitely make it update stuff
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZPLUG_HOME="$ZDOTDIR/zplug"
-[ -n $ZDOTDIR/zplug ] && (
+[ -d $ZDOTDIR/zplug ] || (
     git clone https://github.com/zplug/zplug $ZPLUG_HOME #2>/dev/null
 )
 source $ZPLUG_HOME/init.zsh

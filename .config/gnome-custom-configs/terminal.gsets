@@ -1,4 +1,6 @@
 [legacy]
+default-show-menubar=false
+headerbar=@mb false
 menu-accelerator-enabled=false
 new-tab-position='next'
 theme-variant='dark'
@@ -28,3 +30,6 @@ use-theme-colors=false
 use-theme-transparency=false
 use-transparent-background=true
 visible-name='mitch'
+
+[legacy/settings]
+headerbar=false

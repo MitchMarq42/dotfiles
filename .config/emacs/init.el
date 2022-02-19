@@ -50,6 +50,12 @@
   :after evil)
 (use-package undo-fu
   :straight t)
+(use-package evil-terminal-cursor-changer
+  :straight t
+  :if (null (display-graphic-p))
+  :config
+  (evil-terminal-cursor-changer-activate)
+  )
 
 ;; Completion framework...
 (use-package ivy
@@ -76,8 +82,7 @@
 
 ;; Custom Theme.
 ;; Not to be confused with a color theme, or a color scheme, or a custom scheme.
-(use-package autothemer
-  :straight t)
+(use-package autothemer :straight t)
 (load-theme 'mitch t)
 
 ;; Relative numbers
@@ -85,36 +90,37 @@
   :straight t
   :defer 0.1
   :config
-  (setq linum-relative-backend 'display-line-numbers-mode)
-  ;; (setq linum-relative-backend 'linum-mode)
-  (setq linum-relative-current-symbol "%3s ")
+  ;; (setq linum-relative-backend 'display-line-numbers-mode)
+  (setq linum-relative-backend 'linum-mode)
+  (setq linum-relative-current-symbol "")
   (linum-relative-global-mode t))
 
 ;; Better modeline?
-(use-package all-the-icons
-  :straight t
-  :if (display-graphic-p))
-(use-package doom-modeline
-  :straight t
-  :init
-  (doom-modeline-mode 1))
-(use-package mode-line-frame
-  :straight t
-  :init
-  (setq mode-line-frame-format mode-line-format)
-  (setq mode-line-format nil)
-  :config
-  (mode-line-frame-create)
-  )
+(use-package all-the-icons :straight t :if (display-graphic-p))
+(use-package doom-modeline :straight t :init (doom-modeline-mode 1))
+;; (use-package mode-line-frame
+;;   :straight t
+;;   :init
+;;   (setq mode-line-frame-format mode-line-format)
+;;   (setq mode-line-format nil)
+;;   :config
+;;   (mode-line-frame-create)
+;;   )
 
 ;; scroll step stuff
 (setq scroll-margin 1
-      scroll-conservatively 0
+      scroll-conservatively 1
       scroll-up-aggressively 0.01
       scroll-down-aggressively 0.01)
 
+(use-package yascroll
+  :straight t
+  :config
+  (global-yascroll-bar-mode 1))
+
+
 ;; parentheses settingses
-(setq show-paren-delay 0
+(setq show-paren-delay 1
       show-paren-style 'parenthesis)
 (show-paren-mode 1)
 
@@ -132,24 +138,12 @@
   :after org
   :hook (org-mode . writeroom-mode)
   )
-(use-package evil-terminal-cursor-changer
-  :straight t
-  :if (null (display-graphic-p))
-  :config
-  (evil-terminal-cursor-changer-activate)
-  )
 
 ;; cheaty key popups
 (use-package which-key
   :straight t
   :init
   (which-key-mode t))
-
-;; weird lisp extension
-(use-package slime
-  :straight t
-  :config
-  (slime-setup))
 
 ;; diable stupid file open box thingy
 (setq use-file-dialog nil)

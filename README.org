@@ -7,6 +7,7 @@ Gotta fix the whole document to properly reflect the truth. It's wrong right now
 Hi. Welcome to my dotfiles repository.
 
 +Everything in here is developed on pretty much a single fixed arch/artix system,+
+
 (No, nowadays I use a lot of Fedora, Debian, Ubuntu. Artix is still the best distro though.)
 but is designed to be declarative and deployable.
 So far this only extends to UNIX-like platforms, but I will eventually figure out Windows file path resolution. In general, symlinks sort of work unless they don't...

@@ -91,7 +91,8 @@
 
 (tooltip-mode -1)
 (menu-bar-mode -1)
-(set-fringe-style '(0 . nil))
+(if (display-graphic-p)
+(set-fringe-style '(0 . nil)))
 (setq window-divider-default-places t)
 (setq right-divider-width 5)
 (setq ring-bell-function 'ignore)

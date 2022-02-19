@@ -154,9 +154,10 @@
   :init
   (which-key-mode t))
 
-;; diable stupid file open box thingy
-(setq use-file-dialog nil)
-(setq use-dialog-box nil)
+;; parentheses are boring
+(use-package rainbow-delimiters
+  :straight t
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; run launcher. Copied from
 ;; https://www.reddit.com/r/unixporn/comments/s7p7pr/so_which_run_launcher_do_you_use_rofi_or_dmenu/

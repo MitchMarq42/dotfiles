@@ -1,13 +1,17 @@
 * User-level configuration files
 
-** TODO Fix the whole document to properly reflect the truth. It's wrong right now.
+Gotta fix the whole document to properly reflect the truth. It's wrong right now.
+
+---
 
 Hi. Welcome to my dotfiles repository.
 
-Everything in here is developed on pretty much a single fixed arch/artix system, but is designed to be declarative and deployable.
-So far this only extends to UNIX-like platforms, but I will eventually figure out Windows file path resolution.
++Everything in here is developed on pretty much a single fixed arch/artix system,+
+(No, nowadays I use a lot of Fedora, Debian, Ubuntu. Artix is still the best distro though.)
+but is designed to be declarative and deployable.
+So far this only extends to UNIX-like platforms, but I will eventually figure out Windows file path resolution. In general, symlinks sort of work unless they don't...
 
-There's a lot of stuff in [[.config/nvim][.config/nvim]] as that's where I spend a lot of my time, so be sure and check that out.
++There's a lot of stuff in [[.config/nvim][.config/nvim]] as that's where I spend a lot of my time, so be sure and check that out.+ (No, my nvim config is a separate repo and is now in "stable mode": it's not being worked on at all. Actually look in [[.config/emacs][.config/emacs]]).
 
 For shell configs, look in [[.config/zsh][.config/zsh]]. For scripts, [[.local/bin][.local/bin]].
 
@@ -19,16 +23,20 @@ There's a whole bunch of other stuff too, which I'll eventually go and document.
 
 But some day, there will be an index.md and correspondingly auto-generated index.html in every sub-directory; this will essentially form a lazy man's web interface to his files. But until then, you're just gonna have to look at the code and figure out what it does yourself.
 
+Or it'll all become a magic tangled Org document.
+
 ---
 
 *** The terminal
 
 Beyond handling true-color and UTF-8 nerd fonts, any terminal is sufficient in my book.
-That said, I focus this config on alacritty because anything worth doing is worth being lazy and efficient about.
-Alacritty is fast, it's the default on sway, it's in a lot of repos, and it's one of the few Rust programs that actually has other perks for using-- such as a (weird) built-in vi mode and search.
-I could make Kitty work almost as well, or even something like gnome-terminal... but alacritty is already where I want it.
++That said, I focus this config on alacritty because anything worth doing is worth being lazy and efficient about.+
++Alacritty is fast, it's the default on sway, it's in a lot of repos, and it's one of the few Rust programs that actually has other perks for using-- such as a (weird) built-in vi mode and search.+
++I could make Kitty work almost as well, or even something like gnome-terminal... but alacritty is already where I want it.+
 
-Also the reason I got so invested in alacritty in the first place was because the default colors were so ugly. More about that later...
++Also the reason I got so invested in alacritty in the first place was because the default colors were so ugly. More about that later...+
+
+My alacritty config is also in "stable mode". I currently use mostly =gnome-terminal=. You can find the config here: [[.config/gnome-custom-configs/terminal.gsets][.config/gnome-custom-configs/terminal.gsets]].
 
 *** The shell
 
@@ -67,6 +75,8 @@ but they're doing a fantastic job and they've built up a wonderful ecosystem.
 
 I don't actually mess that much with it. Just a custom color scheme, a few ease-of-use and eyecandy plugins, and an ever-growing mental model of how the thing works.
 You may find some fragments of =coc.nvim=, =cmp=, or LSP configuration scattered about. At present none of it works because I haven't gotten to fixing it yet.
+
+I use emacs BTW. Explanation is somewhere. Maybe in .config/emacs?
 
 ---
 

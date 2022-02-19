@@ -1,4 +1,5 @@
 // Don't show bookmark icons
+user_pref("browser.startup.homepage", "https://search.brave.com/");
 user_pref("browser.chrome.site_icons", false);
 user_pref("experiments.enabled", false);
 user_pref("experiments.manifest.uri", "");

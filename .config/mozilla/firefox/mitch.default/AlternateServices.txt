@@ -1,4 +1,4 @@
-https:www.google-analytics.com:443:.:^partitionKey=%28https%2Cmozilla.org%29:3	0	19042	https:www.google-analytics.com:443:www.google-analytics.com:443::n:1647890746:h3:y:1645298656:n:^partitionKey=%28https%2Cmozilla.org%29:|n:y:
+https:www.google-analytics.com:443:.:^partitionKey=%28https%2Cmozilla.org%29:3	0	19042	https:www.google-analytics.com:443:www.google-analytics.com:443::n:1647891490:h3:y:1645298656:n:^partitionKey=%28https%2Cmozilla.org%29:|n:y:
 https:fonts.gstatic.com:443:.:^partitionKey=%28https%2Cfedoraproject.org%29:3	0	19042	https:fonts.gstatic.com:443:fonts.gstatic.com:443::n:1647890983:h3:y:1645298980:n:^partitionKey=%28https%2Cfedoraproject.org%29:|n:y:
 https:www.google.com:443:.:^firstPartyDomain=google-b-1-d.search.suggestions.mozilla:3	0	19042	https:www.google.com:443:www.google.com:443::n:1647890723:h3:y:1645298656:n:^firstPartyDomain=google-b-1-d.search.suggestions.mozilla:|n:y:
 https:fonts.googleapis.com:443:.:^userContextId=5&partitionKey=%28https%2Cfedoraproject.org%29:3	0	19042	https:fonts.googleapis.com:443:fonts.googleapis.com:443::n:1647890661:h3:y:1645298656:n:^userContextId=5&partitionKey=%28https%2Cfedoraproject.org%29:|n:y:

@@ -76,7 +76,7 @@
   (yascroll:thumb-text-extra (:background mitch-green))
   (show-paren-match (:background mitch-light-blue))
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (org-block (:background mitch-dark-gray))
+  (org-block (:background mitch-dark-gray :family mitchcustom/only-good-font))
   (org-block-begin-line (:foreground mitch-light-black))
   (org-block-end-line (:foreground mitch-light-black))
   (org-table   (:inherit 'fixed-pitch))

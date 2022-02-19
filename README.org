@@ -6,7 +6,7 @@ Gotta fix the whole document to properly reflect the truth. It's wrong right now
 
 Hi. Welcome to my dotfiles repository.
 
-+Everything in here is developed on pretty much a single fixed arch/artix system,+
++Everything in here is developed on pretty much a single fixed arch/artix system+
 
 (No, nowadays I use a lot of Fedora, Debian, Ubuntu. Artix is still the best distro though.)
 but is designed to be declarative and deployable.
@@ -91,7 +91,7 @@ To make it run automatically on gyroscope/accelerometer events, learn how ACPI w
 
 Instead, bind it to a hotkey. On Xorg/xmonad I have it bound to ctrl+alt+arrowkey via sxhkd (https://wiki.archlinux.org/title/sxhkd):
 
-#+begin_src sxhkd
+#+begin_src
 control + alt + Up
     /home/mitch/.local/bin/mrandr inverted
 control + alt + Down
@@ -104,7 +104,7 @@ control + alt + Right
 
 Or for sway/i3:
 
-#+begin_src i3config
+#+begin_src
 bindsym $mod+Left exec "~/.local/bin/mrandr right"
 bindsym $mod+Down exec "~/.local/bin/mrandr normal"
 bindsym $mod+Up exec "~/.local/bin/mrandr inverted"

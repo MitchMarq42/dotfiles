@@ -53,7 +53,7 @@ TODO: there's probably a better way to do this.
       [[ "${TERM}" != eterm* ]] &&
       OLDTERM="${TERM}" exec tmux
 
-      #+end_src
+#+end_src
 
 And now let's bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug
 

@@ -94,8 +94,16 @@
   ;; (setq linum-relative-backend 'display-line-numbers-mode)
   (setq linum-relative-backend 'linum-mode)
   (setq linum-relative-current-symbol "")
-  (linum-relative-global-mode t))
-
+  (linum-relative-global-mode t)
+  )
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		shell-mode-hook
+		treemacs-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda ()
+		   (linum-relative-mode 0)
+		   )))
 ;; Better modeline?
 (use-package all-the-icons :straight t :if (display-graphic-p))
 (use-package doom-modeline :straight t :init (doom-modeline-mode 1))
@@ -109,7 +117,7 @@
 ;;   )
 
 ;; scroll step stuff
-(setq scroll-margin 1
+(setq scroll-margin 2
       scroll-conservatively 1
       scroll-up-aggressively 0.01
       scroll-down-aggressively 0.01)
@@ -117,11 +125,12 @@
 (use-package yascroll
   :straight t
   :config
+  (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode 1))
 
 
 ;; parentheses settingses
-(setq show-paren-delay 1
+(setq show-paren-delay 0
       show-paren-style 'parenthesis)
 (show-paren-mode 1)
 
@@ -131,14 +140,13 @@
   :mode (("\\.org$" . org-mode))
   :config
   (org-indent-mode)
-  (variable-pitch-mode 1)
-  ;; (visual-line-mode 1)
-  (setq org-ellipsis " ▾"))
-(use-package writeroom-mode
-  :straight t
-  :after org
-  :hook (org-mode . writeroom-mode)
-  )
+  (setq org-ellipsis " ▾")
+  :hook (org-mode . variable-pitch-mode))
+;; (use-package writeroom-mode
+;;   :straight t
+;;   :after org
+;;   :hook (org-mode . writeroom-mode)
+;;   )
 
 ;; cheaty key popups
 (use-package which-key

@@ -12,7 +12,7 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.AvoidFloats
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.WindowSwallowing
+-- import XMonad.Hooks.WindowSwallowing
 import Control.Monad (liftM2)
 
 -- Window rules
@@ -25,6 +25,7 @@ myManageHook = composeAll
     , className =? "st256color"		        --> doIgnore
     , className =? "mpv"			        --> doIgnore
     --, className =? "xfce4-panel"  		--> doIgnore
+    , className =? "mode-line-flame"  		--> doIgnore
     , manageDocks
     ]
     where viewShift = doF . liftM2 (.) W.greedyView W.shift
@@ -36,7 +37,7 @@ myTerminal = "alacritty"
 
 --myLayout = avoidStruts $ spiral (6/7)
 
-mySwallowHook = swallowEventHook ( className =? "Alacritty" ) ( return True )
+-- mySwallowHook = swallowEventHook ( className =? "Alacritty" ) ( return True )
 
 -- keybindings (see ~/.config/sxhkd/sxhkdrc for more)
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
@@ -58,6 +59,7 @@ main = xmonad xfceConfig
     , workspaces = myWorkspaces
     , keys       = myKeys <+> keys xfceConfig
     --, layoutHook = myLayout
-    , handleEventHook = mySwallowHook <+> ewmhDesktopsEventHook <+> fullscreenEventHook <+> handleEventHook def
+    , handleEventHook = --mySwallowHook <+>
+                        ewmhDesktopsEventHook <+> fullscreenEventHook <+> handleEventHook def
     , startupHook = ewmhDesktopsStartup <+> spawn myTerminal
     }

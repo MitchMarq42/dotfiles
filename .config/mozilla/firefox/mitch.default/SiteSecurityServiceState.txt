@@ -1,6 +1,6 @@
 clc.stackoverflow.com^partitionKey=%28http%2Cstackoverflow.com%29:HSTS	0	19043	1647924577420,1,0,2
 www.google.com^firstPartyDomain=google-b-1-d.search.suggestions.mozilla:HSTS	0	19042	1676843625242,1,0,2
-api.github.com^partitionKey=%28http%2Cgithub.com%29:HSTS	1	19043	1676857082137,1,1,2
+api.github.com^partitionKey=%28http%2Cgithub.com%29:HSTS	2	19044	1677011831419,1,1,2
 start.fedoraproject.org^partitionKey=%28http%2Cfedoraproject.org%29:HSTS	0	19042	1676834982927,1,1,2
 collector.github.com^partitionKey=%28http%2Cgithub.com%29:HSTS	1	19043	2276459595421,1,0,2
 gql.reddit.com^partitionKey=%28http%2Creddit.com%29:HSTS	1	19043	1676852129729,1,1,2
@@ -28,7 +28,7 @@ versioncheck-bg.addons.mozilla.org:HSTS	1	19044	1645472275830,1,0,2
 abs.twimg.com:HSTS	0	19042	2276437177338,1,0,2
 addons.mozilla.org:HSTS	0	19042	1676835490250,1,1,2
 gateway.reddit.com^partitionKey=%28http%2Creddit.com%29:HSTS	1	19043	1676852122925,1,1,2
-github.com^partitionKey=%28http%2Cgithub.com%29:HSTS	1	19043	1676857076009,1,1,2
+github.com^partitionKey=%28http%2Cgithub.com%29:HSTS	2	19044	1677011831092,1,1,2
 extensions.mozilla.org^partitionKey=%28http%2Cmozilla.org%29:HSTS	0	19042	1645298788096,1,1,2
 aus5.mozilla.org:HSTS	2	19044	1677007975894,1,0,2
 shavar.services.mozilla.com^firstPartyDomain=safebrowsing.86868755-6b82-4842-b301-72671a0db32e.mozilla:HSTS	2	19044	1677007476547,1,1,2

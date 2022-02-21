@@ -12,12 +12,6 @@
 ;; Hide default dashboard
 (setq inhibit-startup-messages t)
 (setq inhibit-startup-screen t)
-;; hide gui scrollbars and menubar etc
-(if (display-graphic-p)
-    (scroll-bar-mode -1)
-  (setq tool-bar-mode 0)
-  (setq menu-bar-mode 0)
-  )
 ;; diable stupid file open box thingy
 (setq use-file-dialog nil)
 (setq use-dialog-box nil)

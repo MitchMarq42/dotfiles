@@ -32,9 +32,10 @@
 (defvar bootstrap-version) (let ((bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)) (bootstrap-version 5)) (unless (file-exists-p bootstrap-file) (with-current-buffer (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el" 'silent 'inhibit-cookies) (goto-char (point-max)) (eval-print-last-sexp))) (load bootstrap-file nil 'nomessage)) (straight-use-package 'use-package) (setq straight-use-package-by-default t)
 
 ;; diminish
-(use-package diminish :straight t
-  (diminish 'eldoc-mode "")
-  )
+(use-package diminish :straight t)
+(use-package eldoc :straight t
+  :diminish "")
+  
 ;; load evil
 (use-package evil
   :straight t
@@ -45,6 +46,8 @@
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-i-jump nil)
   (setq evil-undo-system 'undo-fu)
+  (setq evil-vsplit-window-right t)
+  (setq evil-split-window-below t)
   :config
   (evil-mode t)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
@@ -113,8 +116,8 @@
   :diminish
   :defer 0.1
   :config
-  ;; (setq linum-relative-backend 'display-line-numbers-mode)
-  (setq linum-relative-backend 'linum-mode)
+  (setq linum-relative-backend 'display-line-numbers-mode)
+  ;; (setq linum-relative-backend 'linum-mode)
   (setq linum-relative-current-symbol "")
   (linum-relative-global-mode t)
   )
@@ -165,6 +168,7 @@
 (setq show-paren-delay 0
       show-paren-style 'parenthesis)
 (show-paren-mode 1)
+(electric-pair-mode 1)
 
 ;; Org mode and messy things
 (use-package org

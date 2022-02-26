@@ -2,6 +2,16 @@
 
 Gotta fix the whole document to properly reflect the truth. It's wrong right now.
 
+** Directory listing
+
+[[.config/][.config]]
+[[.gitignore][.gitignore]]
+[[.gitmodules][.gitmodules]]
+[[.local][.local]]
+[[.mozilla][.mozilla]]
+[[.xmonad][.xmonad]]
+[[.zprofile][.zprofile]]
+
 ---
 
 Hi. Welcome to my dotfiles repository.
@@ -120,3 +130,7 @@ bindsym $mod+Right exec "~/.local/bin/mrandr left"
 +^^^ the above doesn't work because I'm an idiot and can't write patch files. Should probably work it into that shell script that will also auto-detect the package manager and install everything automatically.+
 
 As of 2020, xkb accepts user-specific keyboard patches. Modifying system files is no longer needed, and was always bad practice. Please don't do it either.
+
+* .config/
+
+Basic. Place where configs go. Visit the location for more info, another org document may appear there.

@@ -5,8 +5,9 @@
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
+(set-fringe-mode 8)
 
-;; ;; minibuffer frame basically
+;; ;; minibuffer frame basically (disabled because gnome borders are ugly)
 ;; (setq initial-frame-alist (append '((minibuffer . nil)) initial-frame-alist))
 ;; (setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
 ;; (setq minibuffer-auto-raise t)
@@ -34,7 +35,7 @@
 ;; diminish
 (use-package diminish :straight t)
 (use-package eldoc :straight t
-  :diminish "")
+  :diminish)
   
 ;; load evil
 (use-package evil
@@ -67,8 +68,7 @@
 (use-package evil-commentary
   :straight t
   :diminish 'evil-commentary-mode
-  :config
-  (evil-commentary-mode)
+  :config (evil-commentary-mode)
   :after evil)
 (use-package evil-surround
   :straight t
@@ -82,7 +82,7 @@
 (use-package evil-terminal-cursor-changer
   :straight t
   :diminish
-  :if (null (display-graphic-p))
+  :if (not (display-graphic-p))
   :config
   (evil-terminal-cursor-changer-activate))
 
@@ -111,16 +111,17 @@
   :after ivy)
 
 ;; Relative numbers
+;; (setq display-line-numbers 'relative)
 (use-package linum-relative
   :straight t
   :diminish
   :defer 0.1
   :config
-  (setq linum-relative-backend 'display-line-numbers-mode)
-  ;; (setq linum-relative-backend 'linum-mode)
+  ;; (setq linum-relative-backend 'display-line-numbers-mode)
+  (setq linum-relative-backend 'linum-mode)
   (setq linum-relative-current-symbol "")
   (linum-relative-global-mode t)
-  )
+  :hook (prog-mode . linum-relative-mode))
 (dolist (mode '(org-mode-hook
 		term-mode-hook
 		shell-mode-hook
@@ -129,19 +130,16 @@
 		counsel-mode-hook
 		ivy-mode-hook
 		help-mode-hook))
-  (add-hook mode
-	    (lambda ()
-	      (linum-relative-mode -1)
-	      )))
+  (add-hook mode (lambda ()
+	      (linum-relative-mode -1))))
+
 ;; Better modeline?
 (use-package all-the-icons :straight t :if (display-graphic-p))
 ;; (use-package doom-modeline :straight t :init (doom-modeline-mode 1))
 (use-package powerline :straight t
-  :init
-  (setq powerline-default-separator 'utf-8))
+  :init (setq powerline-default-separator 'slant))
 (use-package airline-themes :straight t
-  :init
-  (setq airline-cursor-colors nil)
+  :init (setq airline-cursor-colors nil)
   :config (load-theme 'airline-ravenpower t))
 
 ;; Custom Theme.
@@ -152,15 +150,14 @@
 
 ;; scroll step stuff
 (setq scroll-margin 2
-      scroll-conservatively 1
+      scroll-conservatively 100
       scroll-up-aggressively 0.01
       scroll-down-aggressively 0.01)
 
 (use-package yascroll
   :straight t
   :diminish
-  :config
-  (setq yascroll:delay-to-hide nil)
+  :config (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode 1))
 
 
@@ -183,8 +180,7 @@
 (use-package which-key
   :straight t
   :diminish
-  :init
-  (which-key-mode t))
+  :init (which-key-mode t))
 
 ;; parentheses are boring
 (use-package rainbow-delimiters

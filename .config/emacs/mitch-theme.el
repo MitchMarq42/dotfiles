@@ -72,6 +72,7 @@
   (window-divider (:foreground mitch-light-magenta :weight 'bold))
   (window-divider-first-pixel (:foreground mitch-light-magenta :weight 'bold))
   (window-divider-last-pixel (:foreground mitch-light-magenta :weight 'bold))
+  (fringe (:background mitch-black))
   (yascroll:thumb-fringe (:foreground mitch-green :background mitch-green))
   (yascroll:thumb-text-extra (:background mitch-green))
   (show-paren-match (:background mitch-light-blue))
@@ -91,8 +92,8 @@
 
 (tooltip-mode -1)
 (menu-bar-mode -1)
-(if (display-graphic-p)
-(set-fringe-style '(0 . nil)))
+;; (if (display-graphic-p)
+;;     (set-fringe-style '(0 . nil)))
 (setq window-divider-default-places t)
 (setq right-divider-width 5)
 (setq ring-bell-function 'ignore)

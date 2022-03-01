@@ -7,6 +7,11 @@
 (menu-bar-mode 0)
 (set-fringe-mode 8)
 
+;; Load the file that I put all my settings in
+(load (expand-file-name "mitch-pluginsettings/all.el" user-emacs-directory))
+
+;; minify yes/no prompts
+(defalias 'yes-or-no-p 'y-or-n-p)
 ;; ;; minibuffer frame basically (disabled because gnome borders are ugly)
 ;; (setq initial-frame-alist (append '((minibuffer . nil)) initial-frame-alist))
 ;; (setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
@@ -36,30 +41,14 @@
 (use-package diminish :straight t)
 (use-package eldoc :straight t
   :diminish)
-  
+
 ;; load evil
 (use-package evil
-  :straight t
-  :diminish
+  :straight t :diminish
   :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
-  (setq evil-undo-system 'undo-fu)
-  (setq evil-vsplit-window-right t)
-  (setq evil-split-window-below t)
+  (mitch/evil-init)
   :config
-  (evil-mode t)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  (evil-global-set-key 'normal (kbd "<escape>") 'evil-beginning-of-line)
-  (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal)
-  (global-visual-line-mode t)
-  (diminish 'visual-line-mode))
+  (mitch/evil-config))
 (use-package evil-collection
   :straight t
   :diminish 'evil-collection-unimpaired-mode
@@ -89,8 +78,8 @@
 ;; Completion framework...
 (use-package ivy
   :straight t
-  :defer 0.5
   :diminish
+  :defer 0.5
   :bind (("C-s" . swiper)
 	 :map ivy-minibuffer-map
 	 ("TAB" . ivy-alt-done)
@@ -111,27 +100,11 @@
   :after ivy)
 
 ;; Relative numbers
-;; (setq display-line-numbers 'relative)
 (use-package linum-relative
-  :straight t
-  :diminish
-  :defer 0.1
+  :straight t :diminish :defer 0.1
   :config
-  ;; (setq linum-relative-backend 'display-line-numbers-mode)
-  (setq linum-relative-backend 'linum-mode)
-  (setq linum-relative-current-symbol "")
-  (linum-relative-global-mode t)
+  (mitch/linum-relative-config)
   :hook (prog-mode . linum-relative-mode))
-(dolist (mode '(org-mode-hook
-		term-mode-hook
-		shell-mode-hook
-		treemacs-mode-hook
-		eshell-mode-hook
-		counsel-mode-hook
-		ivy-mode-hook
-		help-mode-hook))
-  (add-hook mode (lambda ()
-	      (linum-relative-mode -1))))
 
 ;; Better modeline?
 (use-package all-the-icons :straight t :if (display-graphic-p))
@@ -147,7 +120,6 @@
 (use-package autothemer :straight t)
 (load-theme 'mitch t)
 
-
 ;; scroll step stuff
 (setq scroll-margin 2
       scroll-conservatively 100
@@ -159,7 +131,6 @@
   :diminish
   :config (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode 1))
-
 
 ;; parentheses settingses
 (setq show-paren-delay 0

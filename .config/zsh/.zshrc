@@ -8,15 +8,26 @@
 [[ $(tty) = /dev/tty7 ]] && exec sway
 [[ $(tty) = /dev/tty5 ]] && startx $XINITRC
 
-# note the previous value of $TERM, for self-awareness in tmuxes.
-[ -z "${TMUX}" ] && export OLDTERM="${TERM}"
-# Start a new tmux session to put the current shell in, if not already in a tmux or alacritty. Remember old TERM.
-[ -z "${TMUX}" ] &&
-    [[ "${TERM}" != alacritty ]] &&
-    [[ "${TERM}" != linux ]] &&
-    [[ "${TERM}" != xterm-256color ]] &&
-    [[ "${TERM}" != eterm* ]] &&
-    OLDTERM="${TERM}" exec tmux
+case "{TTY}" in
+    /dev/tty5)
+	startx $XINITRC ;;
+    /dev/tty7)
+	exec sway ;;
+    *)
+    ;;
+esac
+
+case "${TMUX}" in
+    # note the previous value of $TERM, for self-awareness in tmuxes.
+    *) export OLDTERM="${TERM}"
+       ;;
+    # Start a new tmux session to put the current shell in,
+    # if not already in a tmux or alacritty. Remember old TERM.
+    "") case "${TERM}" in
+	    alacritty|eterm*|xterm-*) ;;
+	    *) OLDTERM="${TERM}" exec tmux ;;
+	esac ;;
+esac
 
 # Maybe install zplug, and definitely make it update stuff
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"

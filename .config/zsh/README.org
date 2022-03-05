@@ -36,22 +36,33 @@ Now it's time to launch our graphical environment... this present config is rath
   [[ $(tty) = /dev/tty7 ]] && exec sway
   [[ $(tty) = /dev/tty5 ]] && startx $XINITRC
 
+  case "{TTY}" in
+      /dev/tty5)
+	  startx $XINITRC ;;
+      /dev/tty7)
+	  exec sway ;;
+      ,*)
+      ;;
+  esac
+
 #+end_src
 
 Time for tmux. We start a tmux on every terminal that isn't in the list.
-TODO: there's probably a better way to do this.
+TODO: there's probably a better way to do this. Case/esac statements?
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
-  # note the previous value of $TERM, for self-awareness in tmuxes.
-  [ -z "${TMUX}" ] && export OLDTERM="${TERM}"
-  # Start a new tmux session to put the current shell in, if not already in a tmux or alacritty. Remember old TERM.
-  [ -z "${TMUX}" ] &&
-      [[ "${TERM}" != alacritty ]] &&
-      [[ "${TERM}" != linux ]] &&
-      [[ "${TERM}" != xterm-256color ]] &&
-      [[ "${TERM}" != eterm* ]] &&
-      OLDTERM="${TERM}" exec tmux
+  case "${TMUX}" in
+      # note the previous value of $TERM, for self-awareness in tmuxes.
+      ,*) export OLDTERM="${TERM}"
+	 ;;
+      # Start a new tmux session to put the current shell in,
+      # if not already in a tmux or alacritty. Remember old TERM.
+      "") case "${TERM}" in
+	      alacritty|eterm*|xterm-*) ;;
+	      ,*) OLDTERM="${TERM}" exec tmux ;;
+	  esac ;;
+  esac
 
 #+end_src
 
@@ -267,7 +278,7 @@ Let's just do everything with rust
 
 #+end_src
 
-=The following is taken from the Arch Wiki, and sort of fixes starting emacs but causes other problems. In general, it's probably fine=. I modified it quite a bit so the above no longer applies. *This is extremely broken so it is commented out. Individual bits are also commented out in accordance with how broken they are. NOTE: this may differ on your system.*
++The following is taken from the Arch Wiki, and sort of fixes starting emacs but causes other problems. In general, it's probably fine+. I modified it quite a bit so the above no longer applies. *This is extremely broken so it is commented out. Individual bits are also commented out in accordance with how broken they are. NOTE: this may differ on your system.*
 
 #+begin_src shell :tangle~/.config/zsh/aliases.zsh
 
@@ -299,7 +310,7 @@ Get myself to use emacs more (broken)
   # alias vi="emacs -Q"
   #alias mpv="mpv --really-quiet"
   # export ALTERNATE_EDITOR=''
-  alias emacs='emacsclient -a /usr/bin/emacs -nc'
+  # alias emacs='emacsclient -a /usr/bin/emacs -nc'
   # $TERM == alacritty && alias nvim="neovide"
 
 #+end_src

@@ -18,3 +18,4 @@
 
 ;; Don't pop up error window on native-comp emacs
 (setq native-comp-async-report-warnings-errors 'silent)
+

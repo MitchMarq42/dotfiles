@@ -18,6 +18,8 @@ in the init-file."
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (evil-global-set-key 'normal (kbd "C-j") 'evil-scroll-line-down)
+  (evil-global-set-key 'normal (kbd "C-k") 'evil-scroll-line-up)
   (evil-global-set-key 'normal (kbd "<escape>") 'evil-beginning-of-line)
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal)
@@ -40,3 +42,19 @@ reduce lines in the init-file."
 		  help-mode-hook))
     (add-hook mode (lambda ()
 		     (linum-relative-mode -1)))))
+(defun mitch/graphical-setup ()
+  "A batch of commands to run at the beginning of
+the init file when we're on a graphical display.
+This prevents errors in termux and speeds up init
+when editing from the console."
+  ;; hide gui scrollbars and menubar etc (needs a hook)
+  (scroll-bar-mode 0)
+  (tool-bar-mode 0)
+  (menu-bar-mode 0)
+  (set-fringe-mode 8)
+  ;; Pixel scrolling?
+  (if (display-graphic-p) (pixel-scroll-precision-mode t))
+  )
+
+;; This one line cost me over an hour of frustration...
+(provide 'mitch-defuns)

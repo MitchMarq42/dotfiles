@@ -13,6 +13,15 @@
 		    :font "Ubuntu"
 		    :height mitchcustom/default-font-size)
 
+(defface yascroll:thumb-text-area
+  '((t (:background "#00aa00")))
+  "Face for text-area scroll bar thumb."
+  :group 'yascroll)
+(defface yascroll:thumb-fringe
+  '((t (:background "#00aa00" :foreground "#00aa00")))
+  "Face for fringe scroll bar thumb."
+  :group 'yascroll)
+
 (autothemer-deftheme
  mitch "Based on my nvim theme. Because everything else looks the same."
 
@@ -73,8 +82,8 @@
   (window-divider-first-pixel (:foreground mitch-light-magenta :weight 'bold))
   (window-divider-last-pixel (:foreground mitch-light-magenta :weight 'bold))
   (fringe (:background mitch-black))
-  (yascroll:thumb-fringe (:foreground mitch-green :background mitch-green))
   (yascroll:thumb-text-extra (:background mitch-green))
+  (yascroll:thumb-fringe (:foreground mitch-green :background mitch-green))
   (show-paren-match (:background mitch-light-blue))
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (org-block (:background mitch-dark-gray :family mitchcustom/only-good-font))

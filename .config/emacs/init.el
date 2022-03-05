@@ -1,14 +1,17 @@
 ;; This is a comment. It's kind of pointless, but
 ;; it's here. You can delete it if you want.
 
-;; hide gui scrollbars and menubar etc (needs a hook)
-(scroll-bar-mode 0)
-(tool-bar-mode 0)
-(menu-bar-mode 0)
-(set-fringe-mode 8)
+;; Load the files that I put my settings in...
+(setq mitch-directory
+      (directory-file-name
+       (concat user-emacs-directory
+	       (convert-standard-filename "lisp/"))))
+(setq load-path
+      (cons
+       mitch-directory load-path))
+(require 'mitch-defuns)
 
-;; Load the file that I put all my settings in
-(load (expand-file-name "mitch-pluginsettings/all.el" user-emacs-directory))
+(if (display-graphic-p) (mitch/graphical-setup))
 
 ;; minify yes/no prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -25,10 +28,16 @@
 (load custom-file)
 
 ;; Control backups/swapfiles
-(defvar --backup-directory (concat user-emacs-directory "backups"))
-(if (not (file-exists-p --backup-directory))
-    (make-directory --backup-directory t))
-(setq backup-directory-alist `(("." . ,--backup-directory)))
+(defvar backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p backup-directory))
+    (make-directory backup-directory t))
+(setq backup-directory-alist `(("." . ,backup-directory)))
+
+;; auto-save-mode doesn't create the path automatically!
+(make-directory (expand-file-name "tmp/auto-saves/" user-emacs-directory) t)
+(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
+      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+(setq create-lockfiles nil)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -73,7 +82,8 @@
   :diminish
   :if (not (display-graphic-p))
   :config
-  (evil-terminal-cursor-changer-activate))
+  (evil-terminal-cursor-changer-activate)
+  (xterm-mouse-mode))
 
 ;; Completion framework...
 (use-package ivy
@@ -100,11 +110,14 @@
   :after ivy)
 
 ;; Relative numbers
-(use-package linum-relative
-  :straight t :diminish :defer 0.1
-  :config
-  (mitch/linum-relative-config)
-  :hook (prog-mode . linum-relative-mode))
+;; (use-package linum-relative
+;;   :straight t :diminish :defer 0.1
+;;   :config
+;;   (mitch/linum-relative-config)
+;;   :hook (prog-mode . linum-relative-mode))
+(setq display-line-numbers-type 'relative
+      display-line-numbers-width-start 1)
+(global-display-line-numbers-mode)
 
 ;; Better modeline?
 (use-package all-the-icons :straight t :if (display-graphic-p))
@@ -159,6 +172,37 @@
   :diminish
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; magit, the wonderful overrated git interface
+(use-package magit
+  :straight t
+  :config
+  (setq magit-repository-directories (expand-file-name ".local/git/dotfiles" abbreviated-home-dir)))
+
 ;; run launcher exists. Copy it from
 ;; https://www.reddit.com/r/unixporn/comments/s7p7pr/so_which_run_launcher_do_you_use_rofi_or_dmenu/
 ;; I don't have it here because I don't use it right now.
+
+;; Fix ansi-term not closing when it closes (broken?)
+(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
+  (if (memq (process-status proc) '(signal exit))
+      (let ((buffer (process-buffer proc)))
+        ad-do-it
+        (kill-buffer buffer))
+    ad-do-it))
+(ad-activate 'term-sentinel)
+;; Ansi-term always use zsh?
+(defvar my-term-shell "/bin/zsh")
+(defadvice ansi-term (before force-zsh)
+  (interactive (list my-term-shell)))
+(ad-activate 'ansi-term)
+;; ansi-term utf-8 everything better
+(defun my-term-use-utf8 ()
+  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+(add-hook 'term-exec-hook 'my-term-use-utf8)
+(defun my-term-setup ()
+  "custom function of things to run when launching
+a new terminal."
+  (display-line-numbers-mode -1))
+;; Term cleanup things
+(add-hook 'term-mode-hook 'my-term-setup)
+(setq evil-collection-term-sync-state-and-mode-p nil)

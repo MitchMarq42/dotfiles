@@ -52,9 +52,11 @@ when editing from the console."
   (tool-bar-mode 0)
   (menu-bar-mode 0)
   (set-fringe-mode 8)
-  ;; Pixel scrolling?
-  (if (display-graphic-p) (pixel-scroll-precision-mode t))
-  )
+  ;; diable stupid file open box thingy
+  (setq use-file-dialog nil)
+  (setq use-dialog-box nil)
+  ;; Pixel scrolling. Only in emacs 29+...
+  (pixel-scroll-precision-mode t))
 
 ;; This one line cost me over an hour of frustration...
 (provide 'mitch-defuns)

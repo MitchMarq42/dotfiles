@@ -1,5 +1,6 @@
 ;; This is a comment. It's kind of pointless, but
 ;; it's here. You can delete it if you want.
+(server-start)
 
 ;; Load the files that I put my settings in...
 (setq mitch-directory
@@ -7,19 +8,20 @@
        (concat user-emacs-directory
 	       (convert-standard-filename "lisp/"))))
 (setq load-path
-      (cons
-       mitch-directory load-path))
+      (cons mitch-directory load-path))
 (require 'mitch-defuns)
-
-(if (display-graphic-p) (mitch/graphical-setup))
 
 ;; minify yes/no prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
-;; ;; minibuffer frame basically (disabled because gnome borders are ugly)
-;; (setq initial-frame-alist (append '((minibuffer . nil)) initial-frame-alist))
-;; (setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
-;; (setq minibuffer-auto-raise t)
-;; (setq minibuffer-exit-hook '(lambda () (lower-frame)))
+;; minibuffer frame basically (disabled because gnome borders are ugly)
+(setq initial-frame-alist (append '((minibuffer . nil)) initial-frame-alist))
+(setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
+(setq minibuffer-auto-raise t)
+(setq minibuffer-exit-hook '(lambda () (lower-frame)))
+(setq minibuffer-frame-alist '((width . 80) (height . 10)))
+;; do the things
+(setq server-after-make-frame-hook 'mitch/graphical-setup)
+(if (display-graphic-p) (mitch/graphical-setup))
 
 ;; remove auto-generated bits
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -49,11 +51,6 @@
 (require 'mitch-packages)
 
 ;; Relative numbers
-;; (use-package linum-relative
-;;   :straight t :diminish :defer 0.1
-;;   :config
-;;   (mitch/linum-relative-config)
-;;   :hook (prog-mode . linum-relative-mode))
 (setq display-line-numbers-type 'relative
       display-line-numbers-width-start 1)
 (global-display-line-numbers-mode)
@@ -72,8 +69,8 @@
 (defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
   (if (memq (process-status proc) '(signal exit))
       (let ((buffer (process-buffer proc)))
-        ad-do-it
-        (kill-buffer buffer))
+	ad-do-it
+	(kill-buffer buffer))
     ad-do-it))
 (ad-activate 'term-sentinel)
 ;; Ansi-term always use zsh?
@@ -92,4 +89,6 @@ a new terminal."
 ;; Term cleanup things
 (add-hook 'term-mode-hook 'my-term-setup)
 (setq evil-collection-term-sync-state-and-mode-p nil)
+
+;; (use-package oneonone :straight t)
 

@@ -70,6 +70,8 @@
   (linum-relative-current-face (:foreground mitch-yellow :weight 'bold))
   (font-lock-function-name-face (:foreground mitch-red :weight 'bold))
   (font-lock-keyword-face (:foreground mitch-red :weight 'bold))
+  (Man-overstrike (:foreground mitch-red :weight 'bold))
+  (woman-bold (:foreground mitch-red :weight 'bold))
   (font-lock-constant-face (:foreground mitch-light-cyan))
   (font-lock-string-face (:foreground mitch-light-blue))
   (font-lock-builtin-face (:foreground mitch-light-white :weight 'bold))

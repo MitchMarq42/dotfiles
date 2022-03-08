@@ -48,7 +48,7 @@ Now it's time to launch our graphical environment... this present config is rath
 #+end_src
 
 Time for tmux. We start a tmux on every terminal that isn't in the list.
-TODO: there's probably a better way to do this. Case/esac statements?
+DONE: there's probably a better way to do this. Case/esac statements?
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 

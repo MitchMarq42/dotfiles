@@ -46,7 +46,6 @@
         <property name="XF86AudioMedia" type="string" value="pragha"/>
         <property name="XF86Explorer" type="string" value="Thunar"/>
         <property name="XF86AudioNext" type="string" value="pragha --next"/>
-        <property name="XF86Terminal" type="string" value="xfce4-terminal"/>
         <property name="XF86AudioPrev" type="string" value="pragha --prev"/>
         <property name="XF86Memo" type="string" value="xfce4-notes"/>
         <property name="startup-notify" type="bool" value="true"/>
@@ -58,7 +57,6 @@
       </property>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="string" value="xfce4-session-logout"/>
       <property name="&lt;Alt&gt;F1" type="string" value="xfce4-popup-applicationsmenu"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="Print" type="string" value="xfce4-screenshooter"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Escape" type="string" value="xkill"/>
       <property name="&lt;Alt&gt;F2" type="string" value="xfce4-appfinder --collapsed">
@@ -76,8 +74,9 @@
       <property name="XF86Mail" type="string" value="exo-open --launch MailReader"/>
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Super&gt;e" type="string" value="thunar"/>
-      <property name="XF86WWW" type="string" value="exo-open --launch WebBrowser"/>
       <property name="override" type="bool" value="true"/>
+      <property name="&lt;Super&gt;Return" type="string" value="exo-open --launch TerminalEmulator"/>
+      <property name="&lt;Super&gt;w" type="string" value="exo-open --launch WebBrowser"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

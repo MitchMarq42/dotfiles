@@ -10,7 +10,7 @@ from libqtile.lazy import lazy
 # from libqtile.utils import guess_terminal
 
 mod = "mod4"
-terminal = "alacritty"
+terminal = "gnome-terminal"
 
 keys = [
         # Switch between windows
@@ -27,8 +27,8 @@ keys = [
         Key([mod], "l", lazy.layout.grow_main()),  # Move vert split right
         Key([mod, "shift"], "h", lazy.layout.swap_left()),
         Key([mod, "shift"], "l", lazy.layout.swap_right()),
-        Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-        Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+        # Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+        # Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
         Key([mod], "n", lazy.layout.normalize()),
         Key([mod], "o", lazy.layout.maximize()),
         Key([mod, "shift"], "space", lazy.layout.flip()),
@@ -59,9 +59,9 @@ keys = [
 
         # Toggle between different layouts as defined below
         Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-        Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+        Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
 
-        Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
+        Key([mod], "q", lazy.restart(), desc="Restart Qtile"),
         Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
         Key([mod], "r", lazy.spawncmd(),
             desc="Spawn a command using a prompt widget"),
@@ -114,30 +114,30 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
         Screen(
-            top=bar.Bar(
-                [
-                    # widget.CurrentLayout(),
-                    widget.GroupBox(**widget_defaults),
-                    # widget.Prompt(),
-                    widget.WindowName(
-                        center_aligned=True,
-                        ),
-                    widget.Chord(
-                        chords_colors={
-                            'launch': ("#ff0000", "#ffffff"),
-                            },
-                        name_transform=lambda name: name.upper(),
-                        ),
-                    # widget.TextBox("default config", name="default"),
-                    # widget.TextBox(),
-                    # widget.Systray(),
-                    widget.Clock(format='%I:%M %p'),
-                    # widget.QuickExit(),
-                    ],
-                29,
-                background="#303030",
-                opacity=0.8,
-                ),
+            # top=bar.Bar(
+            #     [
+            #         # # widget.CurrentLayout(),
+            #         # widget.GroupBox(**widget_defaults),
+            #         # # widget.Prompt(),
+            #         # widget.WindowName(
+            #         #     center_aligned=True,
+            #         #     ),
+            #         # widget.Chord(
+            #         #     chords_colors={
+            #         #         'launch': ("#ff0000", "#ffffff"),
+            #         #         },
+            #         #     name_transform=lambda name: name.upper(),
+            #         #     ),
+            #         # # widget.TextBox("default config", name="default"),
+            #         # # widget.TextBox(),
+            #         # # widget.Systray(),
+            #         # widget.Clock(format='%I:%M %p'),
+            #         # # widget.QuickExit(),
+            #         ],
+            #     29,
+            #     background="#303030",
+            #     opacity=0.8,
+            #     ),
             ),
         ]
 
@@ -164,10 +164,17 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
+    # custom things
+    Match(title='*Minibuf-0'),
     ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
+
+# layout.Ignore(ignore_rules=[
+#     *layout.Ignore.default_ignore_rules,
+#     Match(wm_class='xfce4-panel'),
+# ])
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?

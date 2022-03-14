@@ -56,7 +56,8 @@ when editing from the console."
   (setq use-file-dialog nil)
   (setq use-dialog-box nil)
   ;; Pixel scrolling. Only in emacs 29+...
-  (pixel-scroll-precision-mode t))
+					;  (pixel-scroll-precision-mode t)
+  )
 
 ;; This one line cost me over an hour of frustration...
 (provide 'mitch-defuns)

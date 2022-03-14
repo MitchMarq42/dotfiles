@@ -18,5 +18,5 @@ Tell the emacs startup time instead of the banal
 (setq native-comp-async-report-warnings-errors 'silent)
 
 ;; Run stuff after opening a new frame
-(setq server-after-make-frame-hook (mitch/graphical-setup))
-(setq before-make-frame-hook (mitch/graphical-setup))
+;(setq server-after-make-frame-hook (mitch/graphical-setup))
+;(setq before-make-frame-hook (mitch/graphical-setup))

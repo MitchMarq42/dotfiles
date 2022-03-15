@@ -38,7 +38,8 @@ alias ip="ip -c"
 # alias vi="emacs -Q"
 #alias mpv="mpv --really-quiet"
 # export ALTERNATE_EDITOR=''
-alias emacs='emacsclient -a /usr/bin/emacs -nc'
+emacs=$(which emacs)
+alias emacs="emacsclient -a $emacs -nc"
 # $TERM == alacritty && alias nvim="neovide"
 
 export WM=$(neofetch wm | awk '{print $2}')

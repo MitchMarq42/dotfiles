@@ -58,7 +58,7 @@ export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/config"
 export ELECTRUMDIR="${XDG_DATA_HOME:-$HOME/.local/share}/electrum"
 
 # add personal bin folder and emacs functions to path, for custom scripts
-export PATH=~/.local/bin:$PATH:~/.local/share/cargo/bin:~/.local/share/brew/bin:~/.local/share/brew/sbin:/opt/homebrew/bin
+export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:~/.local/bin:$PATH:~/.local/share/cargo/bin:~/.local/share/brew/bin:~/.local/share/brew/sbin:
 
 # Fix duplicate entries in PATH variable caused by sourcing this file multiple times
 # source ~/.local/bin/fixpath

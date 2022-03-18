@@ -78,6 +78,10 @@
 
 # # custom stuff? And more...
 
+# Launchers
+cmd - return : alacritty
+cmd - space : wall "all thy bases art belongeth to us"
+
 # focus windows
 cmd + h : yabai -m window --focus west
 cmd + l : yabai -m window --focus east

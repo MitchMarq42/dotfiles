@@ -85,6 +85,7 @@
   <property name="plugins" type="empty">
     <property name="plugin-2" type="string" value="tasklist">
       <property name="grouping" type="uint" value="1"/>
+      <property name="include-all-workspaces" type="bool" value="true"/>
     </property>
     <property name="plugin-4" type="string" value="pager"/>
     <property name="plugin-5" type="string" value="separator">

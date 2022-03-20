@@ -1,111 +1,37 @@
-# ls
-# tree .
-# rm -rf *
-# ls
-# ls -a
-# rm -rf .*
-# ls
-# ls -a
-# rm -rf .*
-# ls -a
+#!/bin/sh
 
-cd $HOME
+# Get the dots function itself
+curl https://raw.githubusercontent.com/MitchMarq42/dotfiles/main/.local/bin/dots > ~/.local/bin/dots
 
-for dir in $(ls -A)
+git clone https://github.com/mitchmarq42/dotfiles --bare ~/.local/git/dotfiles
+
+# run
+dots checkout -f
+
+curl 'https://i.ytimg.com/vi/0NHIlU4l02E/maxresdefault.jpg' > .local/share/backgrounds/shockwave.jpg
+
+gnomes=$(ls ~/.config/gnome-custom-configs/ |
+	     grep gsets |
+      sed 's/\.gsets$//g')
+
+for prop in $gnomes
 do
-    rm -rf $dir
+    dconf load /org/gnome/$prop/ < ~/.config/gnome-custom-configs/$prop.gsets
 done
 
-cd ..
+dots submodule init
+dots submodule update
 
-# git clone https://github.com/mitchmarq42/dotfiles mitch/
-
-# ls mitch
-# ls mitch -a
-# rm -rf mitch/.cache/
-git clone https://github.com/mitchmarq42/dotfiles mitch/
-
-cd $HOME
-
-# ls -a
-# rm -rf .git
-# dots status
-# ls .local
-
-# mkdir -p ~/.local/git/dotfiles
-mv ~/.git ~/.local/git/dotfiles
-
-# git clone https://github.com/mitchmarq42/dotfiles --bare ~/.local/git/dotfiles
-
-dots status
-dots restore --staged
-dots restore --staged *
-dots status
-dots restore "*"
-dots status
-dots restore ".*"
-dots restore .*
-ls
-dots status
-dots restore
-dots restore .*
-dots restore --recurse .cache
-dots restore .config
-dots restore .config/*
-dots status
-exit
-ls
-ls -a
-ls -A
-ls .config
-chsh
-sudo chsh
+sudo dnf upgrade -y
 sudo dnf search chsh
 sudo dnf install util-linux
 sudo dnf install zsh emacs qutebrowser gnome-tweak-tool gnome-extensions
 sudo dnf install zsh emacs qutebrowser gnome-tweak-tool gnome-shell-extensions
 sudo dnf install zsh emacs qutebrowser gnome-tweak-tool neovim
-lsblk
-chsh
-exit
-chsh
-exit
-touch .config/emacs/custom.el
-exit
-curl
-curl 'data:image/jpeg;base64,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'
-curl 'https://i.ytimg.com/vi/0NHIlU4l02E/maxresdefault.jpg'
-curl 'https://i.ytimg.com/vi/0NHIlU4l02E/maxresdefault.jpg' | eog
-curl 'https://i.ytimg.com/vi/0NHIlU4l02E/maxresdefault.jpg' > .local/share/backgrounds/shockwave.jpg
-eog .local/share/backgrounds/shockwave.jpg 
-sudo dnf upgrade -y
-dots status
-dots restore
-ls -aa
-dots diff
-dots status
-dots reset --hard
-dots status
-ls
-ls -aa
-ls -A
-dconf -h
-dconf load /org/gnome/terminal/ < ~/.config/gnome-custom-configs/terminal.gsets 
-dconf load /org/gnome/shell/ < ~/.config/gnome-custom-configs/shell.gsets 
-dconf load /org/gnome/desktop/ < ~/.config/gnome-custom-configs/desktop.gsets 
-dconf load /org/gnome/shell/ < ~/.config/gnome-custom-configs/shell.gsets 
-ls .local/share/backgrounds/
-chsh
-dots submodule init
-dots submodule sync
-ls .config/nvim
-ls .config/nvim -a
-git submodule -h
-dots submodule update
-nvim
 sudo dnf search gnome extensions
 sudo dnf install gnome-extensions-app
 sudo dnf install gnome-extensions-app util-linux-user
 sudo dnf install gnome-extensions-app 
 sudo dnf install util-linux-user
-chsh
+
+chsh $(which zsh)

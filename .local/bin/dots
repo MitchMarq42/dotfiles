@@ -1,9 +1,12 @@
 #!/bin/sh
-# vim: set ft=sh :
+
+# Reference: https://dev.to/bowmanjd/store-home-directory-config-files-dotfiles-in-git-using-bash-zsh-or-powershell-the-bare-repo-approach-35l3
+
+repo="https://github.com/MitchMarq42/dotfiles"
+submodule_opts="--init --rebase --remote --merge"
 git_cmd(){
     git --git-dir=$HOME/.local/git/dotfiles --work-tree=$HOME "$@"
 }
-submodule_opts="--init --rebase --remote --merge"
 pull(){
     git_cmd "$@" && git_cmd submodule update $submodule_opts
 }
@@ -20,3 +23,5 @@ case $1 in
     diff) diff "$@" ;;
     *) git_cmd "$@" ;;
 esac
+
+# vim: set ft=sh :

@@ -96,3 +96,4 @@ a new terminal."
 
 
 (require 'webkit)
+(require 'man-plus)

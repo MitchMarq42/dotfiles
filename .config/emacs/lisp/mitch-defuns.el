@@ -18,6 +18,7 @@ in the init-file."
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (evil-global-set-key 'motion "/" 'swiper)
   (evil-global-set-key 'normal (kbd "C-j") 'evil-scroll-line-down)
   (evil-global-set-key 'normal (kbd "C-k") 'evil-scroll-line-up)
   (evil-global-set-key 'normal (kbd "<escape>") 'evil-beginning-of-line)

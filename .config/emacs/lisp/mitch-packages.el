@@ -61,7 +61,17 @@
 (use-package counsel
   :straight t
   :diminish
-  :after ivy)
+  :after ivy
+  :config
+  (setq counsel-describe-function-function #'helpful-callable)
+  (setq counsel-describe-variable-function #'helpful-variable)
+  :init (counsel-mode t)
+  )
+(use-package swiper
+  :straight t
+  :diminish
+  :after counsel
+  )
 
 ;; Better modeline?
 (use-package all-the-icons :straight t :if (display-graphic-p))
@@ -129,5 +139,9 @@
 
 ;; Nobody loves a good language
 (use-package powershell :straight t)
+
+;; Better help-pages?
+(use-package helpful :straight t
+  )
 
 (provide 'mitch-packages)

@@ -73,6 +73,8 @@
   (font-lock-constant-face (:foreground mitch-light-cyan))
   (font-lock-string-face (:foreground mitch-light-blue))
   (font-lock-builtin-face (:foreground mitch-light-white :weight 'bold))
+  (font-lock-keyword-face (:foreground mitch-light-blue :weight 'bold))
+  (transient-heading (:foreground mitch-magenta :weight 'bold))
   (rainbow-delimiters-depth-1-face (:foreground mitch-light-magenta))
   (rainbow-delimiters-depth-2-face (:foreground mitch-magenta :weight 'normal))
   (rainbow-delimiters-depth-3-face (:foreground mitch-light-magenta))

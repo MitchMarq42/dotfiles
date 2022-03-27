@@ -61,39 +61,18 @@
       scroll-up-aggressively 0.01
       scroll-down-aggressively 0.01)
 
+;; Attempt to pretend the last line doesn't exist... more in `lisp/mitch-defuns.el'.
+(advice-add #'end-of-buffer :after #'mitch/eob-dwim)
+
 ;; run launcher exists. Copy it from
 ;; https://www.reddit.com/r/unixporn/comments/s7p7pr/so_which_run_launcher_do_you_use_rofi_or_dmenu/
 ;; I don't have it here because I don't use it right now.
 
-;; Fix ansi-term not closing when it closes (broken?)
-(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
-  (if (memq (process-status proc) '(signal exit))
-      (let ((buffer (process-buffer proc)))
-	ad-do-it
-	(kill-buffer buffer))
-    ad-do-it))
-(ad-activate 'term-sentinel)
-;; Ansi-term always use zsh?
-(defvar my-term-shell "/bin/zsh")
-(defadvice ansi-term (before force-zsh)
-  (interactive (list my-term-shell)))
-(ad-activate 'ansi-term)
-;; ansi-term utf-8 everything better
-(defun my-term-use-utf8 ()
-  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
-(add-hook 'term-exec-hook 'my-term-use-utf8)
-(defun my-term-setup ()
-  "custom function of things to run when launching
-a new terminal."
-  (display-line-numbers-mode -1))
-;; Term cleanup things
-(add-hook 'term-mode-hook 'my-term-setup)
-(setq evil-collection-term-sync-state-and-mode-p nil)
 
 ;; (use-package oneonone :straight t)
 
 ;; (use-package origami :straight t)
 
-
 (require 'webkit)
 (require 'man-plus)
+(require 'ansi-term-plus)

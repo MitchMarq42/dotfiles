@@ -22,6 +22,8 @@
   "Face for fringe scroll bar thumb."
   :group 'yascroll)
 
+(setq rainbow-delimiters-max-face-count 2)
+
 (autothemer-deftheme
  mitch "Based on my nvim theme. Because everything else looks the same."
 
@@ -77,9 +79,6 @@
   (transient-heading (:foreground mitch-magenta :weight 'bold))
   (rainbow-delimiters-depth-1-face (:foreground mitch-light-magenta))
   (rainbow-delimiters-depth-2-face (:foreground mitch-magenta :weight 'normal))
-  (rainbow-delimiters-depth-3-face (:foreground mitch-light-magenta))
-  (rainbow-delimiters-depth-4-face (:foreground mitch-magenta :weight 'normal))
-  (rainbow-delimiters-depth-5-face (:foreground mitch-light-magenta))
   (window-divider (:foreground mitch-light-magenta :weight 'bold))
   (window-divider-first-pixel (:foreground mitch-light-magenta :weight 'bold))
   (window-divider-last-pixel (:foreground mitch-light-magenta :weight 'bold))

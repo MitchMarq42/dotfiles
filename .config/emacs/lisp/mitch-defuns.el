@@ -57,8 +57,16 @@ when editing from the console."
   (setq use-file-dialog nil)
   (setq use-dialog-box nil)
   ;; Pixel scrolling. Only in emacs 29+...
-					;  (pixel-scroll-precision-mode t)
-  )
+  (if (>= (string-to-number emacs-version) 29)
+      (pixel-scroll-precision-mode t)))
+
+;; Copied and modified from https://emacs.stackexchange.com/questions/31638/how-to-make-end-of-buffer-move-to-the-last-line-not-beyond-it
+;; Uses `advice' so is "bad" and should be replaced in time.
+(defun mitch/eob-dwim (&rest _)
+  "Go to beginning of line.
+If current line is empty, go to beginning of previous one
+instead."
+  (beginning-of-line (and (looking-at-p "^$") 0)))
 
 ;; This one line cost me over an hour of frustration...
 (provide 'mitch-defuns)

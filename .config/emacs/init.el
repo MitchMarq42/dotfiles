@@ -1,6 +1,6 @@
 ;; This is a comment. It's kind of pointless, but
 ;; it's here. You can delete it if you want.
-(server-start)
+(server-mode)
 
 ;; Load the files that I put my settings in...
 (setq mitch-directory

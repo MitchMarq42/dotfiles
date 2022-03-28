@@ -280,26 +280,7 @@ Let's just do everything with rust
 
 +The following is taken from the Arch Wiki, and sort of fixes starting emacs but causes other problems. In general, it's probably fine+. I modified it quite a bit so the above no longer applies. *This is extremely broken so it is commented out. Individual bits are also commented out in accordance with how broken they are. NOTE: this may differ on your system.*
 
-#+begin_src shell :tangle~/.config/zsh/aliases.zsh
-
-  # emacs() {
-  #     # if [[ $# -eq 0 ]]; then
-  #     #     /usr/bin/emacs # "emacs" is function, will cause recursion
-  #     #     return
-  #     # fi
-  #     args=($*)
-  #     # for ((i=0; i <= ${#args}; i++)); do
-  #     #     local a=${args[i]}
-  #     #     # NOTE: -c for creating new frame
-  #     #     if [[ ${a:0:1} == '-' && ${a} != '-c' && ${a} != '--' ]]; then
-  #     #         /usr/bin/emacs ${args[*]}
-  #     #         return
-  #     #     fi
-  #     # done
-  #     emacsclient -nc -a /usr/bin/emacs $args
-  # }
-
-#+end_src
+(the following snippet has been moved to ~/.local/bin/runemacs)
 
 Get myself to use emacs more (broken)
 

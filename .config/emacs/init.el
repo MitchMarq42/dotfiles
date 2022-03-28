@@ -13,7 +13,7 @@
 
 ;; minify yes/no prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
-;; minibuffer frame basically (disabled because gnome borders are ugly)
+;; ;; minibuffer frame basically (disabled because gnome borders are ugly)
 ;; (setq initial-frame-alist (append '((minibuffer . nil)) initial-frame-alist))
 ;; (setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
 ;; (setq minibuffer-auto-raise t)
@@ -62,7 +62,7 @@
       scroll-down-aggressively 0.01)
 
 ;; Attempt to pretend the last line doesn't exist... more in `lisp/mitch-defuns.el'.
-(advice-add #'end-of-buffer :after #'mitch/eob-dwim)
+;; (advice-add #'end-of-buffer :after #'mitch/eob-dwim)
 
 ;; run launcher exists. Copy it from
 ;; https://www.reddit.com/r/unixporn/comments/s7p7pr/so_which_run_launcher_do_you_use_rofi_or_dmenu/

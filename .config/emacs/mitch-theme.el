@@ -62,7 +62,8 @@
  (
   (default (:background mitch-black :foreground mitch-light-yellow))
   (highlight (:background mitch-visual-bg))
-  (font-lock-comment-face (:foreground mitch-green))
+  (font-lock-comment-face (:foreground mitch-green :slant 'italic))
+  (font-lock-comment-delimiter-face (:foreground mitch-light-black))
   ;; (mode-line (:background mitch-light-black :foreground mitch-white :weight 'bold))
   ;; (mode-line-inactive (:background mitch-light-black :foreground mitch-white :weight 'bold))
   ;; (doom-modeline-buffer-modified (:background mitch-light-black :foreground mitch-pink :weight 'bold))
@@ -87,7 +88,7 @@
   (yascroll:thumb-fringe (:foreground mitch-green :background mitch-green))
   (show-paren-match (:background mitch-light-blue))
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (org-block (:background mitch-dark-gray :family mitchcustom/only-good-font))
+  (org-block (:inherit 'font-lock-comment-delimiter-face))
   (org-block-begin-line (:foreground mitch-light-black))
   (org-block-end-line (:foreground mitch-light-black))
   (org-table   (:inherit 'fixed-pitch))

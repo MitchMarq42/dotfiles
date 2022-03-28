@@ -2,15 +2,7 @@
 
 Gotta fix the whole document to properly reflect the truth. It's wrong right now.
 
-** Directory listing
-
-[[.config/][.config]]
-[[.gitignore][.gitignore]]
-[[.gitmodules][.gitmodules]]
-[[.local][.local]]
-[[.mozilla][.mozilla]]
-[[.xmonad][.xmonad]]
-[[.zprofile][.zprofile]]
+- [ ] TODO: Fix everything to be accurate instead of just strikethroughs
 
 ---
 
@@ -101,7 +93,7 @@ To make it run automatically on gyroscope/accelerometer events, learn how ACPI w
 
 Instead, bind it to a hotkey. On Xorg/xmonad I have it bound to ctrl+alt+arrowkey via sxhkd (https://wiki.archlinux.org/title/sxhkd):
 
-#+begin_src
+#+begin_src conf
 control + alt + Up
     /home/mitch/.local/bin/mrandr inverted
 control + alt + Down
@@ -114,7 +106,7 @@ control + alt + Right
 
 Or for sway/i3:
 
-#+begin_src
+#+begin_src conf
 bindsym $mod+Left exec "~/.local/bin/mrandr right"
 bindsym $mod+Down exec "~/.local/bin/mrandr normal"
 bindsym $mod+Up exec "~/.local/bin/mrandr inverted"

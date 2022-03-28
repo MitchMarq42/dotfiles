@@ -140,8 +140,10 @@
 ;; Nobody loves a good language
 (use-package powershell :straight t)
 
-;; Better help-pages?
-(use-package helpful :straight t
-  )
+;; Better help-pages. Great.
+(use-package helpful :straight t)
+
+;; Edit in the browser? broken
+(use-package atomic-chrome :straight t)
 
 (provide 'mitch-packages)

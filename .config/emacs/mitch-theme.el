@@ -28,8 +28,7 @@
  mitch "Based on my nvim theme. Because everything else looks the same."
 
  ;; Specify the color classes used by the theme
- (
-  (
+ ((
    ((class color) (min-colors #xFFFFFF)) ;; truecolor
    ((class color) (min-colors #xFF    )) ;; 256color
    ((class color) (min-colors 16 )) ;; 16color
@@ -64,41 +63,34 @@
   (highlight (:background mitch-visual-bg))
   (font-lock-comment-face (:foreground mitch-green :slant 'italic))
   (font-lock-comment-delimiter-face (:foreground mitch-light-black))
-  ;; (mode-line (:background mitch-light-black :foreground mitch-white :weight 'bold))
-  ;; (mode-line-inactive (:background mitch-light-black :foreground mitch-white :weight 'bold))
-  ;; (doom-modeline-buffer-modified (:background mitch-light-black :foreground mitch-pink :weight 'bold))
   (line-number (:foreground mitch-yellow :weight 'normal))
-  (linum (:foreground mitch-yellow :weight 'normal))
   (line-number-current-line (:foreground mitch-yellow :weight 'bold))
-  (linum-relative-current-face (:foreground mitch-yellow :weight 'bold))
+  (linum (:inherit 'line-number))
+  (linum-relative-current-face (:inherit 'line-number-current-line))
   (font-lock-function-name-face (:foreground mitch-red :weight 'bold))
-  (font-lock-keyword-face (:foreground mitch-red :weight 'bold))
+  (font-lock-keyword-face (:inherit 'font-lock-function-name-face))
   (font-lock-constant-face (:foreground mitch-light-cyan))
   (font-lock-string-face (:foreground mitch-light-blue))
   (font-lock-builtin-face (:foreground mitch-light-white :weight 'bold))
-  (font-lock-keyword-face (:foreground mitch-light-blue :weight 'bold))
+  (font-lock-keyword-face (:inherit 'font-lock-string-face))
   (transient-heading (:foreground mitch-magenta :weight 'bold))
   (rainbow-delimiters-depth-1-face (:foreground mitch-light-magenta))
   (rainbow-delimiters-depth-2-face (:foreground mitch-magenta :weight 'normal))
-  (window-divider (:foreground mitch-light-magenta :weight 'bold))
-  (window-divider-first-pixel (:foreground mitch-light-magenta :weight 'bold))
-  (window-divider-last-pixel (:foreground mitch-light-magenta :weight 'bold))
-  (fringe (:background mitch-black))
-  (yascroll:thumb-text-extra (:background mitch-green))
-  (yascroll:thumb-fringe (:foreground mitch-green :background mitch-green))
+  (vertical-border (:foreground mitch-light-magenta :weight 'bold))
+  (fringe (:inherit 'default))
   (show-paren-match (:background mitch-light-blue))
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (org-block (:inherit 'font-lock-comment-delimiter-face))
+  (org-block (:inherit '(font-lock-comment-delimiter-face fixed-pitch)))
   (org-block-begin-line (:foreground mitch-light-black))
   (org-block-end-line (:foreground mitch-light-black))
-  (org-table   (:inherit 'fixed-pitch))
+  (org-table   (:inherit '(font-lock-constant-face fixed-pitch)))
   (org-formula (:inherit 'fixed-pitch))
   (org-code    (:inherit '(shadow fixed-pitch)))
   (org-table   (:inherit '(shadow fixed-pitch)))
   (org-verbatim (:inherit '(shadow fixed-pitch)))
   (org-special-keyword (:inherit '(font-lock-comment-face fixed-pitch)))
   (org-meta-line (:inherit '(font-lock-comment-face fixed-pitch)))
-  (org-checkbox  (:inherit 'fixed-pitch))
+  (org-checkbox  (:inherit 'org-table))
   )
  )
 

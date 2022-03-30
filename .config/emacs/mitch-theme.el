@@ -72,7 +72,7 @@
   (font-lock-constant-face (:foreground mitch-light-cyan))
   (font-lock-string-face (:foreground mitch-light-blue))
   (font-lock-builtin-face (:foreground mitch-light-white :weight 'bold))
-  (font-lock-keyword-face (:inherit 'font-lock-string-face))
+  (font-lock-keyword-face (:inherit 'font-lock-function-name-face))
   (font-lock-variable-name-face (:inherit 'font-lock-builtin-face :weight 'normal))
   (transient-heading (:foreground mitch-magenta :weight 'bold))
   (rainbow-delimiters-depth-1-face (:foreground mitch-light-magenta))

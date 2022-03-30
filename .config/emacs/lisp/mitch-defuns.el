@@ -14,14 +14,6 @@ init-file."
 evil's `use-package'. Made solely to reduce lines
 in the init-file."
   (evil-mode t)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-  (evil-global-set-key 'motion "/" 'swiper)
-  (evil-global-set-key 'normal (kbd "C-j") 'evil-scroll-line-down)
-  (evil-global-set-key 'normal (kbd "C-k") 'evil-scroll-line-up)
-  (evil-global-set-key 'normal (kbd "<escape>") 'evil-beginning-of-line)
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal)
   (global-visual-line-mode t)
@@ -67,6 +59,23 @@ when editing from the console."
 If current line is empty, go to beginning of previous one
 instead."
   (beginning-of-line (and (looking-at-p "^$") 0)))
+
+(defun mitch/general-config ()
+  "A batch of commands to run immediately after loading the
+`general' package. Made solely to reduce lines in the init
+file."
+  (general-define-key
+   "<escape>" 'keyboard-escape-quit)
+  (general-define-key
+   :states 'motion
+   "j" 'evil-next-visual-line
+   "k" 'evil-previous-visual-line
+   )
+  (general-define-key
+   :states 'normal
+   "<escape>" 'evil-beginning-of-line
+   )
+  )
 
 ;; This one line cost me over an hour of frustration...
 (provide 'mitch-defuns)

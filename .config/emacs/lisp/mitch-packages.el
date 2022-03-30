@@ -146,4 +146,9 @@
 ;; Edit in the browser? broken
 (use-package atomic-chrome :straight t)
 
+;; Keybinding manager
+(use-package general :straight t
+  :config
+  (mitch/general-config))
+
 (provide 'mitch-packages)

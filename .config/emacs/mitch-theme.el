@@ -61,7 +61,7 @@
  (
   (default (:background mitch-black :foreground mitch-light-yellow))
   (highlight (:background mitch-visual-bg))
-  (line-number (:foreground mitch-yellow :weight 'normal))
+  (line-number (:foreground mitch-light-black :weight 'normal))
   (line-number-current-line (:foreground mitch-yellow :weight 'bold))
   (linum (:inherit 'line-number))
   (linum-relative-current-face (:inherit 'line-number-current-line))

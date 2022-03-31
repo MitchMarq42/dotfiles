@@ -40,7 +40,7 @@ reduce lines in the init-file."
 the init file when we're on a graphical display.
 This prevents errors in termux and speeds up init
 when editing from the console."
-  ;; hide gui scrollbars and menubar etc (needs a hook)
+  ;; hide gui scrollbars and menubar etc
   (scroll-bar-mode 0)
   (tool-bar-mode 0)
   (menu-bar-mode 0)
@@ -52,14 +52,6 @@ when editing from the console."
   (if (>= (string-to-number emacs-version) 29)
       (pixel-scroll-precision-mode t)))
 
-;; Copied and modified from https://emacs.stackexchange.com/questions/31638/how-to-make-end-of-buffer-move-to-the-last-line-not-beyond-it
-;; Uses `advice' so is "bad" and should be replaced in time.
-(defun mitch/eob-dwim (&rest _)
-  "Go to beginning of line.
-If current line is empty, go to beginning of previous one
-instead."
-  (beginning-of-line (and (looking-at-p "^$") 0)))
-
 (defun mitch/general-config ()
   "A batch of commands to run immediately after loading the
 `general' package. Made solely to reduce lines in the init
@@ -69,12 +61,10 @@ file."
   (general-define-key
    :states 'motion
    "j" 'evil-next-visual-line
-   "k" 'evil-previous-visual-line
-   )
+   "k" 'evil-previous-visual-line)
   (general-define-key
    :states 'normal
-   "<escape>" 'evil-beginning-of-line
-   )
+   "<escape>" 'evil-beginning-of-line)
   )
 
 ;; This one line cost me over an hour of frustration...

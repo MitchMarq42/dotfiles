@@ -65,6 +65,9 @@ file."
   (general-define-key
    :states 'normal
    "<escape>" 'evil-beginning-of-line)
+  (general-define-key
+   :states 'normal
+   "SPC SPC" 'evil-buffer)
   )
 
 ;; This one line cost me over an hour of frustration...

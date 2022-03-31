@@ -119,23 +119,11 @@
   :diminish
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; magit, the wonderful overrated git interface
-(use-package magit
-  :straight t
-  :config
-  (setq magit-repository-directories
-	(expand-file-name ".local/git/dotfiles" abbreviated-home-dir)))
-
 ;; Hex colors
 (use-package rainbow-mode
   :straight t
   :diminish
   :hook (prog-mode . rainbow-mode))
-
-;; stupid broken lisp thingy
-(use-package slime :straight t
-  :config
-  (setq inferior-lisp-program "sbcl"))
 
 ;; Nobody loves a good language
 (use-package powershell :straight t)
@@ -143,12 +131,16 @@
 ;; Better help-pages. Great.
 (use-package helpful :straight t)
 
-;; Edit in the browser? broken
-(use-package atomic-chrome :straight t)
-
 ;; Keybinding manager
 (use-package general :straight t
   :config
   (mitch/general-config))
+
+;; Better lisp highlighting?
+(use-package highlight-defined :straight t
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
+  ;; (setq highlight-defined-face-use-itself t)
+  )
 
 (provide 'mitch-packages)

@@ -1,5 +1,13 @@
-;; This is a comment. It's kind of pointless, but
-;; it's here. You can delete it if you want.
+;; Mitch's...
+;;  _         _  _            _ 
+;; (_) _ __  (_)| |_     ___ | |
+;; | || '_ \ | || __|   / _ \| |
+;; | || | | || || |_  _|  __/| |
+;; |_||_| |_||_| \__|(_)\___||_|
+
+;; (above text graphic generated with command `figlet -k "init.el"')
+						      
+
 (server-mode)
 
 ;; Load the files that I put my settings in...
@@ -13,12 +21,14 @@
 
 ;; minify yes/no prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; ;; minibuffer frame basically (disabled because gnome borders are ugly)
 ;; (setq initial-frame-alist (append '((minibuffer . nil)) initial-frame-alist))
 ;; (setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
 ;; (setq minibuffer-auto-raise t)
 ;; (setq minibuffer-exit-hook '(lambda () (lower-frame)))
 ;; (setq minibuffer-frame-alist '((width . 80) (height . 10)))
+
 ;; do the things
 (setq server-after-make-frame-hook 'mitch/graphical-setup)
 (if (display-graphic-p) (mitch/graphical-setup))

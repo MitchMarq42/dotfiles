@@ -57,9 +57,7 @@
 
 (require 'mitch-packages)
 
-;; Relative numbers. Not perfect but they mostly work. Anything else is ridiculously complex and broken.
-;; (setq display-line-numbers-type 'relative
-;;       display-line-numbers-width-start 1)
+;; Absolute line numbers. Relative ones are an annoyance to set up, sadly.
 (global-display-line-numbers-mode)
 
 ;; scroll step stuff

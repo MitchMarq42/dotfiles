@@ -292,7 +292,7 @@ Get myself to use emacs more (broken)
   #alias mpv="mpv --really-quiet"
   # export ALTERNATE_EDITOR=''
   emacs=$(which emacs)
-  alias emacs="emacsclient -a $emacs -nc"
+  # alias emacs="emacsclient -a $emacs -nc"
   # $TERM == alacritty && alias nvim="neovide"
 
 #+end_src

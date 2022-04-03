@@ -1,3 +1,16 @@
+;; 	        _  _         _
+;;   _ __ ___  (_)| |_  ___ | |__
+;;  | '_ ` _ \ | || __|/ __|| '_ \  _____
+;;  | | | | | || || |_| (__ | | | ||_____|
+;;  |_| |_| |_||_| \__|\___||_| |_|
+;;      _         __                              _
+;;   __| |  ___  / _| _   _  _ __   ___      ___ | |
+;;  / _` | / _ \| |_ | | | || '_ \ / __|    / _ \| |
+;; | (_| ||  __/|  _|| |_| || | | |\__ \ _ |  __/| |
+;;  \__,_| \___||_|   \__,_||_| |_||___/(_) \___||_|
+;;
+;; Some functions to run when loading packages...
+         
 (defun mitch/evil-init ()
   "A batch of commands to run as the :init of evil's
 `use-package'. Made solely to reduce lines in the

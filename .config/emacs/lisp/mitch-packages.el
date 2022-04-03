@@ -139,8 +139,11 @@
 ;; Better lisp highlighting?
 (use-package highlight-defined :straight t
   :config
-  (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
-  ;; (setq highlight-defined-face-use-itself t)
-  )
+  (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode))
+
+;; Shell linting?
+(use-package flycheck :straight t
+  :config
+  (add-hook 'sh-mode-hook 'flycheck-mode))
 
 (provide 'mitch-packages)

@@ -8,7 +8,8 @@ git_cmd(){
     git --git-dir=$HOME/.local/git/dotfiles --work-tree=$HOME "$@"
 }
 pull(){
-    git_cmd "$@" && git_cmd submodule update $submodule_opts
+    git_cmd "$@" &&
+	git_cmd submodule update $submodule_opts
 }
 push(){
     git_cmd "$@" --recurse-submodules=on-demand

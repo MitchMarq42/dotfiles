@@ -60,6 +60,7 @@
  ;; specifications for Emacs faces.
  (
   (default (:background mitch-black :foreground mitch-light-yellow))
+  (cursor (:inherit 'default))
   (highlight (:background mitch-visual-bg))
   (region (:inherit 'highlight))
   (line-number (:foreground mitch-light-black :weight 'normal))

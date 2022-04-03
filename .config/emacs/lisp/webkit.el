@@ -55,4 +55,6 @@
       "--"
       ["Xwidget Webkit Mode" xwidget-webkit-mode :style toggle :selected xwidget-webkit-mode :help "Xwidget webkit view mode"])))
 
+(add-hook 'xwidget-webkit-mode-hook 'display-line-numbers-mode)
+
 (provide 'webkit)

@@ -4,7 +4,7 @@
 ;; | || '_ \ | || __|   / _ \| |
 ;; | || | | || || |_  _|  __/| |
 ;; |_||_| |_||_| \__|(_)\___||_|
-
+;;
 ;; (above text graphic generated with command `figlet -k "init.el"')
 						      
 
@@ -18,6 +18,9 @@
 (setq load-path
       (cons mitch-directory load-path))
 (require 'mitch-defuns)
+(require 'webkit)
+(require 'man-plus)
+(require 'ansi-term-plus)
 
 ;; minify yes/no prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -70,34 +73,8 @@
 ;; https://www.reddit.com/r/unixporn/comments/s7p7pr/so_which_run_launcher_do_you_use_rofi_or_dmenu/
 ;; I don't have it here because I don't use it right now.
 
-;; Make evil-join combine lines. Taken from
-;; https://github.com/hlissner/doom-emacs/commit/40cf6139ed53b635fec37ce623c4b1093c78a11e
-;; ;;;###autoload (autoload '+evil-join-a "editor/evil/autoload/advice" nil nil)
-(evil-define-operator +evil-join-a (beg end)
-  "Join the selected lines.
-This advice improves on `evil-join' by removing comment delimiters when joining
-commented lines, by using `fill-region-as-paragraph'.
-From https://github.com/emacs-evil/evil/issues/606"
-  :motion evil-line
-  (let* ((count (count-lines beg end))
-	 (count (if (> count 1) (1- count) count))
-	 (fixup-mark (make-marker)))
-    (dotimes (var count)
-      (if (and (bolp) (eolp))
-	  (join-line 1)
-	(let* ((end (line-beginning-position 3))
-	       (fill-column (1+ (- end beg))))
-	  (set-marker fixup-mark (line-end-position))
-	  (fill-region-as-paragraph beg end nil t)
-	  (goto-char fixup-mark)
-	  (fixup-whitespace))))
-    (set-marker fixup-mark nil)))
-(advice-add #'evil-join :override #'+evil-join-a)
 
 ;; (use-package oneonone :straight t)
 
 ;; (use-package origami :straight t)
 
-(require 'webkit)
-(require 'man-plus)
-(require 'ansi-term-plus)

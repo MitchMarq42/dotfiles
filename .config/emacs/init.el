@@ -42,15 +42,20 @@
 (load custom-file)
 
 ;; Control backups/swapfiles
-(defvar backup-directory (concat user-emacs-directory "backups"))
+(defvar backup-directory
+  (expand-file-name "emacs-backups" (getenv "XDG_CACHE_HOME")))
 (if (not (file-exists-p backup-directory))
     (make-directory backup-directory t))
 (setq backup-directory-alist `(("." . ,backup-directory)))
 
 ;; auto-save-mode doesn't create the path automatically!
-(make-directory (expand-file-name "tmp/auto-saves/" user-emacs-directory) t)
-(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+(defvar auto-save-directory
+  (expand-file-name "tmp/auto-saves/" user-emacs-directory))
+(make-directory auto-save-directory t)
+(setq auto-save-list-file-prefix
+      (expand-file-name "sessions/" auto-save-directory)
+      auto-save-file-name-transforms
+      `((".*" ,auto-save-directory t)))
 (setq create-lockfiles nil)
 
 ;; straight.el minified bootstrap

@@ -5,7 +5,7 @@ Tell the emacs startup time instead of the banal
   (message (emacs-init-time)))
 
 ;; Crash the computer by overloading memory
-(setq gc-cons-threshold most-positive-fixnum)
+;; (setq gc-cons-threshold most-positive-fixnum)
 
 ;; Disable package.el so we can use straight
 (setq package-enable-at-startup nil)

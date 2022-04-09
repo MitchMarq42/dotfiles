@@ -5,10 +5,9 @@
 ;; | || | | || || |_  _|  __/| |
 ;; |_||_| |_||_| \__|(_)\___||_|
 ;;
-;; (above text graphic generated with command `figlet -k "init.el"')
-						      
+;; (above text graphic generated with command `figlet -k "init.el"')					      
 
-(server-mode)
+;; (server-mode) ; breaks things
 
 ;; Load the files that I put my settings in...
 (setq mitch-directory
@@ -20,7 +19,7 @@
 (require 'mitch-defuns)
 (require 'webkit)
 (require 'man-plus)
-(require 'ansi-term-plus)
+;; (require 'ansi-term-plus)
 
 ;; minify yes/no prompts
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -78,3 +77,18 @@
 
 ;; (use-package origami :straight t)
 
+;; UTF-8 supremacy (Snippet from https://www.masteringemacs.org/article/working-coding-systems-unicode-emacs)
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(if (boundp 'buffer-file-coding-system)
+    (setq-default buffer-file-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8))
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+;; Toggle Japanese with `qq'
+;; Sample text: 真外記 の 巨人
+;; (shingeki no kyojin (attack on titan))
+(setq default-input-method 'japanese)
+(toggle-input-method)

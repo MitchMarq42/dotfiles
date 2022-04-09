@@ -85,6 +85,10 @@ file."
    :states 'normal
    "<escape>" 'evil-beginning-of-line
    "SPC SPC" 'evil-buffer)
+  (general-define-key
+   :states 'insert
+   "qq" 'toggle-input-method
+  )
   )
 
 ;; This one line cost me over an hour of frustration...

@@ -20,8 +20,7 @@ init-file."
   (setq evil-want-C-u-scroll nil)
   (setq evil-want-C-i-jump nil)
   (setq evil-undo-system
-	(if
-	    (>= (string-to-number emacs-version) 29)
+	(if (>= (string-to-number emacs-version) 29)
 	    (quote undo-redo)
 	  (quote undo-fu)))
   (setq evil-vsplit-window-right t)

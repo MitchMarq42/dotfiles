@@ -7,11 +7,11 @@
 		    :font mitchcustom/only-good-font
 		    :height mitchcustom/default-font-size)
 (set-face-attribute 'fixed-pitch nil
-		    :font mitchcustom/only-good-font
-		    :height mitchcustom/default-font-size)
+		    :inherit 'default
+		    )
 (set-face-attribute 'variable-pitch nil
 		    :font "Ubuntu"
-		    :height mitchcustom/default-font-size)
+		    :height 200)
 
 (defface yascroll:thumb-text-area
   '((t (:background "#00aa00")))
@@ -63,8 +63,8 @@
   (cursor (:inherit 'default))
   (highlight (:background mitch-visual-bg))
   (region (:inherit 'highlight))
-  (line-number (:foreground mitch-light-black :weight 'normal))
-  (line-number-current-line (:foreground mitch-yellow :weight 'bold))
+  (line-number (:inherit 'default :foreground mitch-light-black :weight 'normal))
+  (line-number-current-line (:inherit 'default :foreground mitch-yellow :weight 'bold))
   (linum (:inherit 'line-number))
   (linum-relative-current-face (:inherit 'line-number-current-line))
   ;; font-lock faces. The defaults that are important to get right.

@@ -102,3 +102,7 @@
       '((space-mark 32 [95])
 	(newline-mark 10 [36 10])
 	(tab-mark 9 [8614 9])))
+
+;; clean up modeline things
+(diminish 'emacs-lisp-mode "el")
+(diminish 'global-whitespace-mode "ws")

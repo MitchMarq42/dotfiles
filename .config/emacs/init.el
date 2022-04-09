@@ -1,11 +1,11 @@
 ;; Mitch's...
-;;  _         _  _            _ 
+;;  _         _  _            _
 ;; (_) _ __  (_)| |_     ___ | |
 ;; | || '_ \ | || __|   / _ \| |
 ;; | || | | || || |_  _|  __/| |
 ;; |_||_| |_||_| \__|(_)\___||_|
 ;;
-;; (above text graphic generated with command `figlet -k "init.el"')					      
+;; (above text graphic generated with command `figlet -k "init.el"')
 
 ;; (server-mode) ; breaks things
 
@@ -93,3 +93,12 @@
 ;; (shingeki no kyojin (attack on titan))
 (setq default-input-method 'japanese)
 (toggle-input-method)
+
+;; Visualize whitespace. In a very chill and invisible way.
+(global-whitespace-mode t)
+(setq whitespace-style
+      (quote (face tabs tab-mark spaces space-mark newline newline-mark)))
+(setq whitespace-display-mappings
+      '((space-mark 32 [95])
+	(newline-mark 10 [36 10])
+	(tab-mark 9 [8614 9])))

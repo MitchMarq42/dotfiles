@@ -95,6 +95,9 @@
   (org-special-keyword (:inherit '(font-lock-comment-face fixed-pitch)))
   (org-meta-line (:inherit '(font-lock-comment-face fixed-pitch)))
   (org-checkbox  (:inherit 'org-table))
+  (whitespace-space (:foreground mitch-dark-gray))
+  (whitespace-tab (:foreground mitch-dark-gray))
+  (whitespace-newline (:foreground mitch-dark-gray))
   )
  )
 

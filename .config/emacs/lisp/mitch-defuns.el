@@ -87,9 +87,10 @@ file."
    "<escape>" 'evil-beginning-of-line
    "SPC SPC" 'evil-buffer)
   (general-define-key
-    :states 'insert
-    "q" (general-key-dispatch 'self-insert-command
-	  "q" 'toggle-input-method))
+   :states 'insert
+   "q" (general-key-dispatch
+	   'self-insert-command "q"
+	   'toggle-input-method))
   )
 
 ;; This one line cost me over an hour of frustration...

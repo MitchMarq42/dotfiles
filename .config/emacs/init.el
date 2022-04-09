@@ -66,6 +66,7 @@
 
 ;; Absolute line numbers. Relative ones are an annoyance to set up, sadly.
 (global-display-line-numbers-mode)
+(setq display-line-numbers-width-start t)
 
 ;; scroll step stuff
 (setq scroll-margin 2
@@ -89,20 +90,21 @@
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
 ;; Toggle Japanese with `qq'
-;; Sample text: 真外記 の 巨人
+;; Sample text: 進撃 の 巨人
 ;; (shingeki no kyojin (attack on titan))
 (setq default-input-method 'japanese)
-(toggle-input-method)
+(setq current-input-method 'japanese-ascii)
 
 ;; Visualize whitespace. In a very chill and invisible way.
 (global-whitespace-mode t)
 (setq whitespace-style
       (quote (face tabs tab-mark spaces space-mark newline newline-mark)))
 (setq whitespace-display-mappings
-      '((space-mark 32 [95])
-	(newline-mark 10 [36 10])
-	(tab-mark 9 [8614 9])))
+      '(
+	(space-mark	32	[95]		)
+	(newline-mark	10	[36 10]	)
+	(tab-mark	9	[8614 9]	)))
 
 ;; clean up modeline things
 (diminish 'emacs-lisp-mode "el")
-(diminish 'global-whitespace-mode "ws")
+(diminish 'global-whitespace-mode)

@@ -73,10 +73,6 @@
 ;; I don't have it here because I don't use it right now.
 
 
-;; (use-package oneonone :straight t)
-
-;; (use-package origami :straight t)
-
 ;; UTF-8 supremacy (Snippet from https://www.masteringemacs.org/article/working-coding-systems-unicode-emacs)
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)

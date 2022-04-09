@@ -28,9 +28,11 @@
   :after evil
   :config
   (global-evil-surround-mode 1))
-(use-package undo-fu
-  :diminish
-  :straight t)
+	
+(if (< (string-to-number emacs-version) 29)
+    (use-package undo-fu
+      :diminish
+      :straight t))
 (use-package evil-terminal-cursor-changer
   :straight t
   :diminish
@@ -128,7 +130,7 @@
 ;; Nobody loves a good language
 (use-package powershell :straight t)
 
-;; Better help-pages. Great.
+;; Better help-pages. Genuinely pretty great.
 (use-package helpful :straight t)
 
 ;; Keybinding manager
@@ -145,5 +147,9 @@
 (use-package flycheck :straight t
   :config
   (add-hook 'sh-mode-hook 'flycheck-mode))
+
+;; (use-package oneonone :straight t)
+
+;; (use-package origami :straight t)
 
 (provide 'mitch-packages)

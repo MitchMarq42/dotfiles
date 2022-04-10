@@ -2,7 +2,7 @@
 
 Gotta fix the whole document to properly reflect the truth. It's wrong right now.
 
-- [-] TODO Fix everything to be accurate instead of just strikethroughs
+- [-] :TODO: Fix everything to be accurate instead of just strikethroughs
 
 ---
 

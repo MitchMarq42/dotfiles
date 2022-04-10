@@ -36,7 +36,7 @@
       :straight t))
 (use-package evil-terminal-cursor-changer
   :straight t
-  :defer 0.5
+  :after evil
   :diminish
   :if (not (display-graphic-p))
   :config

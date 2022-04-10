@@ -112,4 +112,9 @@
 
   ;; Speed up scrolling down (why is this even a thing?)
   (setq auto-window-vscroll nil)
+
+  ;; save place in all files
+  (save-place-mode t)
+  (setq save-place-file
+	(expand-file-name "file-position-save "backup-directory))
   )

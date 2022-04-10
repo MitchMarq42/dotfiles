@@ -21,7 +21,7 @@ Unless I don't. For now, we can make a hardlink in CMD to specific paths and jus
 I have a lot of things to say about powershell, but none of them are interesting so I'll keep them
 to myself for now.
 
-For shell configs, look in [[.config/zsh][.config/zsh]]. For scripts, [[.local/bin][.local/bin]].
+For shell configs, look in [[.config/zsh]]. For scripts, [[.local/bin]].
 
 There's a whole bunch of other stuff too, which I'll eventually go and document.
 
@@ -47,7 +47,7 @@ console host on Windows, unless I'm in cygwin/gitbash in which case I use their 
 I run ZSH. It's decently fast, POSIX compliant, and has /zillions/ of options and menues and plugins.
 
 I have copied Luke Smith's config layout of a .zprofile linked to its xdg-compliant
-location and setting ~$ZDOTDIR~ to [[.config/zsh][.config/zsh]] because having a clean ~$HOME~ is nice.
+location and setting ~$ZDOTDIR~ to [[.config/zsh]] because having a clean ~$HOME~ is nice.
 the ~.zshrc~ sources ~functions.zsh~ and ~aliases.zsh~, and will on first run attempt
 to install ~zplug~ for a few fun extensions.
 
@@ -83,13 +83,38 @@ to a special surprise here.
 
 ** The Editor
 
-+Neovim is great. Not minimal at all, and every day there are more legacy features in it that need refactoring or replacement,+
-+but they're doing a fantastic job and they've built up a wonderful ecosystem.+
+For my old neovim config (formerly at [[.config/nvim]]), check
+https://github.com/MitchMarq42/nvim-configs
 
-+I don't actually mess that much with it. Just a custom color scheme, a few ease-of-use and eyecandy plugins, and an ever-growing mental model of how the thing works.+
-+You may find some fragments of =coc.nvim=, =cmp=, or LSP configuration scattered about. At present none of it works because I haven't gotten to fixing it yet.+
+Currently, I use emacs. I have based [[my emacs configuration][.config/emacs]]
+off of what I happened to have for neovim at the time, with the aid of
+[[SystemCrafters][systemcrafters.net]]. Since then it has grown into
+something more, something crazy. Or maybe it's really not that crazy
+and emacs is just a bad program with a good extension API. I do not
+know if I am a human dreaming of emacs, or an emacs dreaming of
+humanity.
 
-I use emacs BTW. Explanation is somewhere. Maybe in [[.config/emacs]]?
+There are a few things to immediately note:
+
+- The theme is my own. Every existing emacs (and vim, for that matter)
+  colorscheme/theme is washed-in and gray-on-gray. Doom, spacemacs,
+  solarized, nord, dracula, or any other name-able theme. Also, any "new
+  and exciting" theme you see on Reddit will be the same. This infuriated
+  me to no end, so in the early days of my nvim tweaking I pulled the
+  most unique and contrastful theme I could find. It was called "sv" and
+  it was hacked up by some guy on github once and then forgotten. So
+  I extended it for nvim, then recreated it in emacs with the aid of
+  ~autothemer~ (which you can find at [[.config/emacs/mitch-theme.el]]).
+
+- Typing ~qq~ will switch to Japanese input. This is sort-of a built-in
+  feature, but the default trigger is to type ~C-\~, select a language
+  from the popup menu that comes up, hit enter, type in that language,
+  and type C-\ again to turn it off and on again for the rest of the
+  session. The ~qq~ behavior is built into Japanese-mode specifically
+  and normally toggles in and out of ~japanese-ascii~, which is
+  literally just normal text except ~qq~ switches back to Japanese.
+  Technically the only difference with my setup is that it acts like
+  ~japanese-ascii~ initially, without the ~C-\~ nonsense.
 
 ---
 

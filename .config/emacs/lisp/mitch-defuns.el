@@ -15,16 +15,16 @@
   "A batch of commands to run as the :init of evil's
 `use-package'. Made solely to reduce lines in the
 init-file."
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll nil)
-  (setq evil-want-C-i-jump nil)
+  (setq evil-want-integration t
+	evil-want-keybinding nil
+	evil-want-C-u-scroll nil
+	evil-want-C-i-jump nil)
   (setq evil-undo-system
 	(if (>= (string-to-number emacs-version) 29)
 	    (quote undo-redo)
 	  (quote undo-fu)))
-  (setq evil-vsplit-window-right t)
-  (setq evil-split-window-below t))
+  (setq evil-vsplit-window-right t
+	evil-split-window-below t))
 (defun mitch/evil-config ()
   "A batch of commands to run as the :config of
 evil's `use-package'. Made solely to reduce lines
@@ -34,26 +34,27 @@ in the init-file."
   (global-visual-line-mode t)
   (diminish 'visual-line-mode)
   ;; Make evil-join combine lines. Taken from https://github.com/hlissner/doom-emacs/commit/40cf6139ed53b635fec37ce623c4b1093c78a11e
-  (evil-define-operator +evil-join-a (beg end)
-    "Join the selected lines.
-This advice improves on `evil-join' by removing comment delimiters when joining
-commented lines, by using `fill-region-as-paragraph'.
-From https://github.com/emacs-evil/evil/issues/606"
-    :motion evil-line
-    (let* ((count (count-lines beg end))
-	   (count (if (> count 1) (1- count) count))
-	   (fixup-mark (make-marker)))
-      (dotimes (var count)
-	(if (and (bolp) (eolp))
-	    (join-line 1)
-	  (let* ((end (line-beginning-position 3))
-		 (fill-column (1+ (- end beg))))
-	    (set-marker fixup-mark (line-end-position))
-	    (fill-region-as-paragraph beg end nil t)
-	    (goto-char fixup-mark)
-	    (fixup-whitespace))))
-      (set-marker fixup-mark nil)))
-  (advice-add #'evil-join :override #'+evil-join-a))
+;;   (evil-define-operator +evil-join-a (beg end)
+;;     "Join the selected lines.
+;; This advice improves on `evil-join' by removing comment delimiters when joining
+;; commented lines, by using `fill-region-as-paragraph'.
+;; From https://github.com/emacs-evil/evil/issues/606"
+;;     :motion evil-line
+;;     (let* ((count (count-lines beg end))
+;; 	   (count (if (> count 1) (1- count) count))
+;; 	   (fixup-mark (make-marker)))
+;;       (dotimes (var count)
+;; 	(if (and (bolp) (eolp))
+;; 	    (join-line 1)
+;; 	  (let* ((end (line-beginning-position 3))
+;; 		 (fill-column (1+ (- end beg))))
+;; 	    (set-marker fixup-mark (line-end-position))
+;; 	    (fill-region-as-paragraph beg end nil t)
+;; 	    (goto-char fixup-mark)
+;; 	    (fixup-whitespace))))
+;;       (set-marker fixup-mark nil)))
+;;   (advice-add #'evil-join :override #'+evil-join-a)
+  )
 (defun mitch/graphical-setup ()
   "A batch of commands to run at the beginning of
 the init file when we're on a graphical display.

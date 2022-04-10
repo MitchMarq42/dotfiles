@@ -2,7 +2,8 @@
 
 ;; diminish
 (use-package diminish :straight t)
-(use-package eldoc :straight t
+(use-package eldoc
+  :defer 1
   :diminish)
 
 ;; load evil
@@ -35,6 +36,7 @@
       :straight t))
 (use-package evil-terminal-cursor-changer
   :straight t
+  :defer 0.5
   :diminish
   :if (not (display-graphic-p))
   :config
@@ -69,18 +71,21 @@
   (setq counsel-describe-variable-function #'helpful-variable)
   :init (counsel-mode t)
   )
-(use-package swiper
-  :straight t
-  :diminish
-  :after counsel
-  )
+;; (use-package swiper
+;;   :straight t
+;;   :diminish
+;;   :after counsel
+;;   )
 
 ;; Better modeline?
-(use-package all-the-icons :straight t :if (display-graphic-p))
+(use-package all-the-icons :straight t
+  :defer 10
+  :if (display-graphic-p))
 (use-package powerline :straight t
   :init (setq powerline-default-separator 'slant))
 (use-package airline-themes :straight t
   :init (setq airline-cursor-colors nil)
+  :after powerline
   :config (load-theme 'airline-ravenpower t))
 
 ;; Custom Theme.
@@ -91,6 +96,7 @@
 (use-package yascroll
   :straight t
   :diminish
+  :defer 1
   :config (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode 1))
 
@@ -113,18 +119,21 @@
 (use-package which-key
   :straight t
   :diminish
+  :defer 5
   :init (which-key-mode t))
 
 ;; parentheses are boring
 (use-package rainbow-delimiters
   :straight t
   :diminish
+  :defer 1
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Hex colors
 (use-package rainbow-mode
   :straight t
   :diminish
+  :defer 10
   :hook (prog-mode . rainbow-mode))
 
 ;; Nobody loves a good language
@@ -145,11 +154,15 @@
 
 ;; Shell linting?
 (use-package flycheck :straight t
+  :defer 5
   :config
   (add-hook 'sh-mode-hook 'flycheck-mode))
 
 ;; (use-package oneonone :straight t)
 
 ;; (use-package origami :straight t)
+
+;; Emacs startup profiling
+(use-package esup :straight t)
 
 (provide 'mitch-packages)

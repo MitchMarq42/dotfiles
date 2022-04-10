@@ -1,11 +1,14 @@
 (defun display-startup-echo-area-message ()
   "A re-definition of the function.
-Tell the emacs startup time instead of the banal
+Tell the emacs startup time and number of garbage-collections
+instead of the banal
 \"For information about GNU Emacs and the GNU system, type C-h C-a.\""
-  (message (emacs-init-time)))
+  (message
+   (concat (emacs-init-time) ", gc ran " (number-to-string gcs-done) " times"
+    )))
 
 ;; Crash the computer by overloading memory
-;; (setq gc-cons-threshold most-positive-fixnum)
+(setq gc-cons-threshold (* 17 gc-cons-threshold))
 
 ;; Disable package.el so we can use straight
 (setq package-enable-at-startup nil)

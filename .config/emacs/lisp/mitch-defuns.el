@@ -90,8 +90,12 @@ file."
   (general-define-key
    :states 'insert
    "q" (general-key-dispatch
-	   'self-insert-command "q"
-	   'toggle-input-method))
+	   'self-insert-command
+	 "q" 'toggle-input-method)
+   "C-V" (general-key-dispatch
+	     'evil-quoted-insert
+	   "u" 'counsel-unicode-char)
+   )
   )
 
 ;; This one line cost me over an hour of frustration...

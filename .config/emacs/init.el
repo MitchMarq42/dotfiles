@@ -18,6 +18,7 @@
 		 (convert-standard-filename "lisp/"))))
   (setq load-path
 	(cons mitch-directory load-path))
+  (setq custom-theme-directory mitch-directory)
   (require 'mitch-defuns)
   (require 'webkit)
   (require 'man-plus)
@@ -52,7 +53,7 @@
 
   ;; auto-save-mode doesn't create the path automatically!
   (defvar auto-save-directory
-    (expand-file-name "tmp/auto-saves/" user-emacs-directory))
+    (expand-file-name "tmp/auto-saves/" backup-directory))
   (make-directory auto-save-directory t)
   (setq auto-save-list-file-prefix
 	(expand-file-name "sessions/" auto-save-directory)

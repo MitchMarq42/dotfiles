@@ -38,12 +38,6 @@
   (setq server-after-make-frame-hook 'mitch/graphical-setup)
   (if (display-graphic-p) (mitch/graphical-setup))
 
-  ;; remove auto-generated bits
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-  (if (not (file-exists-p custom-file))
-      (make-empty-file custom-file t))
-  (load custom-file)
-
   ;; Control backups/swapfiles
   (defvar backup-directory
     (expand-file-name "emacs-backups" (getenv "XDG_CACHE_HOME")))
@@ -60,6 +54,12 @@
 	auto-save-file-name-transforms
 	`((".*" ,auto-save-directory t)))
   (setq create-lockfiles nil)
+
+  ;; remove auto-generated bits
+  (setq custom-file (expand-file-name "custom.el" backup-directory))
+  (if (not (file-exists-p custom-file))
+      (make-empty-file custom-file t))
+  (load custom-file)
 
   ;; straight.el minified bootstrap
   ;; (the better package manager?) (split lines if you want) (or not)

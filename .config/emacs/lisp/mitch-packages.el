@@ -61,6 +61,7 @@
 	 :map ivy-reverse-i-search-map
 	 ("C-k" . ivy-previous-line)
 	 ("C-d" . ivy-reverse-i-search-kill))
+  :config (setq ivy-initial-inputs-alist nil)
   :init (ivy-mode 1))
 (use-package counsel
   :straight t
@@ -71,11 +72,6 @@
   (setq counsel-describe-variable-function #'helpful-variable)
   :init (counsel-mode t)
   )
-;; (use-package swiper
-;;   :straight t
-;;   :diminish
-;;   :after counsel
-;;   )
 
 ;; Better modeline?
 (use-package all-the-icons :straight t
@@ -157,10 +153,6 @@
   :defer 5
   :config
   (add-hook 'sh-mode-hook 'flycheck-mode))
-
-;; (use-package oneonone :straight t)
-
-;; (use-package origami :straight t)
 
 ;; Emacs startup profiling
 (use-package esup :straight t)

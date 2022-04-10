@@ -1,20 +1,2 @@
-# Ignore .html, which my vim config generates involuntarily
-*.html
-
-# Ignore all extra files in .local/bin (they get added by python)
-.local/bin/*
-.local/lib/*
-
-# Ignore all extra files in .config (they get added by vim-plug, brave, etc)
-.config/*
-
-# Ignore all extra files in .local/share (they get nasty)
-.local/share/*
-.local/git/*
-.local/src/*
-
-# Ignore .local/state (used by wireplumber which is Fedora audio session)
-.local/state
-
 # Ignore everything
 *

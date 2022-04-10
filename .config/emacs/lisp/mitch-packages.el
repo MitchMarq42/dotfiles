@@ -93,6 +93,7 @@
   :straight t
   :diminish
   :defer 1
+  :if (display-graphic-p)
   :config (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode 1))
 

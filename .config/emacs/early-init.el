@@ -1,3 +1,4 @@
+;; Early-init: do all these things early in the init process
 (defun display-startup-echo-area-message ()
   "A re-definition of the function.
 Tell the emacs startup time and number of garbage-collections

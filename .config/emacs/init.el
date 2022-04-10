@@ -118,4 +118,7 @@
   (save-place-mode t)
   (setq save-place-file
 	(expand-file-name "file-position-save "backup-directory))
+
+  ;; load eshell stuff when we start eshell
+  (add-hook 'eshell-mode-hook '(lambda () (require 'eshell-settings)))
   )

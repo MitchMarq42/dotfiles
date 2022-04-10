@@ -86,9 +86,9 @@ to a special surprise here.
 For my old neovim config (formerly at [[.config/nvim]]), check
 https://github.com/MitchMarq42/nvim-configs
 
-Currently, I use emacs. I have based [[my emacs configuration][.config/emacs]]
+Currently, I use emacs. I have based [[.config/emacs][my emacs configuration]]
 off of what I happened to have for neovim at the time, with the aid of
-[[SystemCrafters][https://systemcrafters.net]]. Since then it has grown into
+[[https://systemcrafters.net][System Crafters]]. Since then it has grown into
 something more, something crazy. Or maybe it's really not that crazy
 and emacs is just a bad program with a good extension API. I do not
 know if I am a human dreaming of emacs, or an emacs dreaming of

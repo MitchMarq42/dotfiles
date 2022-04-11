@@ -100,12 +100,15 @@
   ;; Visualize whitespace. In a very chill and invisible way.
   (global-whitespace-mode t)
   (setq whitespace-style
-	(quote (face tabs tab-mark spaces space-mark newline newline-mark)))
+	(quote
+	 (face tabs tab-mark spaces space-mark newline newline-mark lines-tail
+	       )))
   (setq whitespace-display-mappings
 	'(
 	  (space-mark	32	[95]	)
 	  (newline-mark 10	[36 10] )
 	  (tab-mark	9	[62 9]	)))
+  (setq whitespace-line-column 80)
 
   ;; clean up modeline things
   (diminish 'lisp-interaction-mode "el")

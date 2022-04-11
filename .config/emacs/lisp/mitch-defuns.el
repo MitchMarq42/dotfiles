@@ -10,7 +10,7 @@
 ;;  \__,_| \___||_|   \__,_||_| |_||___/(_) \___||_|
 ;;
 ;; Some functions to run when loading packages...
-         
+
 (defun mitch/evil-init ()
   "A batch of commands to run as the :init of evil's
 `use-package'. Made solely to reduce lines in the
@@ -34,26 +34,26 @@ in the init-file."
   (global-visual-line-mode t)
   (diminish 'visual-line-mode)
   ;; Make evil-join combine lines. Taken from https://github.com/hlissner/doom-emacs/commit/40cf6139ed53b635fec37ce623c4b1093c78a11e
-;;   (evil-define-operator +evil-join-a (beg end)
-;;     "Join the selected lines.
-;; This advice improves on `evil-join' by removing comment delimiters when joining
-;; commented lines, by using `fill-region-as-paragraph'.
-;; From https://github.com/emacs-evil/evil/issues/606"
-;;     :motion evil-line
-;;     (let* ((count (count-lines beg end))
-;; 	   (count (if (> count 1) (1- count) count))
-;; 	   (fixup-mark (make-marker)))
-;;       (dotimes (var count)
-;; 	(if (and (bolp) (eolp))
-;; 	    (join-line 1)
-;; 	  (let* ((end (line-beginning-position 3))
-;; 		 (fill-column (1+ (- end beg))))
-;; 	    (set-marker fixup-mark (line-end-position))
-;; 	    (fill-region-as-paragraph beg end nil t)
-;; 	    (goto-char fixup-mark)
-;; 	    (fixup-whitespace))))
-;;       (set-marker fixup-mark nil)))
-;;   (advice-add #'evil-join :override #'+evil-join-a)
+  ;;   (evil-define-operator +evil-join-a (beg end)
+  ;;     "Join the selected lines.
+  ;; This advice improves on `evil-join' by removing comment delimiters when joining
+  ;; commented lines, by using `fill-region-as-paragraph'.
+  ;; From https://github.com/emacs-evil/evil/issues/606"
+  ;;     :motion evil-line
+  ;;     (let* ((count (count-lines beg end))
+  ;; 	   (count (if (> count 1) (1- count) count))
+  ;; 	   (fixup-mark (make-marker)))
+  ;;       (dotimes (var count)
+  ;; 	(if (and (bolp) (eolp))
+  ;; 	    (join-line 1)
+  ;; 	  (let* ((end (line-beginning-position 3))
+  ;; 		 (fill-column (1+ (- end beg))))
+  ;; 	    (set-marker fixup-mark (line-end-position))
+  ;; 	    (fill-region-as-paragraph beg end nil t)
+  ;; 	    (goto-char fixup-mark)
+  ;; 	    (fixup-whitespace))))
+  ;;       (set-marker fixup-mark nil)))
+  ;;   (advice-add #'evil-join :override #'+evil-join-a)
   )
 (defun mitch/graphical-setup ()
   "A batch of commands to run at the beginning of
@@ -103,8 +103,7 @@ file."
 	 "q" 'toggle-input-method)
    "C-V" (general-key-dispatch
 	     'evil-quoted-insert
-	   "u" 'counsel-unicode-char))
-  )
+	   "u" 'counsel-unicode-char)))
 
 ;; This one line cost me over an hour of frustration...
 (provide 'mitch-defuns)

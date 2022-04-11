@@ -77,9 +77,15 @@ when editing from the console."
 `general' package. Made solely to reduce lines in the init
 file."
   (general-define-key
-   "<escape>" 'keyboard-escape-quit
-   "C-H F" 'counsel-describe-face
-   "C-H k" 'helpful-key)
+   "<escape>" 'keyboard-escape-quit)
+  (general-define-key
+   :keymaps 'help-map
+   "F" 'describe-face
+   "k" 'helpful-key)
+  (general-define-key
+   :keymaps 'emacs-lisp-mode-map
+   :states 'normal
+   "K" 'helpful-at-point)
   (general-define-key
    :states 'motion
    "j" 'evil-next-visual-line

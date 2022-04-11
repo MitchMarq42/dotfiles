@@ -85,7 +85,7 @@
   (fringe (:inherit 'default))
   (show-paren-match (:foreground mitch-black :background mitch-light-magenta))
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (org-block (:inherit '(font-lock-comment-delimiter-face fixed-pitch)))
+  (org-block (:inherit 'fixed-pitch))
   (org-block-begin-line (:foreground mitch-light-black))
   (org-block-end-line (:foreground mitch-light-black))
   (org-table   (:inherit '(font-lock-constant-face fixed-pitch)))

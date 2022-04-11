@@ -1,6 +1,7 @@
 * User-level configuration files
 
-Gotta fix the whole document to properly reflect the truth. It's wrong right now.
+Gotta fix the whole document to properly reflect the truth. It's wrong right
+now.
 
 - [-] :TODO: Fix everything to be accurate instead of just strikethroughs
 
@@ -8,18 +9,18 @@ Gotta fix the whole document to properly reflect the truth. It's wrong right now
 
 Hi. Welcome to my dotfiles repository.
 
-Here you will find a self-chronicled history of my descent into madness.
-There's a lot of waffling back and forth with various features, so only read
-the actual commits if you really feel like it.
+Here you will find a self-chronicled history of my descent into madness. There's
+a lot of waffling back and forth with various features, so only read the actual
+commits if you really feel like it.
 
-I do almost all system crafting on my Fedora machine,
-but everything is designed to be declarative and deployable.
-So far this only extends to UNIX-like platforms,
-but I might eventually figure out Windows file path resolution.
-Unless I don't. For now, we can make a hardlink in CMD to specific paths and just live in powershell.
+I do almost all system crafting on my Fedora machine, but everything is designed
+to be declarative and deployable. So far this only extends to UNIX-like
+platforms, but I might eventually figure out Windows file path resolution.
+Unless I don't. For now, we can make a hardlink in CMD to specific paths and
+just live in powershell.
 
-I have a lot of things to say about powershell, but none of them are interesting so I'll keep them
-to myself for now.
+I have a lot of things to say about powershell, but none of them are interesting
+so I'll keep them to myself for now.
 
 For shell configs, look in [[.config/zsh]]. For scripts, [[.local/bin]].
 
@@ -27,59 +28,68 @@ There's a whole bunch of other stuff too, which I'll eventually go and document.
 
 ---
 
-Self-documenting code does not exist, but some day there will
-be a self-tangling index.org in every sub-directory; this will essentially
-form a lazy man's web interface to his files. Until then, you're just
-gonna have to look at the code and figure out what it does yourself.
+Self-documenting code does not exist, but some day there will be a self-tangling
+index.org in every sub-directory; this will essentially form a lazy man's web
+interface to his files. Until then, you're just gonna have to look at the code
+and figure out what it does yourself.
 
 ---
 
 ** The terminal
 
-Beyond handling true-color and UTF-8 nerd fonts, any terminal is sufficient in my book.
+Beyond handling true-color and UTF-8 nerd fonts, any terminal is sufficient in
+my book.
 
-I currently use ~gnome-terminal~ on Fedora and Ubuntu (my server and media center both run ubuntu),
-~kitty~ on MacOS, ~alacritty~ on arch/artix/whatever, and the totally vanilla default
-console host on Windows, unless I'm in cygwin/gitbash in which case I use their default ~mintty~.
+I currently use ~gnome-terminal~ on Fedora and Ubuntu (my server and media
+center both run ubuntu), ~kitty~ on MacOS, ~alacritty~ on arch/artix/whatever,
+and the totally vanilla default console host on Windows, unless I'm in
+cygwin/gitbash in which case I use their default ~mintty~.
 
 ** The shell
 
-I run ZSH. It's decently fast, POSIX compliant, and has /zillions/ of options and menues and plugins.
+I run ZSH. It's decently fast, POSIX compliant, and has /zillions/ of options
+and menues and plugins.
 
-I have copied Luke Smith's config layout of a .zprofile linked to its xdg-compliant
-location and setting ~$ZDOTDIR~ to [[.config/zsh]] because having a clean ~$HOME~ is nice.
-the ~.zshrc~ sources ~functions.zsh~ and ~aliases.zsh~, and will on first run attempt
-to install ~zplug~ for a few fun extensions.
+I have copied Luke Smith's config layout of a .zprofile linked to its
+xdg-compliant location and setting ~$ZDOTDIR~ to [[.config/zsh]] because having
+a clean ~$HOME~ is nice. the ~.zshrc~ sources ~functions.zsh~ and ~aliases.zsh~,
+and will on first run attempt to install ~zplug~ for a few fun extensions.
 
-Upon entering the shell it will run, among silent things, ~neofetch~. While there are
-sort of alternatives, nothing quite hits the spot that neofetch does, at least for me.
-This may be partially because I have extended neofetch slightly in my config.conf:
+Upon entering the shell it will run, among silent things, ~neofetch~. While
+there are sort of alternatives, nothing quite hits the spot that neofetch does,
+at least for me. This may be partially because I have extended neofetch slightly
+in my config.conf:
 
-- The "Packages" function is now asynchronous to work better on Fedora or other slow package managers (fight me)
+- The "Packages" function is now asynchronous to work better on Fedora or other
+  slow package managers (fight me)
 
-- There is now a line for the current tmux pane if the current session is in one (otherwise says "N/A")
+- There is now a line for the current tmux pane if the current session is in one
+(otherwise says "N/A")
 
-- When paired with my ~.zshrc~, it now prints out the previous value of the TERM variable (before tmux sets it to ~screen~)
+- When paired with my ~.zshrc~, it now prints out the previous value of the TERM
+variable (before tmux sets it to ~screen~)
 
-- It will print out your currently-booted init system. The Artix inits work as expected,
-systemd insults you, and anything else (such as Android or Windows) spews nonsense.
-(Need to double check the behavior of Windows. Perhaps I should poll for ~svchost.exe~?)
+- It will print out your currently-booted init system. The Artix inits work as
+expected, systemd insults you, Android says 'android-ini', and anything else
+(such as Windows) spews nonsense. (Need to double check the behavior of Windows.
+Perhaps I should poll for ~svchost.exe~?)
 
 ** The coreutil aliases
 
-~exa~, if available, replaces ~ls~. GNU (or even BusyBox) ~ls~ is by no means bad,
-but I like ~exa~'s colors better. Also mandatory reminder that it's written in rust.
+~exa~, if available, replaces ~ls~. GNU (or even BusyBox) ~ls~ is by no means
+bad, but I like ~exa~'s colors better. Also mandatory reminder that it's written
+in rust.
 
-~rg~ (ripgrep) replaces ~grep~. Honestly it's rather pointless because I'm not using
-any of ~rg~'s extra features, but hey. Rust.
+~rg~ (ripgrep) replaces ~grep~. Honestly it's rather pointless because I'm not
+using any of ~rg~'s extra features, but hey. Rust.
 
 ~tree~ is now ~exa -T~ because colors. Note that if you want ~pass~ for password
 management you still need the real ~tree~ installed.
 
 ~sl~ I like to have installed so I don't mistype ~ls~.
 
-~dc~ the calculator is worthess. If I type ~dc~ it is by accident. Thus, it's remapped
-to a special surprise here.
+~dc~ the calculator is worthess. If I type ~dc~ it is by accident. Thus, it's
+remapped to a special surprise here.
 
 ** The Editor
 
@@ -89,44 +99,46 @@ https://github.com/MitchMarq42/nvim-configs
 Currently, I use emacs. I have based [[.config/emacs][my emacs configuration]]
 off of what I happened to have for neovim at the time, with the aid of
 [[https://systemcrafters.net][System Crafters]]. Since then it has grown into
-something more, something crazy. Or maybe it's really not that crazy
-and emacs is just a bad program with a good extension API. I do not
-know if I am a human dreaming of emacs, or an emacs dreaming of
-humanity.
+something more, something crazy. Or maybe it's really not that crazy and emacs
+is just a bad program with a good extension API. I do not know if I am a human
+dreaming of emacs, or an emacs dreaming of humanity.
 
 There are a few things to immediately note:
 
 - The theme is my own. Every existing emacs (and vim, for that matter)
-  colorscheme/theme is washed-in and gray-on-gray. Doom, spacemacs,
-  solarized, nord, dracula, or any other name-able theme. Also, any "new
-  and exciting" theme you see on Reddit will be the same. This infuriated
-  me to no end, so in the early days of my nvim tweaking I pulled the
-  most unique and contrastful theme I could find. It was called "sv" and
-  it was hacked up by some guy on github once and then forgotten. So
-  I extended it for nvim, then recreated it in emacs with the aid of
-  ~autothemer~ (which you can find at [[.config/emacs/mitch-theme.el]]).
+colorscheme/theme is washed-in and gray-on-gray. Doom, spacemacs, solarized,
+nord, dracula, or any other name-able theme. Also, any "new and exciting" theme
+you see on Reddit will be the same. This infuriated me to no end, so in the
+early days of my nvim tweaking I pulled the most unique and contrastful theme I
+could find. It was called "sv" and it was hacked up by some guy on github once
+and then forgotten. So I extended it for nvim, then recreated it in emacs with
+the aid of ~autothemer~ (which you can find at
+[[.config/emacs/mitch-theme.el]]).
 
-- Typing ~qq~ will switch to Japanese input. This is sort-of a built-in
-  feature, but the default trigger is to type ~C-\~, select a language
-  from the popup menu that comes up, hit enter, type in that language,
-  and type C-\ again to turn it off and on again for the rest of the
-  session. The ~qq~ behavior is built into Japanese-mode specifically
-  and normally toggles in and out of ~japanese-ascii~, which is
-  literally just normal text except ~qq~ switches back to Japanese.
-  Technically the only difference with my setup is that it acts like
-  ~japanese-ascii~ initially, without the ~C-\~ nonsense.
+- Typing ~qq~ will switch to Japanese input. This is sort-of a built-in feature,
+but the default trigger is to type ~C-\~, select a language from the popup menu
+that comes up, hit enter, type in that language, and type C-\ again to turn it
+off and on again for the rest of the session. The ~qq~ behavior is built into
+Japanese-mode specifically and normally toggles in and out of ~japanese-ascii~,
+which is literally just normal text except ~qq~ switches back to Japanese.
+Technically the only difference with my setup is that it acts like
+~japanese-ascii~ initially, without the ~C-\~ nonsense.
 
 ---
 
 * Notes on mrandr:
 
-Use it as you would =xrandr -o=. E.G., =mrandr right= rotates the screen clockwise by 90 degrees. Et cetera.
+Use it as you would =xrandr -o=. E.G., =mrandr right= rotates the screen
+clockwise by 90 degrees. Et cetera.
 
-There is a comment at the beginning of the executable linking to an extremely helpful Ubuntu Wiki page on the subject, so check that out too.
+There is a comment at the beginning of the executable linking to an extremely
+helpful Ubuntu Wiki page on the subject, so check that out too.
 
-To make it run automatically on gyroscope/accelerometer events, learn how ACPI works or something.
+To make it run automatically on gyroscope/accelerometer events, learn how ACPI
+works or something.
 
-Instead, bind it to a hotkey. On Xorg/xmonad I have it bound to ctrl+alt+arrowkey via sxhkd (https://wiki.archlinux.org/title/sxhkd):
+Instead, bind it to a hotkey. On Xorg/xmonad I have it bound to
+ctrl+alt+arrowkey via sxhkd (https://wiki.archlinux.org/title/sxhkd):
 
 #+begin_src conf
   control + alt + Up
@@ -150,14 +162,24 @@ Or for sway/i3:
 
 ---
 
-+For getting capslock -\> esc and held-capslock -\> super to work in sway, see https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will also suffice for any X11 window manager, or any other Wayland compositor that uses XKB instead of doing its own thing.+
++For getting capslock -\> esc and held-capslock -\> super to work in sway, see+
++https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will+
++also suffice for any X11 window manager, or any other Wayland compositor that+
++uses XKB instead of doing its own thing.+
 
-+The file .local/share/supescaps.diff currently contains the instructions in this gist but automated; run =doas patch < .local/share/supescaps.diff= and it might magically work. You will have to re-do this every upgrade or reinstall of XKB/XCB/xorg/linux. Maybe make it a pacman hook?+
++The file .local/share/supescaps.diff currently contains the instructions in+
++this gist but automated; run =doas patch < .local/share/supescaps.diff= and it+
++might magically work. You will have to re-do this every upgrade or reinstall+
++of XKB/XCB/xorg/linux. Maybe make it a pacman hook?+
 
-+^^^ the above doesn't work because I'm an idiot and can't write patch files. Should probably work it into that shell script that will also auto-detect the package manager and install everything automatically.+
++^^^ the above doesn't work because I'm an idiot and can't write patch files.+
++Should probably work it into that shell script that will also auto-detect the+
++package manager and install everything automatically.+
 
-As of 2020, xkb accepts user-specific keyboard patches. Modifying system files is no longer needed, and was always bad practice. Please don't do it either.
+As of 2020, xkb accepts user-specific keyboard patches. Modifying system files
+is no longer needed, and was always bad practice. Please don't do it either.
 
 * .config/
 
-Basic. Place where configs go. Visit the location for more info, another org document may appear there.
+Basic. Place where configs go. Visit the location for more info, another org
+document may appear there.

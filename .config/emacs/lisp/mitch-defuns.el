@@ -78,7 +78,8 @@ when editing from the console."
 file."
   (general-define-key
    "<escape>" 'keyboard-escape-quit
-   "C-H F" 'counsel-describe-face)
+   "C-H F" 'counsel-describe-face
+   "C-H k" 'helpful-key)
   (general-define-key
    :states 'motion
    "j" 'evil-next-visual-line
@@ -86,16 +87,17 @@ file."
   (general-define-key
    :states 'normal
    "<escape>" 'evil-beginning-of-line
-   "SPC SPC" 'evil-buffer)
+   "SPC SPC" 'evil-buffer
+   "SPC w" 'evil-window-map)
   (general-define-key
    :states 'insert
+   "C-w" 'evil-window-map
    "q" (general-key-dispatch
 	   'self-insert-command
 	 "q" 'toggle-input-method)
    "C-V" (general-key-dispatch
 	     'evil-quoted-insert
-	   "u" 'counsel-unicode-char)
-   )
+	   "u" 'counsel-unicode-char))
   )
 
 ;; This one line cost me over an hour of frustration...

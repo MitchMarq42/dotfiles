@@ -1,9 +1,14 @@
 ;; Eshell settings. settings for eshell.
 
-(defun eshell/emacs (&optional file)
+(defun eshell/emacs (&rest file)
   "When your shell is emacs,
 your emacs is but an oyster..."
-      (counsel-find-file file))
+  (if (null args)
+      (bury-buffer)
+    (mapc
+     #'find-file
+     (mapcar
+      #'expand-file-name (eshell-flatten-list (reverse args))))))
 (defun eshell/clear ()
   "Clear the scrollback buffer, like `clear' in
 a real shell"

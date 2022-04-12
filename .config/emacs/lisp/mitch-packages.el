@@ -169,10 +169,15 @@
   :straight t
   :defer 1
   :config
+  (treemacs-project-follow-mode)
+  (treemacs-git-mode 'simple)
   (add-hook
    'treemacs-mode-hook
    '(lambda () (display-line-numbers-mode -1))))
 (use-package treemacs-evil
+  :straight t
+  :after treemacs)
+(use-package treemacs-all-the-icons
   :straight t
   :after treemacs)
 

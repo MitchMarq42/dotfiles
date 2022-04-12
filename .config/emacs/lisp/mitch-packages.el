@@ -167,9 +167,13 @@
 ;; Blingy file tree view
 (use-package treemacs
   :straight t
-  )
+  :defer 1
+  :config
+  (add-hook
+   'treemacs-mode-hook
+   '(lambda () (display-line-numbers-mode -1))))
 (use-package treemacs-evil
   :straight t
-  :after evil)
+  :after treemacs)
 
 (provide 'mitch-packages)

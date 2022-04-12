@@ -164,4 +164,12 @@
 ;; Emacs startup profiling
 (use-package esup :straight t)
 
+;; Blingy file tree view
+(use-package treemacs
+  :straight t
+  )
+(use-package treemacs-evil
+  :straight t
+  :after evil)
+
 (provide 'mitch-packages)

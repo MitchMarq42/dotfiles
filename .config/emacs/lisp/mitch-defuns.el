@@ -92,9 +92,21 @@ file."
    "k" 'evil-previous-visual-line)
   (general-define-key
    :states 'normal
-   "<escape>" 'evil-beginning-of-line
-   "SPC SPC" 'evil-buffer
-   "SPC w" 'evil-window-map)
+   "<escape>" 'evil-beginning-of-line)
+  (general-define-key
+   :states '(normal visual)
+   :prefix "SPC"
+   :non-normal-prefix "SPC"
+   "w" 'evil-window-map
+   "h" 'help-command
+   "b" 'ivy-switch-buffer
+   "SPC" 'evil-buffer
+   "t t" 'treemacs
+   "e l" 'eval-last-sexp
+   "e b" 'eval-buffer
+   "e r" 'eval-region
+   "e :" 'eval-expression
+   )
   (general-define-key
    :states 'insert
    "C-w" 'evil-window-map

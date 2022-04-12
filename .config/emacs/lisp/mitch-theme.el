@@ -21,6 +21,12 @@
   '((t (:background "#00aa00" :foreground "#00aa00")))
   "Face for fringe scroll bar thumb."
   :group 'yascroll)
+(defface minimap-active-region-background
+  '((t (:background "#303030" :extend t)))
+  "portion of little window shown in big window")
+(defface minimap-current-line-face
+  '((t (:background "#afafaf" :extend t)))
+  "current line in little window")
 
 (setq rainbow-delimiters-max-face-count 2)
 

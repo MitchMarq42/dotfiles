@@ -92,7 +92,9 @@ file."
    "k" 'evil-previous-visual-line)
   (general-define-key
    :states 'normal
-   "<escape>" 'evil-beginning-of-line)
+   "<escape>" 'evil-beginning-of-line
+   "C-p" 'scroll-down-line
+   "C-n" 'scroll-up-line)
   (general-define-key
    :states '(normal visual)
    :prefix "SPC"
@@ -102,11 +104,11 @@ file."
    "b" 'ivy-switch-buffer
    "SPC" 'evil-buffer
    "t t" 'treemacs
+   "m m" 'minimap-mode
    "e l" 'eval-last-sexp
    "e b" 'eval-buffer
    "e r" 'eval-region
-   "e :" 'eval-expression
-   )
+   "e :" 'eval-expression)
   (general-define-key
    :states 'insert
    "C-w" 'evil-window-map

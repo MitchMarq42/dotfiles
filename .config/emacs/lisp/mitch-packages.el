@@ -173,12 +173,19 @@
   (treemacs-git-mode 'simple)
   (add-hook
    'treemacs-mode-hook
-   '(lambda () (display-line-numbers-mode -1))))
+   #'(lambda () (display-line-numbers-mode -1))))
 (use-package treemacs-evil
   :straight t
   :after treemacs)
 (use-package treemacs-all-the-icons
   :straight t
   :after treemacs)
+
+;; Blingy laggy minimap on the right
+(use-package minimap
+  :straight t
+  :init
+  (setq minimap-window-location 'right
+	minimap-update-delay 0))
 
 (provide 'mitch-packages)

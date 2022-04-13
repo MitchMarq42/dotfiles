@@ -103,12 +103,27 @@ file."
    "h" 'help-command
    "b" 'ivy-switch-buffer
    "SPC" 'evil-buffer
-   "t t" 'treemacs
-   "m m" 'minimap-mode
-   "e l" 'eval-last-sexp
-   "e b" 'eval-buffer
-   "e r" 'eval-region
-   "e :" 'eval-expression)
+   "t" 'treemacs-map
+   "m" 'mini-map
+   "e" 'eval-map)
+  (general-define-key
+   :states 'normal 
+   :prefix-command 'eval-map
+   :prefix "e"
+   "l" 'eval-last-sexp
+   "b" 'eval-buffer
+   "r" 'eval-region
+   ":" 'eval-expression)
+  (general-define-key
+   :states 'normal
+   :prefix-command 'mini-map
+   :prefix "m"
+   "m" 'minimap-mode)
+  (general-define-key
+   :states 'normal
+   :prefix-command 'treemacs-map
+   :prefix "t"
+   "t" 'treemacs)
   (general-define-key
    :states 'insert
    "C-w" 'evil-window-map

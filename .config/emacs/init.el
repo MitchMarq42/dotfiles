@@ -40,7 +40,10 @@
 
   ;; Control backups/swapfiles
   (defvar backup-directory
-    (expand-file-name "emacs-backups" (getenv "XDG_CACHE_HOME")))
+    (expand-file-name "emacs-backups"
+		      (or (getenv "XDG_CACHE_HOME")
+			  (expand-file-name
+			   (concat (getenv "HOME") "/.cache")))))
   (if (not (file-exists-p backup-directory))
       (make-directory backup-directory t))
   (setq backup-directory-alist `(("." . ,backup-directory)))

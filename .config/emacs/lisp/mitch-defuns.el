@@ -102,27 +102,28 @@ file."
    "w" 'evil-window-map
    "h" 'help-command
    "b" 'ivy-switch-buffer
-   "SPC" 'evil-buffer
-   "t" 'treemacs-map
-   "m" 'mini-map
-   "e" 'eval-map)
+   "SPC" 'evil-buffer)
   (general-define-key
    :states 'normal 
-   :prefix-command 'eval-map
-   :prefix "e"
+   :prefix-command 'eval-map-prefix
+   :prefix-map 'eval-map
+   :prefix "SPC e"
    "l" 'eval-last-sexp
    "b" 'eval-buffer
    "r" 'eval-region
    ":" 'eval-expression)
   (general-define-key
    :states 'normal
-   :prefix-command 'mini-map
-   :prefix "m"
-   "m" 'minimap-mode)
+   :prefix-command 'mini-map-prefix
+   :prefix-map 'mini-map
+   :prefix "SPC m"
+   "m" 'minimap-mode
+   "k" 'minimap-kill)
   (general-define-key
    :states 'normal
-   :prefix-command 'treemacs-map
-   :prefix "t"
+   :prefix-command 'treemacs-map-prefix
+   :prefix-map 'treemacs-map
+   :prefix "SPC t"
    "t" 'treemacs)
   (general-define-key
    :states 'insert

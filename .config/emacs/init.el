@@ -43,7 +43,8 @@
     (expand-file-name "emacs-backups"
 		      (or (getenv "XDG_CACHE_HOME")
 			  (expand-file-name
-			   (concat (getenv "HOME") "/.cache")))))
+			    ".cache" "~")
+			  )))
   (if (not (file-exists-p backup-directory))
       (make-directory backup-directory t))
   (setq backup-directory-alist `(("." . ,backup-directory)))

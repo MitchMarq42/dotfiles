@@ -67,7 +67,7 @@
  (
   (default (:background mitch-black :foreground mitch-light-yellow))
   (cursor (:inherit 'default))
-  (highlight (:inherit 'default :background mitch-visual-bg))
+  (highlight (:background mitch-visual-bg))
   (region (:inherit 'highlight))
   (line-number (:inherit 'default :foreground mitch-light-black :weight 'normal))
   (line-number-current-line (:inherit 'line-number :foreground mitch-yellow :weight 'bold))
@@ -101,9 +101,9 @@
   (org-special-keyword (:inherit '(font-lock-comment-face fixed-pitch)))
   (org-meta-line (:inherit '(font-lock-comment-face fixed-pitch)))
   (org-checkbox  (:inherit 'org-table))
-  (whitespace-space (:foreground mitch-dark-gray))
-  (whitespace-tab (:foreground mitch-dark-gray))
-  (whitespace-newline (:foreground mitch-dark-gray))
+  (whitespace-space (:foreground mitch-black))
+  (whitespace-tab (:foreground mitch-black))
+  (whitespace-newline (:foreground mitch-black))
   )
  )
 

@@ -1,7 +1,7 @@
-#+TITLE Dotfiles
+#+TITLE: ZSH configuration
 #+PROPERTY: header-args:mkdirp yes
 
-* The beginning
+* Introduction
 
 Hello and welcome. This is the Org-file which contains (or will contain) all of
 my personal zsh configurations. There's a lot to go through, but hopefully
@@ -10,36 +10,21 @@ writing this will give me a good excuse to make an end of it all.
 I'm presently not ready for fully committing to using emacs' built-in shell
 =eshell=, so that means relying on =zsh=.
 
-* ZSH config
-** The ~/.config/zsh/.zshrc file (in ~/.config/zsh/.zshrc which is the $ZDOTDIR)
-
+* .zshrc
+** User edit warning
 First we tell vim to use plain 'sh' highlighting:
-
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
   # vim: set ft=sh :
   # Don't edit this file. Modify and re-tangle the README.org instead.
-
 #+end_src
-
+** Startup-chain logic
 Next exit if this is a non-interactive shell.
-
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
-  # If not running interactively, don't do anything
   [[ $- != *i* ]] && return
-
 #+end_src
-
-Now it's time to launch our graphical environment... this present config is
-rather useless as I'm using GNOME right now.
-
+Launch a graphical environment: sway on tty7, Xorg on tty5, and nothing for
+other terminals.
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
-  # start X or sway on tty7
-  [[ $(tty) = /dev/tty7 ]] && exec sway
-  [[ $(tty) = /dev/tty5 ]] && startx $XINITRC
-
   case "${TTY}" in
       /dev/tty5)
           startx $XINITRC ;;
@@ -48,33 +33,24 @@ rather useless as I'm using GNOME right now.
       ,*)
       ;;
   esac
-
 #+end_src
-
-Time for tmux. We start a tmux on every terminal that isn't in the list.
-DONE: there's probably a better way to do this. Case/esac statements?
-
+Start =tmux= conditionally. Only if the host terminal isn't on our whitelist,
+and there isn't already a tmux running. We note the current $TERM and carry it
+over to the resulting tmux session. My neofetch config also displays this value
+if set.
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
   case "${TMUX}" in
-      # note the previous value of $TERM, for self-awareness in tmuxes.
       ,*) export OLDTERM="${TERM}"
          ;;
-      # Start a new tmux session to put the current shell in,
-      # if not already in a tmux or alacritty. Remember old TERM.
       "") case "${TERM}" in
               alacritty|eterm*|xterm-*) ;;
               ,*) OLDTERM="${TERM}" exec tmux ;;
           esac ;;
   esac
-
 #+end_src
-
-And now let's bootstrap and invoke zplug, a git-based /zsh/ plugin manager
-similar to vim-plug
-
+** zplug, for plugins
+Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug.
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
   # Maybe install zplug, and definitely make it update stuff
   export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
   export ZPLUG_HOME="$ZDOTDIR/zplug"
@@ -95,27 +71,20 @@ similar to vim-plug
           echo; zplug install
       fi
   )
-
 #+end_src
-
+** Display pretty text graphics
 Now that all the possibilities for launching other environments or interactive
 prompts have been exhausted, we can do the thing. The thing that makes opening
 new terminals fun and exciting.
-
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
-  # Choose a fetch based on the width of the terminal and run it, since we are
-  # firmly in an interactive shell now.
   (( $COLUMNS <= 84 )) && FETCH='pfetch' || FETCH='neofetch'
   $FETCH #--ascii_colors 4 --colors 7 4 4 4 4 7
-
 #+end_src
-
+** set options and appease wizards
 The following was originally added automatically by PowerLevel10k's setup
 wizard. P10K is the prompt I use and is clean, extensible, and feature-rich.
-
+(keep the comments so it doesn't regenerate)
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
   # Enable Powerlevel10k instant prompt. Should stay close to the top of
   # ~/.config/zsh/.zshrc. Initialization code that may require console input
   # (password prompts, [y/n] confirmations, etc.) must go above this block;
@@ -123,24 +92,16 @@ wizard. P10K is the prompt I use and is clean, extensible, and feature-rich.
   if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
       source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
   fi
-
 #+end_src
-
 The following is currently disabled, but comes from Luke Smith's config. If I
 used the tty more I might re-enable it.
-
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
   # Switch escape and caps if tty and no passwd required:
-  # doas -n loadkeys ~/.local/share/ttymaps.kmap 2>/dev/null
-
+  # sudo -n loadkeys ~/.local/share/ttymaps.kmap 2>/dev/null
 #+end_src
-
-And now for some boilerplate-ish settings that various zsh wizards apply on
-first run. Keep the comments so they don't accidentally re-apply themselves.
-
+And now for some boilerplate-ish settings that various zsh setup wizards apply
+on first run (Keep the comments so they don't regenerate):
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
   # Lines configured by zsh-newuser-install
   HISTFILE=~/.local/share/zsh/histfile
   HISTSIZE=1000
@@ -158,14 +119,24 @@ first run. Keep the comments so they don't accidentally re-apply themselves.
   _comp_options+=(globdots) # Include hidden files.
   compinit
   # End of lines added by compinstall
-
 #+end_src
-
+And finally, load the cache file for powerlevel10k if it exists.
+#+begin_src shell :tangle ~/.config/zsh/.zshrc
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ ! -f $ZDOTDIR/.p10k.zsh ]] || source $ZDOTDIR/.p10k.zsh
+#+end_src
+Next we source some external settings files I wrote to keep the
+~/.config/zsh/.zshrc clean:
+#+begin_src shell :tangle ~/.config/zsh/.zshrc
+  # source aliases and functions files
+  source $ZDOTDIR/aliases.zsh
+  source $ZDOTDIR/functions.zsh
+  source $ZDOTDIR/insulter.zsh
+#+end_src
+** vi is pretty cool
 Since the emacs terminal is bad, let's rely on zsh itself for vi emulation (it
 actually does a pretty decent job and even has a visual mode like vim):
-
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
   # Use vim keys in tab complete menu etc:
   bindkey -M menuselect 'h' vi-backward-char
   bindkey -M menuselect 'k' vi-up-line-or-history
@@ -182,49 +153,14 @@ actually does a pretty decent job and even has a visual mode like vim):
   bindkey '^[[B' down-line-or-beginning-search
   bindkey -M vicmd 'k' up-line-or-beginning-search
   bindkey -M vicmd 'j' down-line-or-beginning-search
-
 #+end_src
-
-And finally, the last bit of powerlevel10k's initialization
-
-#+begin_src shell :tangle ~/.config/zsh/.zshrc
-
-  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-  [[ ! -f $ZDOTDIR/.p10k.zsh ]] || source $ZDOTDIR/.p10k.zsh
-
-#+end_src
-
-Next we source some external settings files I wrote to keep the
-~/.config/zsh/.zshrc clean
-
-#+begin_src shell :tangle ~/.config/zsh/.zshrc
-
-  # source aliases and functions files
-  source $ZDOTDIR/aliases.zsh
-  source $ZDOTDIR/functions.zsh
-  source $ZDOTDIR/insulter.zsh
-
-#+end_src
-
-Not sure why this is here. Possibly a failed re-implementation of vim's
-encryption?
-
-#+begin_src shell :tangle ~/.config/zsh/.zshrc
-
-  # Make gpg work
-  export GPT_TTY=$(tty)
-
-#+end_src
-
 The following is copied more-or-less from Luke Smith's~/.config/zsh/.zshrc. I
 have, however, done a bit of syntax policing and line-shuffling. What this
 actually does is enable nvim-style terminal cursor-shape changes on changing
 zsh's built-in vi modes. insert is a bar, normal and visual are blocks, replace
 is an underscore. This is a killer feature. Once you use it you will not be able
 to live without it.
-
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
   #############################################################
   ######   Luke Smith's custom vi-mode cursor switcher   ######
   #############################################################
@@ -250,40 +186,30 @@ to live without it.
   #############################################################
   ###### End Luke Smith's custom vi-mode cursor switcher ######
   #############################################################
-
 #+end_src
-
+** load =zplug= statements
 Finally, load those zplugs:
-
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-
-  # Finally load those zplugs
   zplug load
-
 #+end_src
-
 And that's actually it for the ~/.config/zsh/.zshrc.
 
-** The other zsh files
-*** ~/.config/zsh/aliases.zsh
-
-Let's just do everything with rust
-
+* aliases.zsh
+** User edit warning
+Point readers back to this source file:
 #+begin_src shell :tangle~/.config/zsh/aliases.zsh
-
   # Don't edit this file. Edit the README.org instead, and tangle it.
-
-  # aliases that make things easier for me by invoking rust programs you don't have
+#+end_src
+** Rust coreutil-replacement aliases, now with fallback
+#+begin_src shell :tangle~/.config/zsh/aliases.zsh
   #which doas >/dev/null && alias sudo='doas'
   which exa >/dev/null && alias ls='exa'
   which exa >/dev/null && alias tree='exa -T'
   which rg >/dev/null && alias grep='rg -uuu'
   #which dotacat >/dev/null && alias lolcat='dotacat'
-
 #+end_src
-
+** color or auto-sudo, but not giving you up
 #+begin_src shell :tangle~/.config/zsh/aliases.zsh
-
   [ -f /usr/bin/paru ] && alias pacman="paru" || alias pacman="sudo pacman"
   alias cd..="cd .."
   alias spider="spider -s 2 -c"
@@ -292,43 +218,4 @@ Let's just do everything with rust
   alias dc="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
   alias ping="ping -c 4"
   alias ip="ip -c"
-
-#+end_src
-
-+The following is taken from the Arch Wiki, and sort of fixes starting emacs but+
-+causes other problems. In general, it's probably fine+. I modified it quite a
-bit so the above no longer applies. *This is extremely broken so it is commented*
-*out. Individual bits are also commented out in accordance with how broken they
-are. NOTE: this may differ on your system.*
-
-(the following snippet has been moved to ~/.local/bin/runemacs)
-
-Get myself to use emacs more (broken)
-
-#+begin_src shell :tangle~/.config/zsh/aliases.zsh
-
-  # alias nvim="emacs -nw"
-  # alias neovide="emacs"
-  # alias vi="emacs -Q"
-  #alias mpv="mpv --really-quiet"
-  # export ALTERNATE_EDITOR=''
-  emacs=$(which emacs)
-  # alias emacs="emacsclient -a $emacs -nc"
-  # $TERM == alacritty && alias nvim="neovide"
-
-#+end_src
-
-Do window-manager based things, particularly in =sway= environment. All of this
-stuff is kind of iffy since it relies on i3-swallow which I don't actually have
-installed. This is pretty unnecessary and emacs will obsolesce it.
-
-#+begin_src shell :tangle~/.config/zsh/aliases.zsh
-
-  export WM=$(neofetch wm | awk '{print $2}')
-  [[ ${WM} == sway ]] &&
-      #alias emacs='swallow emacs' &&
-      #alias neovide='swallow neovide' &&
-      #alias mpv='swallow mpv' &&
-      alias brave='swallow brave'
-
 #+end_src

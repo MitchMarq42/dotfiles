@@ -1,12 +1,7 @@
 # vim: set ft=sh :
 # Don't edit this file. Modify and re-tangle the README.org instead.
 
-# If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
-# start X or sway on tty7
-[[ $(tty) = /dev/tty7 ]] && exec sway
-[[ $(tty) = /dev/tty5 ]] && startx $XINITRC
 
 case "${TTY}" in
     /dev/tty5)
@@ -18,11 +13,8 @@ case "${TTY}" in
 esac
 
 case "${TMUX}" in
-    # note the previous value of $TERM, for self-awareness in tmuxes.
     *) export OLDTERM="${TERM}"
        ;;
-    # Start a new tmux session to put the current shell in,
-    # if not already in a tmux or alacritty. Remember old TERM.
     "") case "${TERM}" in
             alacritty|eterm*|xterm-*) ;;
             *) OLDTERM="${TERM}" exec tmux ;;
@@ -50,8 +42,6 @@ zplug check --verbose || (
     fi
 )
 
-# Choose a fetch based on the width of the terminal and run it, since we are
-# firmly in an interactive shell now.
 (( $COLUMNS <= 84 )) && FETCH='pfetch' || FETCH='neofetch'
 $FETCH #--ascii_colors 4 --colors 7 4 4 4 4 7
 
@@ -64,7 +54,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Switch escape and caps if tty and no passwd required:
-# doas -n loadkeys ~/.local/share/ttymaps.kmap 2>/dev/null
+# sudo -n loadkeys ~/.local/share/ttymaps.kmap 2>/dev/null
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.local/share/zsh/histfile
@@ -84,6 +74,14 @@ _comp_options+=(globdots) # Include hidden files.
 compinit
 # End of lines added by compinstall
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f $ZDOTDIR/.p10k.zsh ]] || source $ZDOTDIR/.p10k.zsh
+
+# source aliases and functions files
+source $ZDOTDIR/aliases.zsh
+source $ZDOTDIR/functions.zsh
+source $ZDOTDIR/insulter.zsh
+
 # Use vim keys in tab complete menu etc:
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
@@ -100,17 +98,6 @@ bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 bindkey -M vicmd 'k' up-line-or-beginning-search
 bindkey -M vicmd 'j' down-line-or-beginning-search
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f $ZDOTDIR/.p10k.zsh ]] || source $ZDOTDIR/.p10k.zsh
-
-# source aliases and functions files
-source $ZDOTDIR/aliases.zsh
-source $ZDOTDIR/functions.zsh
-source $ZDOTDIR/insulter.zsh
-
-# Make gpg work
-export GPT_TTY=$(tty)
 
 #############################################################
 ######   Luke Smith's custom vi-mode cursor switcher   ######
@@ -138,5 +125,4 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 ###### End Luke Smith's custom vi-mode cursor switcher ######
 #############################################################
 
-# Finally load those zplugs
 zplug load

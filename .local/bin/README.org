@@ -1,0 +1,82 @@
+* Custom Scripts
+** brightctl
+Toggle brightness up and down.
+*** usage:
+**** To turn brightness up:
+#+begin_src sh
+  brightctl +
+#+end_src
+**** To turn brightness down:
+#+begin_src sh
+  brightctl -
+#+end_src
+**** To save brightness:
+#+begin_src sh
+brightctl -s
+#+end_src
+**** To restore saved brightness:
+#+begin_src sh
+brightctl -r
+#+end_src
+** dots
+Manage and update dotfiles, including this file!
+*** Locations:
+- =~/.local/git/dotfiles=: a git bare repository of your dotfiles. My dotfiles.
+*** Usage:
+**** To reset all tracked files to the repo's index:
+#+begin_src sh
+dots checkout -f
+#+end_src
+**** To commit all changed files with message "tweak settings"
+#+begin_src sh
+dots commit -am "tweak settings"
+#+end_src
+For more, see =man git=.
+** fixpath
+Trim and optimize the $PATH variable
+*** Usage:
+**** To fix PATH in the current shell
+#+begin_src sh
+source ~/.local/bin/fixpath
+#+end_src
+** mitch-setup.sh
+A broken and in-progress setup script. Not good yet, please ignore it.
+** mrandr
+*** Usage:
+
+Use it as you would =xrandr -o=. E.G., =mrandr right= rotates the screen
+clockwise by 90 degrees. Et cetera.
+
+There is a comment at the beginning of the executable linking to an extremely
+helpful Ubuntu Wiki page on the subject, so check that out too.
+
+To make it run automatically on gyroscope/accelerometer events, learn how ACPI
+works or something.
+
+Instead, bind it to a hotkey. On Xorg/xmonad I have it bound to
+ctrl+alt+arrowkey via sxhkd (https://wiki.archlinux.org/title/sxhkd):
+
+#+begin_src conf
+  control + alt + Up
+  /home/mitch/.local/bin/mrandr inverted
+  control + alt + Down
+  /home/mitch/.local/bin/mrandr normal
+  control + alt + Left
+  /home/mitch/.local/bin/mrandr right
+  control + alt + Right
+  /home/mitch/.local/bin/mrandr left
+#+end_src
+
+Or for sway/i3:
+
+#+begin_src conf
+  bindsym $mod+Left exec "~/.local/bin/mrandr right"
+  bindsym $mod+Down exec "~/.local/bin/mrandr normal"
+  bindsym $mod+Up exec "~/.local/bin/mrandr inverted"
+  bindsym $mod+Right exec "~/.local/bin/mrandr left"
+#+end_src
+** runemacs
+** stupid
+** swayhide
+** terminal
+** waylock

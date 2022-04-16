@@ -1,11 +1,11 @@
-* User-level configuration files
+#+TITLE User-level configuration files
 
 Gotta fix the whole document to properly reflect the truth. It's wrong right
 now.
 
 - [-] :TODO: Fix everything to be accurate instead of just strikethroughs
 
----
+===
 
 Hi. Welcome to my dotfiles repository.
 

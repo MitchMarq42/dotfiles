@@ -3,9 +3,12 @@
 
 * The beginning
 
-Hello and welcome. This is the Org-file which contains (or will contain) all of my personal zsh configurations. There's a lot to go through, but hopefully writing this will give me a good excuse to make an end of it all.
+Hello and welcome. This is the Org-file which contains (or will contain) all of
+my personal zsh configurations. There's a lot to go through, but hopefully
+writing this will give me a good excuse to make an end of it all.
 
-I'm presently not ready for fully committing to using emacs' built-in shell =eshell=, so that means relying on =zsh=.
+I'm presently not ready for fully committing to using emacs' built-in shell
+=eshell=, so that means relying on =zsh=.
 
 * ZSH config
 ** The ~/.config/zsh/.zshrc file (in ~/.config/zsh/.zshrc which is the $ZDOTDIR)
@@ -28,7 +31,8 @@ Next exit if this is a non-interactive shell.
 
 #+end_src
 
-Now it's time to launch our graphical environment... this present config is rather useless as I'm using GNOME right now.
+Now it's time to launch our graphical environment... this present config is
+rather useless as I'm using GNOME right now.
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -36,11 +40,11 @@ Now it's time to launch our graphical environment... this present config is rath
   [[ $(tty) = /dev/tty7 ]] && exec sway
   [[ $(tty) = /dev/tty5 ]] && startx $XINITRC
 
-  case "{TTY}" in
+  case "${TTY}" in
       /dev/tty5)
-	  startx $XINITRC ;;
+          startx $XINITRC ;;
       /dev/tty7)
-	  exec sway ;;
+          exec sway ;;
       ,*)
       ;;
   esac
@@ -55,18 +59,19 @@ DONE: there's probably a better way to do this. Case/esac statements?
   case "${TMUX}" in
       # note the previous value of $TERM, for self-awareness in tmuxes.
       ,*) export OLDTERM="${TERM}"
-	 ;;
+         ;;
       # Start a new tmux session to put the current shell in,
       # if not already in a tmux or alacritty. Remember old TERM.
       "") case "${TERM}" in
-	      alacritty|eterm*|xterm-*) ;;
-	      ,*) OLDTERM="${TERM}" exec tmux ;;
-	  esac ;;
+              alacritty|eterm*|xterm-*) ;;
+              ,*) OLDTERM="${TERM}" exec tmux ;;
+          esac ;;
   esac
 
 #+end_src
 
-And now let's bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug
+And now let's bootstrap and invoke zplug, a git-based /zsh/ plugin manager
+similar to vim-plug
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -87,39 +92,42 @@ And now let's bootstrap and invoke zplug, a git-based /zsh/ plugin manager simil
   zplug check --verbose || (
       printf "Install? [y/N]: "
       if read -q; then
-	  echo; zplug install
+          echo; zplug install
       fi
   )
 
 #+end_src
 
-Now that all the possibilities for launching other environments or interactive prompts have been exhausted,
-we can do the thing. The thing that makes opening new terminals fun and exciting.
+Now that all the possibilities for launching other environments or interactive
+prompts have been exhausted, we can do the thing. The thing that makes opening
+new terminals fun and exciting.
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
-  # Choose a fetch based on the width of the terminal and run it, since we are firmly in an interactive shell now.
+  # Choose a fetch based on the width of the terminal and run it, since we are
+  # firmly in an interactive shell now.
   (( $COLUMNS <= 84 )) && FETCH='pfetch' || FETCH='neofetch'
   $FETCH #--ascii_colors 4 --colors 7 4 4 4 4 7
 
 #+end_src
 
-The following was originally added automatically by PowerLevel10k's setup wizard. P10K is the prompt I use
-and is clean, extensible, and feature-rich.
+The following was originally added automatically by PowerLevel10k's setup
+wizard. P10K is the prompt I use and is clean, extensible, and feature-rich.
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
-  # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/~/.config/zsh/.zshrc.
-  # Initialization code that may require console input (password prompts, [y/n]
-  # confirmations, etc.) must go above this block; everything else may go below.
+  # Enable Powerlevel10k instant prompt. Should stay close to the top of
+  # ~/.config/zsh/.zshrc. Initialization code that may require console input
+  # (password prompts, [y/n] confirmations, etc.) must go above this block;
+  # everything else may go below.
   if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
       source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
   fi
 
 #+end_src
 
-The following is currently disabled, but comes from Luke Smith's config. If I used the tty more I might re-enable
-it.
+The following is currently disabled, but comes from Luke Smith's config. If I
+used the tty more I might re-enable it.
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -128,8 +136,8 @@ it.
 
 #+end_src
 
-And now for some boilerplate-ish settings that various zsh wizards apply on first run. Keep the comments
-so they don't accidentally re-apply themselves.
+And now for some boilerplate-ish settings that various zsh wizards apply on
+first run. Keep the comments so they don't accidentally re-apply themselves.
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -153,7 +161,8 @@ so they don't accidentally re-apply themselves.
 
 #+end_src
 
-Since the emacs terminal is bad, let's rely on zsh itself for vi emulation (it actually does a pretty decent job and even has a visual mode like vim):
+Since the emacs terminal is bad, let's rely on zsh itself for vi emulation (it
+actually does a pretty decent job and even has a visual mode like vim):
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -185,7 +194,8 @@ And finally, the last bit of powerlevel10k's initialization
 
 #+end_src
 
-Next we source some external settings files I wrote to keep the ~/.config/zsh/.zshrc clean
+Next we source some external settings files I wrote to keep the
+~/.config/zsh/.zshrc clean
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -196,7 +206,8 @@ Next we source some external settings files I wrote to keep the ~/.config/zsh/.z
 
 #+end_src
 
-Not sure why this is here. Possibly a failed re-implementation of vim's encryption?
+Not sure why this is here. Possibly a failed re-implementation of vim's
+encryption?
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -205,7 +216,12 @@ Not sure why this is here. Possibly a failed re-implementation of vim's encrypti
 
 #+end_src
 
-The following is copied more-or-less from Luke Smith's~/.config/zsh/.zshrc. I have, however, done a bit of syntax policing and line-shuffling. What this actually does is enable nvim-style terminal cursor-shape changes on changing zsh's built-in vi modes. insert is a bar, normal and visual are blocks, replace is an underscore. This is a killer feature. Once you use it you will not be able to live without it.
+The following is copied more-or-less from Luke Smith's~/.config/zsh/.zshrc. I
+have, however, done a bit of syntax policing and line-shuffling. What this
+actually does is enable nvim-style terminal cursor-shape changes on changing
+zsh's built-in vi modes. insert is a bar, normal and visual are blocks, replace
+is an underscore. This is a killer feature. Once you use it you will not be able
+to live without it.
 
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
 
@@ -216,14 +232,15 @@ The following is copied more-or-less from Luke Smith's~/.config/zsh/.zshrc. I ha
       if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]];
       then echo -ne '\e[1 q'
       elif [[ ${KEYMAP} == main ]] ||
-	       [[ ${KEYMAP} == viins ]] ||
-	       [[ ${KEYMAP} = '' ]] ||
-	       [[ $1 = 'beam' ]];
+               [[ ${KEYMAP} == viins ]] ||
+               [[ ${KEYMAP} = '' ]] ||
+               [[ $1 = 'beam' ]];
       then echo -ne '\e[5 q'
       fi
   }
   zle-line-init() {
-      zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+      zle -K viins # initiate `vi insert` as keymap (can be removed
+      # if `bindkey -V` has been set elsewhere)
       echo -ne "\e[5 q"
   }
   zle -N zle-keymap-select
@@ -248,7 +265,7 @@ Finally, load those zplugs:
 And that's actually it for the ~/.config/zsh/.zshrc.
 
 ** The other zsh files
-***~/.config/zsh/aliases.zsh
+*** ~/.config/zsh/aliases.zsh
 
 Let's just do everything with rust
 
@@ -278,7 +295,11 @@ Let's just do everything with rust
 
 #+end_src
 
-+The following is taken from the Arch Wiki, and sort of fixes starting emacs but causes other problems. In general, it's probably fine+. I modified it quite a bit so the above no longer applies. *This is extremely broken so it is commented out. Individual bits are also commented out in accordance with how broken they are. NOTE: this may differ on your system.*
++The following is taken from the Arch Wiki, and sort of fixes starting emacs but+
++causes other problems. In general, it's probably fine+. I modified it quite a
+bit so the above no longer applies. *This is extremely broken so it is commented*
+*out. Individual bits are also commented out in accordance with how broken they
+are. NOTE: this may differ on your system.*
 
 (the following snippet has been moved to ~/.local/bin/runemacs)
 
@@ -297,7 +318,9 @@ Get myself to use emacs more (broken)
 
 #+end_src
 
-Do window-manager based things, particularly in =sway= environment. All of this stuff is kind of iffy since it relies on i3-swallow which I don't actually have installed. This is pretty unnecessary and emacs will obsolesce it.
+Do window-manager based things, particularly in =sway= environment. All of this
+stuff is kind of iffy since it relies on i3-swallow which I don't actually have
+installed. This is pretty unnecessary and emacs will obsolesce it.
 
 #+begin_src shell :tangle~/.config/zsh/aliases.zsh
 

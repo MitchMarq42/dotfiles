@@ -1,11 +1,11 @@
-#+TITLE User-level configuration files
+#+TITLE: User-level configuration files
 
 Gotta fix the whole document to properly reflect the truth. It's wrong right
 now.
 
-- [-] :TODO: Fix everything to be accurate instead of just strikethroughs
+* [-] TODO Fix everything to be accurate instead of just strikethroughs [51%]
 
-===
+** Introduction
 
 Hi. Welcome to my dotfiles repository.
 
@@ -26,14 +26,14 @@ For shell configs, look in [[.config/zsh]]. For scripts, [[.local/bin]].
 
 There's a whole bunch of other stuff too, which I'll eventually go and document.
 
----
+===
 
 Self-documenting code does not exist, but some day there will be a self-tangling
 index.org in every sub-directory; this will essentially form a lazy man's web
 interface to his files. Until then, you're just gonna have to look at the code
 and figure out what it does yourself.
 
----
+===
 
 ** The terminal
 
@@ -67,12 +67,12 @@ in my config.conf:
 (otherwise says "N/A")
 
 - When paired with my ~.zshrc~, it now prints out the previous value of the TERM
-variable (before tmux sets it to ~screen~)
+  variable (before tmux sets it to ~screen~)
 
 - It will print out your currently-booted init system. The Artix inits work as
-expected, systemd insults you, Android says 'android-ini', and anything else
-(such as Windows) spews nonsense. (Need to double check the behavior of Windows.
-Perhaps I should poll for ~svchost.exe~?)
+  expected, systemd insults you, Android says 'android-ini', and anything else
+  (such as Windows) spews nonsense. (Need to double check the behavior of Windows.
+  Perhaps I should poll for ~svchost.exe~?)
 
 ** The coreutil aliases
 
@@ -160,7 +160,7 @@ Or for sway/i3:
   bindsym $mod+Right exec "~/.local/bin/mrandr left"
 #+end_src
 
----
+===
 
 +For getting capslock -\> esc and held-capslock -\> super to work in sway, see+
 +https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will+

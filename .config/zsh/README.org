@@ -1,4 +1,4 @@
-#+title Dotfiles
+#+TITLE Dotfiles
 #+PROPERTY: header-args:mkdirp yes
 
 * The beginning

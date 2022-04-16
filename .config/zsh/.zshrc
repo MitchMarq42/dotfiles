@@ -8,11 +8,11 @@
 [[ $(tty) = /dev/tty7 ]] && exec sway
 [[ $(tty) = /dev/tty5 ]] && startx $XINITRC
 
-case "{TTY}" in
+case "${TTY}" in
     /dev/tty5)
-	startx $XINITRC ;;
+        startx $XINITRC ;;
     /dev/tty7)
-	exec sway ;;
+        exec sway ;;
     *)
     ;;
 esac
@@ -24,9 +24,9 @@ case "${TMUX}" in
     # Start a new tmux session to put the current shell in,
     # if not already in a tmux or alacritty. Remember old TERM.
     "") case "${TERM}" in
-	    alacritty|eterm*|xterm-*) ;;
-	    *) OLDTERM="${TERM}" exec tmux ;;
-	esac ;;
+            alacritty|eterm*|xterm-*) ;;
+            *) OLDTERM="${TERM}" exec tmux ;;
+        esac ;;
 esac
 
 # Maybe install zplug, and definitely make it update stuff
@@ -46,17 +46,19 @@ zplug 'zsh-users/zsh-completions'
 zplug check --verbose || (
     printf "Install? [y/N]: "
     if read -q; then
-	echo; zplug install
+        echo; zplug install
     fi
 )
 
-# Choose a fetch based on the width of the terminal and run it, since we are firmly in an interactive shell now.
+# Choose a fetch based on the width of the terminal and run it, since we are
+# firmly in an interactive shell now.
 (( $COLUMNS <= 84 )) && FETCH='pfetch' || FETCH='neofetch'
 $FETCH #--ascii_colors 4 --colors 7 4 4 4 4 7
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of
+# ~/.config/zsh/.zshrc. Initialization code that may require console input
+# (password prompts, [y/n] confirmations, etc.) must go above this block;
+# everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -117,14 +119,15 @@ zle-keymap-select() {
     if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]];
     then echo -ne '\e[1 q'
     elif [[ ${KEYMAP} == main ]] ||
-	     [[ ${KEYMAP} == viins ]] ||
-	     [[ ${KEYMAP} = '' ]] ||
-	     [[ $1 = 'beam' ]];
+             [[ ${KEYMAP} == viins ]] ||
+             [[ ${KEYMAP} = '' ]] ||
+             [[ $1 = 'beam' ]];
     then echo -ne '\e[5 q'
     fi
 }
 zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    zle -K viins # initiate `vi insert` as keymap (can be removed
+    # if `bindkey -V` has been set elsewhere)
     echo -ne "\e[5 q"
 }
 zle -N zle-keymap-select

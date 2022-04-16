@@ -25,7 +25,9 @@
   ;; (require 'ansi-term-plus)
 
   ;; minify yes/no prompts
-  (defalias 'yes-or-no-p 'y-or-n-p)
+  (if (>= (string-to-number emacs-version) 28)
+      (setq use-short-answers t)
+    (defalias 'yes-or-no-p 'y-or-n-p))
 
   ;; ;; minibuffer frame basically (disabled because gnome borders are ugly)
   ;; (setq initial-frame-alist (append '((minibuffer . nil)) initial-frame-alist))

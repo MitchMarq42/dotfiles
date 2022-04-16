@@ -110,13 +110,13 @@
   :config
   (org-indent-mode)
   (setq org-ellipsis " ▾")
+  (setq org-startup-indented t)
   :hook (org-mode . variable-pitch-mode))
 (use-package org-appear
   :straight t
   :hook (org-mode . org-appear-mode)
   :config
-  (setq org-appear-autolinks t)
-  )
+  (setq org-appear-autolinks t))
 
 ;; cheaty key popups
 (use-package which-key

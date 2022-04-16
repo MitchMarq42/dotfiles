@@ -72,6 +72,13 @@ when editing from the console."
   (if (>= (string-to-number emacs-version) 29)
       (pixel-scroll-precision-mode t)))
 
+(defun toggle-ja-input ()
+  "switch between english and japanese"
+  (interactive)
+  (if (eq current-input-method 'japanese)
+      (setq current-input-method 'japanese-ascii)
+    (setq current-input-method 'japanese)))
+
 (defun mitch/general-config ()
   "A batch of commands to run immediately after loading the
 `general' package. Made solely to reduce lines in the init

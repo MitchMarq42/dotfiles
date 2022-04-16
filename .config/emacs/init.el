@@ -97,8 +97,9 @@
   ;; Toggle Japanese with `qq'
   ;; Sample text: 進撃 の 巨人
   ;; (shingeki no kyojin (attack on titan))
-  (setq default-input-method 'japanese)
-  (setq current-input-method 'japanese-ascii)
+  ;; (setq default-input-method 'japanese)
+  ;; (setq-default current-input-method 'japanese-ascii)
+  (setq debug-on-error t)
 
   ;; Visualize whitespace. In a very chill and invisible way.
   (global-whitespace-mode t)

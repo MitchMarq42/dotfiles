@@ -34,14 +34,14 @@ Fedora and Ubuntu (my server and media center both run ubuntu),
 [[https://sw.kovidgoyal.net/kitty/][kitty]] on MacOS,
 [[https://github.com/alacritty/alacritty][alacritty]] on arch/artix/whatever,
 and the totally vanilla default console host on Windows, unless I'm in
-cygwin/gitbash in which case I use their default ~mintty~.
+cygwin/gitbash in which case I use their default =mintty=.
 ** The shell
 I run [[https://man.archlinux.org/man/zshall.1][ZSH]]. It's decently fast, POSIX
 compliant, and has /zillions/ of options and menues and plugins.
 
 I have copied [[https://github.com/lukesmithxyz/voidrice][Luke Smith's config
 layout]] of a .zprofile linked to its xdg-compliant location and setting
-~$ZDOTDIR~ to [[.config/zsh]] because having a clean ~$HOME~ is nice. the
+=$ZDOTDIR= to [[.config/zsh]] because having a clean =$HOME= is nice. the
 [[.config/zsh/.zshrc]] sources [[functions.zsh]] and [[aliases.zsh]], and will
 on first run attempt to install [[https://github.com/zplug/zplug][zplug]] for a
 few fun extensions.
@@ -58,8 +58,8 @@ config.conf:
 - There is now a line for the current [[https://github.com/tmux/tmux][tmux]]
   pane if the current session is in one (otherwise says "N/A")
 
-- When paired with my ~.zshrc~, it now prints out the previous value of the TERM
-  variable (before tmux sets it to ~screen~)
+- When paired with my =.zshrc=, it now prints out the previous value of the TERM
+  variable (before tmux sets it to =screen=)
 
 - It will print out your currently-booted init system. The Artix inits work as
   expected, systemd insults you, Android says 'android-ini', and anything else

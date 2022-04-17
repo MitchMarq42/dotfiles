@@ -325,13 +325,18 @@ Point readers back to this source file:
   export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
   export NPM_CONFIG_TMP=$XDG_RUNTIME_DIR/npm
 #+end_src
-**** thankfully cargo/rust only needs one
+**** thankfully cargo/rust only needs +one+ two
 #+begin_src shell :tangle ~/.config/zsh/zprofile
+  export RUSTUP_HOME="$XDG_DATA_HOME"/rustup 
   export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 #+end_src
 **** as does golang
 #+begin_src shell :tangle ~/.config/zsh/zprofile
   export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
+#+end_src
+**** and python, somehow
+#+begin_src shell :tangle ~/.config/zsh/zprofile
+  export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy 
 #+end_src
 *** Other config directories
 **** passwords and encryption

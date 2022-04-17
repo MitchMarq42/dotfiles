@@ -51,29 +51,30 @@ if set.
 ** zplug, for plugins
 Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug.
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-  # Maybe install zplug, and definitely make it update stuff
-  export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-  export ZPLUG_HOME="$ZDOTDIR/zplug"
-  [ -d $ZDOTDIR/zplug ] || (
-      git clone https://github.com/zplug/zplug $ZPLUG_HOME #2>/dev/null
-  )
-  source $ZPLUG_HOME/init.zsh
-  zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-  zplug "romkatv/powerlevel10k", as:theme, depth:1
-  zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
-  # zplug 'zsh-users/zsh-history-substring-search', depth:1
-  zplug 'zsh-users/zsh-autosuggestions'
-  zplug 'zsh-users/zsh-completions'
-  zplug "dylanaraps/neofetch", as:command, depth:1
-  zplug "dylanaraps/pfetch", as:command, depth:1
-  zplug "keroserene/rickrollrc", as:command, depth:1, use:roll.sh, rename-to:dc
-  # Install plugins if there are plugins that have not been installed
-  zplug check --verbose || (
-      printf "Install? [y/N]: "
-      if read -q; then
-          echo; zplug install
-      fi
-  )
+    # Maybe install zplug, and definitely make it update stuff
+    export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+    export ZPLUG_HOME="$ZDOTDIR/zplug"
+    [ -d $ZDOTDIR/zplug ] || (
+        git clone https://github.com/zplug/zplug $ZPLUG_HOME #2>/dev/null
+    )
+    source $ZPLUG_HOME/init.zsh
+    zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+    zplug "romkatv/powerlevel10k", as:theme, depth:1
+    zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
+    # zplug 'zsh-users/zsh-history-substring-search', depth:1
+    zplug 'zsh-users/zsh-autosuggestions'
+    zplug 'zsh-users/zsh-completions'
+    zplug "dylanaraps/neofetch", as:command, depth:1
+    zplug "dylanaraps/pfetch", as:command, depth:1
+    zplug "keroserene/rickrollrc", as:command, depth:1, use:roll.sh, rename-to:dc
+    zplug "hkbakke/bash-insulter", use:"src/*"
+    # Install plugins if there are plugins that have not been installed
+    zplug check --verbose || (
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
+    )
 #+end_src
 ** load =zplug= statements
 Finally, load those zplugs:
@@ -139,7 +140,7 @@ Next we source some external settings files I wrote to keep the
   # source aliases and functions files
   source $ZDOTDIR/aliases.zsh
   source $ZDOTDIR/functions.zsh
-  source $ZDOTDIR/insulter.zsh
+  # source $ZDOTDIR/insulter.zsh
 #+end_src
 ** vi is pretty cool
 Since the emacs terminal is bad, let's rely on zsh itself for vi emulation (it

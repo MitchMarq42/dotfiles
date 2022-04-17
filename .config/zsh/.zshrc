@@ -37,6 +37,7 @@ zplug 'zsh-users/zsh-completions'
 zplug "dylanaraps/neofetch", as:command, depth:1
 zplug "dylanaraps/pfetch", as:command, depth:1
 zplug "keroserene/rickrollrc", as:command, depth:1, use:roll.sh, rename-to:dc
+zplug "hkbakke/bash-insulter", use:"src/*"
 # Install plugins if there are plugins that have not been installed
 zplug check --verbose || (
     printf "Install? [y/N]: "
@@ -85,7 +86,7 @@ compinit
 # source aliases and functions files
 source $ZDOTDIR/aliases.zsh
 source $ZDOTDIR/functions.zsh
-source $ZDOTDIR/insulter.zsh
+# source $ZDOTDIR/insulter.zsh
 
 # Use vim keys in tab complete menu etc:
 bindkey -M menuselect 'h' vi-backward-char

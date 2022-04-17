@@ -34,6 +34,8 @@ zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
 # zplug 'zsh-users/zsh-history-substring-search', depth:1
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'
+zplug "dylanaraps/neofetch", as:command, depth:1
+zplug "dylanaraps/pfetch", as:command, depth:1
 # Install plugins if there are plugins that have not been installed
 zplug check --verbose || (
     printf "Install? [y/N]: "
@@ -41,6 +43,8 @@ zplug check --verbose || (
         echo; zplug install
     fi
 )
+
+zplug load
 
 (( $COLUMNS <= 84 )) && FETCH='pfetch' || FETCH='neofetch'
 $FETCH #--ascii_colors 4 --colors 7 4 4 4 4 7
@@ -124,5 +128,3 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 #############################################################
 ###### End Luke Smith's custom vi-mode cursor switcher ######
 #############################################################
-
-zplug load

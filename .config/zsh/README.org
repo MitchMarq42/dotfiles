@@ -64,6 +64,8 @@ Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug
   # zplug 'zsh-users/zsh-history-substring-search', depth:1
   zplug 'zsh-users/zsh-autosuggestions'
   zplug 'zsh-users/zsh-completions'
+  zplug "dylanaraps/neofetch", as:command, depth:1
+  zplug "dylanaraps/pfetch", as:command, depth:1
   # Install plugins if there are plugins that have not been installed
   zplug check --verbose || (
       printf "Install? [y/N]: "
@@ -71,6 +73,11 @@ Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug
           echo; zplug install
       fi
   )
+#+end_src
+** load =zplug= statements
+Finally, load those zplugs:
+#+begin_src shell :tangle ~/.config/zsh/.zshrc
+  zplug load
 #+end_src
 ** Display pretty text graphics
 Now that all the possibilities for launching other environments or interactive
@@ -186,11 +193,6 @@ to live without it.
   #############################################################
   ###### End Luke Smith's custom vi-mode cursor switcher ######
   #############################################################
-#+end_src
-** load =zplug= statements
-Finally, load those zplugs:
-#+begin_src shell :tangle ~/.config/zsh/.zshrc
-  zplug load
 #+end_src
 And that's actually it for the ~/.config/zsh/.zshrc.
 

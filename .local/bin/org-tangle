@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+":"; exec emacs --quick --script "$0" "$@" # -*- mode: emacs-lisp; -*-
+;;; org-tangle
+
+;; Tangle source blocks from org files.
+;; Taken from https://orgmode.org/manual/Batch-Execution.html
+;; with the above header from Doom Emacs' enhanced version at
+;; https://github.com/hlissner/doom-emacs/blob/master/bin/org-tangle
+
+(require 'cl-lib)
+(require 'ox)
+(require 'ob-tangle)
+
+ (progn
+      (dolist (file command-line-args-left)
+        (with-current-buffer (find-file-noselect file)
+          (org-babel-tangle))))

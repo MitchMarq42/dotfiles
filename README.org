@@ -113,7 +113,7 @@ There are a few things to immediately note:
   out of ~japanese-ascii~, which is literally just normal text except ~qq~
   switches back to Japanese.
 * Other things
-** Old note on xkb custom mappings :todo:
+** TODO Old note on xkb custom mappings
 +For getting capslock -\> esc and held-capslock -\> super to work in sway, see+
 +https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will+
 +also suffice for any X11 window manager, or any other Wayland compositor that+
@@ -131,7 +131,7 @@ There are a few things to immediately note:
 As of 2020, xkb accepts user-specific keyboard patches. Modifying system files
 is no longer needed, and was always bad practice. Please don't do it either.
 
-** .config :todo:
+** TODO .config
 
 Basic. Place where configs go. Visit the location for more info, another org
 document may appear there.

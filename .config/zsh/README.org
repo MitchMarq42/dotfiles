@@ -227,3 +227,33 @@ Point readers back to this source file:
   alias ping="ping -c 4"
   alias ip="ip -c"
 #+end_src
+* functions.zsh
+** Tmux clean function to kill detached sessions
+#+begin_src shell :tangle ~/.config/zsh/functions.zsh
+  tmux-clean() {
+      sessions=$(tmux ls |
+                     grep -v attached |
+                     sed 's/\:\s.*$//'
+              )
+      for session in $sessions
+      do
+          tmux kill-session -t $session
+      done
+  }
+#+end_src
+** clear() is broken in tmux, so redefine it
+#+begin_src shell :tangle ~/.config/zsh/functions.zsh
+  [ -n "${TMUX}" ] && (
+      clear=$(which clear)
+      clear() {
+          $clear &&
+              tmux clear-history &&
+              $clear
+      }
+  )
+#+end_src
+** Tell vim to highlight the file as sh
+(their zsh highlighting is ugly.)
+#+begin_src shell :tangle ~/.config/zsh/functions.zsh
+  # vim: set ft=sh :
+#+end_src

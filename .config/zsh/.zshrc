@@ -36,6 +36,7 @@ zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'
 zplug "dylanaraps/neofetch", as:command, depth:1
 zplug "dylanaraps/pfetch", as:command, depth:1
+zplug "keroserene/rickrollrc", as:command, depth:1, use:roll.sh, rename-to:dc
 # Install plugins if there are plugins that have not been installed
 zplug check --verbose || (
     printf "Install? [y/N]: "

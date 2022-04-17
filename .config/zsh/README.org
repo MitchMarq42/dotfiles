@@ -66,6 +66,7 @@ Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug
   zplug 'zsh-users/zsh-completions'
   zplug "dylanaraps/neofetch", as:command, depth:1
   zplug "dylanaraps/pfetch", as:command, depth:1
+  zplug "keroserene/rickrollrc", as:command, depth:1, use:roll.sh, rename-to:dc
   # Install plugins if there are plugins that have not been installed
   zplug check --verbose || (
       printf "Install? [y/N]: "
@@ -199,11 +200,11 @@ And that's actually it for the ~/.config/zsh/.zshrc.
 * aliases.zsh
 ** User edit warning
 Point readers back to this source file:
-#+begin_src shell :tangle~/.config/zsh/aliases.zsh
+#+begin_src shell :tangle ~/.config/zsh/aliases.zsh
   # Don't edit this file. Edit the README.org instead, and tangle it.
 #+end_src
 ** Rust coreutil-replacement aliases, now with fallback
-#+begin_src shell :tangle~/.config/zsh/aliases.zsh
+#+begin_src shell :tangle ~/.config/zsh/aliases.zsh
   #which doas >/dev/null && alias sudo='doas'
   which exa >/dev/null && alias ls='exa'
   which exa >/dev/null && alias tree='exa -T'
@@ -211,13 +212,13 @@ Point readers back to this source file:
   #which dotacat >/dev/null && alias lolcat='dotacat'
 #+end_src
 ** color or auto-sudo, but not giving you up
-#+begin_src shell :tangle~/.config/zsh/aliases.zsh
-  [ -f /usr/bin/paru ] && alias pacman="paru" || alias pacman="sudo pacman"
+#+begin_src shell :tangle ~/.config/zsh/aliases.zsh
+  # [ -f /usr/bin/paru ] && alias pacman="paru" || alias pacman="sudo pacman"
   alias cd..="cd .."
   alias spider="spider -s 2 -c"
   alias mounr="doas mount"
   alias umounr="doas umount -r"
-  alias dc="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
+  # alias dc="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
   alias ping="ping -c 4"
   alias ip="ip -c"
 #+end_src

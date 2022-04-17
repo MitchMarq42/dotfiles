@@ -306,6 +306,13 @@ Point readers back to this source file:
   export WINIT_X11_SCALE_FACTOR="1.0"
 #+end_src
 ** Cleaning up home directory
+*** Xmonad directories
+(see https://wiki.archlinux.org/title/XDG_Base_Directory)
+#+begin_src shell :tangle ~/.config/zsh/zprofile
+  export XDG_CACHE_HOME/xmonad
+  export XDG_CONFIG_HOME/xmonad
+  export XDG_DATA_HOME/xmonad
+#+end_src
 *** language-specific package managers
 **** GHCup - just needs any value
 #+begin_src shell :tangle ~/.config/zsh/zprofile

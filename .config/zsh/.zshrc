@@ -1,5 +1,7 @@
 # vim: set ft=sh :
+
 # Don't edit this file. Modify and re-tangle the README.org instead.
+# (it may or may not do this when you write it)
 
 [[ $- != *i* ]] && return
 

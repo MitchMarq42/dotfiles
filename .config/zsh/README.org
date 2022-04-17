@@ -15,7 +15,11 @@ I'm presently not ready for fully committing to using emacs' built-in shell
 First we tell vim to use plain 'sh' highlighting:
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
   # vim: set ft=sh :
+#+end_src
+And tell the user not to edit this file:
+#+begin_src shell :tangle ~/.config/zsh/.zshrc
   # Don't edit this file. Modify and re-tangle the README.org instead.
+  # (it may or may not do this when you write it)
 #+end_src
 ** Startup-chain logic
 Next exit if this is a non-interactive shell.
@@ -51,30 +55,30 @@ if set.
 ** zplug, for plugins
 Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug.
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
-    # Maybe install zplug, and definitely make it update stuff
-    export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-    export ZPLUG_HOME="$ZDOTDIR/zplug"
-    [ -d $ZDOTDIR/zplug ] || (
-        git clone https://github.com/zplug/zplug $ZPLUG_HOME #2>/dev/null
-    )
-    source $ZPLUG_HOME/init.zsh
-    zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-    zplug "romkatv/powerlevel10k", as:theme, depth:1
-    zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
-    # zplug 'zsh-users/zsh-history-substring-search', depth:1
-    zplug 'zsh-users/zsh-autosuggestions'
-    zplug 'zsh-users/zsh-completions'
-    zplug "dylanaraps/neofetch", as:command, depth:1
-    zplug "dylanaraps/pfetch", as:command, depth:1
-    zplug "keroserene/rickrollrc", as:command, depth:1, use:roll.sh, rename-to:dc
-    zplug "hkbakke/bash-insulter", use:"src/*"
-    # Install plugins if there are plugins that have not been installed
-    zplug check --verbose || (
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
-    )
+  # Maybe install zplug, and definitely make it update stuff
+  export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+  export ZPLUG_HOME="$ZDOTDIR/zplug"
+  [ -d $ZDOTDIR/zplug ] || (
+      git clone https://github.com/zplug/zplug $ZPLUG_HOME #2>/dev/null
+  )
+  source $ZPLUG_HOME/init.zsh
+  zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+  zplug "romkatv/powerlevel10k", as:theme, depth:1
+  zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
+  # zplug 'zsh-users/zsh-history-substring-search', depth:1
+  zplug 'zsh-users/zsh-autosuggestions'
+  zplug 'zsh-users/zsh-completions'
+  zplug "dylanaraps/neofetch", as:command, depth:1
+  zplug "dylanaraps/pfetch", as:command, depth:1
+  zplug "keroserene/rickrollrc", as:command, depth:1, use:roll.sh, rename-to:dc
+  zplug "hkbakke/bash-insulter", use:"src/*"
+  # Install plugins if there are plugins that have not been installed
+  zplug check --verbose || (
+      printf "Install? [y/N]: "
+      if read -q; then
+          echo; zplug install
+      fi
+  )
 #+end_src
 ** load =zplug= statements
 Finally, load those zplugs:

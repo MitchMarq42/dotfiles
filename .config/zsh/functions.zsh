@@ -1,7 +1,8 @@
 tmux-clean() {
-    sessions=$(tmux ls |
-                   grep -v attached |
-                   sed 's/\:\s.*$//'
+    sessions=$(
+        tmux ls |
+            grep -v attached |
+            sed 's/\:\s.*$//'
             )
     for session in $sessions
     do

@@ -111,6 +111,9 @@
   (org-indent-mode)
   (setq org-ellipsis " ▾")
   (setq org-startup-indented t)
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (add-hook 'after-save-hook #'org-babel-tangle)))
   :hook (org-mode . variable-pitch-mode))
 (use-package org-appear
   :straight t

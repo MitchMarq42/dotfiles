@@ -83,6 +83,13 @@ On Xorg you can bind it to ctrl+alt+arrowkey
   bindsym $mod+Up exec "~/.local/bin/mrandr inverted"
   bindsym $mod+Right exec "~/.local/bin/mrandr left"
 #+end_src
+** org-tangle
+Tangle an org file into its resulting files. Very basic functionality, nothing
+fancy like Doom's script of the same name.
+*** Usage:
+#+begin_src sh
+  org-tangle README.org
+#+end_src
 ** runemacs
 Broken. Supposed to run emacs as a client while preserving arguments, but
 actually just does nothing.

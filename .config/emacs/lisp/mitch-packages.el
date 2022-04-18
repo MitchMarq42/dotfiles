@@ -105,7 +105,6 @@
 
 ;; Org mode and messy things
 (use-package org
-  :straight t
   :mode (("\\.org$" . org-mode))
   :config
   (org-indent-mode)

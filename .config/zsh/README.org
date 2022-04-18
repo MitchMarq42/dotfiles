@@ -56,8 +56,8 @@ if set.
 Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug.
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
   # Maybe install zplug, and definitely make it update stuff
-  export ZDOTDIR="${XDG_CONFIG_HOME/zsh}"
-  export ZPLUG_HOME="${ZDOTDIR/zplug}"
+  export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+  export ZPLUG_HOME="${ZDOTDIR}/zplug"
   [ -d $ZDOTDIR/zplug ] || (
       git clone https://github.com/zplug/zplug $ZPLUG_HOME #2>/dev/null
   )
@@ -124,7 +124,7 @@ on first run (Keep the comments so they don't regenerate):
   unsetopt autocd beep
   # End of lines configured by zsh-newuser-install
   # The following lines were added by compinstall
-  zstyle :compinstall filename "${ZDOTDIR/.zshrc}"
+  zstyle :compinstall filename "${ZDOTDIR}/.zshrc"
   autoload -Uz compinit
   # Basic auto/tab complete
   zstyle ':completion:*' menu select

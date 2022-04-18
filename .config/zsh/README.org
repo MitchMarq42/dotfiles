@@ -56,8 +56,8 @@ if set.
 Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug.
 #+begin_src shell :tangle ~/.config/zsh/.zshrc
   # Maybe install zplug, and definitely make it update stuff
-  export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-  export ZPLUG_HOME="$ZDOTDIR/zplug"
+  export ZDOTDIR="${XDG_CONFIG_HOME/zsh}"
+  export ZPLUG_HOME="${ZDOTDIR/zplug}"
   [ -d $ZDOTDIR/zplug ] || (
       git clone https://github.com/zplug/zplug $ZPLUG_HOME #2>/dev/null
   )
@@ -66,8 +66,8 @@ Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug
   zplug "romkatv/powerlevel10k", as:theme, depth:1
   zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
   # zplug 'zsh-users/zsh-history-substring-search', depth:1
-  zplug 'zsh-users/zsh-autosuggestions'
-  zplug 'zsh-users/zsh-completions'
+  zplug "zsh-users/zsh-autosuggestions"
+  zplug "zsh-users/zsh-completions"
   zplug "dylanaraps/neofetch", as:command, depth:1
   zplug "dylanaraps/pfetch", as:command, depth:1
   zplug "keroserene/rickrollrc", as:command, depth:1, use:roll.sh, rename-to:dc
@@ -124,7 +124,7 @@ on first run (Keep the comments so they don't regenerate):
   unsetopt autocd beep
   # End of lines configured by zsh-newuser-install
   # The following lines were added by compinstall
-  zstyle :compinstall filename "$ZDOTDIR/~/.config/zsh/.zshrc"
+  zstyle :compinstall filename "${ZDOTDIR/.zshrc}"
   autoload -Uz compinit
   # Basic auto/tab complete
   zstyle ':completion:*' menu select
@@ -144,7 +144,6 @@ Next we source some external settings files I wrote to keep the
   # source aliases and functions files
   source $ZDOTDIR/aliases.zsh
   source $ZDOTDIR/functions.zsh
-  # source $ZDOTDIR/insulter.zsh
 #+end_src
 ** vi is pretty cool
 Since the emacs terminal is bad, let's rely on zsh itself for vi emulation (it
@@ -211,19 +210,18 @@ Point readers back to this source file:
 ** Rust coreutil-replacement aliases, now with fallback
 #+begin_src shell :tangle ~/.config/zsh/aliases.zsh
   #which doas >/dev/null && alias sudo='doas'
-  which exa >/dev/null && alias ls='exa'
-  which exa >/dev/null && alias tree='exa -T'
-  which rg >/dev/null && alias grep='rg -uuu'
+  [ -x $(which exa) ] && alias ls='exa'
+  [ -x $(which exa) ] && alias tree='exa -T'
+  [ -x $(which rg) ] && alias grep='rg -uuu'
   #which dotacat >/dev/null && alias lolcat='dotacat'
 #+end_src
-** color or auto-sudo, but not giving you up
+** color and auto-sudo
 #+begin_src shell :tangle ~/.config/zsh/aliases.zsh
   # [ -f /usr/bin/paru ] && alias pacman="paru" || alias pacman="sudo pacman"
   alias cd..="cd .."
   alias spider="spider -s 2 -c"
   alias mounr="doas mount"
   alias umounr="doas umount -r"
-  # alias dc="curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
   alias ping="ping -c 4"
   alias ip="ip -c"
 #+end_src
@@ -309,14 +307,16 @@ Point readers back to this source file:
 *** Xmonad directories
 (see https://wiki.archlinux.org/title/XDG_Base_Directory)
 #+begin_src shell :tangle ~/.config/zsh/zprofile
-  export XDG_CACHE_HOME/xmonad
-  export XDG_CONFIG_HOME/xmonad
-  export XDG_DATA_HOME/xmonad
+  export XMONAD_CACHE_DIR="$XDG_CACHE_HOME/xmonad"
+  export XMONAD_CONFIG_DIR="$XDG_CONFIG_HOME/xmonad"
+  export XMONAD_DATA_DIR="$XDG_DATA_HOME/xmonad"
 #+end_src
 *** language-specific package managers
-**** GHCup - just needs any value
+**** Haskell
+GHCup just needs any value. Stack needs a specific location.
 #+begin_src shell :tangle ~/.config/zsh/zprofile
   export GHCUP_USE_XDG_DIRS="anything"
+  export STACK_ROOT="$XDG_DATA_HOME/stack"
 #+end_src
 **** NPM clutters everything up unless we add these lines:
 (also see: =npm config ls -l | grep /=)
@@ -352,11 +352,12 @@ without this =adb= etc give stupid errors
   export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
 #+end_src
 *** RC files
-**** xinitrc
-for some reason X doesn't pick up this value so we need to manually
-specify it when invoking =startx= anyway.
+**** xorg
+for some reason =startx= doesn't respect $XINITRC so you have to pass it
+manually
 #+begin_src shell :tangle ~/.config/zsh/zprofile
   export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/x11/xinitrc"
+  export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority 
 #+end_src
 **** gtk2 rc
 #+begin_src shell :tangle ~/.config/zsh/zprofile

@@ -51,7 +51,7 @@
   (mitch-cyan    "#00ffff")
   (mitch-white   "#ffffff")
   (mitch-pink    "#ffaaaa")
-  (mitch-light-black   "#303030" "darkgray" )
+  (mitch-light-black   "#303030" "#303030" "gray" )
   (mitch-light-red     "#ffa000")
   (mitch-light-green   "#00c000")
   (mitch-light-yellow  "#eeee99" "#eeee99" "lightyellow")
@@ -61,6 +61,7 @@
   (mitch-light-white   "#afafaf")
   (mitch-visual-bg     "#3f0090")
   (mitch-dark-gray     "#101010")
+  (mitch-dark-yellow   "#fada00")
   )
 
  ;; specifications for Emacs faces.
@@ -90,6 +91,11 @@
   (vertical-border (:foreground mitch-light-magenta :weight 'bold))
   (fringe (:inherit 'default))
   (show-paren-match (:foreground mitch-black :background mitch-light-magenta))
+  (whitespace-space (:foreground mitch-black))
+  (whitespace-tab (:foreground mitch-black))
+  (whitespace-newline (:foreground mitch-black))
+  (isearch (:foreground mitch-dark-yellow :background mitch-light-magenta :weight 'bold))
+  (lazy-highlight (:inherit 'isearch))
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (org-block (:inherit 'fixed-pitch))
   (org-block-begin-line (:foreground mitch-light-black))
@@ -101,9 +107,6 @@
   (org-special-keyword (:inherit '(font-lock-comment-face fixed-pitch)))
   (org-meta-line (:inherit '(font-lock-comment-face fixed-pitch)))
   (org-checkbox  (:inherit 'org-table))
-  (whitespace-space (:foreground mitch-black))
-  (whitespace-tab (:foreground mitch-black))
-  (whitespace-newline (:foreground mitch-black))
   )
  )
 

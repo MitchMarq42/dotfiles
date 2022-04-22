@@ -7,7 +7,7 @@ submodule_opts="--init --rebase --remote --merge"
 
 org_tangall(){
     orgs=$(
-	git_cmd diff --name-only |
+	git_cmd diff --name-only 'HEAD' 'HEAD^' |
 	    grep 'README.org'
 	)
     for org in $orgs

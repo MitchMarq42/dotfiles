@@ -24,7 +24,12 @@ done
 dots submodule init
 dots submodule update
 
-sudo dnf upgrade -y
-sudo dnf install util-linux zsh emacs qutebrowser gnome-tweak-tool neovim gnome-extensions-app util-linux-user
+# # On fedora do:
+# sudo dnf upgrade -y
+# sudo dnf install util-linux zsh emacs qutebrowser gnome-tweak-tool neovim gnome-extensions-app util-linux-user
+
+# # On macos do:
+# # check out
+# # https://github.com/d12frosted/homebrew-emacs-plus
 
 chsh $(which zsh)

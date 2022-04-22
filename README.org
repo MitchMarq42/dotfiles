@@ -134,4 +134,4 @@ is no longer needed, and was always bad practice. Please don't do it either.
 ** TODO .config
 
 Basic. Place where configs go. Visit the location for more info, another org
-document may appear there.
+document may or may not appear there.

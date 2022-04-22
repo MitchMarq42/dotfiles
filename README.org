@@ -105,7 +105,7 @@ There are a few things to immediately note:
   github once and then forgotten. So I extended it for nvim, then recreated it
   in emacs with the aid of
   [[https://github.com/jasonm23/autothemer][autothemer]] (which you can find at
-  [[.config/emacs/mitch-theme.el]]).
+  [[.config/emacs/lisp/mitch-theme.el]]).
 
 - Typing ~qq~ will change your input method. This is sort-of a built-in feature,
   but the default trigger is to type ~C-\~, which is annoying to press. The ~qq~

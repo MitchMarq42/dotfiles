@@ -6,7 +6,10 @@ repo="https://github.com/MitchMarq42/dotfiles"
 submodule_opts="--init --rebase --remote --merge"
 
 org_tangall(){
-    orgs=$(find -maxdepth 3 -name "README.org")
+    orgs=$(
+	git_cmd diff --name-only |
+	    grep 'README.org'
+	)
     for org in $orgs
     do
 	~/.local/bin/org-tangle $orgs

@@ -1,7 +1,8 @@
 ;; webkit.el
 ;;
 ;; This file is barely a thing.
-;; It was taken from https://raw.githubusercontent.com/emacksnotes/emacsnotes.wordpress.com/master/my-xwidget-menu.el
+;; It was taken from
+;; https://raw.githubusercontent.com/emacksnotes/emacsnotes.wordpress.com/master/my-xwidget-menu.el
 ;; as a simple and painless way to embed webkit into an emacs window,
 ;; ideally for use in something...
 
@@ -86,6 +87,12 @@
        :selected xwidget-webkit-mode
        :help "Xwidget webkit view mode"])))
 
-(add-hook 'xwidget-webkit-mode-hook 'display-line-numbers-mode)
+(add-hook 'xwidget-webkit-mode-hook
+	  #'(lambda () (display-line-numbers-mode -1)))
+
+(setq browse-url-browser-function 'xwidget-webkit-browse-url)
+(defun browse-url-default-browser (url &rest args)
+  "Override `browse-url-default-browser' to use `xwidget-webkit' URL ARGS."
+  (xwidget-webkit-browse-url url args))
 
 (provide 'webkit)

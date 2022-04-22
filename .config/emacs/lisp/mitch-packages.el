@@ -191,4 +191,13 @@
   (setq minimap-window-location 'right
 	minimap-update-delay 0))
 
+;; internal emacs window manager
+;; (use-package edwina
+;;   :straight t
+;;   :config
+;;   (setq display-buffer-base-action '(display-buffer-below-selected))
+;;   (edwina-setup-dwm-keys)
+;;   (edwina-mode 1)
+;; )
+
 (provide 'mitch-packages)

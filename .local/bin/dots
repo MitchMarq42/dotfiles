@@ -4,11 +4,26 @@
 
 repo="https://github.com/MitchMarq42/dotfiles"
 submodule_opts="--init --rebase --remote --merge"
+
+org_tangall(){
+    orgs=$(find -maxdepth 3 -name "README.org")
+    for org in $orgs
+    do
+	~/.local/bin/org-tangle $orgs
+    done
+}
+init(){
+    git clone --bare ${repo} $HOME/.local/git/dotfiles &&
+	git_cmd checkout -f &&
+	org_tangall
+}
+
 git_cmd(){
     git --git-dir=$HOME/.local/git/dotfiles --work-tree=$HOME "$@"
 }
 pull(){
     git_cmd "$@" &&
+	org_tangall &&
 	git_cmd submodule update $submodule_opts
 }
 push(){
@@ -19,6 +34,7 @@ diff(){
 }
 
 case $1 in
+    init) init ;;
     pull) pull "$@" ;;
     push) push "$@" ;;
     diff) diff "$@" ;;

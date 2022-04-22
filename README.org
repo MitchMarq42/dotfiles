@@ -39,8 +39,8 @@ cygwin/gitbash in which case I use their default =mintty=.
 I run [[https://man.archlinux.org/man/zshall.1][ZSH]]. It's decently fast, POSIX
 compliant, and has /zillions/ of options and menues and plugins.
 
-I have copied [[https://github.com/lukesmithxyz/voidrice][Luke Smith's config
-layout]] of a .zprofile linked to its xdg-compliant location and setting
+I have copied [[https://github.com/lukesmithxyz/voidrice][Luke Smith's config]]
+layout of a .zprofile linked to its xdg-compliant location and setting
 =$ZDOTDIR= to [[.config/zsh]] because having a clean =$HOME= is nice. the
 [[.config/zsh/.zshrc]] sources [[functions.zsh]] and [[aliases.zsh]], and will
 on first run attempt to install [[https://github.com/zplug/zplug][zplug]] for a

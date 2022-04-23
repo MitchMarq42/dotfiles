@@ -200,4 +200,11 @@
 ;;   (edwina-mode 1)
 ;; )
 
+(use-package visual-fill-column
+  :straight t
+  :config
+  (setq-default visual-fill-column-center-text t)
+  (setq-default fill-column 140)
+  (add-hook 'org-mode-hook #'visual-fill-column-mode))
+
 (provide 'mitch-packages)

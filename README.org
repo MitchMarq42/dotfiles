@@ -62,7 +62,7 @@ config.conf:
   variable (before tmux sets it to =screen=)
 
 - It will print out your currently-booted init system. The Artix inits work as
-  expected, systemd insults you, Android says 'android-ini', and anything else
+  expected, systemd insults you, Android says 'android-init', and anything else
   (such as Windows) spews nonsense. (Need to double check the behavior of
   Windows. Perhaps I should poll for ~svchost.exe~?)
 ** The coreutil aliases

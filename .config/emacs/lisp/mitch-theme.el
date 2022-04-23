@@ -70,6 +70,7 @@
   (cursor (:inherit 'default))
   (highlight (:background mitch-visual-bg))
   (region (:inherit 'highlight))
+  (link (:background mitch-visual-bg :foreground mitch-light-cyan :box 't))
   (line-number (:inherit 'fixed-pitch :foreground mitch-light-black :weight 'normal))
   (line-number-current-line (:inherit 'line-number :foreground mitch-yellow :weight 'bold))
   (linum (:inherit 'line-number))

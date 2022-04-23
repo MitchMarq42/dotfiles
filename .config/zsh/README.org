@@ -73,17 +73,6 @@ Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug
   zplug "keroserene/rickrollrc", as:command, depth:1, use:roll.sh, rename-to:dc
   zplug "hkbakke/bash-insulter", use:"src/*"
   # Install plugins if there are plugins that have not been installed
-  zplug check --verbose || (
-      printf "Install? [y/N]: "
-      if read -q; then
-          echo; zplug install
-      fi
-  )
-#+end_src
-** load =zplug= statements
-Finally, load those zplugs:
-#+begin_src shell :tangle .zshrc
-  zplug load
 #+end_src
 ** Display pretty text graphics
 Now that all the possibilities for launching other environments or interactive
@@ -198,6 +187,17 @@ to live without it.
   #############################################################
   ###### End Luke Smith's custom vi-mode cursor switcher ######
   #############################################################
+#+end_src
+** load =zplug= statements
+Finally, load those zplugs:
+#+begin_src shell :tangle .zshrc
+  zplug check --verbose || (
+      printf "Install? [y/N]: "
+      if read -q; then
+          echo; zplug install
+      fi
+  )
+  zplug load
 #+end_src
 And that's actually it for the .zshrc.
 

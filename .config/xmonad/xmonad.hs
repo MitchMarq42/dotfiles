@@ -21,11 +21,11 @@ myManageHook = composeAll
     , className =? "DesktopEditors"         --> viewShift "office"
     , className =? "Xfce4-settings-manager" --> viewShift "settings"
     , className =? "Emacs"                  --> viewShift "office"
-    , className =? "Oblogout"	        	--> doFloat
-    , className =? "st256color"		        --> doIgnore
-    , className =? "mpv"			        --> doIgnore
-    --, className =? "xfce4-panel"  		--> doIgnore
-    , className =? "mode-line-flame"  		--> doIgnore
+    , className =? "Oblogout"               --> doFloat
+    , className =? "st256color"             --> doIgnore
+    , className =? "mpv"                    --> doIgnore
+    --, className =? "xfce4-panel"            --> doIgnore
+    , className =? "mode-line-flame"        --> doIgnore
     , manageDocks
     ]
     where viewShift = doF . liftM2 (.) W.greedyView W.shift

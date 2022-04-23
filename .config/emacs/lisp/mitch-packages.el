@@ -145,6 +145,7 @@
 
 ;; Nobody loves a good language
 (use-package powershell :straight t)
+(use-package haskell-mode :straight t)
 
 ;; Better help-pages. Genuinely pretty great.
 (use-package helpful :straight t)

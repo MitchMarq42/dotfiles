@@ -5,7 +5,7 @@
 ;; | || | | || || |_  _|  __/| |
 ;; |_||_| |_||_| \__|(_)\___||_|
 ;;
-;; (above text graphic generated with command `figlet -k "init.el"')
+;; '((above text graphic generated with command `figlet -k "init.el"'))
 
 ;; Speed up loading/finding files
 (let
@@ -28,13 +28,6 @@
   (if (>= (string-to-number emacs-version) 28)
       (setq use-short-answers t)
     (defalias 'yes-or-no-p 'y-or-n-p))
-
-  ;; ;; minibuffer frame basically (disabled because gnome borders are ugly)
-  ;; (setq initial-frame-alist (append '((minibuffer . nil)) initial-frame-alist))
-  ;; (setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
-  ;; (setq minibuffer-auto-raise t)
-  ;; (setq minibuffer-exit-hook '(lambda () (lower-frame)))
-  ;; (setq minibuffer-frame-alist '((width . 80) (height . 10)))
 
   ;; do the things
   (setq server-after-make-frame-hook 'mitch/graphical-setup)
@@ -66,8 +59,8 @@
       (make-empty-file custom-file t))
   (load custom-file)
 
-  ;; straight.el minified bootstrap
-  ;; (the better package manager?) (split lines if you want) (or not)
+  ;; straight.el: the better package manager?
+  ;; minified bootstrap (split lines if you want) (or not)
   (defvar bootstrap-version) (let ((bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)) (bootstrap-version 5)) (unless (file-exists-p bootstrap-file) (with-current-buffer (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el" 'silent 'inhibit-cookies) (goto-char (point-max)) (eval-print-last-sexp))) (load bootstrap-file nil 'nomessage)) (straight-use-package 'use-package) (setq straight-use-package-by-default t)
 
   (require 'mitch-packages)
@@ -101,6 +94,9 @@
   ;; (shingeki no kyojin (attack on titan))
   ;; (setq default-input-method 'japanese)
   ;; (setq-default current-input-method 'japanese-ascii)
+  ;; DISABLED because something broke and I didn't bother figuring out what...
+
+  ;; barf out emacs errors as they are encountered
   (setq debug-on-error t)
 
   ;; Visualize whitespace. In a very chill and invisible way.

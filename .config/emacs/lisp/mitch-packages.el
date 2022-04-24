@@ -29,7 +29,7 @@
   :after evil
   :config
   (global-evil-surround-mode 1))
-	
+
 (if (< (string-to-number emacs-version) 29)
     (use-package undo-fu
       :diminish
@@ -49,18 +49,18 @@
   :diminish
   :defer 0.5
   :bind (("C-s" . swiper)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)
-	 ("C-l" . ivy-alt-done)
-	 ("C-j" . ivy-next-line)
-	 ("C-k" . ivy-previous-line)
-	 :map ivy-switch-buffer-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-l" . ivy-done)
-	 ("C-d" . ivy-switch-buffer-kill)
-	 :map ivy-reverse-i-search-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-d" . ivy-reverse-i-search-kill))
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
   :config (setq ivy-initial-inputs-alist nil)
   :init (ivy-mode 1))
 (use-package counsel
@@ -112,10 +112,20 @@
   (setq org-ellipsis " ▾")
   (setq org-startup-indented t)
   (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook 'after-save-hook #'org-babel-tangle)))
+            (lambda ()
+              (add-hook 'after-save-hook #'org-babel-tangle)))
   :hook (org-mode . variable-pitch-mode))
-(use-package org-contrib)
+(use-package org-contrib
+  :straight t
+  :after org
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (powershell . t)
+     (shell . t)
+     ))
+  )
 (use-package org-appear
   :straight t
   :hook (org-mode . org-appear-mode)
@@ -145,15 +155,32 @@
 
 ;; Nobody loves a good language
 (use-package powershell :straight t)
-(use-package haskell-mode :straight t)
+(use-package ob-powershell :straight t
+  :after org
+  :config
+  (setq ob-powershell-powershell-command "pwsh"))
+
+;; or a bad language
+(use-package haskell-mode
+  :straight t
+  :defer t
+  :init
+  (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
+  (add-hook 'haskell-mode-hook #'lsp)
+  :bind (
+         :map haskell-mode-map
+         ("C-c h" . hoogle)
+         ("C-c s" . haskell-mode-stylish-buffer))
+  :config (message "Loaded haskell-mode")
+  (setq haskell-mode-stylish-haskell-path "brittany")
+  (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
 
 ;; Better help-pages. Genuinely pretty great.
 (use-package helpful :straight t)
 
 ;; Keybinding manager
 (use-package general :straight t
-  :config
-  (mitch/general-config))
+  :config (mitch/general-config))
 
 ;; Better lisp highlighting?
 (use-package highlight-defined :straight t
@@ -191,7 +218,7 @@
   :straight t
   :init
   (setq minimap-window-location 'right
-	minimap-update-delay 0))
+        minimap-update-delay 0))
 
 ;; internal emacs window manager
 ;; (use-package edwina

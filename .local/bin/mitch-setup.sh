@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# .git_credentials file
-# https://MitchMarq42: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@github.com
-
 # # On Ubuntu do:
 # sudo apt install git curl emacs zsh
 

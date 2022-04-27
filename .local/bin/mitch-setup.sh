@@ -32,11 +32,17 @@ dots submodule update
 # sudo dnf install util-linux zsh emacs qutebrowser gnome-tweak-tool neovim gnome-extensions-app util-linux-user
 # sudo dnf install dnf-plugins-core
 
+# # brave:
 # sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
-
 # sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-
 # sudo dnf install brave-browser
+
+# # powershell:
+# sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+# curl https://packages.microsoft.com/config/rhel/7/prod.repo | sudo tee /etc/yum.repos.d/microsoft.repo
+# sudo dnf check-update
+# sudo dnf install compat-openssl10
+# sudo dnf install -y powershell
 
 
 # # On macos do:

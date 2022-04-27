@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
-Name=brave-wayland
+Name=brave
 StartupNotify=true
 StartupWMClass=brave-browser
-TryExec=brave --enable-features=UseOzonePlatform --ozone-platform=wayland %U
-Exec=brave --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+TryExec=/usr/bin/brave-browser
+Exec=brave-browser --enable-features=UseOzonePlatform --ozone-platform=wayland %U
 Terminal=false
 Icon=brave-desktop
 Type=Application

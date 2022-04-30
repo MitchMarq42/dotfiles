@@ -31,6 +31,8 @@ dots submodule update
 # sudo dnf upgrade -y
 # sudo dnf install util-linux zsh emacs qutebrowser gnome-tweak-tool neovim gnome-extensions-app util-linux-user
 # sudo dnf install dnf-plugins-core
+# # rmpfusion
+# sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # # brave:
 # sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/

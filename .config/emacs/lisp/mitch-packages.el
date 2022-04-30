@@ -114,7 +114,8 @@
   (add-hook 'org-mode-hook
             (lambda ()
               (add-hook 'after-save-hook #'org-babel-tangle)))
-  :hook (org-mode . variable-pitch-mode))
+  ;; :hook (org-mode . variable-pitch-mode)
+  )
 (use-package org-contrib
   :straight t
   :after org

@@ -56,7 +56,7 @@ if set.
 Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug.
 #+begin_src shell :tangle .zshrc
   # Maybe install zplug, and definitely make it update stuff
-  export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+  export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
   export ZPLUG_HOME="${ZDOTDIR}/zplug"
   [ -d $ZDOTDIR/zplug ] || (
       git clone https://github.com/zplug/zplug $ZPLUG_HOME #2>/dev/null

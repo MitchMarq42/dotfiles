@@ -26,7 +26,7 @@
    :non-normal-prefix "SPC"
    "w" 'evil-window-map
    "h" 'help-command
-   "b" 'ivy-switch-buffer
+   "b" 'counsel-switch-buffer
    "SPC" 'evil-buffer)
   (general-define-key
    :states 'normal 

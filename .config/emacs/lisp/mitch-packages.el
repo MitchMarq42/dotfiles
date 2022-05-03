@@ -1,30 +1,32 @@
-;; use-package statements...
+;;; mitch-packages --- Declare and configure use-package statements
+
+;;; Commentary:
+;; This is a file in which I put declarations for packages and things.
+
+;;; Code:
 
 ;; diminish
-(use-package diminish :straight t)
+(use-package diminish)
 (use-package eldoc
   :defer 1
   :diminish)
 
 ;; load evil
 (use-package evil
-  :straight t :diminish
+  :diminish
   :init
   (mitch/evil-init)
   :config
   (mitch/evil-config))
 (use-package evil-collection
-  :straight t
   :diminish 'evil-collection-unimpaired-mode
   :after evil
   :config (evil-collection-init))
 (use-package evil-commentary
-  :straight t
   :diminish 'evil-commentary-mode
   :config (evil-commentary-mode)
   :after evil)
 (use-package evil-surround
-  :straight t
   :diminish 'global-evil-surround-mode
   :after evil
   :config
@@ -32,10 +34,8 @@
 
 (if (< (string-to-number emacs-version) 29)
     (use-package undo-fu
-      :diminish
-      :straight t))
+      :diminish))
 (use-package evil-terminal-cursor-changer
-  :straight t
   :after evil
   :diminish
   :if (not (display-graphic-p))
@@ -45,56 +45,56 @@
 
 ;; Completion framework...
 (use-package ivy
-  :straight t
   :diminish
   :defer 0.5
   :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)
+	 ("C-l" . ivy-alt-done)
+	 ("C-j" . ivy-next-line)
+	 ("C-k" . ivy-previous-line)
+	 :map ivy-switch-buffer-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-l" . ivy-done)
+	 ("C-d" . ivy-switch-buffer-kill)
+	 :map ivy-reverse-i-search-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-reverse-i-search-kill))
   :config (setq ivy-initial-inputs-alist nil)
   :init (ivy-mode 1))
 (use-package counsel
-  :straight t
   :diminish
   :after ivy
   :config
   (setq counsel-describe-function-function #'helpful-callable)
   (setq counsel-describe-variable-function #'helpful-variable)
-  :init (counsel-mode t)
-  )
+  :init (counsel-mode t))
 
 ;; Better modeline?
-(use-package all-the-icons :straight t
+(use-package all-the-icons
   :defer 10
   :if (display-graphic-p))
-(use-package powerline :straight t
-  :init (setq powerline-default-separator 'slant))
-(use-package airline-themes :straight t
-  :init (setq airline-cursor-colors nil)
+(use-package powerline
+  :init
+  (setq powerline-default-separator 'slant))
+(use-package airline-themes
+  :init
+  (setq airline-cursor-colors nil)
   :after powerline
-  :config (load-theme 'airline-ravenpower t))
+  :config
+  (load-theme 'airline-ravenpower t))
 
 ;; Custom Theme.
 ;; Not to be confused with a color theme, or a color scheme, or a custom scheme.
-(use-package autothemer :straight t)
+(use-package autothemer)
 (load-theme 'mitch t)
 
 (use-package yascroll
-  :straight t
   :diminish
   :defer 1
   :if (display-graphic-p)
-  :config (setq yascroll:delay-to-hide nil)
+  :config
+  (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode 1))
 
 ;; parentheses settingses
@@ -102,8 +102,10 @@
       show-paren-style 'parenthesis)
 (show-paren-mode 1)
 (electric-pair-mode 1)
+;; Better parentheses settingses
+(use-package paredit)
 
-;; Org mode and messy things
+;; org mode and messy things
 (use-package org
   :straight (:type built-in)
   :mode (("\\.org$" . org-mode))
@@ -112,94 +114,86 @@
   (setq org-ellipsis " ▾")
   (setq org-startup-indented t)
   (add-hook 'org-mode-hook
-            (lambda ()
-              (add-hook 'after-save-hook #'org-babel-tangle)))
+	    (lambda ()
+	      (add-hook 'after-save-hook #'org-babel-tangle)))
   ;; :hook (org-mode . variable-pitch-mode)
   )
 (use-package org-contrib
-  :straight t
   :after org
   :config
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '(
-     (powershell . t)
+   '((powershell . t)
      (shell . t)
      ))
   )
 (use-package org-appear
-  :straight t
   :hook (org-mode . org-appear-mode)
   :config
   (setq org-appear-autolinks t))
 
 ;; cheaty key popups
 (use-package which-key
-  :straight t
   :diminish
   :defer 5
   :init (which-key-mode t))
 
 ;; parentheses are boring
 (use-package rainbow-delimiters
-  :straight t
   :diminish
   :defer 1
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Hex colors
 (use-package rainbow-mode
-  :straight t
   :diminish
   :defer 10
   :hook (prog-mode . rainbow-mode))
 
 ;; Nobody loves a good language
-(use-package powershell :straight t)
-(use-package ob-powershell :straight t
+(use-package powershell)
+(use-package ob-powershell
   :after org
   :config
   (setq ob-powershell-powershell-command "pwsh"))
 
 ;; or a bad language
 (use-package haskell-mode
-  :straight t
   :defer t
   :init
   (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
   (add-hook 'haskell-mode-hook #'lsp)
   :bind (
-         :map haskell-mode-map
-         ("C-c h" . hoogle)
-         ("C-c s" . haskell-mode-stylish-buffer))
+	 :map haskell-mode-map
+	 ("C-c h" . hoogle)
+	 ("C-c s" . haskell-mode-stylish-buffer))
   :config (message "Loaded haskell-mode")
   (setq haskell-mode-stylish-haskell-path "brittany")
   (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
 
 ;; Better help-pages. Genuinely pretty great.
-(use-package helpful :straight t)
+(use-package helpful)
 
 ;; Keybinding manager
-(use-package general :straight t
+(use-package general
   :config (mitch/general-config))
 
 ;; Better lisp highlighting?
-(use-package highlight-defined :straight t
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode))
+(use-package highlight-defined 
+  ;; :config
+  ;; (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
+  :hook (emacs-lisp-mode . highlight-defined-mode))
 
 ;; Shell linting?
-(use-package flycheck :straight t
+(use-package flycheck  
   :defer 5
-  :config
-  (add-hook 'sh-mode-hook 'flycheck-mode))
+  :hook (prog-mode . flycheck-mode))
 
 ;; Emacs startup profiling
-(use-package esup :straight t)
+(use-package esup)
 
 ;; Blingy file tree view
 (use-package treemacs
-  :straight t
   :defer 1
   :config
   (treemacs-project-follow-mode)
@@ -208,33 +202,36 @@
    'treemacs-mode-hook
    #'(lambda () (display-line-numbers-mode -1))))
 (use-package treemacs-evil
-  :straight t
   :after treemacs)
 (use-package treemacs-all-the-icons
-  :straight t
   :after treemacs)
 
 ;; Blingy laggy minimap on the right
 (use-package minimap
-  :straight t
   :init
   (setq minimap-window-location 'right
-        minimap-update-delay 0))
+	minimap-update-delay 0))
 
 ;; internal emacs window manager
 ;; (use-package edwina
-;;   :straight t
-;;   :config
+;;   ;;   :config
 ;;   (setq display-buffer-base-action '(display-buffer-below-selected))
 ;;   (edwina-setup-dwm-keys)
 ;;   (edwina-mode 1)
 ;; )
 
 (use-package visual-fill-column
-  :straight t
   :config
   (setq-default visual-fill-column-center-text t)
   (setq-default fill-column 140)
   (add-hook 'org-mode-hook #'visual-fill-column-mode))
 
+;; epic drop-down completion
+(use-package company
+  :config
+  (setq company-idle-delay 0.3)
+  :hook (prog-mode . company-mode)
+  :init (global-company-mode t))
+
 (provide 'mitch-packages)
+;;; mitch-packages.el ends here

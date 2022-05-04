@@ -1,3 +1,17 @@
+;;; mitch-theme.el --- set visual theme in the only unique way
+
+;;; Commentary:
+;; When I first started using `nvim', I copied my `nano' config
+;; which was very cringe and basic.  And so I scoured the internet
+;; for themes.  And discovered something truly disturbing:
+;; Every single `nvim' and `emacs' theme looks exactly the same,
+;; and they're all gray-on-gray cringe.  I prefer my cringe to really
+;; pop rather than ooze before my eyes, so I somehow found the `nvim'
+;; theme that gradually became this.
+;; We require 'autothemer because it makes the face declaration so much
+;; simpler.
+
+;;; Code:
 (require 'autothemer)
 
 ;; set font
@@ -44,7 +58,7 @@
   ;; Specify the color palette for each of the classes above.
   (mitch-black   "black" )
   (mitch-red     "red" )
-  (mitch-green   "SeaGreen3")
+  (mitch-green   "ForestGreen")
   (mitch-yellow  "gold1" )
   (mitch-blue    "blue" )
   (mitch-magenta "magenta")
@@ -71,9 +85,11 @@
   (highlight (:background mitch-visual-bg))
   (region (:inherit 'highlight))
   (link (:foreground mitch-light-blue))
-  (whitespace-line (:background "#880000"))
-  (line-number (:inherit 'fixed-pitch :foreground mitch-light-black :weight 'normal))
-  (line-number-current-line (:inherit 'line-number :foreground mitch-yellow :weight 'bold))
+  (whitespace-line (:background "#660000"))
+  (line-number (:inherit 'fixed-pitch :foreground mitch-light-black :weight
+			 'normal))
+  (line-number-current-line (:inherit 'line-number :foreground mitch-yellow
+				      :weight 'bold))
   (linum (:inherit 'line-number))
   (linum-relative-current-face (:inherit 'line-number-current-line))
   ;; font-lock faces. The defaults that are important to get right.
@@ -96,7 +112,8 @@
   (whitespace-space (:foreground mitch-black))
   (whitespace-tab (:foreground mitch-black))
   (whitespace-newline (:foreground mitch-black))
-  (isearch (:foreground mitch-dark-yellow :background mitch-light-magenta :weight 'bold))
+  (isearch (:foreground mitch-dark-yellow :background mitch-light-magenta
+			:weight 'bold))
   (lazy-highlight (:inherit 'isearch))
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (org-block (:inherit 'fixed-pitch))
@@ -120,15 +137,6 @@
 (setq window-divider-default-places t)
 (setq right-divider-width 5)
 (setq ring-bell-function 'ignore)
-;; Set faces for heading levels
-;; (dolist (face '((org-level-1 . 1.2)
-;; 		(org-level-2 . 1.1)
-;; 		(org-level-3 . 1.05)
-;; 		(org-level-4 . 1.0)
-;; 		(org-level-5 . 1.1)
-;; 		(org-level-6 . 1.1)
-;; 		(org-level-7 . 1.1)
-;; 		(org-level-8 . 1.1)))
-;;   (set-face-attribute (car face) nil :font "Ubuntu" :weight 'regular :height (cdr face)))
 
 (provide-theme 'mitch)
+;;; mitch-theme.el ends here

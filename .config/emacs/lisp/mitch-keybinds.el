@@ -1,4 +1,10 @@
-;; mitch-keybinds.el-- do keybinding things, mostly with General...
+;;; mitch-keybinds.el --- do keybinding things, mostly with General...
+;;; Commentary:
+;; There are a lot of things we do with the keyboard.  Perhaps all of the
+;; things, in fact.  Thus, we use the `general' package for transparently
+;; defining keybindings in various states.  See
+;; `https://github.com/noctuid/general.el' for more.
+;;; Code:
 (general-define-key
  "<escape>" 'keyboard-escape-quit
  "C--" 'text-scale-decrease
@@ -33,7 +39,7 @@
  "b" 'counsel-switch-buffer
  "SPC" 'evil-buffer)
 (general-define-key
- :states 'normal 
+ :states 'normal
  :prefix-command 'eval-map-prefix
  :prefix-map 'eval-map
  :prefix "SPC e"
@@ -65,3 +71,4 @@
 	 "u" 'counsel-unicode-char))
 
 (provide 'mitch-keybinds)
+;;; mitch-keybinds.el ends here

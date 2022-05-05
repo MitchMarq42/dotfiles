@@ -24,6 +24,7 @@
 (general-define-key
  :states 'normal
  "<escape>" 'evil-beginning-of-line
+ "RET" 'org-open-at-point
  "C-p" 'scroll-down-line
  "C-n" 'scroll-up-line
  "M-j" 'paredit-forward-slurp-sexp

@@ -116,6 +116,9 @@
   (add-hook 'org-mode-hook
 	    (lambda ()
 	      (add-hook 'after-save-hook #'org-babel-tangle)))
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (display-line-numbers-mode -1)))
   ;; :hook (org-mode . variable-pitch-mode)
   )
 (use-package org-contrib
@@ -232,6 +235,7 @@
   (setq company-idle-delay 0.3)
   :hook (prog-mode . company-mode)
   :init (global-company-mode t))
+(use-package company-org-block)
 
 (provide 'mitch-packages)
 ;;; mitch-packages.el ends here

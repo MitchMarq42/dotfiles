@@ -235,7 +235,17 @@
   (setq company-idle-delay 0.3)
   :hook (prog-mode . company-mode)
   :init (global-company-mode t))
-(use-package company-org-block)
+(use-package company-org-block
+  :after (org company))
+  
+;; Visualize whitespace. In a very chill and invisible way.
+(use-package whitespace
+  :straight (:type built-in)
+  :defer 1
+  :init
+  (setq-default whitespace-style '(face lines-tail))
+  (setq-default whitespace-line-column 80)
+  :config (global-whitespace-mode t))
 
 (provide 'mitch-packages)
 ;;; mitch-packages.el ends here

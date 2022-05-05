@@ -95,11 +95,6 @@
   ;; barf out emacs errors as they are encountered
   (setq debug-on-error t)
 
-  ;; Visualize whitespace. In a very chill and invisible way.
-  (global-whitespace-mode t)
-  (setq-default whitespace-style '(face lines-tail))
-  (setq-default whitespace-line-column 80)
-
   ;; clean up modeline things
   (diminish 'lisp-interaction-mode)
   (diminish 'global-whitespace-mode)
@@ -115,5 +110,7 @@
   ;; load eshell stuff when we start eshell
   (add-hook 'eshell-mode-hook #'(lambda () (require 'eshell-settings)))
   )
+;; lower gc threshold again
+(setq gc-cons-threshold (* 2 1000 1000))
 
 ;;; init.el ends here

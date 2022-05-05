@@ -1,3 +1,5 @@
+;;; mitch-defuns.el --- custom-defined functions
+;;; Commentary:
 ;; 	        _  _         _
 ;;   _ __ ___  (_)| |_  ___ | |__
 ;;  | '_ ` _ \ | || __|/ __|| '_ \  _____
@@ -11,24 +13,23 @@
 ;;
 ;; Some functions to run when loading packages...
 
+;;; Code:
 (defun mitch/evil-init ()
-  "A batch of commands to run as the :init of evil's
-`use-package'. Made solely to reduce lines in the
-init-file."
+  "A batch of commands to run as the :init of evil's `use-package'.
+Made solely to reduce lines in the init-file."
   (setq evil-want-integration t
 	evil-want-keybinding nil
 	evil-want-C-u-scroll nil
-	evil-want-C-i-jump nil)
-  (setq evil-undo-system
+	evil-want-C-i-jump nil
+	evil-vsplit-window-right t
+	evil-split-window-below t
+	evil-undo-system
 	(if (>= (string-to-number emacs-version) 29)
 	    (quote undo-redo)
-	  (quote undo-fu)))
-  (setq evil-vsplit-window-right t
-	evil-split-window-below t))
+	  (quote undo-fu))))
 (defun mitch/evil-config ()
-  "A batch of commands to run as the :config of
-evil's `use-package'. Made solely to reduce lines
-in the init-file."
+  "A batch of commands to run as the :config of evil's `use-package'.
+Made solely to reduce lines in the init-file."
   (evil-mode t)
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (global-visual-line-mode t)
@@ -73,18 +74,19 @@ when editing from the console."
       (pixel-scroll-precision-mode t)))
 
 (defun toggle-ja-input ()
-  "switch between english and japanese"
+  "Switch between english and japanese.  Broken."
   (interactive)
   (if (eq current-input-method 'japanese)
       (setq current-input-method 'japanese-ascii)
     (setq current-input-method 'japanese)))
 
 (defun mitch/general-config ()
-  "A batch of commands to run immediately after loading the
-`general' package. Made solely to reduce lines in the init
-file."
+  "A batch of commands to run immediately after loading the `general' package.
+Made solely to reduce lines in the init file."
   (require 'mitch-keybinds)
   )
 
 ;; This one line cost me over an hour of frustration...
 (provide 'mitch-defuns)
+
+;;; mitch-defuns.el ends here

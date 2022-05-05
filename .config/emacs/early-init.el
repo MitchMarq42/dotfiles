@@ -15,13 +15,13 @@ instead of the banal
     )))
 
 (setq initial-scratch-message (purecopy "\
-;; Write some lisp in this buffer and it can be executed,either with
+;; Write some lisp in this buffer and it can be executed, either with
 ;; \\[eval-last-sexp] locally or \\[eval-buffer] globally.
 
 "))
 
 ;; Crash the computer by overloading memory
-(setq gc-cons-threshold (* 17 gc-cons-threshold))
+(setq gc-cons-threshold (* 50 1000 1000))
 
 ;; Disable package.el so we can use straight
 (setq package-enable-at-startup nil)

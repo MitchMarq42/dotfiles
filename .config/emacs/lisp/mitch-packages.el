@@ -114,11 +114,11 @@
   (setq org-ellipsis " ▾")
   (setq org-startup-indented t)
   (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook 'after-save-hook #'org-babel-tangle)))
+	    #'(lambda ()
+		(add-hook 'after-save-hook #'org-babel-tangle)))
   (add-hook 'org-mode-hook
-	    (lambda ()
-	      (display-line-numbers-mode -1)))
+	    #'(lambda ()
+	       (display-line-numbers-mode -1)))
   ;; :hook (org-mode . variable-pitch-mode)
   )
 (use-package org-contrib
@@ -182,13 +182,13 @@
   :config (mitch/general-config))
 
 ;; Better lisp highlighting?
-(use-package highlight-defined 
+(use-package highlight-defined
   ;; :config
   ;; (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
   :hook (emacs-lisp-mode . highlight-defined-mode))
 
 ;; Shell linting?
-(use-package flycheck  
+(use-package flycheck
   :defer 5
   :hook (prog-mode . flycheck-mode))
 
@@ -227,7 +227,7 @@
   :config
   (setq-default visual-fill-column-center-text t)
   (setq-default fill-column 140)
-  (add-hook 'org-mode-hook #'visual-fill-column-mode))
+  :hook (org-mode-hook . visual-fill-column-mode))
 
 ;; epic drop-down completion
 (use-package company

@@ -109,6 +109,9 @@
 
   ;; load eshell stuff when we start eshell
   (add-hook 'eshell-mode-hook #'(lambda () (require 'eshell-settings)))
+  ;; Display "labmda" as λ
+  (global-prettify-symbols-mode 1)
+
   )
 ;; lower gc threshold again
 (setq gc-cons-threshold (* 2 1000 1000))

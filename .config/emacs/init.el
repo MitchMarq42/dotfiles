@@ -95,10 +95,6 @@
   ;; barf out emacs errors as they are encountered
   (setq debug-on-error t)
 
-  ;; clean up modeline things
-  (diminish 'lisp-interaction-mode)
-  (diminish 'global-whitespace-mode)
-
   ;; Speed up scrolling down (why is this even a thing?)
   (setq auto-window-vscroll nil)
 

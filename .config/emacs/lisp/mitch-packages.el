@@ -48,18 +48,18 @@
   :diminish
   :defer 0.5
   :bind (("C-s" . swiper)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)
-	 ("C-l" . ivy-alt-done)
-	 ("C-j" . ivy-next-line)
-	 ("C-k" . ivy-previous-line)
-	 :map ivy-switch-buffer-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-l" . ivy-done)
-	 ("C-d" . ivy-switch-buffer-kill)
-	 :map ivy-reverse-i-search-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-d" . ivy-reverse-i-search-kill))
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
   :config (setq ivy-initial-inputs-alist nil)
   :init (ivy-mode 1))
 (use-package counsel
@@ -75,6 +75,7 @@
   :defer 10
   :if (display-graphic-p))
 (use-package powerline
+  ;; :after mini-mode-line
   :init
   (setq powerline-default-separator 'slant))
 (use-package airline-themes
@@ -114,11 +115,13 @@
   (setq org-ellipsis " ▾")
   (setq org-startup-indented t)
   (add-hook 'org-mode-hook
-	    #'(lambda ()
-		(add-hook 'after-save-hook #'org-babel-tangle)))
+            #'(lambda ()
+                (add-hook 'after-save-hook
+			  #'(lambda ()
+			      (org-babel-tangle)))))
   (add-hook 'org-mode-hook
-	    #'(lambda ()
-	       (display-line-numbers-mode -1)))
+            #'(lambda ()
+                (display-line-numbers-mode -1)))
   ;; :hook (org-mode . variable-pitch-mode)
   )
 (use-package org-contrib
@@ -167,9 +170,9 @@
   (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
   (add-hook 'haskell-mode-hook #'lsp)
   :bind (
-	 :map haskell-mode-map
-	 ("C-c h" . hoogle)
-	 ("C-c s" . haskell-mode-stylish-buffer))
+         :map haskell-mode-map
+         ("C-c h" . hoogle)
+         ("C-c s" . haskell-mode-stylish-buffer))
   :config (message "Loaded haskell-mode")
   (setq haskell-mode-stylish-haskell-path "brittany")
   (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
@@ -190,6 +193,7 @@
 ;; Shell linting?
 (use-package flycheck
   :defer 5
+  :diminish
   :hook (prog-mode . flycheck-mode))
 
 ;; Emacs startup profiling
@@ -213,7 +217,7 @@
 (use-package minimap
   :init
   (setq minimap-window-location 'right
-	minimap-update-delay 0))
+        minimap-update-delay 0))
 
 ;; internal emacs window manager
 ;; (use-package edwina
@@ -231,37 +235,56 @@
 
 ;; epic drop-down completion
 (use-package company
+  :diminish
   :config
   (setq company-idle-delay 0.3)
   :hook (prog-mode . company-mode)
   :init (global-company-mode t))
 (use-package company-org-block
   :after (org company))
-  
+
 ;; Visualize whitespace. In a very chill and invisible way.
 (use-package whitespace
   :straight (:type built-in)
   :defer 1
+  :diminish
   :init
   (setq-default whitespace-style '(face lines-tail))
   (setq-default whitespace-line-column 80)
   :config (global-whitespace-mode t))
 
 (use-package pdf-tools
-  ;; :pin manual
+  :straight (:type git :host github
+		      :repo "dalanicolai/pdf-tools"
+		      :branch "pdf-roll"
+		      :files ("lisp/*.el"
+			      "README"
+			      ("build" "Makefile")
+			      ("build" "server")
+			      (:exclude "lisp/tablist.el" "lisp/tablist-filter.el")))
   :config
   (pdf-tools-install)
   (setq-default pdf-view-display-size 'fit-width)
-  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
+  ;; (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
 	TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
 	TeX-source-correlate-start-server t)
-  (add-hook 'TeX-after-compilation-finished-functions
-	    #'TeX-revert-document-buffer)
   (add-hook 'pdf-view-mode-hook
-	    #'(lambda () (display-line-numbers-mode -1)))
-  :custom
-  (pdf-annot-activate-created-annotations t "automatically annotate highlights"))
+	    #'(lambda () (display-line-numbers-mode -1) (mini-modeline-mode t)))
+  :hook (TeX-after-compilation-finished-functions TeX-revert-document-buffer))
+
+(use-package image-roll
+  :straight (:type git :repo "dalanicolai/image-roll.el.git"))
+;; (use-package hide-mode-line
+;;   ;; :hook (PDFView . hide-mode-line-mode)
+;;   :config
+;;   (hide-mode-line-mode)
+;;   (setq input-method-use-echo-area nil)
+;;   (setq resize-mini-windows nil))
+;; (use-package mini-modeline
+;;   :straight (:type git :repo "kiennq/emacs-mini-modeline")
+;;   :config
+;;   (mini-modeline-mode))
 
 (provide 'mitch-packages)
 ;;; mitch-packages.el ends here

@@ -20,9 +20,9 @@
 (set-face-attribute 'default nil
 		    :font "MesloLGS NF"
 		    :height 130)
-(set-face-attribute 'fixed-pitch nil
-		    :inherit 'default
-		    )
+;; (set-face-attribute 'fixed-pitch nil
+;; 		    :inherit 'default
+;; 		    )
 (set-face-attribute 'variable-pitch nil
 		    :font "Ubuntu"
 		    :height 200)
@@ -67,6 +67,7 @@
  ;; specifications for Emacs faces.
  (
   (default (:background mitch-black :foreground mitch-light-yellow))
+  (fixed-pitch (:inherit 'default))
   (cursor (:inherit 'default))
   (highlight (:background mitch-visual-bg))
   (region (:inherit 'highlight))
@@ -112,15 +113,6 @@
   (org-level-2 (:inherit 'org-level-1 :foreground "magenta3"))
   )
  )
-
-;; Slightly prettier org-headings
-(setq org-hide-leading-stars t)
-
-(tooltip-mode -1)
-(menu-bar-mode -1)
-(setq window-divider-default-places t)
-(setq right-divider-width 5)
-(setq ring-bell-function 'ignore)
 
 (provide-theme 'mitch)
 ;;; mitch-theme.el ends here

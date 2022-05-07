@@ -70,7 +70,14 @@
 ;; Custom Theme.
 ;; Not to be confused with a color theme, or a color scheme, or a custom scheme.
 (use-package autothemer
-  :config (load-theme 'mitch t))
+  :custom
+  (window-divider-default-places t)
+  (right-divider-width 5)
+  (ring-bell-function 'ignore)
+  :config
+  (tooltip-mode -1)
+  (menu-bar-mode -1)
+  (load-theme 'mitch t))
 
 (use-package yascroll
   :diminish
@@ -99,6 +106,7 @@
   :mode (("\\.org$" . org-mode))
   :custom
   (org-ellipsis " ▾")
+  (org-hide-leading-stars t)
   (org-startup-indented t)
   :config
   (org-indent-mode)

@@ -37,7 +37,7 @@
  :non-normal-prefix "SPC"
  "w" 'evil-window-map
  "h" 'help-command
- "b" 'counsel-switch-buffer
+ "b" 'consult-buffer
  "SPC" 'evil-buffer)
 (general-define-key
  :states 'normal
@@ -48,19 +48,19 @@
  "b" 'eval-buffer
  "r" 'eval-region
  ":" 'eval-expression)
-(general-define-key
- :states 'normal
- :prefix-command 'mini-map-prefix
- :prefix-map 'mini-map
- :prefix "SPC m"
- "m" 'minimap-mode
- "k" 'minimap-kill)
-(general-define-key
- :states 'normal
- :prefix-command 'treemacs-map-prefix
- :prefix-map 'treemacs-map
- :prefix "SPC t"
- "t" 'treemacs)
+;; (general-define-key
+;;  :states 'normal
+;;  :prefix-command 'mini-map-prefix
+;;  :prefix-map 'mini-map
+;;  :prefix "SPC m"
+;;  "m" 'minimap-mode
+;;  "k" 'minimap-kill)
+;; (general-define-key
+;;  :states 'normal
+;;  :prefix-command 'treemacs-map-prefix
+;;  :prefix-map 'treemacs-map
+;;  :prefix "SPC t"
+;;  "t" 'treemacs)
 (general-define-key
  :states 'insert
  "C-w" 'evil-window-map

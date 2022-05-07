@@ -14,19 +14,19 @@
 ;; Some functions to run when loading packages...
 
 ;;; Code:
-(defun mitch/evil-init ()
-  "A batch of commands to run as the :init of evil's `use-package'.
-Made solely to reduce lines in the init-file."
-  (setq evil-want-integration t
-	evil-want-keybinding nil
-	evil-want-C-u-scroll nil
-	evil-want-C-i-jump nil
-	evil-vsplit-window-right t
-	evil-split-window-below t
-	evil-undo-system
-	(if (>= (string-to-number emacs-version) 29)
-	    (quote undo-redo)
-	  (quote undo-fu))))
+;; (defun mitch/evil-init ()
+;;   "A batch of commands to run as the :init of evil's `use-package'.
+;; Made solely to reduce lines in the init-file."
+;;   (setq evil-want-integration t
+;; 	evil-want-keybinding nil
+;; 	evil-want-C-u-scroll nil
+;; 	evil-want-C-i-jump nil
+;; 	evil-vsplit-window-right t
+;; 	evil-split-window-below t
+;; 	evil-undo-system
+;; 	(if (>= (string-to-number emacs-version) 29)
+;; 	    (quote undo-redo)
+;; 	  (quote undo-fu))))
 (defun mitch/evil-config ()
   "A batch of commands to run as the :config of evil's `use-package'.
 Made solely to reduce lines in the init-file."

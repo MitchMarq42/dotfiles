@@ -13,11 +13,28 @@
 
 ;; load evil
 (use-package evil
-  :diminish
-  :init
-  (mitch/evil-init)
+  :diminish 'visual-line-mode
   :config
-  (mitch/evil-config))
+  :custom
+  (evil-want-integration t)
+  (evil-want-keybinding nil)
+  (evil-want-C-u-scroll nil)
+  (evil-want-C-i-jump nil)
+  (evil-vsplit-window-right t)
+  (evil-split-window-below t)
+  :init
+  (setq evil-undo-system
+	(if (>= (string-to-number emacs-version) 29)
+	    (quote undo-redo)
+	  (quote undo-fu)))
+  :config
+  (evil-mode t)
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (global-visual-line-mode t)
+  (diminish 'visual-line-mode))
+(use-package evil-collection
+  :after evil
+  :config (evil-collection-init))
 (use-package evil-commentary
   :diminish 'evil-commentary-mode
   :config (evil-commentary-mode)
@@ -25,8 +42,7 @@
 (use-package evil-surround
   :diminish 'global-evil-surround-mode
   :after evil
-  :config
-  (global-evil-surround-mode 1))
+  :config (global-evil-surround-mode 1))
 (use-package evil-terminal-cursor-changer
   :after evil
   :diminish
@@ -36,23 +52,24 @@
   (xterm-mouse-mode))
 (if (< (string-to-number emacs-version) 29)
     (use-package undo-fu
+      :after evil
       :diminish))
 
 ;; Completion framework...
 (use-package vertico
-  :after consult
-  :init (vertico-mode))
+  :custom (vertico-resize t)
+  :config (vertico-mode))
 (use-package consult
-  :defer 1)
+  :after vertico)
 (use-package savehist
   :straight (:type built-in)
-  :after consult
+  :after vertico
   :init (savehist-mode))
 (use-package marginalia
   :after (vertico consult)
   :init (marginalia-mode))
 (use-package orderless
-  :after consult
+  :after vertico
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
@@ -161,11 +178,12 @@
   :hook (prog-mode . rainbow-mode))
 
 ;; Nobody loves a good language
-(use-package powershell)
+(use-package powershell
+  :mode "\\.ps1\\'")
 
 ;; or a bad language
 (use-package haskell-mode
-  :defer t
+  :mode "\\.hs\\'"
   :init
   (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
   (add-hook 'haskell-mode-hook #'lsp)
@@ -198,11 +216,17 @@
   :config (global-flycheck-mode))
 
 ;; Emacs startup profiling
-(use-package esup)
+(use-package esup
+  :commands esup)
 
 ;; Blingy file tree view
 (use-package treemacs
-  :defer 1
+  :general (general-define-key
+	    :states 'normal
+	    :prefix-command 'treemacs-map-prefix
+	    :prefix-map 'treemacs-map
+	    :prefix "SPC t"
+	    "t" 'treemacs)
   :config
   (treemacs-project-follow-mode)
   (treemacs-git-mode 'simple)
@@ -216,6 +240,13 @@
 
 ;; Blingy laggy minimap on the right
 (use-package minimap
+  :general (general-define-key
+	    :states 'normal
+	    :prefix-command 'mini-map-prefix
+	    :prefix-map 'mini-map
+	    :prefix "SPC m"
+	    "m" 'minimap-mode
+	    "k" 'minimap-kill)
   :custom
   (minimap-window-location 'right)
   (minimap-update-delay 0)

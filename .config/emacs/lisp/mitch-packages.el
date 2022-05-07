@@ -121,9 +121,7 @@
 			      (org-babel-tangle)))))
   (add-hook 'org-mode-hook
             #'(lambda ()
-                (display-line-numbers-mode -1)))
-  ;; :hook (org-mode . variable-pitch-mode)
-  )
+                (display-line-numbers-mode -1))))
 (use-package org-contrib
   :after org
   :config
@@ -131,12 +129,22 @@
    'org-babel-load-languages
    '((powershell . t)
      (shell . t)
-     ))
-  )
+     )))
 (use-package org-appear
   :hook (org-mode . org-appear-mode)
   :config
   (setq org-appear-autolinks t))
+(use-package ob-powershell
+  :after org
+  :config
+  (setq ob-powershell-powershell-command "pwsh"))
+(use-package visual-fill-column
+  :config
+  (setq-default visual-fill-column-center-text t)
+  (setq-default fill-column 140)
+  :hook (org-mode-hook . visual-fill-column-mode))
+(use-package company-org-block
+  :after (org company))
 
 ;; cheaty key popups
 (use-package which-key
@@ -158,10 +166,6 @@
 
 ;; Nobody loves a good language
 (use-package powershell)
-(use-package ob-powershell
-  :after org
-  :config
-  (setq ob-powershell-powershell-command "pwsh"))
 
 ;; or a bad language
 (use-package haskell-mode
@@ -227,12 +231,6 @@
 ;;   (edwina-mode 1)
 ;; )
 
-(use-package visual-fill-column
-  :config
-  (setq-default visual-fill-column-center-text t)
-  (setq-default fill-column 140)
-  :hook (org-mode-hook . visual-fill-column-mode))
-
 ;; epic drop-down completion
 (use-package company
   :diminish
@@ -240,8 +238,6 @@
   (setq company-idle-delay 0.3)
   :hook (prog-mode . company-mode)
   :init (global-company-mode t))
-(use-package company-org-block
-  :after (org company))
 
 ;; Visualize whitespace. In a very chill and invisible way.
 (use-package whitespace

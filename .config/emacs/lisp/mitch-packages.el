@@ -18,10 +18,6 @@
   (mitch/evil-init)
   :config
   (mitch/evil-config))
-(use-package evil-collection
-  :diminish 'evil-collection-unimpaired-mode
-  :after evil
-  :config (evil-collection-init))
 (use-package evil-commentary
   :diminish 'evil-commentary-mode
   :config (evil-commentary-mode)
@@ -63,7 +59,6 @@
 
 ;; Better modeline?
 (use-package powerline
-  ;; :after mini-mode-line
   :init
   :custom (powerline-default-separator 'slant))
 (use-package airline-themes
@@ -74,19 +69,23 @@
 
 ;; Custom Theme.
 ;; Not to be confused with a color theme, or a color scheme, or a custom scheme.
-(use-package autothemer)
-(load-theme 'mitch t)
+(use-package autothemer
+  :config (load-theme 'mitch t))
 
 (use-package yascroll
   :diminish
   :defer 1
   :if (display-graphic-p)
   :custom (yascroll:delay-to-hide nil)
+  :custom-face
+  (yascroll:thumb-text-area ((t (:background "ForestGreen"))))
+  (yascroll:thumb-fringe
+   ((t (:background "ForestGreen" :foreground "ForestGreen"))))
   :config (global-yascroll-bar-mode 1))
 
 ;; parentheses settingses
 (use-package paredit
-  :defer 10
+  :defer 0.1
   :config
   (show-paren-mode 1)
   (electric-pair-mode 1)
@@ -211,7 +210,12 @@
 (use-package minimap
   :custom
   (minimap-window-location 'right)
-  (minimap-update-delay 0))
+  (minimap-update-delay 0)
+  :custom-face
+  (minimap-active-region-background
+   ((t (:background "#303030" :extend t))))
+  (minimap-current-line-face
+   ((t (:background "#afafaf" :extend t)))))
 
 ;; internal emacs window manager
 ;; (use-package edwina
@@ -226,8 +230,7 @@
   :diminish
   :custom (company-idle-delay 0.75)
   :hook (prog-mode . company-mode)
-  :config (global-company-mode t)
-  )
+  :config (global-company-mode t))
 
 ;; Visualize whitespace. In a very chill and invisible way.
 (use-package whitespace

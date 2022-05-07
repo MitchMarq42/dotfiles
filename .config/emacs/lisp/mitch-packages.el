@@ -13,8 +13,7 @@
 
 ;; load evil
 (use-package evil
-  :diminish 'visual-line-mode
-  :config
+  :diminish visual-line-mode
   :custom
   (evil-want-integration t)
   (evil-want-keybinding nil)
@@ -28,12 +27,10 @@
 	    (quote undo-redo)
 	  (quote undo-fu)))
   :config
-  (evil-mode t)
-  (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (global-visual-line-mode t)
-  (diminish 'visual-line-mode))
+  (evil-mode t))
 (use-package evil-collection
   :after evil
+  :diminish evil-collection-unimpaired-mode
   :config (evil-collection-init))
 (use-package evil-commentary
   :diminish 'evil-commentary-mode
@@ -128,13 +125,13 @@
   :config
   (org-indent-mode)
   (add-hook 'org-mode-hook
-            #'(lambda ()
-                (add-hook 'after-save-hook
+	    #'(lambda ()
+		(add-hook 'after-save-hook
 			  #'(lambda ()
 			      (org-babel-tangle)))))
   (add-hook 'org-mode-hook
-            #'(lambda ()
-                (display-line-numbers-mode -1))))
+	    #'(lambda ()
+		(display-line-numbers-mode -1))))
 (use-package org-contrib
   :after org
   :config
@@ -188,9 +185,9 @@
   (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
   (add-hook 'haskell-mode-hook #'lsp)
   :bind (
-         :map haskell-mode-map
-         ("C-c h" . hoogle)
-         ("C-c s" . haskell-mode-stylish-buffer))
+	 :map haskell-mode-map
+	 ("C-c h" . hoogle)
+	 ("C-c s" . haskell-mode-stylish-buffer))
   :config (message "Loaded haskell-mode")
   (setq haskell-mode-stylish-haskell-path "brittany")
   (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
@@ -205,8 +202,6 @@
 
 ;; Better lisp highlighting?
 (use-package highlight-defined
-  ;; :config
-  ;; (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
   :hook (emacs-lisp-mode . highlight-defined-mode))
 
 ;; Shell linting?
@@ -275,7 +270,7 @@
 (use-package whitespace
   :straight (:type built-in)
   :defer 1
-  :diminish
+  :diminish global-whitespace-mode
   :init
   (setq-default whitespace-style '(face lines-tail))
   (setq-default whitespace-line-column 80)

@@ -22,7 +22,7 @@
 	(cons mitch-directory load-path))
   (setq custom-theme-directory mitch-directory)
   (require 'mitch-defuns)
-  (require 'webkit)
+  ;; (require 'webkit)
   (require 'man-plus)
   ;; (require 'ansi-term-plus)
 
@@ -76,6 +76,7 @@
 	scroll-conservatively 100
 	scroll-up-aggressively 0.01
 	scroll-down-aggressively 0.01)
+  (global-visual-line-mode t)
 
   ;; run launcher exists. Copy it from
   ;; https://www.reddit.com/r/unixporn/comments/s7p7pr/so_which_run_launcher_do_you_use_rofi_or_dmenu/
@@ -83,7 +84,6 @@
 
   ;; UTF-8 supremacy (Snippet from https://github.com/doomemacs/doomemacs/blob/master/early-init.el)
   (set-language-environment "UTF-8")
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
   ;; Toggle Japanese with `qq'
   ;; Sample text: 進撃 の 巨人

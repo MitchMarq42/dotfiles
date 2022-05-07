@@ -31,10 +31,6 @@
   :after evil
   :config
   (global-evil-surround-mode 1))
-
-(if (< (string-to-number emacs-version) 29)
-    (use-package undo-fu
-      :diminish))
 (use-package evil-terminal-cursor-changer
   :after evil
   :diminish
@@ -42,45 +38,36 @@
   :config
   (evil-terminal-cursor-changer-activate)
   (xterm-mouse-mode))
+(if (< (string-to-number emacs-version) 29)
+    (use-package undo-fu
+      :diminish))
 
 ;; Completion framework...
-(use-package ivy
-  :diminish
-  :defer 0.5
-  :bind (("C-s" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
-  :config (setq ivy-initial-inputs-alist nil)
-  :init (ivy-mode 1))
-(use-package counsel
-  :diminish
-  :after ivy
-  :config
-  (setq counsel-describe-function-function #'helpful-callable)
-  (setq counsel-describe-variable-function #'helpful-variable)
-  :init (counsel-mode t))
+(use-package vertico
+  :after consult
+  :init (vertico-mode))
+(use-package consult
+  :defer 1)
+(use-package savehist
+  :straight (:type built-in)
+  :after consult
+  :init (savehist-mode))
+(use-package marginalia
+  :after (vertico consult)
+  :init (marginalia-mode))
+(use-package orderless
+  :after consult
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;; Better modeline?
-(use-package all-the-icons
-  :defer 10
-  :if (display-graphic-p))
 (use-package powerline
   ;; :after mini-mode-line
   :init
-  (setq powerline-default-separator 'slant))
+  :custom (powerline-default-separator 'slant))
 (use-package airline-themes
-  :init
-  (setq airline-cursor-colors nil)
+  :custom (airline-cursor-colors nil)
   :after powerline
   :config
   (load-theme 'airline-ravenpower t))
@@ -94,26 +81,28 @@
   :diminish
   :defer 1
   :if (display-graphic-p)
-  :config
-  (setq yascroll:delay-to-hide nil)
-  (global-yascroll-bar-mode 1))
+  :custom (yascroll:delay-to-hide nil)
+  :config (global-yascroll-bar-mode 1))
 
 ;; parentheses settingses
-(setq show-paren-delay 0
-      show-paren-style 'parenthesis)
-(show-paren-mode 1)
-(electric-pair-mode 1)
-;; Better parentheses settingses
-(use-package paredit)
+(use-package paredit
+  :defer 10
+  :config
+  (show-paren-mode 1)
+  (electric-pair-mode 1)
+  :custom
+  (show-paren-delay 0)
+  (show-paren-style 'parenthesis))
 
 ;; org mode and messy things
 (use-package org
   :straight (:type built-in)
   :mode (("\\.org$" . org-mode))
+  :custom
+  (org-ellipsis " ▾")
+  (org-startup-indented t)
   :config
   (org-indent-mode)
-  (setq org-ellipsis " ▾")
-  (setq org-startup-indented t)
   (add-hook 'org-mode-hook
             #'(lambda ()
                 (add-hook 'after-save-hook
@@ -132,12 +121,12 @@
      )))
 (use-package org-appear
   :hook (org-mode . org-appear-mode)
-  :config
-  (setq org-appear-autolinks t))
+  :custom
+  (org-appear-autolinks t))
 (use-package ob-powershell
   :after org
-  :config
-  (setq ob-powershell-powershell-command "pwsh"))
+  :custom
+  (ob-powershell-powershell-command "pwsh"))
 (use-package visual-fill-column
   :config
   (setq-default visual-fill-column-center-text t)
@@ -182,7 +171,8 @@
   (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
 
 ;; Better help-pages. Genuinely pretty great.
-(use-package helpful)
+(use-package helpful
+  :defer 0.75)
 
 ;; Keybinding manager
 (use-package general
@@ -198,7 +188,7 @@
 (use-package flycheck
   :defer 5
   :diminish
-  :hook (prog-mode . flycheck-mode))
+  :config (global-flycheck-mode))
 
 ;; Emacs startup profiling
 (use-package esup)
@@ -219,9 +209,9 @@
 
 ;; Blingy laggy minimap on the right
 (use-package minimap
-  :init
-  (setq minimap-window-location 'right
-        minimap-update-delay 0))
+  :custom
+  (minimap-window-location 'right)
+  (minimap-update-delay 0))
 
 ;; internal emacs window manager
 ;; (use-package edwina
@@ -234,10 +224,10 @@
 ;; epic drop-down completion
 (use-package company
   :diminish
-  :config
-  (setq company-idle-delay 0.3)
+  :custom (company-idle-delay 0.75)
   :hook (prog-mode . company-mode)
-  :init (global-company-mode t))
+  :config (global-company-mode t)
+  )
 
 ;; Visualize whitespace. In a very chill and invisible way.
 (use-package whitespace

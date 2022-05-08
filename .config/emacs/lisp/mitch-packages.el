@@ -181,9 +181,9 @@
 ;; or a bad language
 (use-package haskell-mode
   :mode "\\.hs\\'"
-  :init
-  (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
-  (add-hook 'haskell-mode-hook #'lsp)
+  ;; :init
+  ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
+  ;; (add-hook 'haskell-mode-hook #'lsp)
   :bind (
 	 :map haskell-mode-map
 	 ("C-c h" . hoogle)

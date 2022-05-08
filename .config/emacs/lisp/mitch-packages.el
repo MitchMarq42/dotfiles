@@ -194,7 +194,11 @@
 
 ;; Better help-pages. Genuinely pretty great.
 (use-package helpful
-  :defer 0.75)
+  :defer
+  :init
+  (defalias #'describe-variable #'helpful-variable)
+  (defalias #'describe-key #'helpful-key)
+  (defalias #'describe-function #'helpful-function))
 
 ;; Keybinding manager
 (use-package general

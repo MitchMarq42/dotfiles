@@ -47,10 +47,10 @@
   :config
   (evil-terminal-cursor-changer-activate)
   (xterm-mouse-mode))
-(if (< (string-to-number emacs-version) 29)
-    (use-package undo-fu
-      :after evil
-      :diminish))
+(use-package undo-fu
+  :after evil
+  :if (< (string-to-number emacs-version) 29)
+  :diminish)
 
 ;; Completion framework...
 (use-package vertico

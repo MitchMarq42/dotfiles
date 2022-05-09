@@ -22,7 +22,7 @@
 	(cons mitch-directory load-path))
   (setq custom-theme-directory mitch-directory)
   (require 'mitch-defuns)
-  ;; (require 'webkit)
+  ;; (require 'webkit) ; see https://github.com/akirakyle/emacs-webkit
   (require 'man-plus)
   ;; (require 'ansi-term-plus)
 

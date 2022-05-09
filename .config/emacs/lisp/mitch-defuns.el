@@ -62,7 +62,8 @@ the init file when we're on a graphical display.
 This prevents errors in termux and speeds up init
 when editing from the console."
   ;; hide gui scrollbars and menubar etc
-  (scroll-bar-mode 0)
+  (scroll-bar-mode t)
+  (setq scroll-bar-adjust-thumb-portion nil)
   (tool-bar-mode 0)
   (menu-bar-mode 0)
   (set-fringe-mode 8)

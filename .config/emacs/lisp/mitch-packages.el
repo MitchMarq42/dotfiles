@@ -21,11 +21,10 @@
   (evil-want-C-i-jump nil)
   (evil-vsplit-window-right t)
   (evil-split-window-below t)
-  :init
-  (setq evil-undo-system
-	(if (>= (string-to-number emacs-version) 29)
-	    (quote undo-redo)
-	  (quote undo-fu)))
+  (evil-undo-system
+   (if (>= (string-to-number emacs-version) 28)
+       (quote undo-redo)
+     (quote undo-fu)))
   :config
   (evil-mode t))
 (use-package evil-collection
@@ -96,7 +95,7 @@
 (use-package yascroll
   :diminish
   :defer 1
-  :if (display-graphic-p)
+  :if (not (display-graphic-p))
   :custom (yascroll:delay-to-hide nil)
   :custom-face
   (yascroll:thumb-text-area ((t (:background "ForestGreen"))))
@@ -192,17 +191,16 @@
   (setq haskell-mode-stylish-haskell-path "brittany")
   (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
 
-;; Better help-pages. Genuinely pretty great.
-(use-package helpful
-  :defer
-  :init
-  (defalias #'describe-variable #'helpful-variable)
-  (defalias #'describe-key #'helpful-key)
-  (defalias #'describe-function #'helpful-function))
-
 ;; Keybinding manager
 (use-package general
   :config (mitch/general-config))
+
+;; Better help-pages. Genuinely pretty great.
+(use-package helpful
+  :general (general-define-key
+   [remap describe-variable] 'helpful-variable
+   [remap describe-key] 'helpful-key
+   [remap describe-function] 'helpful-callable))
 
 ;; Better lisp highlighting?
 (use-package highlight-defined
@@ -275,9 +273,9 @@
   :straight (:type built-in)
   :defer 1
   :diminish global-whitespace-mode
-  :init
-  (setq-default whitespace-style '(face lines-tail))
-  (setq-default whitespace-line-column 80)
+  :custom
+  (whitespace-style '(face lines-tail))
+  (whitespace-line-column 80)
   :config (global-whitespace-mode t))
 
 ;; (use-package pdf-tools

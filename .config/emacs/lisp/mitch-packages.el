@@ -144,7 +144,7 @@
   :custom
   (org-appear-autolinks t))
 (use-package ob-powershell
-  :after org
+  :after (org powershell)
   :custom
   (ob-powershell-powershell-command "pwsh"))
 (use-package visual-fill-column
@@ -175,7 +175,8 @@
 
 ;; Nobody loves a good language
 (use-package powershell
-  :mode "\\.ps1\\'")
+  ;; :mode "\\.ps1\\'"
+  )
 
 ;; or a bad language
 (use-package haskell-mode

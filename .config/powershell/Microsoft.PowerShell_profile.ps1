@@ -1,5 +1,19 @@
+function make-promptpath(){
+    $location = get-location
+    write-host ($location.path -replace "$home",'~') -foregroundcolor darkblue
+}
+function color-promptstr(){
+    param([string]$promptstr = ">")
+    switch ($lastexitcode) {
+	(0) {$color = "green"}
+	default {$color = "darkred"}
+    }
+    $directprompt = write-host $promptstr -foregroundcolor $color -nonewline
+}
 function Prompt(){
-    "" + (Get-Location) + [environment]::newline + "> "
+    make-promptpath
+    color-promptstr ">"
+    return " "
 }
 
 # Vi mode, with pretty cursor manipulation
@@ -14,6 +28,5 @@ function OnViModeChange {
     }
 }
 Set-PSReadLineOption `
-  -ViModeIndicator Script `
-  -ViModeChangeHandler $Function:OnViModeChange
+  -ViModeIndicator 'cursor'
 set-psreadlineOption -editmode vi

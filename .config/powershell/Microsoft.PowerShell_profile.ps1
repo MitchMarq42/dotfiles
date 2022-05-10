@@ -1,32 +1,25 @@
-function make-promptpath(){
-    $location = get-location
-    write-host ($location.path -replace "$home",'~') -foregroundcolor darkblue
-}
-function color-promptstr(){
-    param([string]$promptstr = ">")
+#!/bin/pwsh
+
+# Powershell profile. Runs before entering a normal powershell session, and
+# raises the interface from bearable to almost-comfy.
+
+# Re-define the prompt() function. A simple imitation of my p10k config.
+function Prompt(){
+    write-host ((get-location).path -replace "$home",'~') -foregroundcolor darkblue
     switch ($lastexitcode) {
-	(0) {$color = "green"}
+	(0) {$color = "darkgreen"}
 	default {$color = "darkred"}
     }
-    $directprompt = write-host $promptstr -foregroundcolor $color -nonewline
-}
-function Prompt(){
-    make-promptpath
-    color-promptstr ">"
+    $directprompt = write-host ">" -foregroundcolor $color -nonewline
     return " "
 }
 
-# Vi mode, with pretty cursor manipulation
-# from https://docs.microsoft.com/en-us/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.2
-function OnViModeChange {
-    if ($args[0] -eq 'Command') {
-        # Set the cursor to a blinking block.
-        Write-Host -NoNewLine "`e[1 q"
-    } else {
-        # Set the cursor to a blinking line.
-        Write-Host -NoNewLine "`e[5 q"
-    }
-}
-Set-PSReadLineOption `
-  -ViModeIndicator 'cursor'
+# Vi-style line editing. Pretty good but no visual mode.
+Set-PSReadLineOption -ViModeIndicator 'cursor'
 set-psreadlineOption -editmode vi
+
+# zsh-like interactive array completion. Very not-perfect.
+Set-PSReadLineKeyHandler -chord tab -function MenuComplete
+
+# Packages/modules (broken)
+# Install-Module PSUnixUtilCompleters

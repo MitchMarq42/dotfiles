@@ -3,9 +3,28 @@
 # Powershell profile. Runs before entering a normal powershell session, and
 # raises the interface from bearable to almost-comfy.
 
+# a bunch of this stuff will be transposed from the zsh stuff...
+
+switch ($env:TTY) {
+    ("/dev/tty5") {startx $env:XINITRC}
+    ("/dev/tty7") {& sway; exit}
+    default {}
+}
+
+switch -regex ($env:TMUX) {
+    (*) {$env:OLDTERM = $env:TERM}
+    default {
+	switch -regex ($env:TERM) {
+	    (alacritty|eterm*|xterm-*) {}
+	    default {$env:OLDTERM = $env:TERM ; & tmux ; exit}
+	}
+    }
+}
+
 # Re-define the prompt() function. A simple imitation of my p10k config.
 function Prompt(){
-    write-host ((get-location).path -replace (($home).replace('\','/')),'~') -foregroundcolor darkblue #-nonewline
+    write-host ((get-location).path -replace (($home).replace('\','/')),'~') `
+      -foregroundcolor darkblue #-nonewline
     switch ($lastexitcode) {
 	(0) {$color = "darkgreen"}
 	default {$color = "darkred"}

@@ -53,7 +53,8 @@ if set.
   esac
 #+end_src
 ** zplug, for plugins
-Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to vim-plug.
+Bootstrap and invoke zplug, a git-based /zsh/ plugin manager similar to
+vim-plug.
 #+begin_src shell :tangle .zshrc
   # Maybe install zplug, and definitely make it update stuff
   export ZDOTDIR="$XDG_CONFIG_HOME/zsh"

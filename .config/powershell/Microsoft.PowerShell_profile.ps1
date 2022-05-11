@@ -5,14 +5,17 @@
 
 # a bunch of this stuff will be transposed from the zsh stuff...
 
+# clear screen, but only a little bit
+# & tput cup 0 0
+
 switch ($env:TTY) {
-    ("/dev/tty5") {startx $env:XINITRC}
+    ("/dev/tty5") {& startx $env:XINITRC}
     ("/dev/tty7") {& sway; exit}
     default {}
 }
 
 switch -regex ($env:TMUX) {
-    (*) {$env:OLDTERM = $env:TERM}
+    (".*") {$env:OLDTERM = $env:TERM}
     default {
 	switch -regex ($env:TERM) {
 	    (alacritty|eterm*|xterm-*) {}

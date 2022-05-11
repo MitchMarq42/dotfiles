@@ -213,7 +213,7 @@ Point readers back to this source file:
   #which doas >/dev/null && alias sudo='doas'
   [ -x $(which exa) ] && alias ls='exa'
   [ -x $(which exa) ] && alias tree='exa -T'
-  [ -x $(which rg) ] && alias grep='rg -uuu'
+  # [ -x $(which rg) ] && alias grep='rg -uuu'
   #which dotacat >/dev/null && alias lolcat='dotacat'
 #+end_src
 ** color and auto-sudo

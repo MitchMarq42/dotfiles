@@ -58,41 +58,44 @@ function use-module(){
 	  [string]$dev = 'powershell',
 	  [string]$manifest,
 	  [string]$build,
-	  [string]$import)
+	  [string]$import,
+	  [scriptblock]$if = {return $true})
     $module = [psobject]@{
 	name = $name
 	dev = $dev
 	manifest = $manifest
 	build = $build
 	import = $import
-    }
-    $module.remote = ($github + $module.dev + '/' + $module.name)
-    $module.local = $modulesdir + $module.name
-    $module.absmanifest = $module.local + '/' + $module.manifest
-    if (!(test-path $module.absmanifest)) {
-	"Installing " + $module.name
-	git clone $module.remote ($modulesdir + $module.name)
-	if ($module.build) {
-	    set-location $module.local
-	    invoke-expression $module.build
+	if = $if}
+    if ($module.if.invoke()) {
+	# "loading " + $module.name # DEBUG
+	$module.remote = ($github + $module.dev + '/' + $module.name)
+	$module.local = $modulesdir + $module.name
+	$module.absmanifest = $module.local + '/' + $module.manifest
+	if (!(test-path $module.absmanifest)) {
+	    "Installing " + $module.name
+	    git clone $module.remote ($modulesdir + $module.name)
+	    if ($module.build) {
+		set-location $module.local
+		invoke-expression $module.build
+	    }
 	}
+	if ($module.import) {
+	    set-location $module.local
+	    import-module $module.import
+	} else {
+	    Import-Module $module.absmanifest
+	}
+	set-location $startingdir
     }
-    if ($module.import) {
-	set-location $module.local
-	import-module $module.import
-    } else {
-	Import-Module $module.absmanifest
-    }
-    set-location $startingdir
 }
 # posh-git
-use-module `
-  -name 'posh-git' `
+use-module 'posh-git' `
   -dev 'dahlbyk' `
   -manifest 'src/posh-git.psd1'
 # unix-completers
-use-module `
-  -name 'unixcompleters' `
+use-module 'unixcompleters' `
+  -if {$PSVersionTable.PSVersion.Major -ge 6} `
   -manifest 'Microsoft.PowerShell.UnixTabCompletion.psd1' `
   -build './build.ps1 -Clean' `
   -import './out/Microsoft.PowerShell.UnixTabCompletion/0.5.0/Microsoft.PowerShell.UnixTabCompletion.dll'

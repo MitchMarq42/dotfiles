@@ -24,17 +24,21 @@ switch -regex ($env:TMUX) {
     }
 }
 
+# environment fixes
+$env:XDG_DATA_HOME = "$env:HOME/.local/share"
+$env:PATH = "$env:HOME/.local/bin/:" + $env:PATH
+
 # Re-define the prompt() function. A simple imitation of my p10k config.
 function Prompt(){
     write-host ((get-location).path -replace (($home).replace('\','/')),'~') `
-      -foregroundcolor darkblue #-nonewline
+      -foregroundcolor darkblue
     switch ($lastexitcode) {
-	(0) {$color = "darkgreen"}
-	default {$color = "darkred"}
+	(0) {$color = "darkgreen"}        # Success = exit code 0
+	# ($null) {$color = "darkgreen"}    # New shell = no exit code
+	default {$color = "darkred"}      # All other exit codes are bad
     }
-    # & $GitPromptScriptBlock
-    $directprompt = write-host ">" -foregroundcolor $color -nonewline
-    return " "
+    write-host "> " -foregroundcolor $color -nonewline
+    return "`e[5 q"
 }
 
 # Vi-style line editing. Pretty good but no visual mode.
@@ -45,5 +49,50 @@ set-psreadlineOption -editmode vi
 Set-PSReadLineKeyHandler -chord tab -function MenuComplete
 
 # Packages/modules (broken)
-# Install-Module PSUnixUtilCompleters
-# Import-Module '/home/mitch/.local/share/powershell/Modules/posh-git/1.1.0/posh-git.psd1'
+$github = 'https://github.com/' 
+$modulesdir = ($env:XDG_DATA_HOME + '/powershell/Modules/')
+$startingdir = get-location
+
+function use-module(){
+    param([string]$name,
+	  [string]$dev = 'powershell',
+	  [string]$manifest,
+	  [string]$build,
+	  [string]$import)
+    $module = [psobject]@{
+	name = $name
+	dev = $dev
+	manifest = $manifest
+	build = $build
+	import = $import
+    }
+    $module.remote = ($github + $module.dev + '/' + $module.name)
+    $module.local = $modulesdir + $module.name
+    $module.absmanifest = $module.local + '/' + $module.manifest
+    if (!(test-path $module.absmanifest)) {
+	"Installing " + $module.name
+	git clone $module.remote ($modulesdir + $module.name)
+	if ($module.build) {
+	    set-location $module.local
+	    invoke-expression $module.build
+	}
+    }
+    if ($module.import) {
+	set-location $module.local
+	import-module $module.import
+    } else {
+	Import-Module $module.absmanifest
+    }
+    set-location $startingdir
+}
+# posh-git
+use-module `
+  -name 'posh-git' `
+  -dev 'dahlbyk' `
+  -manifest 'src/posh-git.psd1'
+# unix-completers
+use-module `
+  -name 'unixcompleters' `
+  -manifest 'Microsoft.PowerShell.UnixTabCompletion.psd1' `
+  -build './build.ps1 -Clean' `
+  -import './out/Microsoft.PowerShell.UnixTabCompletion/0.5.0/Microsoft.PowerShell.UnixTabCompletion.dll'

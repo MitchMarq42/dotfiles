@@ -60,31 +60,24 @@ function use-module(){
 	  [string]$build,
 	  [string]$import,
 	  [scriptblock]$if = {return $true})
-    $module = [psobject]@{
-	name = $name
-	dev = $dev
-	manifest = $manifest
-	build = $build
-	import = $import
-	if = $if}
-    if ($module.if.invoke()) {
-	# "loading " + $module.name # DEBUG
-	$module.remote = ($github + $module.dev + '/' + $module.name)
-	$module.local = $modulesdir + $module.name
-	$module.absmanifest = $module.local + '/' + $module.manifest
-	if (!(test-path $module.absmanifest)) {
-	    "Installing " + $module.name
-	    git clone $module.remote ($modulesdir + $module.name)
-	    if ($module.build) {
-		set-location $module.local
-		invoke-expression $module.build
+    if ($if.invoke()) {
+	# "loading " + $name # DEBUG
+	$remote = ($github + $dev + '/' + $name)
+	$local = $modulesdir + $name
+	$absmanifest = $local + '/' + $manifest
+	if (!(test-path $absmanifest)) {
+	    "Installing " + $name
+	    git clone $remote ($modulesdir + $name)
+	    if ($build) {
+		set-location $local
+		invoke-expression $build
 	    }
 	}
-	if ($module.import) {
-	    set-location $module.local
-	    import-module $module.import
+	if ($import) {
+	    set-location $local
+	    import-module $import
 	} else {
-	    Import-Module $module.absmanifest
+	    Import-Module $absmanifest
 	}
 	set-location $startingdir
     }

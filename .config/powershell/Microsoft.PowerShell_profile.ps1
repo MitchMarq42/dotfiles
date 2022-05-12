@@ -37,8 +37,8 @@ function Prompt(){
 	# ($null) {$color = "darkgreen"}    # New shell = no exit code
 	default {$color = "darkred"}      # All other exit codes are bad
     }
-    write-host "> " -foregroundcolor $color -nonewline
-    return "`e[5 q"
+    write-host ">" -foregroundcolor $color -nonewline
+    return " " #"`e[5 q"
 }
 
 # Vi-style line editing. Pretty good but no visual mode.
@@ -97,3 +97,5 @@ use-module 'unixcompleters' `
   -manifest 'Microsoft.PowerShell.UnixTabCompletion.psd1' `
   -build './build.ps1 -Clean' `
   -import './out/Microsoft.PowerShell.UnixTabCompletion/0.5.0/Microsoft.PowerShell.UnixTabCompletion.dll'
+
+[Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()

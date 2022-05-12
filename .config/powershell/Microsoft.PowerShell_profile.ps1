@@ -47,6 +47,11 @@ set-psreadlineOption -editmode vi
 
 # zsh-like interactive array completion. Very not-perfect.
 Set-PSReadLineKeyHandler -chord tab -function MenuComplete
+set-psreadlineOption -ShowToolTips:$False
+
+# history search
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 # Packages/modules (broken)
 $github = 'https://github.com/' 

@@ -8,7 +8,7 @@
 # clear screen, but only a little bit
 # & tput cup 0 0
 
-switch ($env:TTY) {
+switch -regex (tty) {
     ("/dev/tty5") {& startx $env:XINITRC}
     ("/dev/tty7") {& sway; exit}
     default {}
@@ -41,17 +41,46 @@ function Prompt(){
     return " " #"`e[5 q"
 }
 
-# Vi-style line editing. Pretty good but no visual mode.
-Set-PSReadLineOption -ViModeIndicator 'cursor'
-set-psreadlineOption -editmode vi
+$PSReadlineOptions = @{
+    editmode = 'vi'
+    vimodeindicator = 'cursor'
+    HistorySearchCursorMovesToEnd = $true
+    showtooltips = $false
+}
+
+set-psreadlineoption @PSReadlineOptions
 
 # zsh-like interactive array completion. Very not-perfect.
 Set-PSReadLineKeyHandler -chord tab -function MenuComplete
-set-psreadlineOption -ShowToolTips:$False
 
 # history search
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+
+# Quote auto-matching-- see https://github.com/PowerShell/PSReadLine
+Set-PSReadLineKeyHandler -Chord "'",'"' `
+  -BriefDescription SmartInsertQuote `
+  -LongDescription "Insert paired quotes if not already on a quote" `
+  -ScriptBlock {
+      param($key, $arg)
+      $line = $null
+      $cursor = $null
+      [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState(
+	  [ref]$line, [ref]$cursor)
+      if ($line[$cursor] -eq $key.KeyChar) {
+	  # Just move the cursor
+	  [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition(
+	      $cursor + 1)
+      } else {
+	  # Insert matching quotes, move cursor to be in between the quotes
+	  [Microsoft.PowerShell.PSConsoleReadLine]::Insert(
+	      "$($key.KeyChar)" * 2)
+	  [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState(
+	      [ref]$line, [ref]$cursor)
+	  [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition(
+	      $cursor - 1)
+      }
+  }
 
 # Packages/modules (broken)
 $github = 'https://github.com/' 
@@ -67,12 +96,12 @@ function use-module(){
 	  [scriptblock]$if = {return $true})
     if ($if.invoke()) {
 	# "loading " + $name # DEBUG
-	$remote = ($github + $dev + '/' + $name)
-	$local = $modulesdir + $name
-	$absmanifest = $local + '/' + $manifest
+	$remote = $github + (join-path $dev $name)
+	$local = join-path $modulesdir $name
+	$absmanifest = join-path $local  $manifest
 	if (!(test-path $absmanifest)) {
 	    "Installing " + $name
-	    git clone $remote ($modulesdir + $name)
+	    git clone $remote (join-path $modulesdir $name)
 	    if ($build) {
 		set-location $local
 		invoke-expression $build

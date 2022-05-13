@@ -95,9 +95,9 @@ function get-typename {
 function use-module(){
     param([string]$name,
 	  [string]$dev = 'powershell',
-	  $manifest,
+	  $manifest = "$name.psd1",
 	  [scriptblock]$build,
-	  [string]$import,
+	  [string]$import ,
 	  [scriptblock]$if = {return $true})
     if ($if.invoke()) {
 	# "loading " + $name # DEBUG

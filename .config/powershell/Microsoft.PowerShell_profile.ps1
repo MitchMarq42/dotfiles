@@ -87,24 +87,29 @@ $github = 'https://github.com/'
 $modulesdir = ($env:XDG_DATA_HOME + '/powershell/Modules/')
 $startingdir = get-location
 
+function get-typename {
+    param($variable)
+    ($variable.gettype()).name
+}
+
 function use-module(){
     param([string]$name,
 	  [string]$dev = 'powershell',
-	  [string]$manifest,
-	  [string]$build,
+	  $manifest,
+	  [scriptblock]$build,
 	  [string]$import,
 	  [scriptblock]$if = {return $true})
     if ($if.invoke()) {
 	# "loading " + $name # DEBUG
 	$remote = $github + (join-path $dev $name)
 	$local = join-path $modulesdir $name
-	$absmanifest = join-path $local  $manifest
+	$absmanifest = join-path $local $manifest
 	if (!(test-path $absmanifest)) {
 	    "Installing " + $name
 	    git clone $remote (join-path $modulesdir $name)
 	    if ($build) {
 		set-location $local
-		invoke-expression $build
+		$build.invoke()
 	    }
 	}
 	if ($import) {
@@ -124,7 +129,7 @@ use-module 'posh-git' `
 use-module 'unixcompleters' `
   -if {$PSVersionTable.PSVersion.Major -ge 6} `
   -manifest 'Microsoft.PowerShell.UnixTabCompletion.psd1' `
-  -build './build.ps1 -Clean' `
+  -build {./build.ps1 -Clean} `
   -import './out/Microsoft.PowerShell.UnixTabCompletion/0.5.0/Microsoft.PowerShell.UnixTabCompletion.dll'
 
 [Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()

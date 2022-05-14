@@ -5,8 +5,6 @@
 
 # a bunch of this stuff will be transposed from the zsh stuff...
 
-# clear screen, but only a little bit
-# & tput cup 0 0
 
 switch -regex (tty) {
     ("/dev/tty5") {& startx $env:XINITRC}
@@ -103,19 +101,24 @@ function use-module(){
 	# "loading " + $name # DEBUG
 	$remote = $github + (join-path $dev $name)
 	$local = join-path $modulesdir $name
-	$absmanifest = join-path $local $manifest
-	if (!(test-path $absmanifest)) {
+	if ( $manifest.gettype().name -eq 'Boolean' ) {
+	    $absmanifest = join-path $local $manifest
+	    $haslocal = (test-path $absmanifest)
+	} else {
+	    $haslocal = (test-path $local)
+	    $nomanifest = $true
+	}
+	if (!($haslocal)) {
 	    "Installing " + $name
 	    git clone $remote (join-path $modulesdir $name)
 	    if ($build) {
 		set-location $local
 		$build.invoke()
-	    }
-	}
+	    }}
 	if ($import) {
 	    set-location $local
 	    import-module $import
-	} else {
+	} elseif (!($nomanifest)) {
 	    Import-Module $absmanifest
 	}
 	set-location $startingdir
@@ -123,6 +126,7 @@ function use-module(){
 }
 # posh-git
 use-module 'posh-git' `
+  -if {$PSVersionTable.PSVersion.Major -lt 6} `
   -dev 'dahlbyk' `
   -manifest 'src/posh-git.psd1'
 # unix-completers
@@ -131,5 +135,21 @@ use-module 'unixcompleters' `
   -manifest 'Microsoft.PowerShell.UnixTabCompletion.psd1' `
   -build {./build.ps1 -Clean} `
   -import './out/Microsoft.PowerShell.UnixTabCompletion/0.5.0/Microsoft.PowerShell.UnixTabCompletion.dll'
+use-module 'neofetch' `
+  -dev 'dylanaraps' `
+  -manifest 'none' `
+  -build {make PREFIX=$HOME/.local install}
+use-module 'pfetch' `
+  -dev 'dylanaraps' `
+  -manifest 'none' `
+  -build {make PREFIX=$HOME/.local install}
 
+# clear screen
+clear
+# run fetch based on terminal height
+if ($host.ui.RawUI.WindowSize.Width -gt 80) {
+    neofetch
+} else {
+    pfetch
+}
 [Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()

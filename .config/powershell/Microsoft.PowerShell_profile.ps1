@@ -99,7 +99,7 @@ function use-module(){
 	  [scriptblock]$if = {return $true})
     if ($if.invoke()) {
 	# "loading " + $name # DEBUG
-	$remote = $github + (join-path $dev $name)
+	$remote = $github + ($dev + '/' + $name)
 	$local = join-path $modulesdir $name
 	if ( $manifest.gettype().name -eq 'Boolean' ) {
 	    $absmanifest = join-path $local $manifest

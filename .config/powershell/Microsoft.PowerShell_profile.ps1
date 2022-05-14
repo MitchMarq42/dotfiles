@@ -103,11 +103,10 @@ function use-module(){
 	$local = join-path $modulesdir $name
 	if ( $manifest.gettype().name -eq 'Boolean' ) {
 	    $absmanifest = join-path $local $manifest
-	    $haslocal = (test-path $absmanifest)
-	} else {
+	    $haslocal = (test-path $absmanifest)}
+	else {
 	    $haslocal = (test-path $local)
-	    $nomanifest = $true
-	}
+	    $nomanifest = $true}
 	if (!($haslocal)) {
 	    "Installing " + $name
 	    git clone $remote (join-path $modulesdir $name)
@@ -117,13 +116,13 @@ function use-module(){
 	    }}
 	if ($import) {
 	    set-location $local
-	    import-module $import
-	} elseif (!($nomanifest)) {
-	    Import-Module $absmanifest
-	}
+	    import-module $import}
+	elseif (!($nomanifest)) {
+	    Import-Module $absmanifest}
 	set-location $startingdir
     }
 }
+
 # posh-git
 use-module 'posh-git' `
   -if {$PSVersionTable.PSVersion.Major -lt 6} `

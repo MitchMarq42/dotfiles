@@ -28,7 +28,7 @@ $env:PATH = "$env:HOME/.local/bin/:" + $env:PATH
 
 # Re-define the prompt() function. A simple imitation of my p10k config.
 function Prompt(){
-    write-host ((get-location).path -replace (($home).replace('\','/')),'~') `
+    write-host ($pwd.path -replace ($home).replace('\','\\'),'~') `
       -foregroundcolor darkblue
     switch ($lastexitcode) {
 	(0) {$color = "darkgreen"}        # Success = exit code 0

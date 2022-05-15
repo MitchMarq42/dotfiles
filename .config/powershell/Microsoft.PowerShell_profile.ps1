@@ -135,10 +135,12 @@ use-module 'unixcompleters' `
   -build {./build.ps1 -Clean} `
   -import './out/Microsoft.PowerShell.UnixTabCompletion/0.5.0/Microsoft.PowerShell.UnixTabCompletion.dll'
 use-module 'neofetch' `
+  -if {! $IsWindows} `
   -dev 'dylanaraps' `
   -manifest 'none' `
   -build {make PREFIX=$HOME/.local install}
 use-module 'pfetch' `
+  -if {! $IsWindows} `
   -dev 'dylanaraps' `
   -manifest 'none' `
   -build {make PREFIX=$HOME/.local install}

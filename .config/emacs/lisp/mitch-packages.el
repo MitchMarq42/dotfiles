@@ -254,14 +254,6 @@
   (minimap-current-line-face
    ((t (:background "#afafaf" :extend t)))))
 
-;; internal emacs window manager
-;; (use-package edwina
-;;   ;;   :config
-;;   (setq display-buffer-base-action '(display-buffer-below-selected))
-;;   (edwina-setup-dwm-keys)
-;;   (edwina-mode 1)
-;; )
-
 ;; epic drop-down completion
 (use-package company
   :diminish
@@ -278,39 +270,6 @@
   (whitespace-style '(face lines-tail))
   (whitespace-line-column 80)
   :config (global-whitespace-mode t))
-
-;; (use-package pdf-tools
-;;   :straight (:type git :host github
-;; 		      :repo "dalanicolai/pdf-tools"
-;; 		      :branch "pdf-roll"
-;; 		      :files ("lisp/*.el"
-;; 			      "README"
-;; 			      ("build" "Makefile")
-;; 			      ("build" "server")
-;; 			      (:exclude "lisp/tablist.el" "lisp/tablist-filter.el")))
-;;   :config
-;;   (pdf-tools-install)
-;;   (setq-default pdf-view-display-size 'fit-width)
-;;   ;; (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward)
-;;   (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-;; 	TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
-;; 	TeX-source-correlate-start-server t)
-;;   (add-hook 'pdf-view-mode-hook
-;; 	    #'(lambda () (display-line-numbers-mode -1) (mini-modeline-mode t)))
-;;   :hook (TeX-after-compilation-finished-functions TeX-revert-document-buffer))
-
-;; (use-package image-roll
-;;   :straight (:type git :repo "dalanicolai/image-roll.el.git"))
-;; (use-package hide-mode-line
-;;   ;; :hook (PDFView . hide-mode-line-mode)
-;;   :config
-;;   (hide-mode-line-mode)
-;;   (setq input-method-use-echo-area nil)
-;;   (setq resize-mini-windows nil))
-;; (use-package mini-modeline
-;;   :straight (:type git :repo "kiennq/emacs-mini-modeline")
-;;   :config
-;;   (mini-modeline-mode))
 
 (provide 'mitch-packages)
 ;;; mitch-packages.el ends here

@@ -11,8 +11,24 @@
   :defer 1
   :diminish)
 
+;; Keybinding manager
+(use-package general
+  :config (mitch/general-config))
+
 ;; load evil
 (use-package evil
+  :general
+  (general-define-key
+   :states 'normal
+   "<escape>" 'evil-beginning-of-line
+   "C-p" 'scroll-down-line
+   "C-n" 'scroll-up-line)
+  (general-define-key
+   :states 'insert
+   "C-w" 'evil-window-map
+   "C-V" (general-key-dispatch
+	     'evil-quoted-insert
+	   "u" 'insert-char))
   :diminish visual-line-mode
   :custom
   (evil-want-integration t)
@@ -25,7 +41,7 @@
    (if (>= (string-to-number emacs-version) 28)
        (quote undo-redo)
      (quote undo-fu)))
-  :config
+  :init
   (evil-mode t))
 (use-package evil-collection
   :after evil
@@ -106,6 +122,12 @@
 ;; parentheses settingses
 (use-package paredit
   :defer 0.1
+  :general (general-define-key
+	    :states 'normal
+	    "M-j" 'paredit-forward-slurp-sexp
+	    "M-k" 'paredit-forward-barf-sexp
+	    "M-h" 'paredit-backward-barf-sexp
+	    "M-l" 'paredit-backward-slurp-sexp)
   :config
   (show-paren-mode 1)
   (electric-pair-mode 1)
@@ -192,16 +214,21 @@
   (setq haskell-mode-stylish-haskell-path "brittany")
   (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
 
-;; Keybinding manager
-(use-package general
-  :config (mitch/general-config))
-
 ;; Better help-pages. Genuinely pretty great.
 (use-package helpful
   :general (general-define-key
-   [remap describe-variable] 'helpful-variable
-   [remap describe-key] 'helpful-key
-   [remap describe-function] 'helpful-callable))
+	    [remap describe-key] 'helpful-key
+	    [remap describe-variable] 'helpful-variable
+	    [remap describe-function] 'helpful-callable)
+  (general-define-key
+   :keymaps 'help-map
+   "F" 'describe-face
+   "k" 'helpful-key)
+  (general-define-key
+   :keymaps 'emacs-lisp-mode-map
+   :states 'normal
+   "K" 'helpful-at-point)
+  )
 
 ;; Better lisp highlighting?
 (use-package highlight-defined

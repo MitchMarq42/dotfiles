@@ -89,7 +89,12 @@
 
 ;; broken terminal that doesn't compile but at least it's fast when it does
 (use-package vterm
-  :custom (vterm-always-compile-module t)
+  :general (general-define-key
+	    :states 'normal
+	    "SPC 4 v" 'vterm-other-window)
+  :custom
+  (vterm-always-compile-module t)
+  (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no")
   :config
   (add-hook 'vterm-mode-hook
 	    #'(lambda ()

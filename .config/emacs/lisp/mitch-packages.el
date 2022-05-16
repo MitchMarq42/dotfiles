@@ -86,6 +86,13 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;; broken terminal that doesn't compile but at least it's fast when it does
+(use-package vterm
+  :custom (vterm-always-compile-module t)
+  :config
+  (add-hook 'vterm-mode-hook
+	    #'(lambda ()
+		(display-line-numbers-mode -1))))
 ;; Better modeline?
 (use-package powerline
   :init
@@ -196,9 +203,9 @@
   :hook (prog-mode . rainbow-mode))
 
 ;; Nobody loves a good language
-(use-package powershell
-  ;; :mode "\\.ps1\\'"
-  )
+(use-package powershell)
+
+(use-package cider)
 
 ;; or a bad language
 (use-package haskell-mode

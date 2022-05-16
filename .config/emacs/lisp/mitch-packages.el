@@ -1,8 +1,9 @@
 ;;; mitch-packages --- Declare and configure use-package statements
 
 ;;; Commentary:
+;; -----------------------------------------------------------------------------
 ;; This is a file in which I put declarations for packages and things.
-
+;; -----------------------------------------------------------------------------
 ;;; Code:
 
 ;; diminish
@@ -205,7 +206,8 @@
 ;; Nobody loves a good language
 (use-package powershell)
 
-(use-package cider)
+(use-package cider
+  :defer 1)
 
 ;; or a bad language
 (use-package haskell-mode

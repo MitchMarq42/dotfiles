@@ -210,23 +210,82 @@
 
 ;; Nobody loves a good language
 (use-package powershell)
-
 (use-package cider
   :defer 1)
 
 ;; or a bad language
-(use-package haskell-mode
-  :mode "\\.hs\\'"
-  ;; :init
-  ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
-  ;; (add-hook 'haskell-mode-hook #'lsp)
-  :bind (
-	 :map haskell-mode-map
-	 ("C-c h" . hoogle)
-	 ("C-c s" . haskell-mode-stylish-buffer))
-  :config (message "Loaded haskell-mode")
-  (setq haskell-mode-stylish-haskell-path "brittany")
-  (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
+;; (use-package haskell-mode
+;;   :mode "\\.hs\\'"
+;;   ;; :init
+;;   ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
+;;   ;; (add-hook 'haskell-mode-hook #'lsp)
+;;   :bind (
+;; 	 :map haskell-mode-map
+;; 	 ("C-c h" . hoogle)
+;; 	 ("C-c s" . haskell-mode-stylish-buffer))
+;;   :config (message "Loaded haskell-mode")
+;;   (setq haskell-mode-stylish-haskell-path "brittany")
+;;   (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
+
+;; c sharp; taken from https://www.reddit.com/r/emacs/comments/k8tnzg/help_setting_up_c_lsp_omnisharproslyn/
+(use-package csharp-mode
+  ;; :ensure t
+  :mode (("\\.cs\\'" . csharp-mode))
+  :config
+  (add-to-list 'compilation-error-regexp-alist-alist
+               '(my-csharp
+                 "^\\(.+\\)(\\([1-9][0-9]+\\),\\([0-9]+\\)): \\(?:\\(warning\\)\\|error\\)?"
+                 1 2 3 (4)))
+  (add-to-list 'compilation-error-regexp-alist 'my-csharp)
+  (defun my-csharp-repl ()
+    "Switch to the CSharpRepl buffer, creating it if necessary."
+    (interactive)
+    (if-let ((buf (get-buffer "*CSharpRepl*")))
+        (pop-to-buffer buf)
+      (when-let ((b (make-comint "CSharpRepl" "csharp")))
+        (switch-to-buffer-other-window b))))
+  (define-key csharp-mode-map (kbd "C-c C-z") 'my-csharp-repl)
+  (define-key csharp-mode-map (kbd "C-c C-c") #'projectile-compile-project))
+(use-package omnisharp
+  ;; :ensure t
+  :after csharp-mode
+  :config
+  ;; (setq omnisharp-expected-server-version "1.32.8")
+  ;; (setq omnisharp-expected-server-version "1.32.0") ; https://github.com/OmniSharp/omnisharp-vscode/issues/1450#issuecomment-432516876
+  ;; (let ((dotnet-version (string-trim (shell-command-to-string "dotnet --version"))))
+  ;;   ;; https://github.com/OmniSharp/omnisharp-emacs/issues/459#issuecomment-452656947
+  ;;   (setenv "MSBuildSDKsPath" (format "/usr/share/dotnet/sdk/%s/Sdks" dotnet-version)))
+  (define-key omnisharp-mode-map (kbd "M-.") #'omnisharp-go-to-definition)
+  (eval-after-load 'company '(add-to-list 'company-backends 'company-omnisharp))
+  (add-hook 'csharp-mode-hook #'company-mode)
+  (add-hook 'csharp-mode-hook #'flycheck-mode)
+  (add-hook 'csharp-mode-hook #'omnisharp-mode)
+  (setq omnisharp-completing-read-function #'ivy-completing-read)
+  (put 'my-omnisharp-solution-path 'safe-local-variable #'stringp))
+
+;; (use-package lsp-mode
+;;   :init
+;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+;;   (setq lsp-keymap-prefix "C-c l")
+;;   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+;;          (powershell-mode . lsp)
+;; 	 ;; (csharp-mode . lsp)
+;;          ;; if you want which-key integration
+;;          (lsp-mode . lsp-enable-which-key-integration))
+;;   :commands lsp)
+
+;; optionally
+(use-package lsp-ui
+  :after lsp
+  :commands lsp-ui-mode)
+(use-package lsp-treemacs
+  :after lsp
+  :commands lsp-treemacs-errors-list)
+
+;; optionally if you want to use debugger
+;; (use-package dap-mode)
+;; (use-package dap-powershell)
+;; (use-package dap-LANGUAGE) to load the dap adapter for your language
 
 ;; Better help-pages. Genuinely pretty great.
 (use-package helpful
@@ -250,7 +309,7 @@
 
 ;; Shell linting?
 (use-package flycheck
-  :defer 5
+  ;; :defer 5
   :diminish
   :config (global-flycheck-mode))
 
@@ -298,9 +357,12 @@
 ;; epic drop-down completion
 (use-package company
   :diminish
-  :custom (company-idle-delay 0.75)
+  ;; :custom (company-idle-delay 0.75)
   :hook (prog-mode . company-mode)
   :config (global-company-mode t))
+(use-package company-lsp
+  :config
+  (push 'company-lsp company-backends))
 
 ;; Visualize whitespace. In a very chill and invisible way.
 (use-package whitespace

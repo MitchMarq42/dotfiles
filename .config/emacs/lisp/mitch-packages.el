@@ -121,16 +121,16 @@
   (menu-bar-mode -1)
   (load-theme 'mitch t))
 
-(use-package yascroll
-  :diminish
-  :defer 1
-  :if (not (display-graphic-p))
-  :custom (yascroll:delay-to-hide nil)
-  :custom-face
-  (yascroll:thumb-text-area ((t (:background "ForestGreen"))))
-  (yascroll:thumb-fringe
-   ((t (:background "ForestGreen" :foreground "ForestGreen"))))
-  :config (global-yascroll-bar-mode 1))
+;; (use-package yascroll
+;;   :diminish
+;;   :defer 1
+;;   :if (not (display-graphic-p))
+;;   :custom (yascroll:delay-to-hide nil)
+;;   :custom-face
+;;   (yascroll:thumb-text-area ((t (:background "ForestGreen"))))
+;;   (yascroll:thumb-fringe
+;;    ((t (:background "ForestGreen" :foreground "ForestGreen"))))
+;;   :config (global-yascroll-bar-mode 1))
 
 ;; parentheses settingses
 (use-package paredit
@@ -209,7 +209,8 @@
   :hook (prog-mode . rainbow-mode))
 
 ;; Nobody loves a good language
-(use-package powershell)
+(use-package powershell
+  :mode ("\\.ps1\\'" . powershell-mode))
 (use-package cider
   :defer 1)
 
@@ -245,22 +246,15 @@
       (when-let ((b (make-comint "CSharpRepl" "csharp")))
         (switch-to-buffer-other-window b))))
   (define-key csharp-mode-map (kbd "C-c C-z") 'my-csharp-repl)
-  (define-key csharp-mode-map (kbd "C-c C-c") #'projectile-compile-project))
+  ;; (define-key csharp-mode-map (kbd "C-c C-c") #'projectile-compile-project)
+  )
 (use-package omnisharp
   ;; :ensure t
   :after csharp-mode
   :config
-  ;; (setq omnisharp-expected-server-version "1.32.8")
-  ;; (setq omnisharp-expected-server-version "1.32.0") ; https://github.com/OmniSharp/omnisharp-vscode/issues/1450#issuecomment-432516876
-  ;; (let ((dotnet-version (string-trim (shell-command-to-string "dotnet --version"))))
-  ;;   ;; https://github.com/OmniSharp/omnisharp-emacs/issues/459#issuecomment-452656947
-  ;;   (setenv "MSBuildSDKsPath" (format "/usr/share/dotnet/sdk/%s/Sdks" dotnet-version)))
-  (define-key omnisharp-mode-map (kbd "M-.") #'omnisharp-go-to-definition)
   (eval-after-load 'company '(add-to-list 'company-backends 'company-omnisharp))
-  (add-hook 'csharp-mode-hook #'company-mode)
-  (add-hook 'csharp-mode-hook #'flycheck-mode)
   (add-hook 'csharp-mode-hook #'omnisharp-mode)
-  (setq omnisharp-completing-read-function #'ivy-completing-read)
+  ;; (setq omnisharp-completing-read-function #'ivy-completing-read)
   (put 'my-omnisharp-solution-path 'safe-local-variable #'stringp))
 
 ;; (use-package lsp-mode
@@ -300,8 +294,7 @@
   (general-define-key
    :keymaps 'emacs-lisp-mode-map
    :states 'normal
-   "K" 'helpful-at-point)
-  )
+   "K" 'helpful-at-point))
 
 ;; Better lisp highlighting?
 (use-package highlight-defined
@@ -309,14 +302,19 @@
 
 ;; Shell linting?
 (use-package flycheck
-  ;; :defer 5
   :diminish
-  :config (global-flycheck-mode))
+  :hook (prog-mode . flycheck-mode)
+  ;; :config (global-flycheck-mode t)
+  )
 
 ;; Emacs startup profiling
 (use-package esup
   :commands esup)
 
+(defun turn-off-line-numbers ()
+  "A tiny wrapper around `display-line-numbers-mode'.
+For use in hooks."
+  (display-line-numbers-mode -1))
 ;; Blingy file tree view
 (use-package treemacs
   :general (general-define-key
@@ -328,9 +326,8 @@
   :config
   (treemacs-project-follow-mode)
   (treemacs-git-mode 'simple)
-  (add-hook
-   'treemacs-mode-hook
-   #'(lambda () (display-line-numbers-mode -1))))
+  :hook
+  (treemacs-mode-hook . turn-off-line-numbers))
 (use-package treemacs-evil
   :after treemacs)
 (use-package treemacs-all-the-icons
@@ -359,8 +356,10 @@
   :diminish
   ;; :custom (company-idle-delay 0.75)
   :hook (prog-mode . company-mode)
-  :config (global-company-mode t))
+  ;; :config (global-company-mode t)
+  )
 (use-package company-lsp
+  :after (lsp company)
   :config
   (push 'company-lsp company-backends))
 

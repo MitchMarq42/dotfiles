@@ -6,6 +6,11 @@
 ;; -----------------------------------------------------------------------------
 ;;; Code:
 
+(defun turn-off-line-numbers ()
+  "A tiny wrapper around `display-line-numbers-mode'.
+For use in hooks."
+  (display-line-numbers-mode -1))
+
 ;; diminish
 (use-package diminish)
 (use-package eldoc
@@ -95,10 +100,8 @@
   :custom
   (vterm-always-compile-module t)
   (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no")
-  :config
-  (add-hook 'vterm-mode-hook
-	    #'(lambda ()
-		(display-line-numbers-mode -1))))
+  :hook
+  (vterm-mode . turn-off-line-numbers))
 ;; Better modeline?
 (use-package powerline
   :init
@@ -163,9 +166,7 @@
 		(add-hook 'after-save-hook
 			  #'(lambda ()
 			      (org-babel-tangle)))))
-  (add-hook 'org-mode-hook
-	    #'(lambda ()
-		(display-line-numbers-mode -1))))
+  :hook (org-mode . turn-off-line-numbers))
 (use-package org-contrib
   :after org
   :config
@@ -253,9 +254,10 @@
   :after csharp-mode
   :config
   (eval-after-load 'company '(add-to-list 'company-backends 'company-omnisharp))
-  (add-hook 'csharp-mode-hook #'omnisharp-mode)
   ;; (setq omnisharp-completing-read-function #'ivy-completing-read)
-  (put 'my-omnisharp-solution-path 'safe-local-variable #'stringp))
+  (put 'my-omnisharp-solution-path 'safe-local-variable #'stringp)
+  (csharp-mode . omnisharp-mode)
+  )
 
 ;; (use-package lsp-mode
 ;;   :init
@@ -311,10 +313,6 @@
 (use-package esup
   :commands esup)
 
-(defun turn-off-line-numbers ()
-  "A tiny wrapper around `display-line-numbers-mode'.
-For use in hooks."
-  (display-line-numbers-mode -1))
 ;; Blingy file tree view
 (use-package treemacs
   :general (general-define-key
@@ -327,7 +325,7 @@ For use in hooks."
   (treemacs-project-follow-mode)
   (treemacs-git-mode 'simple)
   :hook
-  (treemacs-mode-hook . turn-off-line-numbers))
+  (treemacs-mode . turn-off-line-numbers))
 (use-package treemacs-evil
   :after treemacs)
 (use-package treemacs-all-the-icons

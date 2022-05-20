@@ -256,8 +256,7 @@ For use in hooks."
   (eval-after-load 'company '(add-to-list 'company-backends 'company-omnisharp))
   ;; (setq omnisharp-completing-read-function #'ivy-completing-read)
   (put 'my-omnisharp-solution-path 'safe-local-variable #'stringp)
-  (csharp-mode . omnisharp-mode)
-  )
+  :hook (csharp-mode . omnisharp-mode))
 
 ;; (use-package lsp-mode
 ;;   :init

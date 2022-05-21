@@ -5,25 +5,31 @@
 
 # a bunch of this stuff will be transposed from the zsh stuff...
 
-switch -regex (tty) {
-    ("/dev/tty5") {& startx $env:XINITRC}
-    ("/dev/tty7") {& sway; exit}
-    default {}
-}
-
-switch -regex ($env:TMUX) {
-    (".*") {$env:OLDTERM = $env:TERM}
-    default {
-	switch -regex ($env:TERM) {
-	    (alacritty|eterm*|xterm-*) {}
-	    default {$env:OLDTERM = $env:TERM ; & tmux ; exit}
+if ($IsLinux) {
+    # startup redirection
+    switch -regex ($env:TMUX) {
+	(".*") {$env:OLDTERM = $env:TERM}
+	default {
+	    switch -regex ($env:TERM) {
+		(alacritty|eterm*|xterm-*) {}
+		(linux) {
+		    switch (tty) {
+			("/dev/tty5") { & startx $env:XINITRC }
+			("/dev/tty7") { & sway; exit }
+			default {}}}
+		default {$env:OLDTERM = $env:TERM ; & tmux ; exit}
+	    }
 	}
     }
+    # environment fixes
+    $env:XDG_DATA_HOME = "$env:HOME/.local/share"
+    $env:PATH = "$env:HOME/.local/bin/:" + $env:PATH
 }
 
-# environment fixes
-$env:XDG_DATA_HOME = "$env:HOME/.local/share"
-$env:PATH = "$env:HOME/.local/bin/:" + $env:PATH
+# default settings from the writer of PSReadLine
+# . $env:HOME/.local/share/powershell/Modules/psreadline/PSReadLine/SamplePSReadLineProfile.ps1 | out-null
+
+# LINUX
 
 # Re-define the prompt() function. A simple imitation of my p10k config.
 function Prompt(){
@@ -43,6 +49,7 @@ $PSReadlineOptions = @{
     vimodeindicator = 'cursor'
     HistorySearchCursorMovesToEnd = $true
     showtooltips = $false
+    PredictionSource = 'history'
 }
 
 set-psreadlineoption @PSReadlineOptions
@@ -54,7 +61,7 @@ Set-PSReadLineKeyHandler -chord tab -function MenuComplete
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
-# Quote auto-matching-- copied from https://github.com/PowerShell/PSReadLine/blob/master/PSReadLine/SamplePSReadLineProfile.ps1
+# Electric pairs-- copied from https://github.com/PowerShell/PSReadLine/blob/master/PSReadLine/SamplePSReadLineProfile.ps1
 #region Smart Insert/Delete
 
 # The next four key handlers are designed to make entering matched quotes
@@ -150,7 +157,7 @@ Set-PSReadLineKeyHandler -Key Backspace `
       }
   }
 
-#endregion Smart Insert/Delete
+# endregion Smart Insert/Delete
 
 # Broken - hjkl tab-completion maybe?
 # Set-PSReadLineKeyHandler -chord 'j' `
@@ -170,40 +177,42 @@ $github = 'https://github.com/'
 $modulesdir = ($env:XDG_DATA_HOME + '/powershell/Modules/')
 $startingdir = get-location
 
-function get-typename {
-    param($variable)
-    ($variable.gettype()).name
-}
+# function get-typename {
+#     param($variable)
+#     ($variable.gettype()).name
+# }
 
 function use-module(){
     param([string]$name,
 	  [string]$dev = 'powershell',
 	  $manifest = "$name.psd1",
-	  [scriptblock]$build,
 	  [string]$import ,
-	  [scriptblock]$if = {return $true})
+	  [scriptblock]$build,
+	  [scriptblock]$if = {return $true},
+	  $init = {})
     if ($if.invoke()) {
 	# "loading " + $name # DEBUG
 	$remote = $github + ($dev + '/' + $name)
 	$local = join-path $modulesdir $name
+	set-location $local
 	if ( $manifest.gettype().name -eq 'Boolean' ) {
 	    $absmanifest = join-path $local $manifest
-	    $haslocal = (test-path $absmanifest)}
-	else {
+	    $haslocal = (test-path $absmanifest)
+	} else {
 	    $haslocal = (test-path $local)
 	    $nomanifest = $true}
 	if (!($haslocal)) {
 	    "Installing " + $name
 	    git clone $remote (join-path $modulesdir $name)
 	    if ($build) {
-		set-location $local
+		# set-location $local
 		$build.invoke()
 	    }}
 	if ($import) {
-	    set-location $local
-	    import-module $import}
-	elseif (!($nomanifest)) {
+	    import-module $import
+	} elseif (!($nomanifest)) {
 	    Import-Module $absmanifest}
+	$init.invoke()
 	set-location $startingdir
     }
 }
@@ -229,13 +238,16 @@ use-module 'pfetch' `
   -dev 'dylanaraps' `
   -manifest 'none' `
   -build {make PREFIX=$HOME/.local install}
+use-module 'psreadline' `
+  -manifest 'PSReadLine/PSReadLine.psd1'
 
-# clear screen
-clear
+# clear screen if it looks cool
+if ($host.ui.RawUI.WindowSize.Height -lt 50) {
+    clear}
 # run fetch based on terminal height
 if ($host.ui.RawUI.WindowSize.Width -gt 80) {
     neofetch
 } else {
-    pfetch
-}
+    pfetch}
+
 [Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()

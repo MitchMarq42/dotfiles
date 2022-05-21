@@ -16,7 +16,7 @@ if ($IsLinux) {
 		    switch (tty) {
 			("/dev/tty5") { & startx $env:XINITRC }
 			("/dev/tty7") { & sway; exit }
-			default {}}}
+			default {sudo loadkeys "$env:XDG_DATA_HOME/imports/caps.kmap"}}}
 		default {$env:OLDTERM = $env:TERM ; & tmux ; exit}
 	    }
 	}

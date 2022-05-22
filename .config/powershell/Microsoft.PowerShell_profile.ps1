@@ -172,50 +172,10 @@ Set-PSReadLineKeyHandler -Key Backspace `
 #       if ( )
 #   }
 
-# Packages/modules (broken)
-$github = 'https://github.com/' 
-$modulesdir = ($env:XDG_DATA_HOME + '/powershell/Modules/')
-$startingdir = get-location
-
-# function get-typename {
-#     param($variable)
-#     ($variable.gettype()).name
-# }
-
-function use-module(){
-    param([string]$name,
-	  [string]$dev = 'powershell',
-	  $manifest = "$name.psd1",
-	  [string]$import ,
-	  [scriptblock]$build,
-	  [scriptblock]$if = {return $true},
-	  $init = {})
-    if ($if.invoke()) {
-	# "loading " + $name # DEBUG
-	$remote = $github + ($dev + '/' + $name)
-	$local = join-path $modulesdir $name
-	set-location $local
-	if ( $manifest.gettype().name -eq 'Boolean' ) {
-	    $absmanifest = join-path $local $manifest
-	    $haslocal = (test-path $absmanifest)
-	} else {
-	    $haslocal = (test-path $local)
-	    $nomanifest = $true}
-	if (!($haslocal)) {
-	    "Installing " + $name
-	    git clone $remote (join-path $modulesdir $name)
-	    if ($build) {
-		# set-location $local
-		$build.invoke()
-	    }}
-	if ($import) {
-	    import-module $import
-	} elseif (!($nomanifest)) {
-	    Import-Module $absmanifest}
-	$init.invoke()
-	set-location $startingdir
-    }
-}
+if (! (Test-Path $home/.local/git/use-module/use-module.ps1)) {
+    git clone https://git.mitchmarq42.xyz/mitch/use-module `
+      $home/.local/git/use-module}
+. ~/.local/git/use-module/use-module.ps1
 
 # posh-git
 use-module 'posh-git' `
@@ -231,23 +191,25 @@ use-module 'unixcompleters' `
 use-module 'neofetch' `
   -if {! $IsWindows} `
   -dev 'dylanaraps' `
-  -manifest 'none' `
+  -manifest $false `
   -build {make PREFIX=$HOME/.local install}
 use-module 'pfetch' `
   -if {! $IsWindows} `
   -dev 'dylanaraps' `
-  -manifest 'none' `
+  -manifest $false `
   -build {make PREFIX=$HOME/.local install}
 use-module 'psreadline' `
   -manifest 'PSReadLine/PSReadLine.psd1'
 
 # clear screen if it looks cool
-if ($host.ui.RawUI.WindowSize.Height -lt 50) {
-    clear}
+# if ($host.ui.RawUI.WindowSize.Height -lt 50) {
+#     clear}
 # run fetch based on terminal height
 if ($host.ui.RawUI.WindowSize.Width -gt 80) {
-    neofetch
-} else {
-    pfetch}
+	neofetch
+}
+else {
+	pfetch
+}
 
 [Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()

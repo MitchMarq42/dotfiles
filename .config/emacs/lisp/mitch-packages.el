@@ -258,16 +258,11 @@ For use in hooks."
   (put 'my-omnisharp-solution-path 'safe-local-variable #'stringp)
   :hook (csharp-mode . omnisharp-mode))
 
-;; (use-package lsp-mode
-;;   :init
-;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-;;          (powershell-mode . lsp)
-;; 	 ;; (csharp-mode . lsp)
-;;          ;; if you want which-key integration
-;;          (lsp-mode . lsp-enable-which-key-integration))
-;;   :commands lsp)
+(use-package lsp-mode
+  :hook ((powershell-mode . lsp)
+	 (csharp-mode . lsp)
+	 (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
 ;; optionally
 (use-package lsp-ui

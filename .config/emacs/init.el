@@ -11,9 +11,8 @@
 ;;; Code:
 ;; Speed up loading/finding files
 (let
-    ((file-name-handler-alist nil)
-     (shell-file-name "/bin/sh"))
-
+    ((file-name-handler-alist nil))
+  (setq shell-file-name "/bin/sh")
   ;; Load the files that I put my settings in...
   (defvar mitch-directory
     (directory-file-name

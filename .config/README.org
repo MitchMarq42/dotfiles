@@ -1,0 +1,113 @@
+* Config Files
+Basic. Where configs go.
+
+More specifically...
+** alacritty
+A completely cool and technically 'best' terminal. My config just gives some
+neutral colors (IMO the alacritty default colors are awful) and disables the
+built-in vi mode which I don't really need as I prefer that at the shell or
+editor level. Anymore, I'm not using alacritty as much as 'gnome-terminal' is
+largely sufficient for terminal-ing and even has smooth scrolling (!).
+** emacs
+Eventually Luke Smith will use it. I'm sure of this. There's no way he won't. I
+mean, look at vim's license. It's shilling for a good cause, but still shilling.
+Emacs already just does everything vi does, even in the same way, and does
+everything vim is trying to do way better. Neovim is ahead of emacs in some
+technical aspects and design principles, but is hugely held back by not being
+able to redefine internal editor functions. Yes, i'm saying that lua was not
+enough for neovim. Not until you let us stick a hand into the core of the editor
+and rearrange the bits to do whatever in a trivially transparent way. Because
+that's what emacs does, and so even with 40 years of infuriating cruft, it can
+still keep up with nvim while also having potentially infinitely many more
+features.
+
+That said, hang in there nvim. I'm rooting for you.
+** git
+Why is this an entry? You are not me...
+** gnome-custom-configs
+These files are dumped by 'dconf', the GNOME registry handler. They are
+literally just INI config files. You can apply them like so:
+#+begin_src sh
+  dconf load /org/gnome/terminal/ < ~/.config/gnome-custom-configs/terminal.gsets
+#+end_src
+Or read the current values like so:
+#+begin_src sh
+  dconf dump /org/gnome/terminal/ > ~/.config/gnome-custom-configs/terminal.gsets
+#+end_src
+My nvim config has a few lines to automate this process, and I am in the process
+of writing an Emacs major mode to accomplish the same thing (based on conf-mode
+of course).
+** mako
+The notification daemon that works on swaywm. I haven't used this in a while,
+but it may as well stay here. Basically the notifications are themed like my
+desktop and waybar. Gray, MesloLGS Nerd Font Bold text, graphics labels.
+** mozilla
+Broken. Every couple months I look at all the web browsers and see if I can keep
+a configuration deployed between them. The answer is always 'sorta kinda not
+really but also you totally can heres how' <proceeds to never show how>.
+
+Yes I'm salty about this. Why do you ask?
+** neofetch
+For now, see the README in the root of this project. In short: neofetch is crazy
+extensible since the config is just a shell script (don't tell the feds). I have
+added some fun extensions into neofetch that help or used to help me with stuff.
+Feel free to steal them.
+** nitrogen
+The wallpaper manager for X11. Don't really use anymore but it may as well stay
+here. Basically just sets my darkened Mojave as the wallpaper and leaves it at
+that.
+** nvim
+Moved to another repository on GitHub. See root readme.
+** powershell
+Contains my powershell profile. Powershell is awesome. Like, it's the best
+possible language that's not lisp. Wait, that statement is inane. Well, so is
+everything else I do so who cares.
+** qtile
+Python window manager, which can launch a wayland session but not help you work
+on improving it since all the guides assume X11. I don't really use it and I
+might delete the folder here because it makes me look like I write python. I
+don't, I write shell and powershell and lisp. But never python unless that's
+Just What You Do.
+** qutebrowser
+Python browser. Actually pretty nice when it's not crashing, freezing, or just
+not listening. To be fair, that stuff is uncommon. But it's common enough that I
+just don't bother and use brave instead.
+** skhd
+A MacOS hotkey daemon. Able to do lots of things... except it needs to inject a
+binary that's not available for ARM. And I got scammed out of my Intel MacBook
+ages ago...
+** sway
+The only Wayland window manager that both works and can be customized. Pretty
+great that it exists, though you can't open a new window on the left for some
+reason. You have to open it on the right and switch it until it's on the far
+left. I think that's dumb. That said, everything else about sway is excellent.
+** tmux
+Terminal multiplexer and session manager. This config file just disables the
+green line at the bottom. I've tried to do other things with it, but they never
+seem to work quite right so I've basically given up. It's great at doing what
+it's for, though. Stick with that, and tmux is the best.
+** user-dirs.dirs
+Broken. Doesn't work. Always gets reset by stupid baka XDG. Needs to mkdir -p
+but doesn't so we end up with doubled dirs and the good ones never get used.
+** waybar
+The bar I use on sway. Not completely ideal, but still very cool. (this config
+was minified to remove JSON and CSS from the github language tracker which is
+also used by gitea.)
+** xfce4
+Auto-generated configs which you can hand-edit if you want. XFCE is unique and
+kind of good. It's missing some smoothness that gnome has, but the panels are to
+die for. I wish they worked on wayland. The rest of XFCE can go, just let me
+keep the panels!
+** xkb
+The X Keyboard extension. These files in particular just define a rule for
+turning capslock into Escape and Super simultaneously. My gnome settings (see
+above) apply this, but for some reason it doesn't take effect on X11 systems.
+Like, it says it did it, but capslock still turns on the light and makes me
+scream.
+** xmonad
+Window manager in Haskell. Good but not using it right now because lazy.
+** yabai
+MacOS window manager similar to BSPWM. uses skhd (see above) for keybindings.
+Also can't use it because requires x86 for no reason.
+** zsh
+There's a whole file. Read it.

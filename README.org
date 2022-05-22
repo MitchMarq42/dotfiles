@@ -16,7 +16,8 @@ just live in powershell.
 I have a lot of things to say about powershell, but none of them are interesting
 so I'll keep them to myself for now.
 
-For shell configs, look in [[.config/zsh]]. For scripts, [[.local/bin]].
+For shell configs, look in [[.config/zsh][.config/zsh]]. For scripts,
+[[.local/bin][.local/bin]].
 
 There's a whole bunch of other stuff too, which I'll eventually go and document.
 ** an abstract wish
@@ -41,10 +42,11 @@ compliant, and has /zillions/ of options and menues and plugins.
 
 I have copied [[https://github.com/lukesmithxyz/voidrice][Luke Smith's config]]
 layout of a .zprofile linked to its xdg-compliant location and setting
-=$ZDOTDIR= to [[.config/zsh]] because having a clean =$HOME= is nice. the
-[[.config/zsh/.zshrc]] sources [[functions.zsh]] and [[aliases.zsh]], and will
-on first run attempt to install [[https://github.com/zplug/zplug][zplug]] for a
-few fun extensions.
+=$ZDOTDIR= to [[.config/zsh][.config/zsh]] because having a clean =$HOME= is
+nice. the [[.config/zsh/.zshrc][.config/zsh/.zshrc]] sources
+[[functions.zsh][functions.zsh]] and [[aliases.zsh][aliases.zsh]], and will on
+first run attempt to install [[https://github.com/zplug/zplug][zplug]] for a few
+fun extensions.
 
 Upon entering the shell it will run, among silent things,
 [[https://github.com/dylanaraps/neofetch][neofetch]]. While there are sort of
@@ -83,8 +85,9 @@ mistype ~ls~.
 ~dc~ the calculator is worthess. If I type ~dc~ it is by accident. Thus, it's
 remapped to a special surprise here.
 ** The Editor
-For my old [[https://neovim.io/][neovim]] config (formerly at [[.config/nvim]]),
-check https://github.com/MitchMarq42/nvim-configs.
+For my old [[https://neovim.io/][neovim]] config (formerly at
+[[.config/nvim][.config/nvim]]), check
+https://github.com/MitchMarq42/nvim-configs.
 
 Currently, I use [[https://www.gnu.org/software/emacs/][emacs]]. I have based
 [[.config/emacs][my emacs configuration]] off of what I happened to have for
@@ -105,7 +108,7 @@ There are a few things to immediately note:
   github once and then forgotten. So I extended it for nvim, then recreated it
   in emacs with the aid of
   [[https://github.com/jasonm23/autothemer][autothemer]] (which you can find at
-  [[.config/emacs/lisp/mitch-theme.el]]).
+  [[.config/emacs/lisp/mitch-theme.el][.config/emacs/lisp/mitch-theme.el]]).
 
 - Typing ~qq~ will change your input method. This is sort-of a built-in feature,
   but the default trigger is to type ~C-\~, which is annoying to press. The ~qq~

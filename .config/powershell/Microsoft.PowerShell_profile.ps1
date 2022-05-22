@@ -172,6 +172,23 @@ Set-PSReadLineKeyHandler -Key Backspace `
 #       if ( )
 #   }
 
+# aliases
+Set-Alias -Name 'ls' -Value 'Get-ChildItem'
+Set-Alias -Name 'which' -Value 'Get-Command'
+# Set-Alias -Name 'rm' -Value 'Remove-Item'
+function rm(){
+    param(
+	[string[]]$allargs,
+	[switch]$rf
+    )
+    if ($rf) {
+	remove-item -Recurse -Force $allargs
+    } else {
+	remove-item $allargs
+    }
+}
+
+# use-module bootstrap
 if (! (Test-Path $home/.local/git/use-module/use-module.ps1)) {
     git clone https://git.mitchmarq42.xyz/mitch/use-module `
       $home/.local/git/use-module}

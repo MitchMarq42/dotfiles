@@ -177,6 +177,7 @@ For use in hooks."
      )))
 (use-package org-appear
   :hook (org-mode . org-appear-mode)
+  :after org
   :custom
   (org-appear-autolinks t))
 (use-package ob-powershell

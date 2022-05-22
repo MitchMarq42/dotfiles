@@ -11,13 +11,14 @@
 ;;; Code:
 ;; Speed up loading/finding files
 (let
-    ((file-name-handler-alist nil))
+    ((file-name-handler-alist nil)
+     (shell-file-name "/bin/sh"))
 
   ;; Load the files that I put my settings in...
   (defvar mitch-directory
-	(directory-file-name
-	 (concat user-emacs-directory
-		 (convert-standard-filename "lisp/"))))
+    (directory-file-name
+     (concat user-emacs-directory
+	     (convert-standard-filename "lisp/"))))
   (setq load-path
 	(cons mitch-directory load-path))
   (setq custom-theme-directory mitch-directory)
@@ -40,7 +41,7 @@
     (expand-file-name "emacs-backups"
 		      (or (getenv "XDG_CACHE_HOME")
 			  (expand-file-name
-			    ".cache" "~"))))
+			   ".cache" "~"))))
   (if (not (file-exists-p backup-directory))
       (make-directory backup-directory t))
   (setq backup-directory-alist `(("." . ,backup-directory)))
@@ -101,7 +102,7 @@
   ;; save place in all files
   (save-place-mode t)
   (defvar save-place-file
-	(expand-file-name "file-position-save" backup-directory))
+    (expand-file-name "file-position-save" backup-directory))
 
   ;; load eshell stuff when we start eshell
   (add-hook 'eshell-mode-hook #'(lambda () (require 'eshell-settings)))

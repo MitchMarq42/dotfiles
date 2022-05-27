@@ -1,6 +1,8 @@
-* This is a garbage place-holder file
+* Waybar Config
 (I am making it to clean up my github by having fewer languages in it).
 
+** style.css
+*** Everything
 #+BEGIN_SRC css :tangle style.css
 *{
       border: none;
@@ -10,7 +12,7 @@
       font-weight: bold;
   }
 #+END_SRC
-
+*** Window-wide stuff
 #+BEGIN_SRC css :tangle style.css
   window#waybar {
       background-color: #303030;
@@ -29,6 +31,9 @@
       border: none;
   }
 
+#+END_SRC
+*** workspaces
+#+BEGIN_SRC css :tangle style.css
   #workspaces button {
       color: #dfdfdf;
       padding: 0 0px;
@@ -48,6 +53,9 @@
       background-color: #fd3c3a;
   }
 
+#+END_SRC
+*** random other things
+#+BEGIN_SRC css :tangle style.css
   #mode {
       background-color: #64727D;
       border-bottom: 0px solid #ffffff;
@@ -70,6 +78,9 @@
       margin: 0 0px;
       color: #afafaf;
   }
+#+END_SRC
+*** Workspaces
+#+BEGIN_SRC css :tangle style.css
 
   #window,
   #workspaces {
@@ -123,6 +134,9 @@
   #backlight {
       background-color: #90b1b1;
   }
+#+END_SRC
+*** Network monitor (hidden)
+#+BEGIN_SRC css :tangle style.css
 
   #network {
       background-color: #2980b9;
@@ -131,6 +145,9 @@
   #network.disconnected {
       background-color: #f53c3c;
   }
+#+END_SRC
+*** audio, tray, temperature
+#+BEGIN_SRC css :tangle style.css
 
   #pulseaudio.muted {
       color: #fa0f0f;
@@ -170,6 +187,9 @@
       background-color: #ecf0f1;
       color: #2d3436;
   }
+#+END_SRC
+*** Music Player Daemon (don't use)
+#+BEGIN_SRC css :tangle style.css
 
   #mpd {
       background-color: #66cc99;
@@ -187,4 +207,86 @@
   #mpd.paused {
       background-color: #51a37a;
   }
+#+END_SRC
+
+** config
+a JSON file with stuff...
+#+BEGIN_SRC js :tangle config
+{
+    "layer": "top",
+    "exclusive": true,
+    "modules-left": ["custom/vivarium", "sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["tray", "pulseaudio", "battery", "cpu", "clock"],
+
+    "sway/workspaces": {
+        "format": "{icon}",
+        "disable-scroll": true,
+        "format-icons": {
+            "1": "  ",
+            "2": "  ",
+            "3": " ﭮ ",
+            "4": " 4 ",
+            "5": " 5 ",
+            "6": " 6 ",
+            "7": " 7 ",
+            "8": " 8 ",
+            "9": " 9 "
+        }
+    },
+    "custom/vivarium": {
+        "exec": "cat ~/.cache/vivarium.state",
+        "exec-if": "~/.local/bin/stupid vivarium"
+    },
+
+    "sway/window": {
+        "format": "{}",
+        "rewrite": {
+            "(.*) - (.*) - Brave": "$1",
+            "(.*): (.*) - Brave": "$1",
+            "(.*) - Brave": "$1"
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%  ",
+        "format-bluetooth": "  {icon} {volume}%  ",
+        "format-muted": " Mute  ",
+        "format-icons": {
+            "default": ["奔", "墳", ""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "min-length": 8,
+        "max-length": 9
+    },
+
+    "battery": {
+        "format": "{icon} {capacity}%  ",
+        "format-icons": ["", "", "", "", "", "", "", "", "", ""],
+        "min-length": 8,
+        "max-length": 8
+    },
+
+    "cpu": {
+        "format": "  {usage}%",
+        "interval": 1,
+        "max-length": 7,
+        "min-length": 6
+    },
+
+    "clock": {
+        "format": "   {:%I:%M %p}",
+        "format-alt": "   ({:%a %b %d %H:%M})"
+    }
+
+}
+
+// vim: set filetype=json :
+
 #+END_SRC

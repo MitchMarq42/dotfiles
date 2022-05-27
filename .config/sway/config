@@ -264,7 +264,7 @@ gaps inner 20
 
 # fake fullscreen (custom)-- Hides bar and disables gaps
 exec_always echo yes > $XDG_RUNTIME_DIR/swayisgaps
-bindsym $mod+b exec ~/.local/bin/swayhide
+bindsym $mod+b exec ~/.local/bin/fakegaps
 
 #
 # Remove title bars:

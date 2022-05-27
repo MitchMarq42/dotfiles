@@ -217,18 +217,18 @@ For use in hooks."
   :defer 1)
 
 ;; or a bad language
-;; (use-package haskell-mode
-;;   :mode "\\.hs\\'"
-;;   ;; :init
-;;   ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
-;;   ;; (add-hook 'haskell-mode-hook #'lsp)
-;;   :bind (
-;; 	 :map haskell-mode-map
-;; 	 ("C-c h" . hoogle)
-;; 	 ("C-c s" . haskell-mode-stylish-buffer))
-;;   :config (message "Loaded haskell-mode")
-;;   (setq haskell-mode-stylish-haskell-path "brittany")
-;;   (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
+(use-package haskell-mode
+  :mode "\\.hs\\'"
+  ;; :init
+  ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
+  ;; (add-hook 'haskell-mode-hook #'lsp)
+  :bind (
+	 :map haskell-mode-map
+	 ("C-c h" . hoogle)
+	 ("C-c s" . haskell-mode-stylish-buffer))
+  :config (message "Loaded haskell-mode")
+  (setq haskell-mode-stylish-haskell-path "brittany")
+  (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
 
 ;; c sharp; taken from https://www.reddit.com/r/emacs/comments/k8tnzg/help_setting_up_c_lsp_omnisharproslyn/
 (use-package csharp-mode

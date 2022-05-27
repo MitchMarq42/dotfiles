@@ -9,10 +9,11 @@ import XMonad.Util.Cursor
 import XMonad.Util.EZConfig
 import XMonad.Actions.FloatKeys
 import XMonad.Layout.Spiral
+import XMonad.Layout.Spacing
 import XMonad.Layout.AvoidFloats
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
--- import XMonad.Hooks.WindowSwallowing
+import XMonad.Hooks.WindowSwallowing
 import Control.Monad (liftM2)
 
 -- Window rules
@@ -35,7 +36,9 @@ myWorkspaces = ["term","web","office","settings","5","6","7","8","9"]
 
 myTerminal = "alacritty"
 
---myLayout = avoidStruts $ spiral (6/7)
+theEmacs = "emacsclient -n -a /usr/bin/emacs"
+
+myLayout = avoidStruts $ spiral (6/7)
 
 -- mySwallowHook = swallowEventHook ( className =? "Alacritty" ) ( return True )
 
@@ -47,6 +50,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
     , ((modMask, xK_o), withFocused (keysMoveWindow (10, 0)) )
     , ((modMask, xK_b), sendMessage ToggleStruts)
     , ((modMask, xK_Return), spawn myTerminal)
+    , ((modMask, xK_e), spawn theEmacs)
     , ((modMask, xK_w), spawn "brave")
     , ((modMask, xK_Escape), spawn "xkill")
     ]
@@ -58,8 +62,8 @@ main = xmonad xfceConfig
     , manageHook = myManageHook <+> manageHook xfceConfig
     , workspaces = myWorkspaces
     , keys       = myKeys <+> keys xfceConfig
-    --, layoutHook = myLayout
-    , handleEventHook = --mySwallowHook <+>
+    , layoutHook = myLayout
+    , handleEventHook = -- mySwallowHook <+>
                         ewmhDesktopsEventHook <+> fullscreenEventHook <+> handleEventHook def
     , startupHook = ewmhDesktopsStartup <+> spawn myTerminal
     }

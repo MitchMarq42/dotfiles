@@ -11,6 +11,7 @@ import qualified Data.Map as M
 import XMonad.Util.Cursor
 import XMonad.Util.Paste
 import XMonad.Util.EZConfig
+import XMonad.Util.WindowProperties
 import XMonad.Actions.FloatKeys
 import XMonad.Layout.Spiral
 import XMonad.Layout.Spacing
@@ -52,8 +53,7 @@ myTerminal = "alacritty"
 myStartupCmd :: String
 myStartupCmd = "notify-send 'xmonad reloaded' && alacritty"
 
-theEmacs :: String
-theEmacs = "emacsclient -n -a /usr/bin/emacs"
+-- theEmacs :: String
 
 myLayout = (
   spacingWithEdge 10 .
@@ -76,13 +76,16 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
     , ((modMask, xK_o), withFocused (keysMoveWindow (10, 0)) )
     , ((modMask, xK_b), myBordersToggle)
     , ((modMask, xK_Return), spawn myTerminal)
-    , ((modMask, xK_e), spawn theEmacs)
+    , ((modMask, xK_e), spawn "emacsclient -nc -a emacs")
     , ((modMask, xK_w), spawn "brave-browser")
     , ((modMask, xK_Escape), spawn "xkill")
     , ((modMask, xK_slash), spawn "xfdashboard")
     , ((modMask, xK_f), (sendMessage $ Toggle FULL))
-    , ((0, xK_Super_L), sendKey noModMask xK_Escape)
+    -- , ((0, xK_Super_L), sendKey noModMask xK_Escape )
+    -- , ((0, xK_Escape), sendKey mod4Mask xK_Super_L <+> sendKey noModMask xK_Escape)
     ]
+  -- where
+    
 
 -- main defs: start with XFCE defaults and throw in all the above.
 main :: IO ()

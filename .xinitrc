@@ -4,7 +4,7 @@ picom -b
 gnome-keyring-daemon
 xsetroot -cursor_name left_ptr
 xset r rate 300 50
-setxkbmap -option caps:super
+setxkbmap -option caps:escape
 
 id=$(
     xinput list |

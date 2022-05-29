@@ -9,10 +9,14 @@ import XMonad.Config.Xfce
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import XMonad.Util.Cursor
+import XMonad.Util.Paste
 import XMonad.Util.EZConfig
 import XMonad.Actions.FloatKeys
 import XMonad.Layout.Spiral
 import XMonad.Layout.Spacing
+import XMonad.Layout.NoBorders
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
 -- import XMonad.Layout.AvoidFloats
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -29,9 +33,12 @@ myManageHook = composeAll
     , className =? "Oblogout"               --> doFloat
     , className =? "st256color"             --> doIgnore
     , className =? "mpv"                    --> doIgnore
-    , className =? "xfdashboard"            --> doFloat
+    , title =? "xfdashboard"                --> doFullFloat
     --, className =? "xfce4-panel"            --> doIgnore
     , className =? "mode-line-flame"        --> doIgnore
+    , isFullscreen                          --> doFullFloat
+    , manageHook xfceConfig
+    , manageDocks
     ]
     where viewShift = doF . liftM2 (.) W.greedyView W.shift
 
@@ -48,17 +55,17 @@ myStartupCmd = "notify-send 'xmonad reloaded' && alacritty"
 theEmacs :: String
 theEmacs = "emacsclient -n -a /usr/bin/emacs"
 
-myLayout = spacingWithEdge 10 $
-  avoidStruts $
-  spiral (6/7)
+myLayout = (
+  spacingWithEdge 10 .
+    smartBorders .
+    avoidStruts $ spiral (6/7)
+  )
 
 mySwallowHook = swallowEventHook ( className =? "Alacritty" ) ( return True )
 
 myBordersToggle = (sendMessage ToggleStruts <+>
                    toggleWindowSpacingEnabled <+>
                    toggleScreenSpacingEnabled)
-
-theManageHooks = myManageHook <+> manageHook xfceConfig <+> manageDocks
 
 -- keybindings (see ~/.config/sxhkd/sxhkdrc for more)
 myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ()) 
@@ -72,6 +79,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
     , ((modMask, xK_e), spawn theEmacs)
     , ((modMask, xK_w), spawn "brave-browser")
     , ((modMask, xK_Escape), spawn "xkill")
+    , ((modMask, xK_slash), spawn "xfdashboard")
+    , ((modMask, xK_f), (sendMessage $ Toggle FULL))
+    , ((0, xK_Super_L), sendKey noModMask xK_Escape)
     ]
 
 -- main defs: start with XFCE defaults and throw in all the above.
@@ -81,7 +91,7 @@ main = do
         xfceConfig
         { modMask    = mod4Mask
         , terminal   = myTerminal
-        , manageHook = theManageHooks
+        , manageHook = myManageHook
         , workspaces = myWorkspaces
         , keys       = myKeys <+> keys xfceConfig
         , layoutHook = myLayout

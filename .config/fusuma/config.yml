@@ -1,0 +1,10 @@
+swipe:
+  3:
+    left:
+    # start at right of touchpad and go left
+      # command: "notify-send 'swiped left' fusuma"
+      command: "xtransition.sh right"
+    right:
+    # start at left of touchpad and go right
+      # command: "notify-send 'swiped right' fusuma"
+      command: "xtransition.sh left"

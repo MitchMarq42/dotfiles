@@ -6,6 +6,7 @@
 import XMonad
 import System.IO
 import XMonad.Config.Xfce
+import XMonad.Config.Desktop
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import XMonad.Util.Cursor
@@ -81,6 +82,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
     , ((modMask, xK_Escape), spawn "xkill")
     , ((modMask, xK_slash), spawn "xfdashboard")
     , ((modMask, xK_f), (sendMessage $ Toggle FULL))
+    , ((modMask, xK_1), spawn "xtransition.sh 0")
+    , ((modMask, xK_2), spawn "xtransition.sh 1")
+    , ((modMask, xK_3), spawn "xtransition.sh 2")
+    , ((modMask, xK_4), spawn "xtransition.sh 3")
+    , ((modMask, xK_5), spawn "xtransition.sh 4")
+    , ((modMask, xK_6), spawn "xtransition.sh 5")
+    , ((modMask, xK_7), spawn "xtransition.sh 6")
+    , ((modMask, xK_8), spawn "xtransition.sh 7")
+    , ((modMask, xK_9), spawn "xtransition.sh 8")
     -- , ((0, xK_Super_L), sendKey noModMask xK_Escape )
     -- , ((0, xK_Escape), sendKey mod4Mask xK_Super_L <+> sendKey noModMask xK_Escape)
     ]
@@ -90,8 +100,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
 -- main defs: start with XFCE defaults and throw in all the above.
 main :: IO ()
 main = do
-      xmonad $ ewmhFullscreen -- ewmh
-        xfceConfig
+      xmonad $ ewmhFullscreen $ ewmh
+        desktopConfig
         { modMask    = mod4Mask
         , terminal   = myTerminal
         , manageHook = myManageHook

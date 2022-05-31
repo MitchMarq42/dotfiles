@@ -22,6 +22,7 @@ xinput set-prop $id $prop 1
 dunst &
 polybar &
 xfce4-power-manager &
+fusuma &
 # sxhkd &
 # alacritty &
 # exec bspwm

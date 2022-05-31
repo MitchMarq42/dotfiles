@@ -133,6 +133,7 @@ wrapper for all of them.
 ** xtransition.sh
 Pretty (but also janky) workspace transitions on Xorg. Non-interactive. Can be
 called interactively but works best if bound to a gesture and/or hotkey.
+[[xtransition.mp4]]
 *** NOTE:
 - Workspaces are 0-indexed by xdotool, which this wraps. Most WMs/DEs abstract
   this to a 1-indexed list so e.g. =Super+1= binds to the first workspace, =0=.
@@ -144,7 +145,6 @@ called interactively but works best if bound to a gesture and/or hotkey.
 *** Files:
 - =/tmp/xtransition/*=: Directory that stores temp screenshots. Can safely be
   cleared absolutely any time, and probably should be...
-- [[xtransition.mp4]]: A short demo of usage with a shortcut
 *** Usage:
 In xmonad.hs, in keybindings array:
 #+begin_src haskell

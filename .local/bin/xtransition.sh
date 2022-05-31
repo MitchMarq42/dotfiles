@@ -12,40 +12,46 @@ tmpdir='/tmp/xtransition'
 duration="0.5"
 
 case $1 in
-    [1-9])	newws=$1
-		;;
-    right)	_=$((newws=(oldws+1)))
-		direction=right
-		;;
-    left)	_=$((newws=(oldws-1)))
-		direction=left
-		;;
+    [0-9])
+	newws=$1 ;;
+    right)
+	_=$((newws=(oldws+1)))
+	direction=right ;;
+    left)
+	_=$((newws=(oldws-1)))
+	direction=left ;;
+    *)
+	notify-send "化か"
+	exit ;;
 esac
 
-if [ "$oldws" -eq "$newws" ]; then
-    exit
-elif [ "$oldws" -lt "$newws" ]; then
+if [ "$oldws" -lt "$newws" ]; then
     direction="left"
-else
+elif [ "$oldws" -gt "$newws" ]; then
     direction="right"
+elif [ "$oldws" -eq "$newws" ]; then
+    notify-send "化か"; exit
 fi
+
+# notify-send $direction
 
 mkdir -p $tmpdir
 
-# Screenshot of current workspace
-scrot -o -F "${tmpdir}/${oldws}.jpg" &&
+# Screenshot of current workspace, for present and future use
+scrot -o -F "${tmpdir}/${oldws}.jpg"
+
+if ! [ -e "${tmpdir}/${newws}.jpg" ]; then
     # Switch to new workspace
-    if ! [ -e "${tmpdir}/${newws}.jpg" ]; then
-	xdotool set_desktop "${newws}" &&
-	    # (the below number took a while to find,
-	    # please don't change it without a good reason)
-	    # sleep 0.0208354086434455 &&
-	    sleep 0.03 && 
-	    # Screenshot (on new workspace)
-	    scrot -o -F "${tmpdir}/${newws}.jpg" #&&
-	# Go back to old workspace
-	xdotool set_desktop "${oldws}"
-    fi
+    xdotool set_desktop "${newws}" &&
+	# (the below number took a while to find,
+	# please don't change it without a good reason)
+	# sleep 0.0208354086434455 &&
+	sleep 0.03 && 
+	# Screenshot (on new workspace)
+	scrot -o -F "${tmpdir}/${newws}.jpg" #&&
+    # Go back to old workspace
+    xdotool set_desktop "${oldws}"
+fi
 
 ffmpeg -y \
        -loop 1 -t "${duration}" -i "${tmpdir}/${oldws}.jpg" \

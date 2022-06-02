@@ -12,7 +12,9 @@
 ;; Speed up loading/finding files
 (let
     ((file-name-handler-alist nil))
-  (setq shell-file-name "/bin/sh")
+  ;; Don't set this, fix the actual issue and use a POSIX-ish shell (or CMD):
+  ;; (setq shell-file-name "/bin/sh")
+
   ;; Load the files that I put my settings in...
   (defvar mitch-directory
     (directory-file-name
@@ -24,7 +26,6 @@
   (require 'mitch-defuns)
   ;; (require 'webkit) ; see https://github.com/akirakyle/emacs-webkit
   (require 'man-plus)
-  ;; (require 'ansi-term-plus)
 
   ;; minify yes/no prompts
   (if (>= (string-to-number emacs-version) 28)

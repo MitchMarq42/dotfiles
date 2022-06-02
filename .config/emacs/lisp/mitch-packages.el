@@ -74,29 +74,36 @@ For use in hooks."
   :diminish)
 
 ;; Completion framework...
-(use-package vertico
-  :custom (vertico-resize t)
-  :config (vertico-mode))
-(use-package consult
-  :after vertico)
+;; (use-package vertico
+;;   :custom (vertico-resize t)
+;;   :config (vertico-mode))
+;; (use-package consult
+;;   :after vertico)
+
+;; Minibuffer generic stuff
 (use-package savehist
   :straight (:type built-in)
-  :after vertico
+  ;; :after vertico
   :init (savehist-mode))
 (use-package marginalia
-  :after (vertico consult)
+  ;; :after (vertico consult)
   :init (marginalia-mode))
 (use-package orderless
-  :after vertico
+  ;; :after vertico
+  ;; :config
+  ;;  (setq completion-category-defaults nil
+  ;;        completion-category-overrides nil)
+  :commands 'execute-extended-command
   :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
+  (completion-styles '(orderless partial-completion basic))
+  (completion-category-defaults nil)
+  ;; (completion-category-overrides '((file (styles basic partial-completion))))
+  (completion-category-overrides nil)
+  )
 
 ;; broken terminal that doesn't compile but at least it's fast when it does
 (use-package vterm
-  :general (general-define-key
-	    :states 'normal
-	    "SPC 4 v" 'vterm-other-window)
+  ;; :general
   :custom
   (vterm-always-compile-module t)
   (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no")
@@ -188,7 +195,7 @@ For use in hooks."
   :config
   (setq-default visual-fill-column-center-text t)
   (setq-default fill-column 140)
-  :hook (org-mode-hook . visual-fill-column-mode))
+  :hook (org-mode . visual-fill-column-mode))
 (use-package company-org-block
   :after (org company))
 
@@ -262,8 +269,15 @@ For use in hooks."
 (use-package lsp-mode
   :hook ((powershell-mode . lsp)
 	 (csharp-mode . lsp)
-	 (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+	 (lsp-mode . lsp-enable-which-key-integration)
+	 (lsp-completion-mode . my/lsp-mode-setup-completion))
+  :commands lsp
+  :init
+  (defun my/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+	  '(flex))) ;; Configure flex
+  :custom
+  (lsp-completion-provider :none))
 
 ;; optionally
 (use-package lsp-ui
@@ -345,16 +359,78 @@ For use in hooks."
    ((t (:background "#afafaf" :extend t)))))
 
 ;; epic drop-down completion
-(use-package company
-  :diminish
-  ;; :custom (company-idle-delay 0.75)
-  :hook (prog-mode . company-mode)
-  ;; :config (global-company-mode t)
+;; (use-package company
+;;   :diminish
+;;   :custom (company-require-match nil)
+;;   (company-tooltip-align-annotations t)
+;;   :hook (prog-mode . company-mode))
+;; (use-package company-lsp
+;;   :after (lsp company)
+;;   :config
+;;   (push 'company-lsp company-backends))
+
+;; (use-package company-fuzzy
+;;   :hook (company-mode . company-fuzzy-mode)
+;;   ;; :init
+;;   :custom
+;;   ;; (company-fuzzy-sorting-backend 'flx)
+;;   (company-fuzzy-prefix-on-top nil)
+;;   (company-fuzzy-history-backends '(company-yasnippet))
+;;   (company-fuzzy-trigger-symbols '("." "->" "<" "\"" "'" "@"))
+;;   (company-fuzzy-passthrough-backends '(company-capf)))
+(use-package corfu
+  :custom
+  (completion-cycle-threshold 3)
+  (tab-always-indent 'complete)
+  (corfu-auto t)
+  (corfu-quit-no-match t)
+  ;; (corfu-separator ";")
+  :init (global-corfu-mode)
+  (defun corfu-enable-always-in-minibuffer ()
+    "Enable Corfu in the minibuffer if Vertico/Mct are not active."
+    (unless (or (bound-and-true-p mct--active)
+		(bound-and-true-p vertico--input))
+      (setq-local corfu-auto nil) ;; Enable/disable auto completion
+      (corfu-mode 1)
+      (minibuffer-complete)))
+  (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
+  (defun corfu-kill-in-minibuffer ()
+    "Kill corfu and minibuffer. To be bound to Esc."
+    ;; (interactive)
+    (ignore-errors
+      (corfu-quit)
+      (keyboard-quit))
+    )
+  (defun corfu-send-shell (&rest _)
+    "Send completion candidate when inside comint/eshell."
+    (cond
+     ((and (derived-mode-p 'eshell-mode) (fboundp 'eshell-send-input))
+      (eshell-send-input))
+     ((and (derived-mode-p 'comint-mode) (fboundp 'comint-send-input))
+      (comint-send-input))))
+  :general
+  (general-define-key
+   :prefix-map 'corfu-map
+   "C-n" 'corfu-next
+   "C-p" 'corfu-previous
+   "RET" 'corfu-insert
+   "ESC" 'corfu-kill-in-minibuffer
+   )
   )
-(use-package company-lsp
-  :after (lsp company)
-  :config
-  (push 'company-lsp company-backends))
+
+(use-package popon
+  :straight
+  (:type git
+	 :host codeberg.org
+	 :repo "akib/emacs-popon"))
+(use-package corfu-terminal
+  :straight
+  (:type git
+	 :host codeberg.org
+	 :repo "akib/emacs-corfu-terminal")
+  :init (unless
+	    (display-graphic-p)
+	  (corfu-terminal-mode +1)))
 
 ;; Visualize whitespace. In a very chill and invisible way.
 (use-package whitespace

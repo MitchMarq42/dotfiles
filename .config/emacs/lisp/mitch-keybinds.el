@@ -26,8 +26,9 @@
  :non-normal-prefix "SPC"
  "w" 'evil-window-map
  "h" 'help-command
- "b" 'consult-buffer
- "SPC" 'evil-buffer)
+ "b" 'switch-to-buffer
+ "SPC" 'evil-buffer
+ "v" 'vterm)
 (general-define-key
  :states 'normal
  :prefix-command 'eval-map-prefix
@@ -37,6 +38,18 @@
  "b" 'eval-buffer
  "r" 'eval-region
  ":" 'eval-expression)
+
+;; fixed?
+(general-define-key
+ :states 'normal
+ :prefix-map 'ctl-x-4-map
+ :prefix "SPC 4"
+ "v" 'vterm-other-window)
+
+;; broken
+(general-define-key
+ :prefix-map 'minibuffer-mode-map
+ "DEL" 'backward-kill-word)
 
 (provide 'mitch-keybinds)
 ;;; mitch-keybinds.el ends here

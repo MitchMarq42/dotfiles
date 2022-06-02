@@ -8,3 +8,5 @@ swipe:
     # start at left of touchpad and go right
       # command: "notify-send 'swiped right' fusuma"
       command: "xtransition.sh left"
+    up:
+      command: "xfdashboard"

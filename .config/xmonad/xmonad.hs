@@ -34,12 +34,12 @@ myManageHook = composeAll
     , className =? "Emacs"                  --> viewShift "office"
     , className =? "Oblogout"               --> doFloat
     , className =? "st256color"             --> doIgnore
-    , className =? "mpv"                    --> doIgnore
+    -- , className =? "mpv"                    --> doIgnore
     , title =? "xfdashboard"                --> doFullFloat
     --, className =? "xfce4-panel"            --> doIgnore
     , className =? "mode-line-flame"        --> doIgnore
     , isFullscreen                          --> doFullFloat
-    , manageHook xfceConfig
+    , manageHook desktopConfig
     , manageDocks
     ]
     where viewShift = doF . liftM2 (.) W.greedyView W.shift
@@ -94,23 +94,21 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
     -- , ((0, xK_Super_L), sendKey noModMask xK_Escape )
     -- , ((0, xK_Escape), sendKey mod4Mask xK_Super_L <+> sendKey noModMask xK_Escape)
     ]
-  -- where
-    
 
 -- main defs: start with XFCE defaults and throw in all the above.
 main :: IO ()
 main = do
-      xmonad $ ewmhFullscreen $ ewmh
-        desktopConfig
-        { modMask    = mod4Mask
-        , terminal   = myTerminal
-        , manageHook = myManageHook
-        , workspaces = myWorkspaces
-        , keys       = myKeys <+> keys xfceConfig
-        , layoutHook = myLayout
-        , handleEventHook = mySwallowHook <+>
+  xmonad $ ewmhFullscreen $ ewmh -- $ ewmhDesktops
+    desktopConfig
+    { modMask    = mod4Mask
+    , terminal   = myTerminal
+    , manageHook = myManageHook
+    , workspaces = myWorkspaces
+    , keys       = myKeys <+> keys xfceConfig
+    , layoutHook = myLayout
+    , handleEventHook = mySwallowHook <+>
                         -- ewmhDesktopsEventHook <+>
                         handleEventHook def -- <+> 
-        , startupHook = -- ewmhDesktopsStartup <+>
-                        spawn myStartupCmd
-        }
+    , startupHook = -- ewmhDesktopsStartup <+>
+        spawn myStartupCmd
+    }

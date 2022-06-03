@@ -441,5 +441,15 @@ For use in hooks."
   (whitespace-line-column 80)
   :config (global-whitespace-mode t))
 
+(use-package lsp-dart
+  ;; :custom (lsp-dart-dap-flutter-hot-reload t)
+  :init
+  (add-hook 'dart-mode-hook 'lsp)
+  (add-hook 'dart-mode-hook
+	    #'(lambda ()
+		(add-hook 'after-save-hook
+			  #'(lambda ()
+			      (lsp-dart-dap-flutter-hot-reload)))))
+  )
 (provide 'mitch-packages)
 ;;; mitch-packages.el ends here

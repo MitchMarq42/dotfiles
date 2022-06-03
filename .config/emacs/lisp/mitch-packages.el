@@ -394,13 +394,14 @@ For use in hooks."
       (corfu-mode 1)
       (minibuffer-complete)))
   (add-hook 'minibuffer-setup-hook #'corfu-enable-always-in-minibuffer 1)
-  (defun corfu-kill-in-minibuffer ()
-    "Kill corfu and minibuffer. To be bound to Esc."
-    ;; (interactive)
-    (ignore-errors
-      (corfu-quit)
-      (keyboard-quit))
-    )
+  ;; (defun corfu-kill-in-minibuffer ()
+  ;;   "Kill corfu and minibuffer. To be bound to Esc."
+  ;;   (interactive)
+  ;;   ;; (ignore-errors
+  ;;     ;; (corfu-quit)
+  ;;     (exit-minibuffer)
+  ;;     ;; )
+  ;;   )
   (defun corfu-send-shell (&rest _)
     "Send completion candidate when inside comint/eshell."
     (cond
@@ -414,20 +415,18 @@ For use in hooks."
    "C-n" 'corfu-next
    "C-p" 'corfu-previous
    "RET" 'corfu-insert
-   "ESC" 'corfu-kill-in-minibuffer
+   ;; "ESC" 'exit-minibuffer
    )
   )
 
 (use-package popon
   :straight
   (:type git
-	 :host codeberg.org
-	 :repo "akib/emacs-popon"))
+	 :repo "https://codeberg.org/akib/emacs-popon"))
 (use-package corfu-terminal
   :straight
   (:type git
-	 :host codeberg.org
-	 :repo "akib/emacs-corfu-terminal")
+	 :repo "https://codeberg.org/akib/emacs-corfu-terminal")
   :init (unless
 	    (display-graphic-p)
 	  (corfu-terminal-mode +1)))

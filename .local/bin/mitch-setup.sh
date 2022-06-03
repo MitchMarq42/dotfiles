@@ -4,7 +4,10 @@
 # sudo apt install git curl emacs zsh
 
 # Relevant directories
-mkdir -p ~/.local/bin ~/.local/git/
+mkdir -p \
+      ~/.local/bin \
+      ~/.local/git \
+      ~/.config/gnupg 
 
 # Get the dots function itself
 [ -f ~/.local/bin/dots ] ||

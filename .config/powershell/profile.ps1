@@ -49,7 +49,7 @@ $PSReadlineOptions = @{
     vimodeindicator = 'cursor'
     HistorySearchCursorMovesToEnd = $true
     showtooltips = $false
-    PredictionSource = 'history'
+    # PredictionSource = 'history'
 }
 
 set-psreadlineoption @PSReadlineOptions

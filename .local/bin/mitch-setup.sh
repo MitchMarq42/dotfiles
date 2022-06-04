@@ -7,14 +7,15 @@
 mkdir -p \
       ~/.local/bin \
       ~/.local/git \
-      ~/.config/gnupg 
+      ~/.config/gnupg \
+      ~/.local/share/zsh 
 
 # Get the dots function itself
 [ -f ~/.local/bin/dots ] ||
-	curl https://git.mitchmarq42.xyz/mitch/dotfiles/raw/branch/main/.local/bin/mitch-setup.sh > ~/.local/bin/dots && chmod +x ~/.local/bin/dots
+	curl https://git.mitchmarq42.xyz/mitch/dotfiles/raw/branch/main/.local/bin/dots > ~/.local/bin/dots && chmod +x ~/.local/bin/dots
 
 [ -d ~/.local/git/dotfiles ] ||
-    git clone https://github.com/mitchmarq42/dotfiles --bare ~/.local/git/dotfiles
+    git clone https://git.mitchmarq42.xyz/mitch/dotfiles --bare ~/.local/git/dotfiles
 
 # run
 ~/.local/bin/dots checkout -f

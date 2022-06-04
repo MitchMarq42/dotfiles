@@ -24,6 +24,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.WindowSwallowing
+import XMonad.Hooks.ServerMode
 import Control.Monad (liftM2)
 
 -- Window rules
@@ -75,13 +76,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList
     , ((modMask, xK_i), withFocused (keysMoveWindow (0, -10)) )
     , ((modMask, xK_y), withFocused (keysMoveWindow (-10, 0)) )
     , ((modMask, xK_o), withFocused (keysMoveWindow (10, 0)) )
-    , ((modMask, xK_b), myBordersToggle)
+    , ((modMask, xK_b), myBordersToggle <+> spawn "fakegaps")
     , ((modMask, xK_Return), spawn myTerminal)
     , ((modMask, xK_e), spawn "emacsclient -nc -a emacs")
     , ((modMask, xK_w), spawn "brave-browser")
     , ((modMask, xK_Escape), spawn "xkill")
     , ((modMask, xK_slash), spawn "xfdashboard")
-    , ((modMask, xK_f), (sendMessage $ Toggle FULL))
+    , ((modMask, xK_f), (sendMessage $ Toggle FULL) )
     , ((modMask, xK_1), spawn "xtransition.sh 0")
     , ((modMask, xK_2), spawn "xtransition.sh 1")
     , ((modMask, xK_3), spawn "xtransition.sh 2")

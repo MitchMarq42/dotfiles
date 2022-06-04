@@ -1,15 +1,58 @@
-#!/bin/bash
+#!/bin/sh
 
-killall -SIGUSR1 waybar
+isgaps=$(cat $XDG_RUNTIME_DIR/fakegaps)
 
-isgaps=$(cat $XDG_RUNTIME_DIR/swayisgaps)
+platform=$(
+    case $(pgrep sway) in
+	[0-9]*)
+	    echo "sway" ;;
+	"")
+	    echo "Xorg" ;;
+    esac
+	)
+
+bartoggle(){
+    case $platform in
+	sway)
+	    killall -SIGUSR1 waybar
+	    ;;
+	Xorg)
+	    polybar-msg cmd toggle
+	    ;;
+    esac
+}
+
+bartoggle
+
+gapson(){
+    case $platform in
+	sway)
+	    swaymsg gaps inner all set 20
+	    ;;
+	Xorg)
+	    # handle this at the WM level if at all possible
+	    ;;
+    esac
+}
+gapsoff(){
+    case $platform in
+	sway)
+	    swaymsg gaps inner all set 0
+	    ;;
+	Xorg)
+	    # handle this at the WM level if at all possible
+	    ;;
+    esac
+}
 
 [[ $isgaps == yes ]] && (
-    swaymsg gaps inner all set 0
-    echo no > $XDG_RUNTIME_DIR/swayisgaps
+    # swaymsg gaps inner all set 0
+    gapsoff
+    echo no > $XDG_RUNTIME_DIR/fakegaps
 )
 
 [[ $isgaps == no ]] && (
-    swaymsg gaps inner all set 20
-    echo yes > $XDG_RUNTIME_DIR/swayisgaps
+    # swaymsg gaps inner all set 20
+    gapson
+    echo yes > $XDG_RUNTIME_DIR/fakegaps
 )

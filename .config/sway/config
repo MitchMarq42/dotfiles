@@ -167,16 +167,26 @@ exec ~/.local/bin/brightctl -r
 # Workspaces:
 #
     # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+    # bindsym $mod+1 workspace number 1
+    # bindsym $mod+2 workspace number 2
+    # bindsym $mod+3 workspace number 3
+    # bindsym $mod+4 workspace number 4
+    # bindsym $mod+5 workspace number 5
+    # bindsym $mod+6 workspace number 6
+    # bindsym $mod+7 workspace number 7
+    # bindsym $mod+8 workspace number 8
+    # bindsym $mod+9 workspace number 9
+    # bindsym $mod+0 workspace number 10
+    bindsym $mod+1 exec xtransition.sh 1
+    bindsym $mod+2 exec xtransition.sh 2
+    bindsym $mod+3 exec xtransition.sh 3
+    bindsym $mod+4 exec xtransition.sh 4
+    bindsym $mod+5 exec xtransition.sh 5
+    bindsym $mod+6 exec xtransition.sh 6
+    bindsym $mod+7 exec xtransition.sh 7
+    bindsym $mod+8 exec xtransition.sh 8
+    bindsym $mod+9 exec xtransition.sh 9
+    bindsym $mod+0 exec xtransition.sh 10
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2

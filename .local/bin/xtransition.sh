@@ -6,10 +6,52 @@
 # `xtransition.sh {right|left}`
 #	with the direction to go towards by 1 workspace
 
-oldws=$(xdotool get_desktop)
+platform=$(
+    case $(pgrep sway) in
+	[0-9]*)
+	    echo "sway" ;;
+	"")
+	    echo "Xorg" ;;
+    esac
+	)
+
+oldws=$(
+    case $platform in
+	Xorg)
+	    xdotool get_desktop
+	    ;;
+	sway)
+	    swaymsg -pt get_workspaces |
+		grep -i focused |
+		sed -E 's_^.*([0-9]).*$_\1_'
+	    ;;
+    esac
+     )
+
 # newws=$1
 tmpdir='/tmp/xtransition'
 duration="0.5"
+
+screenshot(){
+    case $platform in
+	sway)
+	    grim $@
+	    ;;
+	Xorg)
+	    scrot -o -F $@
+	    ;;
+    esac
+}
+movews(){
+    case $platform in
+	sway)
+	    # swaymsg workspace $(((1+$@)))
+	    swaymsg workspace $@
+	    ;;
+	Xorg)
+	    xdotool set_desktop $@
+    esac
+}
 
 case $1 in
     [0-9])
@@ -38,19 +80,19 @@ fi
 mkdir -p $tmpdir
 
 # Screenshot of current workspace, for present and future use
-scrot -o -F "${tmpdir}/${oldws}.jpg"
+screenshot "${tmpdir}/${oldws}.jpg"
 
 if ! [ -e "${tmpdir}/${newws}.jpg" ]; then
     # Switch to new workspace
-    xdotool set_desktop "${newws}" &&
+    movews "${newws}" &&
 	# (the below number took a while to find,
 	# please don't change it without a good reason)
 	# sleep 0.0208354086434455 &&
 	sleep 0.03 && 
 	# Screenshot (on new workspace)
-	scrot -o -F "${tmpdir}/${newws}.jpg" #&&
+	screenshot "${tmpdir}/${newws}.jpg" #&&
     # Go back to old workspace
-    xdotool set_desktop "${oldws}"
+    movews "${oldws}"
 fi
 
 ffmpeg -y \
@@ -64,6 +106,6 @@ ffmpeg -y \
 # $tmpdir/output.mp4 &&
 # mpv --no-terminal --fs $tmpdir/output.mp4 #&
 
-xdotool set_desktop "${newws}"
+movews "${newws}"
 
 # rm -rf $tmpdir

@@ -105,6 +105,7 @@ Comment[vi]=Truy cập Internet
 Comment[zh_CN]=访问互联网
 Comment[zh_HK]=連線到網際網路
 Comment[zh_TW]=連線到網際網路
+TryExec=/usr/bin/brave %U --ozone-platform=wayland
 Exec=/usr/bin/brave-browser-stable %U
 StartupNotify=true
 Terminal=false

@@ -384,6 +384,7 @@ For use in hooks."
   (tab-always-indent 'complete)
   (corfu-auto t)
   (corfu-quit-no-match t)
+  (corfu-count 40)
   ;; (corfu-separator ";")
   :init (global-corfu-mode)
   (defun corfu-enable-always-in-minibuffer ()

@@ -84,7 +84,22 @@ when editing from the console."
 (defun mitch/general-config ()
   "A batch of commands to run immediately after loading the `general' package.
 Made solely to reduce lines in the init file."
-  (require 'mitch-keybinds)
+  (require 'mitch-keybinds))
+
+(defun turn-off-line-numbers ()
+  "A tiny wrapper around `display-line-numbers-mode'.
+For use in hooks."
+  (display-line-numbers-mode -1))
+
+(defun mitch/terminal-setup ()
+  "A batch of commands to run when opening anything that looks like a terminal.
+For instance:
+- Shell
+- (ansi-)term
+- eshell
+- vterm
+- Maybe SLIME too."
+  (turn-off-line-numbers)
   )
 
 ;; This one line cost me over an hour of frustration...

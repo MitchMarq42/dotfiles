@@ -1,5 +1,5 @@
 #+TITLE: ZSH configuration
-#+PROPERTY: header-args:mkdirp yes
+#+PROPERTY: header-args :mkdirp yes
 
 * Introduction
 
@@ -258,7 +258,8 @@ Look at https://github.com/akermu/emacs-libvterm for more...
   if [[ "$INSIDE_EMACS" = 'vterm' ]] \
          && [[ -n ${EMACS_VTERM_PATH} ]] \
          && [[ -f ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh ]]; then
-      source ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh
+      source ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh &&
+          alias emacs="vterm_cmd find-file"
   fi
 #+end_src
 ** Tell vim to highlight the file as sh

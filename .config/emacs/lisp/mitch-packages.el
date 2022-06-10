@@ -6,11 +6,6 @@
 ;; -----------------------------------------------------------------------------
 ;;; Code:
 
-(defun turn-off-line-numbers ()
-  "A tiny wrapper around `display-line-numbers-mode'.
-For use in hooks."
-  (display-line-numbers-mode -1))
-
 ;; diminish
 (use-package diminish)
 (use-package eldoc
@@ -109,7 +104,7 @@ For use in hooks."
   (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no")
   (vterm-clear-scrollback-when-clearing t)
   :hook
-  (vterm-mode . turn-off-line-numbers))
+  (vterm-mode . mitch/terminal-setup))
 ;; Better modeline?
 (use-package powerline
   :init
@@ -456,7 +451,7 @@ For use in hooks."
 
 (use-package eshell
   :straight (:type built-in)
-  :hook (eshell-mode . turn-off-line-numbers)
+  :hook (eshell-mode . mitch/terminal-setup)
   :config (require 'eshell-settings))
 
 (provide 'mitch-packages)

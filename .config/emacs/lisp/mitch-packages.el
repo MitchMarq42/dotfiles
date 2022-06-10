@@ -107,6 +107,7 @@ For use in hooks."
   :custom
   (vterm-always-compile-module t)
   (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no")
+  (vterm-clear-scrollback-when-clearing t)
   :hook
   (vterm-mode . turn-off-line-numbers))
 ;; Better modeline?
@@ -452,5 +453,11 @@ For use in hooks."
 			  #'(lambda ()
 			      (lsp-dart-dap-flutter-hot-reload)))))
   )
+
+(use-package eshell
+  :straight (:type built-in)
+  :hook (eshell-mode . turn-off-line-numbers)
+  :config (require 'eshell-settings))
+
 (provide 'mitch-packages)
 ;;; mitch-packages.el ends here

@@ -37,7 +37,8 @@
  "l" 'eval-last-sexp
  "b" 'eval-buffer
  "r" 'eval-region
- ":" 'eval-expression)
+ ":" 'eval-expression
+ "s" 'eshell)
 
 ;; fixed?
 (general-define-key

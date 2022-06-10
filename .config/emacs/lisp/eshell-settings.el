@@ -1,8 +1,12 @@
-;; Eshell settings. settings for eshell.
+;;; eshell-settings --- settings for eshell.
+;;; Commentary:
+;; the elisp linter wants me to put some text here so I guess I will
 
-(defun eshell/emacs (&rest file)
-  "When your shell is emacs,
-your emacs is but an oyster..."
+;;; Code:
+(defun eshell/emacs (&rest args)
+  "Basically you can edit ARGS and it will open in a new buffer.
+When your shell is Emacs, your Emacs is but an oyster...
+This is taken from a website that I can't remember at the moment."
   (if (null args)
       (bury-buffer)
     (mapc
@@ -10,8 +14,7 @@ your emacs is but an oyster..."
      (mapcar
       #'expand-file-name (eshell-flatten-list (reverse args))))))
 (defun eshell/clear ()
-  "Clear the scrollback buffer, like `clear' in
-a real shell"
+  "Clear the scrollback buffer, like `clear' in a real shell..."
   (eshell/clear-scrollback))
 (defun eshell/faketty (args)
   "USAGE: `faketty ARGS` where ARGS is anything that spews colors.
@@ -24,3 +27,4 @@ Credit: https://stackoverflow.com/questions/1401002/how-to-trick-an-application-
     ))
 
 (provide 'eshell-settings)
+;;; eshell-settings.el ends here

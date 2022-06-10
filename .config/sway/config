@@ -17,7 +17,9 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty -e zsh
+set $term "emacsclient -nc --eval '(vterm)' -a 'emacs -f vterm'"
+# set $term alacritty -e zsh
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -25,7 +27,7 @@ set $menu dmenu_path | wofi --show drun -t alacritty -i -G | xargs swaymsg exec 
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+# My wallpaper (cucky defaults are available in /usr/share/backgrounds/sway/)
 output * bg ~/.local/share/backgrounds/mojave_midnight.jpg fill
 
 # Lower refresh rate to avoid stupid crashes. What are we, heathens?
@@ -89,7 +91,8 @@ output DP-3 resolution 1920x1080 position 1920,0 scale 0.9
 # Read `man 5 sway-input` for more information about this section.
 
 #boilerplate for having audio
-exec pipewire & pipewire-pulse & pipewire-media-session
+exec pipewire & pipewire-pulse & wireplumber
+# exec pipewire & pipewire-pulse & pipewire-media-session
 
 # Boilerplate for networking. Because I've given up.
 exec export XDG_CURRENT_DESKTOP=Unity
@@ -110,13 +113,15 @@ exec ~/.local/bin/brightctl -r
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    # bindsym $mod+Return exec $term
+    bindsym $mod+Return exec swayspawn $term
 
     #start a browser
-    bindsym $mod+w exec gtk-launch brave-browser
+    bindsym $mod+w exec brave --ozone-platform=wayland
+    # bindsym $mod+w exec gtk-launch brave-browser
 
     # Kill focused window
-    bindsym $mod+Shift+c kill
+    bindsym $mod+Shift+c exec swayspawn kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -273,7 +278,7 @@ bar {
 gaps inner 20
 
 # fake fullscreen (custom)-- Hides bar and disables gaps
-exec_always echo yes > $XDG_RUNTIME_DIR/swayisgaps
+exec_always echo yes > $XDG_RUNTIME_DIR/fakegaps
 bindsym $mod+b exec ~/.local/bin/fakegaps
 
 #
@@ -291,4 +296,7 @@ include /etc/sway/config.d/*
 #exec /usr/lib/sway-systemd/session.sh --with-cleanup
 #exec /usr/lib/sway-systemd/assign-cgroups.py
 
-exec $term
+# emacs daemon because reasons
+exec emacs --daemon
+
+exec swayspawn $term

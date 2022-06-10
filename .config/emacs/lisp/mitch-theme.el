@@ -16,25 +16,38 @@
 
 ;; set font...
 ;; Taken from https://web.archive.org/web/20210622224446/https://www.manueluberti.eu/emacs/2017/02/26/dynamicfonts/
-(defun mitch/setup-main-fonts (default-height variable-pitch-height)
-  "Set up default fonts.
+;; insane font stuff. Might be what breaks something.
+;; (defun mitch/setup-main-fonts (default-height variable-pitch-height)
+;;   "Set up default fonts.
 
-Use DEFAULT-HEIGHT for default face and VARIABLE-PITCH-HEIGHT
-for variable-pitch face."
-  (set-face-attribute 'default nil
-		      :family "MesloLGS NF"
-		      :height default-height)
-  (set-face-attribute 'variable-pitch nil
-		      ;; :family "Fira Sans"
-		      :height variable-pitch-height
-		      :weight 'regular))
-;; Now I just have to call this function with the proper values for :height according to the screen size.
-(when window-system
-  (if (> (x-display-pixel-width) 1800)
-      (mitch/setup-main-fonts 130 140)
-    (mitch/setup-main-fonts 110 120)))
+;; Use DEFAULT-HEIGHT for default face and VARIABLE-PITCH-HEIGHT
+;; for variable-pitch face."
+;;   (set-face-attribute 'default nil
+;; 		      :family "MesloLGS NF"
+;; 		      :height default-height)
+;;   (set-face-attribute 'variable-pitch nil
+;; 		      :height variable-pitch-height
+;; 		      :weight 'regular))
+;; ;; Now I just have to call this function with the proper values for :height according to the screen size.
+;; (when window-system
+;;   (if (> (x-display-pixel-width) 1800)
+;;       (mitch/setup-main-fonts 130 140)
+;;     (mitch/setup-main-fonts 110 120)))
+
+;; sane font stuff
+(set-face-attribute 'default nil
+		    :family "MesloLGS NF"
+		    :height 130)
+(set-face-attribute 'variable-pitch nil
+		    :height 140
+		    :weight 'regular)
 
 (setq rainbow-delimiters-max-face-count 2)
+
+;; Set transparent background; might break older emacsen
+(add-to-list 'initial-frame-alist '(alpha-background . 50))
+(add-to-list 'default-frame-alist '(alpha-background . 50))
+(add-to-list 'default-frame-alist '(cursor-color . "white"))
 
 (autothemer-deftheme
  mitch "Based on my nvim theme. Because everything else looks the same."
@@ -75,7 +88,8 @@ for variable-pitch face."
 
  ;; specifications for Emacs faces.
  (
-  (default (:background mitch-black :foreground mitch-light-yellow))
+  ;; (default (:background mitch-black :foreground mitch-light-yellow))
+  (default (:background mitch-black :foreground mitch-white))
   (fixed-pitch (:inherit 'default))
   (cursor (:inherit 'default))
   (highlight (:background mitch-visual-bg))

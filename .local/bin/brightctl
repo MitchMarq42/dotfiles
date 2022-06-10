@@ -6,10 +6,11 @@
 arg="$*"
 echo "$arg"
 
-bl="$(
+bl=$(
     ls /sys/class/backlight |
-    awk '{print $1}'
-)"
+	awk '{print $1}'
+  )
+blfile=/sys/class/backlight/"$bl"/brightness
 
 brightness=$(cat /sys/class/backlight/"$bl"/brightness)
 
@@ -18,26 +19,36 @@ oldbrightness="$brightness"
 
 upstep=$(
     cat /sys/class/backlight/"$bl"/max_brightness |
-    awk '{ print int($1/17  +0.5 ) } '
-)
+	awk '{ print int($1/17  +0.5 ) } '
+      )
 downstep=$(
     cat /sys/class/backlight/"$bl"/max_brightness |
-    awk '{ print int($1/19  +0.5 ) } '
-)
+	awk '{ print int($1/19  +0.5 ) } '
+	)
 
 echo "Was $oldbrightness"
+
+elevate(){
+    me=$(whoami)
+    SUDO_ASKPASS=/usr/lib/ssh/gnome-ssh-askpass3 \
+	sudo -A chown $me $blfile
+}
 
 case "$arg" in
     +)       _=$((brightness=(brightness+upstep) )) ;;
     -)       _=$((brightness=(brightness-downstep) )) ;;
     -s | save | --save )
-             (echo "$brightness" > "$HOME"/.local/share/brightness 2>/dev/null &&
-              echo Saved "$saved" as "$brightness" ||
-              echo "Failed. Check your privilege.") ;;
+	echo "$brightness" > "$HOME"/.local/share/brightness 2>/dev/null &&
+	    echo Saved "$saved" as "$brightness" ||
+		echo "Failed. Check your privilege." ;;
     -r | restore | --restore )
-        brightness=$(cat "$saved")
+	brightness=$(cat "$saved")
+	;;
+    elevate)
+	elevate
+	;;
 esac
 
-echo "$brightness" | sudo -n tee /sys/class/backlight/"$bl"/brightness >/dev/null &&
-echo Now "$brightness" ||
-    echo "Still $oldbrightness, maybe don't expect the impossible next time?"
+echo "$brightness" > $blfile &&
+    echo Now "$brightness" ||
+	echo "Still $oldbrightness, maybe don't expect the impossible next time?"

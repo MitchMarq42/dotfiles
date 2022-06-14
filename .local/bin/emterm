@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Start an emacs terminal. Try the client, or start a new one.
+
+emacsclient -nc --eval '(multi-vterm)' ||
+    emacs -f multi-vterm

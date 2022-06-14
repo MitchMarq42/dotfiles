@@ -28,7 +28,7 @@
  "h" 'help-command
  "b" 'switch-to-buffer
  "SPC" 'evil-buffer
- "v" 'vterm)
+ "v" 'multi-vterm)
 (general-define-key
  :states 'normal
  :prefix-command 'eval-map-prefix
@@ -45,7 +45,7 @@
  :states 'normal
  :prefix-map 'ctl-x-4-map
  :prefix "SPC 4"
- "v" 'vterm-other-window)
+ "v" 'multi-vterm-other-window)
 
 ;; broken
 (general-define-key

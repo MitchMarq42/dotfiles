@@ -28,9 +28,9 @@
   (require 'man-plus)
 
   ;; minify yes/no prompts
-  (if (>= (string-to-number emacs-version) 28)
-      (defvar use-short-answers t)
-    (defalias 'yes-or-no-p 'y-or-n-p))
+  ;; (if (>= (string-to-number emacs-version) 28)
+  ;;     (defvar use-short-answers t))
+    (defalias 'yes-or-no-p 'y-or-n-p)
 
   ;; do the things
   (add-hook 'server-after-make-frame-hook #'mitch/graphical-setup)

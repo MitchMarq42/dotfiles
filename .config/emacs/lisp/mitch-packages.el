@@ -103,14 +103,39 @@
   (vterm-always-compile-module t)
   (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no")
   (vterm-clear-scrollback-when-clearing t)
+  :config
+  ;; (add-to-list 'vterm-eval-cmds
+  ;; 	       '("update-pwd" update-pwd))
+  ;; (add-to-list 'vterm-eval-cmds
+  ;; 	       '("find-file-other-window" find-file-other-window))
+  (setq mitch/vterm-eval-cmds-strings
+	'("update-pwd"
+	  "restart-emacs"
+	  "find-file-other-window"
+	  "find-file-other-frame"))
+  (dolist (emacs-function mitch/vterm-eval-cmds-strings)
+      (add-to-list 'vterm-eval-cmds
+		   (list emacs-function (intern emacs-function))))
   :hook
-  (vterm-mode . mitch/terminal-setup))
+  (vterm-mode . mitch/terminal-setup)
+  (vterm-exit-functions . save-buffers-kill-terminal))
+(use-package multi-vterm)
+
 ;; Better modeline?
 (use-package powerline
   :init
-  :custom (powerline-default-separator 'slant))
+  :custom
+  (powerline-default-separator 'utf-8)
+  (powerline-utf-8-separator-left 57532)
+  (powerline-utf-8-separator-right 57534)
+  (powerline-display-hud nil)
+  (powerline-gui-use-vcs-glyph t))
 (use-package airline-themes
-  :custom (airline-cursor-colors nil)
+  :custom
+  (airline-cursor-colors nil)
+  (airline-display-directory t)
+  (airline-eshell-colors nil)
+  (airline-shortened-directory-length 20)
   :after powerline
   :config
   (load-theme 'airline-ravenpower t))
@@ -364,7 +389,6 @@
 ;;   :after (lsp company)
 ;;   :config
 ;;   (push 'company-lsp company-backends))
-
 ;; (use-package company-fuzzy
 ;;   :hook (company-mode . company-fuzzy-mode)
 ;;   ;; :init
@@ -394,10 +418,9 @@
   ;; (defun corfu-kill-in-minibuffer ()
   ;;   "Kill corfu and minibuffer. To be bound to Esc."
   ;;   (interactive)
-  ;;   ;; (ignore-errors
-  ;;     ;; (corfu-quit)
-  ;;     (exit-minibuffer)
-  ;;     ;; )
+  ;;   (setq-local inhibit-debugger t)
+  ;;   (corfu-quit)
+  ;;   (exit-minibuffer)
   ;;   )
   (defun corfu-send-shell (&rest _)
     "Send completion candidate when inside comint/eshell."
@@ -412,7 +435,7 @@
    "C-n" 'corfu-next
    "C-p" 'corfu-previous
    "RET" 'corfu-insert
-   ;; "ESC" 'exit-minibuffer
+   "ESC" 'corfu-kill-in-minibuffer
    )
   )
 
@@ -438,16 +461,15 @@
   (whitespace-line-column 80)
   :config (global-whitespace-mode t))
 
-(use-package lsp-dart
-  ;; :custom (lsp-dart-dap-flutter-hot-reload t)
-  :init
-  (add-hook 'dart-mode-hook 'lsp)
-  (add-hook 'dart-mode-hook
-	    #'(lambda ()
-		(add-hook 'after-save-hook
-			  #'(lambda ()
-			      (lsp-dart-dap-flutter-hot-reload)))))
-  )
+;; (use-package lsp-dart
+;;   ;; :custom (lsp-dart-dap-flutter-hot-reload t)
+;;   :init
+;;   (add-hook 'dart-mode-hook 'lsp)
+;;   (add-hook 'dart-mode-hook
+;; 	    #'(lambda ()
+;; 		(add-hook 'after-save-hook
+;; 			  #'(lambda ()
+;; 			      (lsp-dart-dap-flutter-hot-reload))))))
 
 (use-package eshell
   :straight (:type built-in)

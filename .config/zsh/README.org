@@ -260,7 +260,18 @@ Look at https://github.com/akermu/emacs-libvterm for more...
          && [[ -f ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh ]]; then
       source ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh &&
           alias emacs="vterm_cmd find-file"
+      vterm_set_directory() {
+          vterm_cmd update-pwd "$PWD/"
+      }
+      autoload -U add-zsh-hook
+      add-zsh-hook -Uz chpwd (){ vterm_set_directory }
   fi
+#+end_src
+** Optionally keep raw escape codes
+#+begin_src shell :tangle functions.zsh
+  faketty() {
+      script -qfc $(printf '%q ' "$@") /dev/null
+  }
 #+end_src
 ** Tell vim to highlight the file as sh
 (their zsh highlighting is ugly.)

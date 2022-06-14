@@ -17,7 +17,9 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term "emacsclient -nc --eval '(vterm)' -a 'emacs -f vterm'"
+set $term emterm
+# set $term "emacsclient -e '(multi-vterm)' -ca emacs"
+#-f multi-vterm -e '(multi-vterm)'
 # set $term alacritty -e zsh
 
 # Your preferred application launcher
@@ -121,7 +123,7 @@ exec ~/.local/bin/brightctl -r
     # bindsym $mod+w exec gtk-launch brave-browser
 
     # Kill focused window
-    bindsym $mod+Shift+c exec swayspawn kill
+    bindsym $mod+Shift+c exec "swayspawn kill"
 
     # Start your launcher
     bindsym $mod+d exec $menu

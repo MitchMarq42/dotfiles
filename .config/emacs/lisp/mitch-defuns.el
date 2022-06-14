@@ -99,8 +99,17 @@ For instance:
 - eshell
 - vterm
 - Maybe SLIME too."
-  (turn-off-line-numbers)
-  )
+  (turn-off-line-numbers))
+
+(defun multi-vterm-other-window ()
+  "Run a new-ish vterm in the other window"
+  (other-window 1) (multi-vterm))
+
+;; for vterm
+(defun update-pwd (path)
+  "Sync Emacs' working PATH with the shell's.
+For use with `vterm'."
+  (setq default-directory path))
 
 ;; This one line cost me over an hour of frustration...
 (provide 'mitch-defuns)

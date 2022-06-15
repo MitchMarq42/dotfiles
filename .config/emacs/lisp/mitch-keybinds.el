@@ -30,7 +30,7 @@
  "SPC" 'evil-buffer
  "v" 'multi-vterm)
 (general-define-key
- :states 'normal
+ :states '(normal visual)
  :prefix-command 'eval-map-prefix
  :prefix-map 'eval-map
  :prefix "SPC e"
@@ -40,6 +40,11 @@
  ":" 'eval-expression
  "s" 'eshell)
 
+;; broken
+(general-define-key
+ :prefix-map 'minibuffer-mode-map
+ "DEL" 'backward-kill-word)
+
 ;; fixed?
 (general-define-key
  :states 'normal
@@ -47,10 +52,14 @@
  :prefix "SPC 4"
  "v" 'multi-vterm-other-window)
 
-;; broken
-(general-define-key
- :prefix-map 'minibuffer-mode-map
- "DEL" 'backward-kill-word)
+;; (defun vterm-send-C-w ()
+;;   "Don't send C-w to vterm..."
+;;   (interactive)
+;;   (evil-window-map))
+;; (define-key
+;;  vterm-mode-map
+;;  (kbd "C-w") #'vterm-send-next-key
+;;  )
 
 (provide 'mitch-keybinds)
 ;;; mitch-keybinds.el ends here

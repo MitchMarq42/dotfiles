@@ -103,6 +103,7 @@ For instance:
 
 (defun multi-vterm-other-window ()
   "Run a new-ish vterm in the other window"
+  (interactive)
   (other-window 1) (multi-vterm))
 
 ;; for vterm

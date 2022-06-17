@@ -98,15 +98,13 @@
 
 ;; broken terminal that doesn't compile but at least it's fast when it does
 (use-package vterm
-  :general
-  (general-define-key
-   :map 'vterm-mode-map
-   "C-w" 'evil-window-map)
   :custom
   (vterm-always-compile-module t)
   (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no")
   (vterm-clear-scrollback-when-clearing t)
   :config
+  (evil-collection-define-key 'insert 'vterm-mode-map
+    (kbd "C-w") 'evil-window-map)
   (add-to-list 'vterm-keymap-exceptions
                "C-w")
   (setq mitch/vterm-eval-cmds-strings

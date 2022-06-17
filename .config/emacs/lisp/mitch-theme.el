@@ -28,7 +28,8 @@
 ;;   (set-face-attribute 'variable-pitch nil
 ;; 		      :height variable-pitch-height
 ;; 		      :weight 'regular))
-;; ;; Now I just have to call this function with the proper values for :height according to the screen size.
+;; ;; Now I just have to call this function with the proper values for :height
+;; ;; according to the screen size.
 ;; (when window-system
 ;;   (if (> (x-display-pixel-width) 1800)
 ;;       (mitch/setup-main-fonts 130 140)

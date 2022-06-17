@@ -28,8 +28,8 @@
    :states 'insert
    "C-w" 'evil-window-map
    "C-V" (general-key-dispatch
-	     'evil-quoted-insert
-	   "u" 'insert-char))
+             'evil-quoted-insert
+           "u" 'insert-char))
   :diminish visual-line-mode
   :custom
   (evil-want-integration t)
@@ -108,15 +108,15 @@
   (vterm-clear-scrollback-when-clearing t)
   :config
   (add-to-list 'vterm-keymap-exceptions
-	       "C-w")
+               "C-w")
   (setq mitch/vterm-eval-cmds-strings
-	'("update-pwd"
-	  "restart-emacs"
-	  "find-file-other-window"
-	  "find-file-other-frame"))
+        '("update-pwd"
+          "restart-emacs"
+          "find-file-other-window"
+          "find-file-other-frame"))
   (dolist (emacs-function mitch/vterm-eval-cmds-strings)
-      (add-to-list 'vterm-eval-cmds
-		   (list emacs-function (intern emacs-function))))
+    (add-to-list 'vterm-eval-cmds
+                 (list emacs-function (intern emacs-function))))
   :hook
   (vterm-mode . mitch/terminal-setup)
   (vterm-exit-functions . save-buffers-kill-terminal))
@@ -168,11 +168,11 @@
 (use-package paredit
   :defer 0.1
   :general (general-define-key
-	    :states 'normal
-	    "M-j" 'paredit-forward-slurp-sexp
-	    "M-k" 'paredit-forward-barf-sexp
-	    "M-h" 'paredit-backward-barf-sexp
-	    "M-l" 'paredit-backward-slurp-sexp)
+            :states 'normal
+            "M-j" 'paredit-forward-slurp-sexp
+            "M-k" 'paredit-forward-barf-sexp
+            "M-h" 'paredit-backward-barf-sexp
+            "M-l" 'paredit-backward-slurp-sexp)
   :config
   (show-paren-mode 1)
   (electric-pair-mode 1)
@@ -191,11 +191,13 @@
   :config
   (org-indent-mode)
   (add-hook 'org-mode-hook
-	    #'(lambda ()
-		(add-hook 'after-save-hook
-			  #'(lambda ()
-			      (org-babel-tangle)))))
+            #'(lambda ()
+                (add-hook 'after-save-hook
+                          #'(lambda ()
+                              (org-babel-tangle)))))
   :hook (org-mode . turn-off-line-numbers))
+(use-package org-variable-pitch
+  :hook (org-mode . org-variable-pitch-minor-mode))
 (use-package org-contrib
   :after org
   :config
@@ -204,20 +206,20 @@
    '((powershell . t)
      (shell . t)
      )))
-(use-package org-appear
-  :hook (org-mode . org-appear-mode)
-  :after org
-  :custom
-  (org-appear-autolinks t))
+;; (use-package org-appear
+;;   :hook (org-mode . org-appear-mode)
+;;   :after org
+;;   :custom
+;;   (org-appear-autolinks t))
 (use-package ob-powershell
   :after (org powershell)
   :custom
   (ob-powershell-powershell-command "pwsh"))
-(use-package visual-fill-column
-  :config
-  (setq-default visual-fill-column-center-text t)
-  (setq-default fill-column 140)
-  :hook (org-mode . visual-fill-column-mode))
+;; (use-package visual-fill-column
+;;   :config
+;;   (setq-default visual-fill-column-center-text t)
+;;   (setq-default fill-column 140)
+;;   :hook (org-mode . visual-fill-column-mode))
 (use-package company-org-block
   :after (org company))
 
@@ -252,9 +254,9 @@
   ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
   ;; (add-hook 'haskell-mode-hook #'lsp)
   :bind (
-	 :map haskell-mode-map
-	 ("C-c h" . hoogle)
-	 ("C-c s" . haskell-mode-stylish-buffer))
+         :map haskell-mode-map
+         ("C-c h" . hoogle)
+         ("C-c s" . haskell-mode-stylish-buffer))
   :config (message "Loaded haskell-mode")
   (setq haskell-mode-stylish-haskell-path "brittany")
   (setq haskell-hoogle-url "https://www.stackage.org/lts/hoogle?q=%s"))
@@ -290,14 +292,14 @@
 
 (use-package lsp-mode
   :hook ((powershell-mode . lsp)
-	 (csharp-mode . lsp)
-	 (lsp-mode . lsp-enable-which-key-integration)
-	 (lsp-completion-mode . my/lsp-mode-setup-completion))
+         (csharp-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration)
+         (lsp-completion-mode . my/lsp-mode-setup-completion))
   :commands lsp
   :init
   (defun my/lsp-mode-setup-completion ()
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-	  '(flex))) ;; Configure flex
+          '(flex))) ;; Configure flex
   :custom
   (lsp-completion-provider :none))
 
@@ -317,9 +319,9 @@
 ;; Better help-pages. Genuinely pretty great.
 (use-package helpful
   :general (general-define-key
-	    [remap describe-key] 'helpful-key
-	    [remap describe-variable] 'helpful-variable
-	    [remap describe-function] 'helpful-callable)
+            [remap describe-key] 'helpful-key
+            [remap describe-variable] 'helpful-variable
+            [remap describe-function] 'helpful-callable)
   (general-define-key
    :keymaps 'help-map
    "F" 'describe-face
@@ -347,11 +349,11 @@
 ;; Blingy file tree view
 (use-package treemacs
   :general (general-define-key
-	    :states 'normal
-	    :prefix-command 'treemacs-map-prefix
-	    :prefix-map 'treemacs-map
-	    :prefix "SPC t"
-	    "t" 'treemacs)
+            :states 'normal
+            :prefix-command 'treemacs-map-prefix
+            :prefix-map 'treemacs-map
+            :prefix "SPC t"
+            "t" 'treemacs)
   :config
   (treemacs-project-follow-mode)
   (treemacs-git-mode 'simple)
@@ -365,12 +367,12 @@
 ;; Blingy laggy minimap on the right
 (use-package minimap
   :general (general-define-key
-	    :states 'normal
-	    :prefix-command 'mini-map-prefix
-	    :prefix-map 'mini-map
-	    :prefix "SPC m"
-	    "m" 'minimap-mode
-	    "k" 'minimap-kill)
+            :states 'normal
+            :prefix-command 'mini-map-prefix
+            :prefix-map 'mini-map
+            :prefix "SPC m"
+            "m" 'minimap-mode
+            "k" 'minimap-kill)
   :custom
   (minimap-window-location 'right)
   (minimap-update-delay 0)
@@ -411,7 +413,7 @@
   (defun corfu-enable-always-in-minibuffer ()
     "Enable Corfu in the minibuffer if Vertico/Mct are not active."
     (unless (or (bound-and-true-p mct--active)
-		(bound-and-true-p vertico--input))
+                (bound-and-true-p vertico--input))
       (setq-local corfu-auto nil) ;; Enable/disable auto completion
       (corfu-mode 1)
       (minibuffer-complete)))
@@ -443,14 +445,14 @@
 (use-package popon
   :straight
   (:type git
-	 :repo "https://codeberg.org/akib/emacs-popon"))
+         :repo "https://codeberg.org/akib/emacs-popon"))
 (use-package corfu-terminal
   :straight
   (:type git
-	 :repo "https://codeberg.org/akib/emacs-corfu-terminal")
+         :repo "https://codeberg.org/akib/emacs-corfu-terminal")
   :init (unless
-	    (display-graphic-p)
-	  (corfu-terminal-mode +1)))
+            (display-graphic-p)
+          (corfu-terminal-mode +1)))
 
 ;; Visualize whitespace. In a very chill and invisible way.
 (use-package whitespace

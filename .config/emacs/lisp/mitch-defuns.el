@@ -89,6 +89,7 @@ Made solely to reduce lines in the init file."
 (defun turn-off-line-numbers ()
   "A tiny wrapper around `display-line-numbers-mode'.
 For use in hooks."
+  (interactive)
   (display-line-numbers-mode -1))
 
 (defun mitch/terminal-setup ()

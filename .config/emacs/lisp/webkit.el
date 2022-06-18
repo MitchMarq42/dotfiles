@@ -88,11 +88,14 @@
        :help "Xwidget webkit view mode"])))
 
 (add-hook 'xwidget-webkit-mode-hook
-	  #'(lambda () (display-line-numbers-mode -1)))
+	  #'(lambda ()
+	      (turn-off-line-numbers)
+	      (scroll-bar-mode -1)
+	      ))
 
-(setq browse-url-browser-function 'xwidget-webkit-browse-url)
-(defun browse-url-default-browser (url &rest args)
-  "Override `browse-url-default-browser' to use `xwidget-webkit' URL ARGS."
-  (xwidget-webkit-browse-url url args))
+;; (setq browse-url-browser-function 'xwidget-webkit-browse-url)
+;; (defun browse-url-default-browser (url &rest args)
+;;   "Override `browse-url-default-browser' to use `xwidget-webkit' URL ARGS."
+;;   (xwidget-webkit-browse-url url args))
 
 (provide 'webkit)

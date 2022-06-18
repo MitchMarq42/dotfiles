@@ -477,5 +477,34 @@
   :hook (eshell-mode . mitch/terminal-setup)
   :config (require 'eshell-settings))
 
+(use-package popper
+  :custom
+  (display-buffer-base-action '(display-buffer-pop-up-window))
+  (popper-reference-buffers
+   '(
+     helpful-mode
+     compilation-mode
+     ibuffer-mode
+     "*Warnings"))
+  ;; (popper-display-function
+  ;;  #'display-buffer-pop-up-frame)
+  (popper-mode-line nil)
+  :init
+  (popper-mode +1)
+  (popper-echo-mode +1))
+
+;; (use-package mini-frame
+;;   :init (mini-frame-mode))
+(use-package xwidget ;-webkit
+  :straight (:type built-in)
+  :if (featurep 'xwidget-internal)
+  :config
+  (add-hook 'xwidget-webkit-mode-hook
+	    #'(lambda ()
+		(turn-off-line-numbers)
+		(scroll-bar-mode -1)
+		))
+  )
+
 (provide 'mitch-packages)
 ;;; mitch-packages.el ends here

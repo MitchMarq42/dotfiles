@@ -52,14 +52,5 @@
  :prefix "SPC 4"
  "v" 'multi-vterm-other-window)
 
-;; (defun vterm-send-C-w ()
-;;   "Don't send C-w to vterm..."
-;;   (interactive)
-;;   (evil-window-map))
-;; (define-key
-;;  vterm-mode-map
-;;  (kbd "C-w") #'vterm-send-next-key
-;;  )
-
 (provide 'mitch-keybinds)
 ;;; mitch-keybinds.el ends here

@@ -1,0 +1,255 @@
+* Emacs Configuration
+Oh boy.
+
+I don't even know what to say about this. I want to believe in the vim cult, but
+emacs just has me under its thrall. It's precisely what I've been looking for
+this whole time.
+
+** early-init.el
+*** A pointless header
+#+begin_src elisp :tangle early-init.el
+
+  ;;; Early-init --- do all these things early in the init process
+
+  ;;; Commentary:
+  ;; do the first initial beginning things
+
+#+end_src
+*** Redefine the startup message
+#+begin_src elisp :tangle early-init.el
+  ;;; Code:
+
+  (defun display-startup-echo-area-message ()
+    "A re-definition of the function.
+  Tell the Emacs startup time and number of garbage-collections
+  instead of the banal
+  \"For information about GNU Emacs and the GNU system, type \\[about-emacs].\""
+    (message
+     (concat (emacs-init-time) ", gc ran " (number-to-string gcs-done) " times"
+             )))
+
+#+end_src
+*** Redefine the Scratch blurb
+#+begin_src elisp :tangle early-init.el
+  (setq initial-scratch-message (purecopy "\
+  ;; Write some lisp in this buffer and it can be executed, either with
+  ;; \\[eval-last-sexp] locally or \\[eval-buffer] globally.
+
+  "))
+
+#+end_src
+*** Un-hinge the garbage collector
+#+begin_src elisp :tangle early-init.el
+  ;; Crash the computer by overloading memory
+  (setq gc-cons-threshold (* 50 1000 1000))
+
+#+end_src
+*** Vanilla is not plain. Pour on the bleach.
+#+begin_src elisp :tangle early-init.el
+  ;; Disable package.el so we can use straight
+  (setq package-enable-at-startup nil)
+
+#+end_src
+*** just give me my file buffer, please
+#+begin_src elisp :tangle early-init.el
+  ;; Hide default dashboard
+  (defvar inhibit-startup-messages t)
+  (setq inhibit-startup-screen t)
+
+#+end_src
+*** Compilers are verbose, but we need not listen
+#+begin_src elisp :tangle early-init.el
+  ;; Don't pop up error window on native-comp emacs
+  (defvar native-comp-async-report-warnings-errors 'silent)
+
+#+end_src
+*** BROKEN: frame hooks. Present later in init.
+#+begin_src elisp :tangle early-init.el
+  ;; Run stuff after opening a new frame
+                                          ;(setq server-after-make-frame-hook (mitch/graphical-setup))
+                                          ;(setq before-make-frame-hook (mitch/graphical-setup))
+
+  ;;; early-init.el ends here
+#+end_src
+
+** init.el
+*** Cool figlet text
+This file used to get checked by flycheck so that's perhaps worthy of note...
+#+begin_src elisp :tangle init.el
+  ;;; init.el --- basic initial declarations
+  ;;; Commentary:
+  ;;  _         _  _            _
+  ;; (_) _ __  (_)| |_     ___ | |
+  ;; | || '_ \ | || __|   / _ \| |
+  ;; | || | | || || |_  _|  __/| |
+  ;; |_||_| |_||_| \__|(_)\___||_|
+  ;;
+  ;; '((above text graphic generated with command `figlet -k "init.el"'))
+#+end_src
+*** Wrap it all in a Let
+This is said to speed up loading files because it doesn't search on network
+locations, which have always been broken for me.
+#+begin_src elisp :tangle init.el
+  ;;; Code:
+  ;; Speed up loading/finding files
+  (let
+      ((file-name-handler-alist nil))
+#+end_src
+TODO make it indent correctly
+*** BROKEN: explicit shell name
+#+begin_src elisp :tangle init.el
+  ;; Don't set this, fix the actual issue and use a POSIX-ish shell (or CMD):
+  ;; (setq shell-file-name "/bin/sh")
+#+end_src
+*** Add my personal files to the load-path
+#+begin_src elisp :tangle init.el
+  ;; Load the files that I put my settings in...
+  (defvar mitch-directory
+    (directory-file-name
+     (concat user-emacs-directory
+             (convert-standard-filename "lisp/"))))
+  (setq load-path
+        (cons mitch-directory load-path))
+  (setq custom-theme-directory mitch-directory)
+#+end_src
+*** ... and load them
+#+begin_src elisp :tangle init.el
+  (require 'mitch-defuns)
+  ;; (require 'webkit) ; see https://github.com/akirakyle/emacs-webkit
+  (require 'man-plus)
+#+end_src
+*** Minify yes/no prompts
+#+begin_src elisp :tangle init.el
+  ;; minify yes/no prompts
+  ;; (if (>= (string-to-number emacs-version) 28)
+  ;;     (defvar use-short-answers t))
+  (defalias 'yes-or-no-p 'y-or-n-p)
+
+#+end_src
+*** When GUI, do GUI things
+#+begin_src elisp :tangle init.el
+  ;; do the things
+  (add-hook 'server-after-make-frame-hook #'mitch/graphical-setup)
+  (if (display-graphic-p) (mitch/graphical-setup))
+
+#+end_src
+*** Hide backup, swap, and lock files
+#+begin_src elisp :tangle init.el
+  ;; Control backups/swapfiles
+  (defvar backup-directory
+    (expand-file-name "emacs-backups"
+                      (or (getenv "XDG_CACHE_HOME")
+                          (expand-file-name
+                           ".cache" "~"))))
+  (if (not (file-exists-p backup-directory))
+      (make-directory backup-directory t))
+  (setq backup-directory-alist `(("." . ,backup-directory)))
+
+  ;; auto-save-mode doesn't create the path automatically!
+  (defvar auto-save-directory
+    (expand-file-name "tmp/auto-saves/" backup-directory))
+  (make-directory auto-save-directory t)
+  (setq auto-save-list-file-prefix
+        (expand-file-name "sessions/" auto-save-directory)
+        auto-save-file-name-transforms
+        `((".*" ,auto-save-directory t)))
+  (setq create-lockfiles nil)
+
+#+end_src
+*** Put Custom declarations in their own (ignored) file
+#+begin_src elisp :tangle init.el
+  ;; remove auto-generated bits
+  (setq custom-file (expand-file-name "custom.el" backup-directory))
+  (if (not (file-exists-p custom-file))
+      (make-empty-file custom-file t))
+  (load custom-file)
+
+#+end_src
+*** Invoke/load straight.el, the gud git package manager
+#+begin_src elisp :tangle init.el
+  ;; straight.el: the better package manager?
+  ;; minified bootstrap (split lines if you want) (or not)
+  (defvar bootstrap-version) (let ((bootstrap-file (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory)) (bootstrap-version 5)) (unless (file-exists-p bootstrap-file) (with-current-buffer (url-retrieve-synchronously "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el" 'silent 'inhibit-cookies) (goto-char (point-max)) (eval-print-last-sexp))) (load bootstrap-file nil 'nomessage)) (straight-use-package 'use-package) (setq straight-use-package-by-default t)
+
+#+end_src
+*** And load my packages
+#+begin_src elisp :tangle init.el
+  (require 'mitch-packages)
+
+#+end_src
+*** Line numbers
+#+begin_src elisp :tangle init.el
+  ;; Absolute line numbers. Relative ones are an annoyance to set up, sadly.
+  (global-display-line-numbers-mode)
+  (defvar display-line-numbers-width-start t)
+
+#+end_src
+*** Scrolling up and down is weird
+#+begin_src elisp :tangle init.el
+  ;; scroll step stuff
+  (setq scroll-margin 2
+        scroll-conservatively 100
+        scroll-up-aggressively 0.01
+        scroll-down-aggressively 0.01)
+  (global-visual-line-mode t)
+
+  ;; run launcher exists. Copy it from
+  ;; https://www.reddit.com/r/unixporn/comments/s7p7pr/so_which_run_launcher_do_you_use_rofi_or_dmenu/
+  ;; I don't have it here because I don't use it right now.
+
+#+end_src
+*** UTF-8 is love, UTF-8 is life
+#+begin_src elisp :tangle init.el
+  ;; UTF-8 supremacy (Snippet from https://github.com/doomemacs/doomemacs/blob/master/early-init.el)
+  (set-language-environment "UTF-8")
+
+#+end_src
+*** BROKEN: Japanese input
+you can still use it: ~C-u C-\ japanese RET~
+#+begin_src elisp :tangle init.el
+  ;; Toggle Japanese with `qq'
+  ;; Sample text: 進撃 の 巨人
+  ;; (shingeki no kyojin (attack on titan))
+  ;; (setq default-input-method 'japanese)
+  ;; (setq-default current-input-method 'japanese-ascii)
+  ;; DISABLED because something broke and I didn't bother figuring out what...
+
+#+end_src
+*** Inspect Element popup, but 40 years old
+#+begin_src elisp :tangle init.el
+  ;; barf out emacs errors as they are encountered
+  (setq debug-on-error t)
+
+#+end_src
+*** Pointless scrolling hack
+TODO should go in [[Scrolling up and down is weird]]
+#+begin_src elisp :tangle init.el
+  ;; Speed up scrolling down (why is this even a thing?)
+  (setq auto-window-vscroll nil)
+
+#+end_src
+*** Save our place in files, to jump right back into it
+#+begin_src elisp :tangle init.el
+  ;; save place in all files
+  (save-place-mode t)
+  (defvar save-place-file
+    (expand-file-name "file-position-save" backup-directory))
+
+#+end_src
+*** an excuse to write lambda as λ
+#+begin_src elisp :tangle init.el
+  ;; load eshell stuff when we start eshell
+  (add-hook 'eshell-mode-hook #'(lambda () (require 'eshell-settings)))
+  ;; Display "labmda" as λ
+  (global-prettify-symbols-mode 1)
+
+  )
+#+end_src
+*** Re-hinge the garbage collector
+see early-init.el
+#+begin_src elisp :tangle init.el
+  ;; lower gc threshold again
+  (setq gc-cons-threshold (* 2 1000 1000))
+
+  ;;; init.el ends here
+#+end_src

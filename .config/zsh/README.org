@@ -406,5 +406,6 @@ that =.lesshst= file is so annoying...
 #+end_src
 ** PATH variable
 #+begin_src shell :tangle zprofile
-  export PATH=/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/flutter/bin:~/.local/bin:$PATH:~/.local/share/cargo/bin:~/.local/share/brew/bin:~/.local/share/brew/sbin:/home/linuxbrew/.linuxbrew/bin
+  export PATH=/opt/local/bin:/home/mitch/.dotnet/tools:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/flutter/bin:~/.local/bin:$PATH:~/.local/share/cargo/bin:~/.local/share/brew/bin:~/.local/share/brew/sbin:/home/linuxbrew/.linuxbrew/bin
+
 #+end_src

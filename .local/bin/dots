@@ -41,6 +41,7 @@ case $1 in
     pull) pull "$@" ;;
     push) push "$@" ;;
     diff) diff "$@" ;;
+    tangall) org_tangall ;;
     *) git_cmd "$@" ;;
 esac
 

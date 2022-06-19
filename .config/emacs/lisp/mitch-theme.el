@@ -54,6 +54,7 @@
 (add-to-list 'initial-frame-alist '(alpha-background . 50))
 (add-to-list 'default-frame-alist '(alpha-background . 50))
 (add-to-list 'default-frame-alist '(cursor-color . "white"))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (autothemer-deftheme
  mitch "Based on my nvim theme. Because everything else looks the same."

@@ -243,6 +243,9 @@ TODO should go in [[Scrolling up and down is weird]]
   ;; Display "labmda" as λ
   (global-prettify-symbols-mode 1)
 
+#+end_src
+*** Close the 'Let'
+#+begin_src elisp :tangle init.el
   )
 #+end_src
 *** Re-hinge the garbage collector

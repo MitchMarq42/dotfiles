@@ -16,6 +16,7 @@
 
 ;; set font...
 ;; Taken from https://web.archive.org/web/20210622224446/https://www.manueluberti.eu/emacs/2017/02/26/dynamicfonts/
+
 ;; insane font stuff. Might be what breaks something.
 ;; (defun mitch/setup-main-fonts (default-height variable-pitch-height)
 ;;   "Set up default fonts.
@@ -36,6 +37,9 @@
 ;;     (mitch/setup-main-fonts 110 120)))
 
 ;; sane font stuff
+(set-face-attribute 'fixed-pitch nil
+		    :family "MesloLGS NF"
+		    :height 130)
 (set-face-attribute 'default nil
 		    :family "MesloLGS NF"
 		    :height 130)
@@ -44,6 +48,7 @@
 		    :weight 'regular)
 
 (setq rainbow-delimiters-max-face-count 2)
+;; (setq org-fontify-quote-and-verse-blocks t)
 
 ;; Set transparent background; might break older emacsen
 (add-to-list 'initial-frame-alist '(alpha-background . 50))
@@ -90,8 +95,8 @@
  ;; specifications for Emacs faces.
  (
   ;; (default (:background mitch-black :foreground mitch-light-yellow))
+  ;; (fixed-pitch (:inherit 'default))
   (default (:background mitch-black :foreground mitch-white))
-  (fixed-pitch (:inherit 'default))
   (cursor (:inherit 'default))
   (highlight (:background mitch-visual-bg))
   (region (:inherit 'highlight))
@@ -103,42 +108,30 @@
   (linum (:inherit 'line-number))
   (linum-relative-current-face (:inherit 'line-number-current-line))
   ;; font-lock faces. The defaults that are important to get right.
-  (font-lock-comment-face (:inherit 'default :foreground mitch-green :slant 'oblique))
-  (font-lock-comment-delimiter-face (:inherit 'default :foreground mitch-light-black))
-  (font-lock-constant-face (:inherit 'default :foreground mitch-light-white :weight 'normal))
-  (font-lock-string-face (:inherit 'default :foreground mitch-light-blue :slant 'italic))
-  (font-lock-builtin-face (:inherit 'default :foreground mitch-light-white :weight 'bold))
-  (font-lock-keyword-face (:inherit 'default :foreground mitch-red :weight 'bold))
-  (font-lock-type-face (:inherit 'default :foreground mitch-light-red :weight 'bold))
-  (font-lock-function-name-face (:inherit 'default :foreground mitch-red :weight 'normal))
-  (font-lock-variable-name-face (:inherit 'default :foreground mitch-light-cyan :weight 'normal))
-  (font-lock-negation-char-face (:inherit 'default :foreground mitch-visual-bg :weight 'bold))
+  (font-lock-comment-face (:foreground mitch-green :slant 'oblique))
+  (font-lock-comment-delimiter-face (:foreground mitch-light-black))
+  (font-lock-constant-face (:foreground mitch-light-white :weight 'normal))
+  (font-lock-string-face (:foreground mitch-light-blue :slant 'italic))
+  (font-lock-builtin-face (:foreground mitch-light-white :weight 'bold))
+  (font-lock-keyword-face (:foreground mitch-red :weight 'bold))
+  (font-lock-type-face (:foreground mitch-light-red :weight 'bold))
+  (font-lock-function-name-face (:foreground mitch-red :weight 'normal))
+  (font-lock-variable-name-face (:foreground mitch-light-cyan :weight 'normal))
+  (font-lock-negation-char-face (:foreground mitch-visual-bg :weight 'bold))
   ;; other things
   (transient-heading (:inherit 'default :foreground mitch-magenta :weight 'bold))
-  (rainbow-delimiters-depth-1-face (:inherit 'default :foreground mitch-light-magenta))
-  (rainbow-delimiters-depth-2-face (:inherit 'default :foreground mitch-magenta :weight 'normal))
-  (vertical-border (:inherit 'default :foreground mitch-light-magenta :weight 'bold))
+  (rainbow-delimiters-depth-1-face ('default :foreground mitch-light-magenta))
+  (rainbow-delimiters-depth-2-face ('default :foreground mitch-magenta :weight 'normal))
+  (vertical-border (:foreground mitch-light-magenta :weight 'bold))
   (fringe (:inherit 'default))
   (whitespace-space (:foreground mitch-black))
   (whitespace-tab (:foreground mitch-black))
   (whitespace-newline (:foreground mitch-black))
-  (isearch (:inherit 'default :foreground mitch-dark-yellow :background mitch-light-magenta :weight 'bold))
+  (isearch (:foreground mitch-dark-yellow :background mitch-light-magenta :weight 'bold))
   (lazy-highlight (:inherit 'isearch))
+  (completions-highlight (:background mitch-mid-violet))
   (corfu-default (:background mitch-mid-gray))
-  (corfu-current (:background mitch-mid-violet :foreground mitch-light-yellow))
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (org-block-begin-line (:inherit 'font-lock-comment-delimiter-face))
-  (org-block-end-line (:inherit 'font-lock-comment-delimiter-face))
-  (org-code (:inherit 'font-lock-constant-face))
-  (org-table (:inherit 'org-code))
-  (org-block (:inherit 'org-code))
-  (org-verbatim (:inherit 'org-code))
-  (org-special-keyword (:inherit '(font-lock-comment-face fixed-pitch)))
-  (org-formula (:inherit 'org-special-keyword))
-  (org-meta-line (:inherit 'org-special-keyword))
-  (org-checkbox (:inherit 'org-code))
-  ;; (org-level-1 (:inherit 'default :height 'mitch/font/heading-height :weight 'bold :foreground mitch-light-magenta))
-  ;; (org-level-2 (:inherit 'org-level-1 :foreground "magenta3"))
+  (corfu-current (:inherit 'completions-highlight))
   (vterm-color-red (:foreground mitch-red :background mitch-light-red))
   (vterm-color-blue (:foreground mitch-blue :background mitch-light-blue))
   (vterm-color-cyan (:foreground mitch-cyan :background mitch-light-cyan))

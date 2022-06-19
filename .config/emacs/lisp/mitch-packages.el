@@ -196,6 +196,12 @@
 		(add-hook 'after-save-hook
 			  #'(lambda ()
 			      (org-babel-tangle)))))
+  (with-eval-after-load 'org
+    ;; This is needed as of Org 9.2
+    (require 'org-tempo)
+    (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+    (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+    (add-to-list 'org-structure-template-alist '("ps1" . "src powershell")))
   :hook (org-mode . turn-off-line-numbers))
 (use-package org-variable-pitch
   :diminish

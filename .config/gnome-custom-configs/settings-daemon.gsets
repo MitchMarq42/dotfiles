@@ -6,12 +6,12 @@ custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybin
 
 [plugins/media-keys/custom-keybindings/custom0]
 binding='<Super>Return'
-command='gnome-terminal'
+command='emterm'
 name='terminal'
 
 [plugins/media-keys/custom-keybindings/custom1]
 binding='<Super>w'
-command='qutebrowser'
+command='brave-browser'
 name='browser'
 
 [plugins/media-keys/custom-keybindings/custom2]

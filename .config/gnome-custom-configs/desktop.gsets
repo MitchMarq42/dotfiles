@@ -1,3 +1,6 @@
+[a11y/applications]
+screen-reader-enabled=false
+
 [app-folders]
 folder-children=['Utilities', 'YaST']
 
@@ -17,6 +20,7 @@ translate=true
 color-shading-type='solid'
 picture-options='zoom'
 picture-uri='file:///home/mitch/.local/share/backgrounds/mojave_midnight.jpg'
+picture-uri-dark='file:///home/mitch/.local/share/backgrounds/mojave_midnight.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -33,6 +37,8 @@ xkb-options=['custom:super_esc']
 clock-format='12h'
 clock-show-date=false
 clock-show-weekday=false
+color-scheme='prefer-dark'
+cursor-theme='Mocu-White-Right'
 document-font-name='Ubuntu 12'
 font-antialiasing='rgba'
 font-hinting='slight'
@@ -48,7 +54,7 @@ toolkit-accessibility=false
 autorun-never=true
 
 [notifications]
-application-children=['gvim', 'org-freedesktop-problems-applet', 'gnome-power-panel', 'gnome-network-panel']
+application-children=['gvim', 'org-freedesktop-problems-applet', 'gnome-power-panel', 'gnome-network-panel', 'org-gnome-software']
 show-banners=true
 show-in-lock-screen=false
 
@@ -63,6 +69,9 @@ application-id='gvim.desktop'
 
 [notifications/application/org-freedesktop-problems-applet]
 application-id='org.freedesktop.problems.applet.desktop'
+
+[notifications/application/org-gnome-software]
+application-id='org.gnome.Software.desktop'
 
 [peripherals/keyboard]
 numlock-state=false

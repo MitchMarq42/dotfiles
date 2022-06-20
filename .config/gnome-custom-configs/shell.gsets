@@ -47,6 +47,7 @@ symbolic=true
 
 [keybindings]
 open-application-menu=@as []
+switch-to-application-2=@as []
 toggle-message-tray=['<Super>v']
 toggle-overview=@as []
 

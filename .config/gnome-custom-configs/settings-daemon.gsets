@@ -3,6 +3,7 @@ night-light-last-coordinates=(61.187299280057594, -149.95070000000001)
 
 [plugins/media-keys]
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']
+screensaver=['<Super>x']
 
 [plugins/media-keys/custom-keybindings/custom0]
 binding='<Super>Return'

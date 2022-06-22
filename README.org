@@ -89,32 +89,9 @@ For my old [[https://neovim.io/][neovim]] config (formerly at
 [[.config/nvim][.config/nvim]]), check
 https://github.com/MitchMarq42/nvim-configs.
 
-Currently, I use [[https://www.gnu.org/software/emacs/][emacs]]. I have based
-[[.config/emacs][my emacs configuration]] off of what I happened to have for
-neovim at the time, with the aid of [[https://systemcrafters.net][System
-Crafters]]. Since then it has grown into something more, something crazy. Or
-maybe it's really not that crazy and emacs is just a bad program with a good
-extension API. I do not know if I am a human dreaming of emacs, or an emacs
-dreaming of humanity.
+For my current [[https://www.gnu.org/software/emacs/][emacs]] configuration,
+check https://git.mitchmarq42.xyz/mitch/emacs.d.
 
-There are a few things to immediately note:
-
-- The theme is my own. Every existing emacs (and vim, for that matter)
-  colorscheme/theme is washed-in and gray-on-gray. Doom, spacemacs, solarized,
-  nord, dracula, or any other name-able theme. Also, any "new and exciting"
-  theme you see on Reddit will be the same. This infuriated me to no end, so in
-  the early days of my nvim tweaking I pulled the most unique and contrastful
-  theme I could find. It was called "sv" and it was hacked up by some guy on
-  github once and then forgotten. So I extended it for nvim, then recreated it
-  in emacs with the aid of
-  [[https://github.com/jasonm23/autothemer][autothemer]] (which you can find at
-  [[.config/emacs/lisp/mitch-theme.el][.config/emacs/lisp/mitch-theme.el]]).
-
-- Typing ~qq~ will change your input method. This is sort-of a built-in feature,
-  but the default trigger is to type ~C-\~, which is annoying to press. The ~qq~
-  behavior is built into Japanese-mode specifically and normally toggles in and
-  out of ~japanese-ascii~, which is literally just normal text except ~qq~
-  switches back to Japanese.
 * Other things
 ** TODO Old note on xkb custom mappings
 +For getting capslock -\> esc and held-capslock -\> super to work in sway, see+

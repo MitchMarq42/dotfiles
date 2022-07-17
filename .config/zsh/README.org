@@ -258,8 +258,12 @@ Look at https://github.com/akermu/emacs-libvterm for more...
   if [[ "$INSIDE_EMACS" = 'vterm' ]] \
          && [[ -n ${EMACS_VTERM_PATH} ]] \
          && [[ -f ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh ]]; then
-      source ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh &&
-          alias emacs="vterm_cmd find-file"
+      source ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh
+      alias emacs="vterm_cmd eshell/emacs"
+      alias man="vterm_cmd eshell/man"
+      alias info="vterm_cmd info-other-window"
+      alias dirvish="vterm_cmd dirvish"
+      alias magit="vterm_cmd magit"
       vterm_set_directory() {
           vterm_cmd update-pwd "$PWD/"
       }
@@ -407,5 +411,7 @@ that =.lesshst= file is so annoying...
 ** PATH variable
 #+begin_src shell :tangle zprofile
   export PATH=/opt/local/bin:/home/mitch/.dotnet/tools:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/opt/flutter/bin:~/.local/bin:$PATH:~/.local/share/cargo/bin:~/.local/share/brew/bin:~/.local/share/brew/sbin:/home/linuxbrew/.linuxbrew/bin
+
+  # . /home/mitch/.nix-profile/etc/profile.d/nix.sh
 
 #+end_src

@@ -5,25 +5,26 @@
 
 # a bunch of this stuff will be transposed from the zsh stuff...
 
+# environment fixes
+$env:HOME = $home
+$env:XDG_DATA_HOME = "$env:HOME/.local/share"
+$env:PATH = "$env:HOME/.local/bin/:" + $env:PATH
+
 if ($IsLinux) {
     # startup redirection
-    switch -regex ($env:TMUX) {
-	(".*") {$env:OLDTERM = $env:TERM}
-	default {
-	    switch -regex ($env:TERM) {
-		(alacritty|eterm*|xterm-*) {}
-		(linux) {
-		    switch (tty) {
-			("/dev/tty5") { & startx $env:XINITRC }
-			("/dev/tty7") { & sway; exit }
-			default {sudo loadkeys "$env:XDG_DATA_HOME/imports/caps.kmap"}}}
-		default {$env:OLDTERM = $env:TERM ; & tmux ; exit}
-	    }
+    if (get-variable '$env:TMUX') {
+	$env:OLDTERM = $env:TERM
+    } else {
+	switch -regex ($env:TERM) {
+	    (alacritty|eterm*|xterm-*) {}
+	    (linux) {
+		switch (tty) {
+		    ("/dev/tty5") { & startx $env:XINITRC }
+		    ("/dev/tty7") { & sway; exit }
+		    default {sudo loadkeys "$env:XDG_DATA_HOME/imports/caps.kmap"}}}
+	    default {$env:OLDTERM = $env:TERM ; & tmux ; exit}
 	}
     }
-    # environment fixes
-    $env:XDG_DATA_HOME = "$env:HOME/.local/share"
-    $env:PATH = "$env:HOME/.local/bin/:" + $env:PATH
 }
 
 # default settings from the writer of PSReadLine

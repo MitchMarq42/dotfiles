@@ -11,20 +11,23 @@ $env:XDG_DATA_HOME = "$env:HOME/.local/share"
 $env:PATH = "$env:HOME/.local/bin/:" + $env:PATH
 
 if ($IsLinux) {
-    # startup redirection
-    if (get-variable '$env:TMUX') {
-	$env:OLDTERM = $env:TERM
-    } else {
-	switch -regex ($env:TERM) {
-	    (alacritty|eterm*|xterm-*) {}
-	    (linux) {
-		switch (tty) {
+	# startup redirection
+	if ($null -ne $env:TMUX) {
+		$env:OLDTERM = $env:TERM
+	}
+ else {
+		switch -regex ($env:TERM) {
+	    ('alacritty|eterm*x|term-*') {}
+	    ('linux') {
+				switch (tty) {
 		    ("/dev/tty5") { & startx $env:XINITRC }
 		    ("/dev/tty7") { & sway; exit }
-		    default {sudo loadkeys "$env:XDG_DATA_HOME/imports/caps.kmap"}}}
-	    default {$env:OLDTERM = $env:TERM ; & tmux ; exit}
+					default { sudo loadkeys "$env:XDG_DATA_HOME/imports/caps.kmap" }
+				}
+			}
+			default { $env:OLDTERM = $env:TERM ; & tmux ; exit }
+		}
 	}
-    }
 }
 
 # default settings from the writer of PSReadLine
@@ -33,24 +36,24 @@ if ($IsLinux) {
 # LINUX
 
 # Re-define the prompt() function. A simple imitation of my p10k config.
-function Prompt(){
-    write-host ($pwd.path -replace ($home).replace('\','\\'),'~') `
-      -foregroundcolor darkblue
-    switch ($lastexitcode) {
-	(0) {$color = "darkgreen"}        # Success = exit code 0
-	# ($null) {$color = "darkgreen"}    # New shell = no exit code
-	default {$color = "darkred"}      # All other exit codes are bad
-    }
-    write-host ">" -foregroundcolor $color -nonewline
-    return " " #"`e[5 q"
+function Prompt() {
+	write-host ($pwd.path -replace ($home).replace('\', '\\'), '~') `
+		-foregroundcolor darkblue
+	switch ($lastexitcode) {
+	(0) { $color = "darkgreen" }        # Success = exit code 0
+		# ($null) {$color = "darkgreen"}    # New shell = no exit code
+		default { $color = "darkred" }      # All other exit codes are bad
+	}
+	write-host ">" -foregroundcolor $color -nonewline
+	return " " #"`e[5 q"
 }
 
 $PSReadlineOptions = @{
-    editmode = 'vi'
-    vimodeindicator = 'cursor'
-    HistorySearchCursorMovesToEnd = $true
-    showtooltips = $false
-    # PredictionSource = 'history'
+	editmode                      = 'vi'
+	vimodeindicator               = 'cursor'
+	HistorySearchCursorMovesToEnd = $true
+	showtooltips                  = $false
+	# PredictionSource = 'history'
 }
 
 set-psreadlineoption @PSReadlineOptions
@@ -162,9 +165,9 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 # Broken - hjkl tab-completion maybe?
 # Set-PSReadLineKeyHandler -chord 'j' `
-  #   -BriefDescription MenuViDown `
-  #   -LongDescription "Go down in the tab-complete menu" `
-  #   -ScriptBlock {
+#   -BriefDescription MenuViDown `
+#   -LongDescription "Go down in the tab-complete menu" `
+#   -ScriptBlock {
 #       param($key, $arg)
 #       $line = $null
 #       $cursor = $null
@@ -176,40 +179,59 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 # aliases
 Set-Alias  -Name  'ls'  -Value  'Get-ChildItem'
 Set-Alias -Name 'which' -Value 'Get-Command'
-function rm(){ #defined as function instead of alias because parameters
-    param([string[]]$allargs, [switch]$rf)
-    if ($rf) {remove-item -Recurse -Force $allargs
-    } else {remove-item $allargs}}
+function top () {
+    tput smcup
+	do {
+  $rows = [console]::WindowHeight - 2 # account for headers
+  $columns = [console]::WindowWidth
+  $newText = (
+			Get-Process |
+			Sort-Object CPU -Descending |
+			Select-Object -first $rows |
+			Format-Table |
+			Out-String -Stream |                 # get output as individual lines
+			Where-Object { $_ } |                  # get rid of trailing lines
+			ForEach-Object PadRight $columns ' ' # overwrite gack from last time
+  ) -join "`n"
+
+  [console]::SetCursorPosition(0, 0)
+  [console]::Write($newText)
+  [console]::SetCursorPosition(0, 0)
+  Start-Sleep -Milliseconds 500
+	} until ([console]::ReadKey().KeyChar -eq 'q')
+    tput rmcup
+}
 
 # use-module bootstrap
 if (! (Test-Path $home/.local/git/use-module/use-module.ps1)) {
-    git clone https://git.mitchmarq42.xyz/mitch/use-module `
-      $env:HOME/.local/git/use-module}
+	git clone https://git.mitchmarq42.xyz/mitch/use-module `
+		$env:HOME/.local/git/use-module
+}
 . $env:HOME/.local/git/use-module/use-module.ps1
 
 # posh-git
 use-module 'posh-git' `
-  -if {$PSVersionTable.PSVersion.Major -lt 6} `
-  -dev 'dahlbyk' `
-  -manifest 'src/posh-git.psd1'
+	-if { $PSVersionTable.PSVersion.Major -lt 6 } `
+	-dev 'dahlbyk' `
+	-manifest 'src/posh-git.psd1'
 # unix-completers
 use-module 'unixcompleters' `
-  -if {$PSVersionTable.PSVersion.Major -ge 6} `
-  -manifest 'Microsoft.PowerShell.UnixTabCompletion.psd1' `
-  -build {./build.ps1 -Clean} `
-  -import './out/Microsoft.PowerShell.UnixTabCompletion/0.5.0/Microsoft.PowerShell.UnixTabCompletion.dll'
+	-if { $PSVersionTable.PSVersion.Major -ge 6 } `
+	-manifest 'Microsoft.PowerShell.UnixTabCompletion.psd1' `
+	-build { ./build.ps1 -Clean } `
+	-import './out/Microsoft.PowerShell.UnixTabCompletion/0.5.0/Microsoft.PowerShell.UnixTabCompletion.dll'
 use-module 'neofetch' `
-  -if {! $IsWindows} `
-  -dev 'dylanaraps' `
-  -manifest $false `
-  -build {make PREFIX=$HOME/.local install}
+	-if { ! $IsWindows } `
+	-dev 'dylanaraps' `
+	-manifest $false `
+	-build { make PREFIX=$HOME/.local install }
 use-module 'pfetch' `
-  -if {! $IsWindows} `
-  -dev 'dylanaraps' `
-  -manifest $false `
-  -build {make PREFIX=$HOME/.local install}
+	-if { ! $IsWindows } `
+	-dev 'dylanaraps' `
+	-manifest $false `
+	-build { make PREFIX=$HOME/.local install }
 use-module 'psreadline' `
-  -manifest 'PSReadLine/PSReadLine.psd1'
+	-manifest 'PSReadLine/PSReadLine.psd1'
 
 # clear screen if it looks cool
 # if ($host.ui.RawUI.WindowSize.Height -lt 50) {

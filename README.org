@@ -18,11 +18,11 @@ Self-documenting code does not exist, but some day there will be a self-tangling
 ** The terminal
 Beyond handling true-color and UTF-8 nerd fonts, any terminal is sufficient in my book.
 
-I currently use [[https://wiki.gnome.org/Apps/Terminal][gnome-terminal]] on Fedora and Ubuntu (my server and media center both run ubuntu), [[https://sw.kovidgoyal.net/kitty/][kitty]] on MacOS, [[https://github.com/alacritty/alacritty][alacritty]] on arch/artix/whatever, and the totally vanilla default console host on Windows, unless I'm in cygwin/gitbash in which case I use their default =mintty=.
+I currently use [[https://wiki.gnome.org/Apps/Terminal][gnome-terminal]] on Fedora and Ubuntu (my server and media center both run ubuntu), [[https://sw.kovidgoyal.net/kitty/][kitty]] on MacOS, [[https://github.com/alacritty/alacritty][alacritty]] on arch/artix/whatever, and the totally vanilla default console host on Windows, unless I'm in cygwin/gitbash in which case I use their default ~mintty~.
 ** The shell
 I run [[https://man.archlinux.org/man/zshall.1][ZSH]]. It's decently fast, POSIX compliant, and has /zillions/ of options and menues and plugins.
 
-I have copied [[https://github.com/lukesmithxyz/voidrice][Luke Smith's config]] layout of a .zprofile linked to its xdg-compliant location and setting =$ZDOTDIR= to [[.config/zsh][.config/zsh]] because having a clean =$HOME= is nice. the [[.config/zsh/.zshrc][.config/zsh/.zshrc]] sources [[functions.zsh][functions.zsh]] and [[aliases.zsh][aliases.zsh]], and will on first run attempt to install [[https://github.com/zplug/zplug][zplug]] for a few fun extensions.
+I have copied [[https://github.com/lukesmithxyz/voidrice][Luke Smith's config]] layout of a .zprofile linked to its xdg-compliant location and setting ~$ZDOTDIR~ to [[.config/zsh][.config/zsh]] because having a clean ~$HOME~ is nice. the [[.config/zsh/.zshrc][.config/zsh/.zshrc]] sources [[functions.zsh][functions.zsh]] and [[aliases.zsh][aliases.zsh]], and will on first run attempt to install [[https://github.com/zplug/zplug][zplug]] for a few fun extensions.
 
 Upon entering the shell it will run, among silent things, [[https://github.com/dylanaraps/neofetch][neofetch]]. While there are sort of alternatives, nothing quite hits the spot that neofetch does, at least for me. This may be partially because I have extended neofetch slightly in my config.conf:
 
@@ -30,7 +30,7 @@ Upon entering the shell it will run, among silent things, [[https://github.com/d
 
 - There is now a line for the current [[https://github.com/tmux/tmux][tmux]] pane if the current session is in one (otherwise says "N/A")
 
-- When paired with my =.zshrc=, it now prints out the previous value of the TERM variable (before tmux sets it to =screen=)
+- When paired with my ~.zshrc~, it now prints out the previous value of the TERM variable (before tmux sets it to ~screen~)
 
 - It will print out your currently-booted init system. The Artix inits work as expected, systemd insults you, Android says 'android-init', and anything else (such as Windows) spews nonsense. (Need to double check the behavior of Windows. Perhaps I should poll for ~svchost.exe~?)
 ** The coreutil aliases
@@ -52,7 +52,7 @@ For my current [[https://www.gnu.org/software/emacs/][emacs]] configuration, che
 ** TODO Old note on xkb custom mappings
 +For getting capslock -\> esc and held-capslock -\> super to work in sway, see+ +https://gist.github.com/bendavis78/e8cc8371499b52ac276fbe864247fdb7. This will+ +also suffice for any X11 window manager, or any other Wayland compositor that+ +uses XKB instead of doing its own thing.+
 
-+The file .local/share/supescaps.diff currently contains the instructions in+ +this gist but automated; run =doas patch < .local/share/supescaps.diff= and it+ +might magically work. You will have to re-do this every upgrade or reinstall+ +of XKB/XCB/xorg/linux. Maybe make it a pacman hook?+
++The file .local/share/supescaps.diff currently contains the instructions in+ +this gist but automated; run ~doas patch < .local/share/supescaps.diff~ and it+ +might magically work. You will have to re-do this every upgrade or reinstall+ +of XKB/XCB/xorg/linux. Maybe make it a pacman hook?+
 
 +^^^ the above doesn't work because I'm an idiot and can't write patch files.+ +Should probably work it into that shell script that will also auto-detect the+ +package manager and install everything automatically.+
 

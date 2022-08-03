@@ -3,30 +3,15 @@ Basic. Where configs go.
 
 More specifically...
 ** alacritty
-A completely cool and technically 'best' terminal. My config just gives some
-neutral colors (IMO the alacritty default colors are awful) and disables the
-built-in vi mode which I don't really need as I prefer that at the shell or
-editor level. Anymore, I'm not using alacritty as much as 'gnome-terminal' is
-largely sufficient for terminal-ing and even has smooth scrolling (!).
+A completely cool and technically 'best' terminal. My config just gives some neutral colors (IMO the alacritty default colors are awful) and disables the built-in vi mode which I don't really need as I prefer that at the shell or editor level. Anymore, I'm not using alacritty as much as 'gnome-terminal' is largely sufficient for terminal-ing and even has smooth scrolling (!).
 ** emacs
-Eventually Luke Smith will use it. I'm sure of this. There's no way he won't. I
-mean, look at vim's license. It's shilling for a good cause, but still shilling.
-Emacs already just does everything vi does, even in the same way, and does
-everything vim is trying to do way better. Neovim is ahead of emacs in some
-technical aspects and design principles, but is hugely held back by not being
-able to redefine internal editor functions. Yes, i'm saying that lua was not
-enough for neovim. Not until you let us stick a hand into the core of the editor
-and rearrange the bits to do whatever in a trivially transparent way. Because
-that's what emacs does, and so even with 40 years of infuriating cruft, it can
-still keep up with nvim while also having potentially infinitely many more
-features.
+Eventually Luke Smith will use it. I'm sure of this. There's no way he won't. I mean, look at vim's license. It's shilling for a good cause, but still shilling. Emacs already just does everything vi does, even in the same way, and does everything vim is trying to do way better. Neovim is ahead of emacs in some technical aspects and design principles, but is hugely held back by not being able to redefine internal editor functions. Yes, i'm saying that lua was not enough for neovim. Not until you let us stick a hand into the core of the editor and rearrange the bits to do whatever in a trivially transparent way. Because that's what emacs does, and so even with 40 years of infuriating cruft, it can still keep up with nvim while also having potentially infinitely many more features.
 
 That said, hang in there nvim. I'm rooting for you.
 ** git
 Why is this an entry? You are not me...
 ** gnome-custom-configs
-These files are dumped by 'dconf', the GNOME registry handler. They are
-literally just INI config files. You can apply them like so:
+These files are dumped by 'dconf', the GNOME registry handler. They are literally just INI config files. You can apply them like so:
 #+begin_src sh
   dconf load /org/gnome/terminal/ < ~/.config/gnome-custom-configs/terminal.gsets
 #+end_src
@@ -34,17 +19,11 @@ Or read the current values like so:
 #+begin_src sh
   dconf dump /org/gnome/terminal/ > ~/.config/gnome-custom-configs/terminal.gsets
 #+end_src
-My nvim config has a few lines to automate this process, and I am in the process
-of writing an Emacs major mode to accomplish the same thing (based on conf-mode
-of course).
+My nvim config has a few lines to automate this process, and I am in the process of writing an Emacs major mode to accomplish the same thing (based on conf-mode of course).
 ** mako
-The notification daemon that works on swaywm. I haven't used this in a while,
-but it may as well stay here. Basically the notifications are themed like my
-desktop and waybar. Gray, MesloLGS Nerd Font Bold text, graphics labels.
+The notification daemon that works on swaywm. I haven't used this in a while, but it may as well stay here. Basically the notifications are themed like my desktop and waybar. Gray, MesloLGS Nerd Font Bold text, graphics labels.
 ** mozilla
-Broken. Every couple months I look at all the web browsers and see if I can keep
-a configuration deployed between them. The answer is always 'sorta kinda not
-really but also you totally can heres how' <proceeds to never show how>.
+Broken. Every couple months I look at all the web browsers and see if I can keep a configuration deployed between them. The answer is always 'sorta kinda not really but also you totally can heres how' <proceeds to never show how>.
 
 Yes I'm salty about this. Why do you ask?
 ** neofetch

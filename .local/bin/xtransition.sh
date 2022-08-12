@@ -28,9 +28,8 @@ oldws=$(
     esac
      )
 
-# newws=$1
 tmpdir='/tmp/xtransition'
-duration="0.5"
+duration="0.4"
 
 screenshot(){
     case $platform in
@@ -45,7 +44,6 @@ screenshot(){
 movews(){
     case $platform in
 	sway)
-	    # swaymsg workspace $(((1+$@)))
 	    swaymsg workspace $@
 	    ;;
 	Xorg)
@@ -80,9 +78,9 @@ fi
 mkdir -p $tmpdir
 
 # Screenshot of current workspace, for present and future use
-screenshot "${tmpdir}/${oldws}.jpg"
+screenshot "${tmpdir}/${oldws}.png"
 
-if ! [ -e "${tmpdir}/${newws}.jpg" ]; then
+if ! [ -e "${tmpdir}/${newws}.png" ]; then
     # Switch to new workspace
     movews "${newws}" &&
 	# (the below number took a while to find,
@@ -90,21 +88,27 @@ if ! [ -e "${tmpdir}/${newws}.jpg" ]; then
 	# sleep 0.0208354086434455 &&
 	sleep 0.03 && 
 	# Screenshot (on new workspace)
-	screenshot "${tmpdir}/${newws}.jpg" #&&
+	screenshot "${tmpdir}/${newws}.png" #&&
     # Go back to old workspace
     movews "${oldws}"
 fi
 
 ffmpeg -y \
-       -loop 1 -t "${duration}" -i "${tmpdir}/${oldws}.jpg" \
-       -loop 1 -t "${duration}" -i "${tmpdir}/${newws}.jpg" \
+       -loop 1 -t "${duration}" -i "${tmpdir}/${oldws}.png" \
+       -loop 1 -t "${duration}" -i "${tmpdir}/${newws}.png" \
        -filter_complex "[0][1]xfade=transition=slide${direction}:duration=${duration}" \
+       -c:v libx265 \
        -preset ultrafast \
+       -crf 18 \
        -deadline realtime \
        -f matroska - |
     mpv --no-terminal --fs -
 # $tmpdir/output.mp4 &&
 # mpv --no-terminal --fs $tmpdir/output.mp4 #&
+       # -vaapi_device /dev/dri/renderD128 \
+       # -vcodec h264_vaapi \
+
+
 
 movews "${newws}"
 

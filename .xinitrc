@@ -3,8 +3,10 @@ nitrogen --restore
 picom -b
 gnome-keyring-daemon
 xsetroot -cursor_name left_ptr
-xset r rate 300 50
-setxkbmap -option caps:escape
+xset r rate 200 30
+# setxkbmap -option caps:escape
+localectl set-x11-keymap us "" "" caps:escape
+xbindkeys
 
 id=$(
     xinput list |
@@ -25,5 +27,5 @@ xfce4-power-manager &
 fusuma &
 # sxhkd &
 # alacritty &
-# exec bspwm
-exec xmonad
+exec bspwm
+# exec xmonad
